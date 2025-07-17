@@ -15687,178 +15687,203 @@ const Auth0ProviderWithHistory = ({ children }) => {
     }
   );
 };
-const Auth0Login = () => {
-  const { loginWithRedirect, isLoading } = useAuth0();
+const DSALogin = () => {
+  const { loginWithRedirect } = useAuth0();
+  const [showGetStarted, setShowGetStarted] = reactExports.useState(false);
   const handleLogin = () => {
-    loginWithRedirect();
-  };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-gradient-to-br from-indigo-900 via-blue-900 to-purple-900 relative overflow-hidden", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute inset-0", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-pulse" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-700" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-1000" })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative z-10 min-h-screen flex items-center justify-center p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-7xl w-full grid lg:grid-cols-2 gap-12 items-center", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-white space-y-8 lg:pr-8", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-16 h-16 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center transform rotate-3 shadow-2xl", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-3xl", children: "💡" }) }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-r from-pink-400 to-red-500 rounded-full animate-bounce" })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-5xl lg:text-6xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent", children: "DSA Mentor" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-2 mt-2", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-2 h-2 bg-green-400 rounded-full animate-pulse" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400 text-sm font-medium", children: "Interactive Learning Platform" })
-              ] })
-            ] })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-2xl lg:text-3xl text-gray-300 font-light leading-relaxed", children: [
-            "Transform your coding skills with",
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent", children: " hands-on practice" }),
-            " and",
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent", children: " real-time execution" })
-          ] })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-4", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-white/5 backdrop-blur-xl rounded-2xl p-4 border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:scale-105", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-3", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 h-10 bg-gradient-to-r from-green-400 to-blue-500 rounded-xl flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-lg", children: "📚" }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-semibold text-white", children: "18+ Topics" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-gray-400 text-sm", children: "Comprehensive coverage" })
-            ] })
-          ] }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-white/5 backdrop-blur-xl rounded-2xl p-4 border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:scale-105", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-3", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 h-10 bg-gradient-to-r from-purple-400 to-pink-500 rounded-xl flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-lg", children: "⚡" }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-semibold text-white", children: "Live Execution" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-gray-400 text-sm", children: "Test instantly" })
-            ] })
-          ] }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-white/5 backdrop-blur-xl rounded-2xl p-4 border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:scale-105", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-3", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 h-10 bg-gradient-to-r from-orange-400 to-red-500 rounded-xl flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-lg", children: "🎯" }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-semibold text-white", children: "Smart Progress" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-gray-400 text-sm", children: "Track your journey" })
-            ] })
-          ] }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-white/5 backdrop-blur-xl rounded-2xl p-4 border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:scale-105", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-3", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 h-10 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-lg", children: "🔧" }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-semibold text-white", children: "Interactive UI" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-gray-400 text-sm", children: "Modern experience" })
-            ] })
-          ] }) })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-8 pt-4", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent", children: "18+" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-gray-400 text-sm", children: "DSA Topics" })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-3xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent", children: "200+" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-gray-400 text-sm", children: "Practice Problems" })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent", children: "100%" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-gray-400 text-sm", children: "Interactive" })
-          ] })
-        ] })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex justify-center lg:justify-end", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full max-w-md", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-white/10 backdrop-blur-2xl rounded-3xl p-8 border border-white/20 shadow-2xl", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center space-y-6", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-2", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-3xl font-bold text-white", children: "Welcome Back!" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-gray-300", children: "Ready to level up your coding skills?" })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "button",
-            {
-              onClick: handleLogin,
-              disabled: isLoading,
-              className: "w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold py-4 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-3",
-              children: isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Signing you in..." })
-              ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "🚀" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Start Learning Now" })
-              ] })
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-gray-400 text-sm", children: "Join thousands of developers mastering DSA" }) })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-3 pt-4 border-t border-white/10", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-white font-medium", children: "What's Inside:" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-2 text-sm text-gray-300", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-2", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: "✓" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Arrays, Strings, Linked Lists" })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-2", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: "✓" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Trees, Graphs, Dynamic Programming" })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-2", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: "✓" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Binary Search, Sorting, Recursion" })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-2", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: "✓" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Heaps, Hashing, Bit Manipulation" })
-            ] })
-          ] })
-        ] })
-      ] }) }) }) })
-    ] }) })
-  ] });
-};
-const Auth0Header = () => {
-  const { logout, user } = useAuth0();
-  const handleLogout = () => {
-    logout({
-      logoutParams: {
-        returnTo: window.location.origin
+    loginWithRedirect({
+      appState: {
+        returnTo: window.location.pathname
       }
     });
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("header", { className: "bg-gradient-to-r from-indigo-900 via-blue-900 to-purple-900 text-white shadow-2xl border-b border-cyan-500/20", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between items-center h-16", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-3", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 h-10 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xl", children: "💡" }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent", children: "DSA Mentor" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-2", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-2 h-2 bg-green-400 rounded-full animate-pulse" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400 text-xs font-medium", children: "Live Session" })
-        ] })
-      ] })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-3 bg-white/10 rounded-2xl px-4 py-2 backdrop-blur-xl border border-white/20", children: [
-        (user == null ? void 0 : user.picture) && /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "img",
-          {
-            src: user.picture,
-            alt: user.name || "User",
-            className: "w-8 h-8 rounded-full ring-2 ring-cyan-400/50 shadow-lg"
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-right", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-sm font-medium text-white", children: (user == null ? void 0 : user.name) || "User" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs text-gray-300", children: "Learning Mode" })
-        ] })
-      ] }),
+  const handleGuestMode = () => {
+    localStorage.setItem("guestMode", "true");
+    window.location.reload();
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 flex flex-col", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl w-full space-y-8 text-center", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "div",
+        {
+          className: "relative transform hover:scale-105 transition-transform cursor-pointer",
+          onMouseEnter: () => setShowGetStarted(true),
+          onMouseLeave: () => setShowGetStarted(false),
+          children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl p-1", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-gray-900 rounded-3xl p-8", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex justify-center mb-6", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-5xl", children: "🚀" }) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute -bottom-3 -right-3 bg-green-500 w-10 h-10 rounded-full flex items-center justify-center border-4 border-gray-900", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xl", children: "✓" }) })
+            ] }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-4xl sm:text-5xl font-bold text-white mb-4", children: "DSA Mentor" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xl sm:text-2xl text-gray-300 mb-8", children: "Your personal Data Structures & Algorithms learning companion" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "button",
+                {
+                  onClick: handleLogin,
+                  className: "bg-gradient-to-r from-blue-600 to-purple-600 text-white text-lg font-semibold px-8 py-4 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500",
+                  children: "Get Started"
+                }
+              ),
+              showGetStarted && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute -top-12 left-1/2 transform -translate-x-1/2 bg-white text-gray-900 px-4 py-2 rounded-lg text-sm font-medium shadow-lg", children: [
+                "Click to begin!",
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 rotate-45 w-2 h-2 bg-white" })
+              ] })
+            ] })
+          ] }) })
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-8 flex justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
         "button",
         {
-          onClick: handleLogout,
-          className: "bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white px-4 py-2 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg text-sm font-medium",
-          children: "Sign Out"
+          onClick: handleGuestMode,
+          className: "text-gray-400 hover:text-white transition-colors flex items-center space-x-2",
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "👋" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Continue as Guest" })
+          ]
         }
-      )
-    ] })
-  ] }) }) });
+      ) })
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { className: "py-8 text-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-gray-500", children: [
+      "By continuing, you agree to our",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", className: "text-blue-400 hover:text-blue-300", children: "Terms of Service" }),
+      " ",
+      "and",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", className: "text-blue-400 hover:text-blue-300", children: "Privacy Policy" })
+    ] }) })
+  ] });
+};
+const DSANavbar = () => {
+  const { logout, user, isAuthenticated } = useAuth0();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = reactExports.useState(false);
+  const [isScrolled, setIsScrolled] = reactExports.useState(false);
+  const [activePath, setActivePath] = reactExports.useState("");
+  reactExports.useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    const handlePathChange = () => {
+      setActivePath(window.location.pathname);
+    };
+    window.addEventListener("scroll", handleScroll);
+    handlePathChange();
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+  const handleLogout = async () => {
+    try {
+      localStorage.removeItem("guestMode");
+      localStorage.removeItem("lastSelectedTopic");
+      localStorage.removeItem("lastSelectedProblemIdx");
+      localStorage.removeItem("userPreferences");
+      localStorage.removeItem("problemProgress");
+      let returnUrl;
+      if (window.location.href.includes("dsamentor-deploy")) {
+        returnUrl = "https://merajmunshiofficial.github.io/dsamentor-deploy/";
+      } else {
+        returnUrl = window.location.origin + "/";
+      }
+      await logout({
+        logoutParams: {
+          returnTo: returnUrl
+        }
+      });
+    } catch (error) {
+      console.error("Logout error:", error);
+      const fallbackUrl = window.location.href.includes("dsamentor-deploy") ? "https://merajmunshiofficial.github.io/dsamentor-deploy/" : window.location.origin + "/";
+      window.location.href = fallbackUrl;
+    }
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("nav", { className: `fixed top-0 w-full transition-all duration-300 z-50 ${isScrolled ? "bg-white/90 backdrop-blur-xl shadow-lg" : "bg-transparent"}`, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between items-center h-16", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative group", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg transform transition-all duration-200 group-hover:scale-110", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-white text-xl font-bold", children: "D" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl blur opacity-30 group-hover:opacity-75 transition duration-200" })
+        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent glow-text tracking-wide", children: "DSA Mentor" }) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "hidden md:flex items-center space-x-8", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "a",
+          {
+            href: "/problems",
+            className: `nav-link ${activePath === "/problems" ? "text-blue-600 font-semibold" : "text-gray-600 hover:text-gray-900"} transition-colors duration-200 text-sm flex items-center space-x-1`,
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-lg", children: "📚" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Problems" })
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "a",
+          {
+            href: "/practice",
+            className: `nav-link ${activePath === "/practice" ? "text-blue-600 font-semibold" : "text-gray-600 hover:text-gray-900"} transition-colors duration-200 text-sm flex items-center space-x-1`,
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-lg", children: "💻" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Practice" })
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "a",
+          {
+            href: "/progress",
+            className: `nav-link ${activePath === "/progress" ? "text-blue-600 font-semibold" : "text-gray-600 hover:text-gray-900"} transition-colors duration-200 text-sm flex items-center space-x-1`,
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-lg", children: "📊" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Progress" })
+            ]
+          }
+        )
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "md:hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "button",
+        {
+          onClick: () => setIsMobileMenuOpen(!isMobileMenuOpen),
+          className: "bg-white/10 hover:bg-white/20 text-gray-700 p-2.5 rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 border border-gray-200/50",
+          children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { className: "w-5 h-5", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16" }) })
+        }
+      ) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center space-x-6", children: isAuthenticated && user ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "hidden md:flex items-center space-x-2", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative group", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 flex items-center space-x-2 transition-all duration-200 hover:bg-white/20", children: [
+          user.picture && /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "img",
+            {
+              src: user.picture,
+              alt: user.name || "User",
+              className: "w-8 h-8 rounded-full border-2 border-white/30"
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-right", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-sm font-medium text-gray-800", children: user.name || "User" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs text-gray-500", children: "Premium Member" })
+          ] })
+        ] }) }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "button",
+          {
+            onClick: handleLogout,
+            className: "bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-2 rounded-xl transition-all duration-200 text-sm font-medium shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center space-x-2",
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "👋" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Sign Out" })
+            ]
+          }
+        )
+      ] }) : null })
+    ] }) }),
+    isMobileMenuOpen && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "md:hidden bg-white border-t border-gray-200", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-4 py-3 space-y-1", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#problems", className: "block text-gray-600 hover:text-gray-900 transition-colors duration-200 font-medium py-2 text-sm", children: "Problems" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#tutorials", className: "block text-gray-600 hover:text-gray-900 transition-colors duration-200 font-medium py-2 text-sm", children: "Tutorials" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#progress", className: "block text-gray-600 hover:text-gray-900 transition-colors duration-200 font-medium py-2 text-sm", children: "Progress" })
+    ] }) })
+  ] });
 };
 const Auth0Setup = () => {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "min-h-screen bg-gradient-to-br from-slate-900 via-red-900 to-slate-900 flex items-center justify-center p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl w-full bg-white/10 backdrop-blur-md rounded-3xl shadow-2xl p-8 lg:p-12 border border-white/20", children: [
@@ -16294,7 +16319,7 @@ function MainApp() {
     return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center h-screen text-red-600 text-xl", children: error });
   }
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col h-screen bg-gray-50", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Auth0Header, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(DSANavbar, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-1 overflow-hidden", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         TopicSelector,
@@ -16313,7 +16338,10 @@ function MainApp() {
         }
       ),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "flex-1 flex flex-row overflow-hidden", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 min-w-[350px] flex flex-col overflow-hidden border-r border-gray-300", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ProblemDetails, { problem: selectedProblem }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 min-w-[350px] flex flex-col overflow-hidden border-r border-gray-300", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(ProblemDetails, { problem: selectedProblem }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CodeEditor, { code: input.code || "", setCode: (code) => setInput({ ...input, code }), language: "java" }) })
+        ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-[350px] flex flex-col overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 overflow-y-auto p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             InputForm,
@@ -16353,7 +16381,7 @@ function AuthenticatedApp() {
       )
     ] }) });
   }
-  return isAuthenticated ? /* @__PURE__ */ jsxRuntimeExports.jsx(MainApp, {}) : /* @__PURE__ */ jsxRuntimeExports.jsx(Auth0Login, {});
+  return isAuthenticated ? /* @__PURE__ */ jsxRuntimeExports.jsx(MainApp, {}) : /* @__PURE__ */ jsxRuntimeExports.jsx(DSALogin, {});
 }
 function App() {
   if (!isAuth0Configured()) {
