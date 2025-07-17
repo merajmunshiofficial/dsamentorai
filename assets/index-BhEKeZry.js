@@ -12241,9 +12241,16 @@ function requireDist() {
 }
 requireDist();
 var PopStateEventType = "popstate";
-function createBrowserHistory(options = {}) {
-  function createBrowserLocation(window2, globalHistory) {
-    let { pathname, search, hash } = window2.location;
+function createHashHistory(options = {}) {
+  function createHashLocation(window2, globalHistory) {
+    let {
+      pathname = "/",
+      search = "",
+      hash = ""
+    } = parsePath(window2.location.hash.substring(1));
+    if (!pathname.startsWith("/") && !pathname.startsWith(".")) {
+      pathname = "/" + pathname;
+    }
     return createLocation(
       "",
       { pathname, search, hash },
@@ -12252,13 +12259,28 @@ function createBrowserHistory(options = {}) {
       globalHistory.state && globalHistory.state.key || "default"
     );
   }
-  function createBrowserHref(window2, to) {
-    return typeof to === "string" ? to : createPath(to);
+  function createHashHref(window2, to) {
+    let base = window2.document.querySelector("base");
+    let href2 = "";
+    if (base && base.getAttribute("href")) {
+      let url = window2.location.href;
+      let hashIndex = url.indexOf("#");
+      href2 = hashIndex === -1 ? url : url.slice(0, hashIndex);
+    }
+    return href2 + "#" + (typeof to === "string" ? to : createPath(to));
+  }
+  function validateHashLocation(location, to) {
+    warning(
+      location.pathname.charAt(0) === "/",
+      `relative pathnames are not supported in hash history.push(${JSON.stringify(
+        to
+      )})`
+    );
   }
   return getUrlBasedHistory(
-    createBrowserLocation,
-    createBrowserHref,
-    null,
+    createHashLocation,
+    createHashHref,
+    validateHashLocation,
     options
   );
 }
@@ -12357,6 +12379,7 @@ function getUrlBasedHistory(getLocation, createHref2, validateLocation, options 
   function push(to, state) {
     action = "PUSH";
     let location = createLocation(history.location, to, state);
+    if (validateLocation) validateLocation(location, to);
     index = getIndex() + 1;
     let historyState = getHistoryState(location, index);
     let url = history.createHref(location);
@@ -12375,6 +12398,7 @@ function getUrlBasedHistory(getLocation, createHref2, validateLocation, options 
   function replace2(to, state) {
     action = "REPLACE";
     let location = createLocation(history.location, to, state);
+    if (validateLocation) validateLocation(location, to);
     index = getIndex();
     let historyState = getHistoryState(location, index);
     let url = history.createHref(location);
@@ -13833,14 +13857,10 @@ try {
   }
 } catch (e2) {
 }
-function BrowserRouter({
-  basename,
-  children,
-  window: window2
-}) {
+function HashRouter({ basename, children, window: window2 }) {
   let historyRef = reactExports.useRef();
   if (historyRef.current == null) {
-    historyRef.current = createBrowserHistory({ window: window2, v5Compat: true });
+    historyRef.current = createHashHistory({ window: window2, v5Compat: true });
   }
   let history = historyRef.current;
   let [state, setStateImpl] = reactExports.useState({
@@ -15612,7 +15632,7 @@ var useAuth0 = function(context) {
   }
   return reactExports.useContext(context);
 };
-const __vite_import_meta_env__ = { "BASE_URL": "/dsamentor-deploy/", "DEV": false, "MODE": "production", "PROD": true, "SSR": false, "VITE_AUTH0_CLIENT_ID": "wetVbccRWFxGMtiWEfAI9XGFZnWRj4Gd", "VITE_AUTH0_DOMAIN": "merajmunshi.us.auth0.com" };
+const __vite_import_meta_env__ = { "BASE_URL": "/dsamentorai/", "DEV": false, "MODE": "production", "PROD": true, "SSR": false, "VITE_AUTH0_CLIENT_ID": "wetVbccRWFxGMtiWEfAI9XGFZnWRj4Gd", "VITE_AUTH0_DOMAIN": "merajmunshi.us.auth0.com" };
 console.log("🔍 Environment check:", {
   isDev: false,
   mode: "production",
@@ -15630,7 +15650,7 @@ console.log("🔧 Final Auth0 config values:", {
 });
 const getRedirectUri = () => {
   {
-    const redirectUri = "https://merajmunshiofficial.github.io/dsamentor-deploy/callback";
+    const redirectUri = "https://merajmunshiofficial.github.io/dsamentorai/callback";
     console.log("🔄 Prod redirect URI:", redirectUri);
     return redirectUri;
   }
@@ -16009,7 +16029,7 @@ const CallbackPage = () => {
     const handleCallback = async () => {
       try {
         await handleRedirectCallback();
-        const basePath = true ? "/dsamentor-deploy" : "";
+        const basePath = true ? "/dsamentorai" : "";
         window.location.href = basePath + "/";
       } catch (err) {
         console.error("Auth0 callback error:", err);
@@ -16043,7 +16063,7 @@ const CallbackPage = () => {
       /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Authentication Error" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: error.message }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: () => {
-        const basePath = "/dsamentor-deploy";
+        const basePath = "/dsamentorai";
         window.location.href = basePath + "/";
       }, children: "Return to Home" })
     ] });
@@ -16336,7 +16356,7 @@ function AuthenticatedApp() {
   if (isLoading) {
     return /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingSpinner, {});
   }
-  if (location.pathname === "/callback" || location.pathname === "/dsamentor-deploy/callback") {
+  if (location.pathname === "/callback" || location.pathname === "/dsamentorai/callback") {
     return /* @__PURE__ */ jsxRuntimeExports.jsx(CallbackPage, {});
   }
   if (error) {
@@ -16359,7 +16379,7 @@ function App() {
   if (!isAuth0Configured()) {
     return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Auth0Setup, {}) });
   }
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(BrowserRouter, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Auth0ProviderWithHistory, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(AuthenticatedApp, {}) }) });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(HashRouter, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Auth0ProviderWithHistory, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(AuthenticatedApp, {}) }) });
 }
 ReactDOM.createRoot(document.getElementById("root")).render(
   /* @__PURE__ */ jsxRuntimeExports.jsx(React.StrictMode, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) })
