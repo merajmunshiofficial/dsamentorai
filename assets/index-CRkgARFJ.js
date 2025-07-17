@@ -15689,8 +15689,20 @@ const Auth0ProviderWithHistory = ({ children }) => {
 };
 const DSALogin = () => {
   const { loginWithRedirect } = useAuth0();
-  const [showGetStarted, setShowGetStarted] = reactExports.useState(false);
-  const handleLogin = () => {
+  const [passwordVisible, setPasswordVisible] = reactExports.useState(false);
+  const [email, setEmail] = reactExports.useState("");
+  const [password, setPassword] = reactExports.useState("");
+  const [error, setError] = reactExports.useState("");
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+  const handleSubmit = (e2) => {
+    e2.preventDefault();
+    if (!email || !password) {
+      setError("Please fill in all fields");
+      return;
+    }
+    setError("");
     loginWithRedirect({
       appState: {
         returnTo: window.location.pathname
@@ -15701,59 +15713,96 @@ const DSALogin = () => {
     localStorage.setItem("guestMode", "true");
     window.location.reload();
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 flex flex-col", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl w-full space-y-8 text-center", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "div",
-        {
-          className: "relative transform hover:scale-105 transition-transform cursor-pointer",
-          onMouseEnter: () => setShowGetStarted(true),
-          onMouseLeave: () => setShowGetStarted(false),
-          children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl p-1", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-gray-900 rounded-3xl p-8", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex justify-center mb-6", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-5xl", children: "🚀" }) }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute -bottom-3 -right-3 bg-green-500 w-10 h-10 rounded-full flex items-center justify-center border-4 border-gray-900", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xl", children: "✓" }) })
-            ] }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-4xl sm:text-5xl font-bold text-white mb-4", children: "DSA Mentor" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xl sm:text-2xl text-gray-300 mb-8", children: "Your personal Data Structures & Algorithms learning companion" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "button",
-                {
-                  onClick: handleLogin,
-                  className: "bg-gradient-to-r from-blue-600 to-purple-600 text-white text-lg font-semibold px-8 py-4 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500",
-                  children: "Get Started"
-                }
-              ),
-              showGetStarted && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute -top-12 left-1/2 transform -translate-x-1/2 bg-white text-gray-900 px-4 py-2 rounded-lg text-sm font-medium shadow-lg", children: [
-                "Click to begin!",
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 rotate-45 w-2 h-2 bg-white" })
-              ] })
-            ] })
-          ] }) })
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-8 flex justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-        "button",
-        {
-          onClick: handleGuestMode,
-          className: "text-gray-400 hover:text-white transition-colors flex items-center space-x-2",
-          children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "👋" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Continue as Guest" })
-          ]
-        }
-      ) })
-    ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { className: "py-8 text-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-gray-500", children: [
-      "By continuing, you agree to our",
-      " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", className: "text-blue-400 hover:text-blue-300", children: "Terms of Service" }),
-      " ",
-      "and",
-      " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", className: "text-blue-400 hover:text-blue-300", children: "Privacy Policy" })
-    ] }) })
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "login-page", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "visualizations", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "binary-tree", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { width: "200", height: "200", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "100", cy: "50", r: "20", className: "glow-node" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("line", { x1: "100", y1: "50", x2: "50", y2: "100", className: "glow-line" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "50", cy: "100", r: "20", className: "glow-node" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("line", { x1: "100", y1: "50", x2: "150", y2: "100", className: "glow-line" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "150", cy: "100", r: "20", className: "glow-node" })
+      ] }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "graph", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { width: "200", height: "200", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "50", cy: "50", r: "15", className: "glow-node" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "150", cy: "50", r: "15", className: "glow-node" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "100", cy: "100", r: "15", className: "glow-node" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("line", { x1: "50", y1: "50", x2: "100", y2: "100", className: "glow-line" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("line", { x1: "150", y1: "50", x2: "100", y2: "100", className: "glow-line" })
+      ] }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "stack", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { width: "100", height: "200", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "10", y: "10", width: "80", height: "30", className: "glow-element" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "10", y: "50", width: "80", height: "30", className: "glow-element" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "10", y: "90", width: "80", height: "30", className: "glow-element" })
+      ] }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "array", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { width: "200", height: "50", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "10", y: "10", width: "30", height: "30", className: "glow-element" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "50", y: "10", width: "30", height: "30", className: "glow-element" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "90", y: "10", width: "30", height: "30", className: "glow-element" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "130", y: "10", width: "30", height: "30", className: "glow-element" })
+      ] }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "queue", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { width: "200", height: "100", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "10", y: "10", width: "30", height: "30", className: "glow-element" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "50", y: "10", width: "30", height: "30", className: "glow-element" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "90", y: "10", width: "30", height: "30", className: "glow-element" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "10", y: "50", width: "30", height: "30", className: "glow-element" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("rect", { x: "50", y: "50", width: "30", height: "30", className: "glow-element" })
+      ] }) })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "login-form", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { children: "DSA Mentorship Platform" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleSubmit, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "form-group", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("label", { htmlFor: "email", children: "Email or Username" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "input",
+            {
+              type: "text",
+              id: "email",
+              placeholder: "Enter your email or username",
+              value: email,
+              onChange: (e2) => setEmail(e2.target.value)
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "form-group", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("label", { htmlFor: "password", children: "Password" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "password-input", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                type: passwordVisible ? "text" : "password",
+                id: "password",
+                placeholder: "Enter your password",
+                value: password,
+                onChange: (e2) => setPassword(e2.target.value)
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "button",
+              {
+                type: "button",
+                className: "toggle-password",
+                onClick: togglePasswordVisibility,
+                children: passwordVisible ? "Hide" : "Show"
+              }
+            )
+          ] })
+        ] }),
+        error && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "error-message", children: error }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "form-options", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("input", { type: "checkbox" }),
+            " Remember me"
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Forgot password?" })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("button", { type: "submit", className: "sign-in-button", children: "Sign In" })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+        "Don't have an account? ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", onClick: handleGuestMode, children: "Continue as Guest" })
+      ] })
+    ] })
   ] });
 };
 const DSANavbar = () => {
@@ -15886,147 +15935,68 @@ const DSANavbar = () => {
   ] });
 };
 const Auth0Setup = () => {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "min-h-screen bg-gradient-to-br from-slate-900 via-red-900 to-slate-900 flex items-center justify-center p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl w-full bg-white/10 backdrop-blur-md rounded-3xl shadow-2xl p-8 lg:p-12 border border-white/20", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center mb-10", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-20 h-20 bg-gradient-to-r from-red-500 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-3xl", children: "⚠️" }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-3xl lg:text-4xl font-bold text-white mb-3", children: "Auth0 Setup Required" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xl text-gray-300", children: "Configure your Auth0 credentials to secure your DSA Mentor app" })
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "min-h-screen bg-gradient-to-br from-orange-900 via-red-900 to-pink-900 flex items-center justify-center p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-2xl w-full bg-white/10 backdrop-blur-md rounded-2xl shadow-2xl p-8 border border-white/20", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center mb-8", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-3xl font-bold text-white mb-2", children: "⚠️ Auth0 Setup Required" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-gray-300", children: "Please configure your Auth0 credentials" })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid lg:grid-cols-2 gap-8", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-white/10 rounded-2xl p-6 border border-white/10", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-2xl font-semibold mb-4 text-blue-300 flex items-center", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mr-2", children: "🚀" }),
-            "Quick Setup Steps"
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6 text-white", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-white/10 rounded-lg p-6", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-semibold mb-4", children: "🚀 Quick Setup Steps:" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("ol", { className: "list-decimal list-inside space-y-2 text-gray-300", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+            "Create a free Auth0 account at ",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://auth0.com", className: "text-blue-300 underline", children: "auth0.com" })
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("ol", { className: "list-decimal list-inside space-y-3 text-gray-300", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
-              "Create a free Auth0 account at ",
-              /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://auth0.com", className: "text-blue-400 underline hover:text-blue-300", children: "auth0.com" })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
-              "Create a new ",
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-purple-400 font-medium", children: "Single Page Application" })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
-              "Copy your ",
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400 font-medium", children: "Domain" }),
-              " and ",
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400 font-medium", children: "Client ID" })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
-              "Update your ",
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-yellow-400 font-medium", children: ".env" }),
-              " file with the credentials"
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Restart your development server" })
-          ] })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-white/10 rounded-2xl p-6 border border-white/10", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("h3", { className: "text-xl font-semibold mb-3 text-purple-300 flex items-center", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mr-2", children: "🔧" }),
-            "Auth0 Application Settings"
+          /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Create a new Single Page Application" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Copy your Domain and Client ID" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Update your .env file with the credentials" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Restart your development server" })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-white/10 rounded-lg p-6", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-semibold mb-3", children: "📝 Environment Variables:" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-black/30 rounded p-4 font-mono text-sm", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-green-300", children: "VITE_AUTH0_DOMAIN=your-domain.auth0.com" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-green-300", children: "VITE_AUTH0_CLIENT_ID=your-client-id" })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-white/10 rounded-lg p-6", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-semibold mb-3", children: "🔧 Auth0 Configuration:" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-2 text-sm text-gray-300", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Callback URLs:" }),
+            " http://localhost:5173"
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-3 text-sm", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-300 font-medium", children: "Callback URLs:" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-black/40 rounded-lg p-2 mt-1 font-mono text-green-300", children: "http://localhost:5173/callback, https://yourdomain.github.io/callback" })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-300 font-medium", children: "Logout URLs:" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-black/40 rounded-lg p-2 mt-1 font-mono text-green-300", children: "http://localhost:5173, https://yourdomain.github.io" })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-300 font-medium", children: "Web Origins:" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-black/40 rounded-lg p-2 mt-1 font-mono text-green-300", children: "http://localhost:5173, https://yourdomain.github.io" })
-            ] })
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Logout URLs:" }),
+            " http://localhost:5173"
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Web Origins:" }),
+            " http://localhost:5173"
           ] })
         ] })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-white/10 rounded-2xl p-6 border border-white/10", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("h3", { className: "text-xl font-semibold mb-3 text-green-300 flex items-center", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mr-2", children: "📝" }),
-            "Environment Variables"
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-gray-400 text-sm mb-4", children: [
-            "Create a ",
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-yellow-400 font-medium", children: ".env" }),
-            " file in your project root:"
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-black/50 rounded-xl p-4 font-mono text-sm border border-gray-600", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-gray-500", children: "# .env" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-green-400", children: "VITE_AUTH0_DOMAIN=your-domain.auth0.com" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-green-400", children: "VITE_AUTH0_CLIENT_ID=your-client-id" })
-          ] })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-2xl p-6 border border-blue-500/30", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("h3", { className: "text-xl font-semibold mb-3 text-white flex items-center", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mr-2", children: "💡" }),
-            "Pro Tips"
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { className: "space-y-2 text-gray-300 text-sm", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex items-start", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400 mr-2", children: "✓" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Use Auth0's free tier (up to 7,500 MAUs)" })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex items-start", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400 mr-2", children: "✓" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Enable social logins (Google, GitHub, etc.)" })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex items-start", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400 mr-2", children: "✓" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Set up multi-factor authentication" })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex items-start", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400 mr-2", children: "✓" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Customize your login page branding" })
-            ] })
-          ] })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-          "a",
-          {
-            href: "https://auth0.com/signup",
-            target: "_blank",
-            rel: "noopener noreferrer",
-            className: "bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-200 transform hover:scale-105 inline-flex items-center space-x-2 shadow-lg",
-            children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "🚀" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Get Started with Auth0" })
-            ]
-          }
-        ) })
-      ] })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-10 text-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-gray-400 text-sm", children: [
-      "Need help? Check out the ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://auth0.com/docs", className: "text-blue-400 underline hover:text-blue-300", children: "Auth0 Documentation" })
-    ] }) })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "a",
+        {
+          href: "https://auth0.com/signup",
+          target: "_blank",
+          rel: "noopener noreferrer",
+          className: "bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 inline-block",
+          children: "Get Started with Auth0"
+        }
+      ) })
+    ] })
   ] }) });
 };
 const LoadingSpinner = () => {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-gradient-to-br from-indigo-900 via-blue-900 to-purple-900 flex items-center justify-center relative overflow-hidden", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute inset-0", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-1/4 left-1/4 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl animate-pulse" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-700" })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative z-10 text-white text-center", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative mb-8", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-24 h-24 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center mx-auto shadow-2xl", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-3xl", children: "💡" }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 w-24 h-24 border-4 border-cyan-400/30 rounded-2xl animate-spin mx-auto" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-2 w-20 h-20 border-2 border-blue-500/50 rounded-xl animate-spin mx-auto", style: { animationDirection: "reverse", animationDuration: "3s" } })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-3xl font-bold mb-2 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent", children: "DSA Mentor" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xl text-gray-300 mb-6", children: "Setting up your learning environment..." }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-center space-x-3 mb-6", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-3 h-3 bg-cyan-400 rounded-full animate-bounce" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-3 h-3 bg-blue-500 rounded-full animate-bounce", style: { animationDelay: "0.1s" } }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-3 h-3 bg-purple-500 rounded-full animate-bounce", style: { animationDelay: "0.2s" } })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20 max-w-md mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-gray-300 text-sm", children: "Preparing your interactive DSA learning experience" }) })
-    ] })
-  ] });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-white text-center", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "animate-spin rounded-full h-16 w-16 border-b-2 border-white mx-auto mb-4" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-semibold mb-2", children: "Authenticating..." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-gray-300", children: "Please wait while we verify your identity" })
+  ] }) });
 };
 const CallbackPage = () => {
   const { handleRedirectCallback, isLoading, error } = useAuth0();
