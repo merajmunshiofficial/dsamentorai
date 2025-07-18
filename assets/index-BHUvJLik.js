@@ -15906,49 +15906,131 @@ const Auth0Login = () => {
 };
 const Auth0Header = () => {
   const { logout, user } = useAuth0();
+  const [showApiKeyModal, setShowApiKeyModal] = reactExports.useState(false);
+  const [apiKeyInput, setApiKeyInput] = reactExports.useState(localStorage.getItem("openai_api_key") || "");
+  const [apiKeyError, setApiKeyError] = reactExports.useState("");
   const handleLogout = () => {
+    localStorage.removeItem("openai_api_key");
     logout({
       logoutParams: {
-        returnTo: window.location.origin
+        returnTo: window.location.origin,
+        federated: true
       }
     });
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("header", { className: "bg-gradient-to-r from-indigo-900 via-blue-900 to-purple-900 text-white shadow-2xl border-b border-cyan-500/20", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between items-center h-16", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-3", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 h-10 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xl", children: "💡" }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent", children: "DSA Mentor" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-2", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-2 h-2 bg-green-400 rounded-full animate-pulse" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400 text-xs font-medium", children: "Live Session" })
-        ] })
-      ] })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-3 bg-white/10 rounded-2xl px-4 py-2 backdrop-blur-xl border border-white/20", children: [
-        (user == null ? void 0 : user.picture) && /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "img",
-          {
-            src: user.picture,
-            alt: user.name || "User",
-            className: "w-8 h-8 rounded-full ring-2 ring-cyan-400/50 shadow-lg"
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-right", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-sm font-medium text-white", children: (user == null ? void 0 : user.name) || "User" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs text-gray-300", children: "Learning Mode" })
+  const handleApiKeySave = (e2) => {
+    e2.preventDefault();
+    if (!apiKeyInput.trim().startsWith("sk-") && !apiKeyInput.trim().startsWith("sk-proj-")) {
+      setApiKeyError("Please enter a valid OpenAI API key.");
+      return;
+    }
+    localStorage.setItem("openai_api_key", apiKeyInput.trim());
+    setShowApiKeyModal(false);
+    setApiKeyError("");
+  };
+  const handleApiKeyChange = (e2) => {
+    setApiKeyInput(e2.target.value);
+    setApiKeyError("");
+  };
+  const handleApiKeyClear = () => {
+    localStorage.removeItem("openai_api_key");
+    setApiKeyInput("");
+    setShowApiKeyModal(false);
+    setApiKeyError("");
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: "bg-gradient-to-r from-indigo-900 via-blue-900 to-purple-900 text-white shadow-2xl border-b border-cyan-500/20", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between items-center h-16", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-3", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 h-10 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xl", children: "💡" }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent", children: "DSA Mentor" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-2 h-2 bg-green-400 rounded-full animate-pulse" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400 text-xs font-medium", children: "Live Session" })
+          ] })
         ] })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "button",
-        {
-          onClick: handleLogout,
-          className: "bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white px-4 py-2 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg text-sm font-medium",
-          children: "Sign Out"
-        }
-      )
-    ] })
-  ] }) }) });
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            onClick: () => setShowApiKeyModal(true),
+            className: "bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white px-4 py-2 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg text-sm font-medium",
+            children: "API Key"
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-3 bg-white/10 rounded-2xl px-4 py-2 backdrop-blur-xl border border-white/20", children: [
+          (user == null ? void 0 : user.picture) && /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "img",
+            {
+              src: user.picture,
+              alt: user.name || "User",
+              className: "w-8 h-8 rounded-full ring-2 ring-cyan-400/50 shadow-lg"
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-right", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-sm font-medium text-white", children: (user == null ? void 0 : user.name) || "User" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs text-gray-300", children: "Learning Mode" })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            onClick: handleLogout,
+            className: "bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white px-4 py-2 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg text-sm font-medium",
+            children: "Sign Out"
+          }
+        )
+      ] })
+    ] }) }),
+    showApiKeyModal && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-white rounded-xl p-8 shadow-xl w-full max-w-sm", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-semibold mb-4", children: "OpenAI API Key" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleApiKeySave, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "input",
+          {
+            type: "password",
+            className: "w-full border border-gray-300 rounded px-3 py-2 mb-2 focus:outline-none focus:ring-2 focus:ring-blue-400",
+            placeholder: "sk-... or sk-proj-...",
+            value: apiKeyInput,
+            onChange: handleApiKeyChange,
+            autoFocus: true
+          }
+        ),
+        apiKeyError && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-red-600 text-sm mb-2", children: apiKeyError }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex space-x-2 mt-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              type: "submit",
+              className: "flex-1 bg-blue-600 text-white py-2 rounded hover:bg-blue-700",
+              children: "Save"
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              type: "button",
+              className: "flex-1 bg-gray-300 text-gray-800 py-2 rounded hover:bg-gray-400",
+              onClick: () => setShowApiKeyModal(false),
+              children: "Cancel"
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              type: "button",
+              className: "flex-1 bg-red-500 text-white py-2 rounded hover:bg-red-600",
+              onClick: handleApiKeyClear,
+              disabled: !localStorage.getItem("openai_api_key"),
+              children: "Clear"
+            }
+          )
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-gray-500 mt-2", children: "Your API key is stored only in your browser for this session." })
+    ] }) })
+  ] });
 };
 const Auth0Setup = () => {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "min-h-screen bg-gradient-to-br from-slate-900 via-red-900 to-slate-900 flex items-center justify-center p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl w-full bg-white/10 backdrop-blur-md rounded-3xl shadow-2xl p-8 lg:p-12 border border-white/20", children: [
