@@ -16911,7 +16911,6 @@ const CodeEditor = ({
   onChange,
   language = "javascript",
   height = "400px",
-  width = "100%",
   options = {}
 }) => {
   const handleEditorWillMount = () => {
@@ -16927,11 +16926,10 @@ const CodeEditor = ({
       (error == null ? void 0 : error.message) || "Unknown error"
     ] });
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { border: "1px solid #e5e7eb", borderRadius: 8, overflow: "hidden", width }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { border: "1px solid #e5e7eb", borderRadius: 8, overflow: "hidden", width: "100%" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
     Ft,
     {
       height,
-      width,
       language,
       value,
       onChange: handleEditorChange,
@@ -17112,19 +17110,18 @@ If the user's code is correct, reply with 'Correct' and a brief explanation. If 
         tab
       )) })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 bg-white overflow-y-auto w-full h-full", children: [
-      activeTab === "Description" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "whitespace-pre-wrap p-4 w-full h-full", children: problem.description }),
-      activeTab === "Approach" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "whitespace-pre-wrap p-4 w-full h-full", children: problem.approach }),
-      activeTab === "Code" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 w-full h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CodeBlock, { code: problem.code }) }),
-      activeTab === "My Solution" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 w-full h-full flex flex-col", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 bg-white overflow-y-auto w-full", children: [
+      activeTab === "Description" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "whitespace-pre-wrap p-4 w-full", children: problem.description }),
+      activeTab === "Approach" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "whitespace-pre-wrap p-4 w-full", children: problem.approach }),
+      activeTab === "Code" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 w-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CodeBlock, { code: problem.code }) }),
+      activeTab === "My Solution" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 w-full flex flex-col", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           CodeEditor,
           {
             value: userCode,
             onChange: setUserCode,
             language: editorLanguage,
-            height: "400px",
-            width: "100%"
+            height: "400px"
           }
         ),
         /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -17139,7 +17136,7 @@ If the user's code is correct, reply with 'Correct' and a brief explanation. If 
         error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 text-red-600", children: error }),
         feedback && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 p-4 bg-gray-100 rounded whitespace-pre-wrap", children: feedback })
       ] }),
-      activeTab === "Run Solution" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 w-full h-full flex flex-col", children: [
+      activeTab === "Run Solution" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 w-full flex flex-col", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           InputForm,
           {
