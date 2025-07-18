@@ -35,8 +35,8 @@
     fetch(link.href, fetchOpts);
   }
 })();
-function getDefaultExportFromCjs(x2) {
-  return x2 && x2.__esModule && Object.prototype.hasOwnProperty.call(x2, "default") ? x2["default"] : x2;
+function getDefaultExportFromCjs(x) {
+  return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, "default") ? x["default"] : x;
 }
 var jsxRuntime = { exports: {} };
 var reactJsxRuntime_production = {};
@@ -237,8 +237,8 @@ function requireReact_production() {
           }
       }
     if (invokeCallback)
-      return callback = callback(children), invokeCallback = "" === nameSoFar ? "." + getElementKey(children, 0) : nameSoFar, isArrayImpl(callback) ? (escapedPrefix = "", null != invokeCallback && (escapedPrefix = invokeCallback.replace(userProvidedKeyEscapeRegex, "$&/") + "/"), mapIntoArray(callback, array, escapedPrefix, "", function(c2) {
-        return c2;
+      return callback = callback(children), invokeCallback = "" === nameSoFar ? "." + getElementKey(children, 0) : nameSoFar, isArrayImpl(callback) ? (escapedPrefix = "", null != invokeCallback && (escapedPrefix = invokeCallback.replace(userProvidedKeyEscapeRegex, "$&/") + "/"), mapIntoArray(callback, array, escapedPrefix, "", function(c) {
+        return c;
       })) : null != callback && (isValidElement(callback) && (callback = cloneAndReplaceKey(
         callback,
         escapedPrefix + (null == callback.key || children && children.key === callback.key ? "" : ("" + callback.key).replace(
@@ -503,11 +503,11 @@ function requireReact_production() {
   react_production.useMemo = function(create2, deps) {
     return ReactSharedInternals.H.useMemo(create2, deps);
   };
-  react_production.useOptimistic = function(passthrough, reducer2) {
-    return ReactSharedInternals.H.useOptimistic(passthrough, reducer2);
+  react_production.useOptimistic = function(passthrough, reducer) {
+    return ReactSharedInternals.H.useOptimistic(passthrough, reducer);
   };
-  react_production.useReducer = function(reducer2, initialArg, init2) {
-    return ReactSharedInternals.H.useReducer(reducer2, initialArg, init2);
+  react_production.useReducer = function(reducer, initialArg, init2) {
+    return ReactSharedInternals.H.useReducer(reducer, initialArg, init2);
   };
   react_production.useRef = function(initialValue) {
     return ReactSharedInternals.H.useRef(initialValue);
@@ -586,9 +586,9 @@ function requireScheduler_production() {
       }
       return first;
     }
-    function compare(a2, b2) {
-      var diff = a2.sortIndex - b2.sortIndex;
-      return 0 !== diff ? diff : a2.id - b2.id;
+    function compare(a2, b) {
+      var diff = a2.sortIndex - b.sortIndex;
+      return 0 !== diff ? diff : a2.id - b.id;
     }
     exports.unstable_now = void 0;
     if ("object" === typeof performance && "function" === typeof performance.now) {
@@ -1050,14 +1050,14 @@ function requireReactDomClient_production() {
       if (null === alternate) throw Error(formatProdErrorMessage(188));
       return alternate !== fiber ? null : fiber;
     }
-    for (var a2 = fiber, b2 = alternate; ; ) {
+    for (var a2 = fiber, b = alternate; ; ) {
       var parentA = a2.return;
       if (null === parentA) break;
       var parentB = parentA.alternate;
       if (null === parentB) {
-        b2 = parentA.return;
-        if (null !== b2) {
-          a2 = b2;
+        b = parentA.return;
+        if (null !== b) {
+          a2 = b;
           continue;
         }
         break;
@@ -1065,23 +1065,23 @@ function requireReactDomClient_production() {
       if (parentA.child === parentB.child) {
         for (parentB = parentA.child; parentB; ) {
           if (parentB === a2) return assertIsMounted(parentA), fiber;
-          if (parentB === b2) return assertIsMounted(parentA), alternate;
+          if (parentB === b) return assertIsMounted(parentA), alternate;
           parentB = parentB.sibling;
         }
         throw Error(formatProdErrorMessage(188));
       }
-      if (a2.return !== b2.return) a2 = parentA, b2 = parentB;
+      if (a2.return !== b.return) a2 = parentA, b = parentB;
       else {
         for (var didFindChild = false, child$0 = parentA.child; child$0; ) {
           if (child$0 === a2) {
             didFindChild = true;
             a2 = parentA;
-            b2 = parentB;
+            b = parentB;
             break;
           }
-          if (child$0 === b2) {
+          if (child$0 === b) {
             didFindChild = true;
-            b2 = parentA;
+            b = parentA;
             a2 = parentB;
             break;
           }
@@ -1092,12 +1092,12 @@ function requireReactDomClient_production() {
             if (child$0 === a2) {
               didFindChild = true;
               a2 = parentB;
-              b2 = parentA;
+              b = parentA;
               break;
             }
-            if (child$0 === b2) {
+            if (child$0 === b) {
               didFindChild = true;
-              b2 = parentB;
+              b = parentB;
               a2 = parentA;
               break;
             }
@@ -1106,7 +1106,7 @@ function requireReactDomClient_production() {
           if (!didFindChild) throw Error(formatProdErrorMessage(189));
         }
       }
-      if (a2.alternate !== b2) throw Error(formatProdErrorMessage(190));
+      if (a2.alternate !== b) throw Error(formatProdErrorMessage(190));
     }
     if (3 !== a2.tag) throw Error(formatProdErrorMessage(188));
     return a2.stateNode.current === a2 ? fiber : alternate;
@@ -1170,7 +1170,7 @@ function requireReactDomClient_production() {
           type = type._init;
           try {
             return getComponentNameFromType(type(innerType));
-          } catch (x2) {
+          } catch (x) {
           }
       }
     return null;
@@ -1245,9 +1245,9 @@ function requireReactDomClient_production() {
       }
   }
   var clz32 = Math.clz32 ? Math.clz32 : clz32Fallback, log = Math.log, LN2 = Math.LN2;
-  function clz32Fallback(x2) {
-    x2 >>>= 0;
-    return 0 === x2 ? 32 : 31 - (log(x2) / LN2 | 0) | 0;
+  function clz32Fallback(x) {
+    x >>>= 0;
+    return 0 === x ? 32 : 31 - (log(x) / LN2 | 0) | 0;
   }
   var nextTransitionLane = 256, nextRetryLane = 4194304;
   function getHighestPriorityLanes(lanes) {
@@ -1597,10 +1597,10 @@ function requireReactDomClient_production() {
     if (void 0 === prefix)
       try {
         throw Error();
-      } catch (x2) {
-        var match = x2.stack.trim().match(/\n( *(at )?)/);
+      } catch (x) {
+        var match = x.stack.trim().match(/\n( *(at )?)/);
         prefix = match && match[1] || "";
-        suffix = -1 < x2.stack.indexOf("\n    at") ? " (<anonymous>)" : -1 < x2.stack.indexOf("@") ? "@unknown:0:0" : "";
+        suffix = -1 < x.stack.indexOf("\n    at") ? " (<anonymous>)" : -1 < x.stack.indexOf("@") ? "@unknown:0:0" : "";
       }
     return "\n" + prefix + name + suffix;
   }
@@ -1626,8 +1626,8 @@ function requireReactDomClient_production() {
               if ("object" === typeof Reflect && Reflect.construct) {
                 try {
                   Reflect.construct(Fake, []);
-                } catch (x2) {
-                  var control = x2;
+                } catch (x) {
+                  var control = x;
                 }
                 Reflect.construct(fn, [], Fake);
               } else {
@@ -1727,8 +1727,8 @@ function requireReactDomClient_production() {
         info += describeFiber(workInProgress2), workInProgress2 = workInProgress2.return;
       while (workInProgress2);
       return info;
-    } catch (x2) {
-      return "\nError generating stack: " + x2.message + "\n" + x2.stack;
+    } catch (x) {
+      return "\nError generating stack: " + x.message + "\n" + x.stack;
     }
   }
   function getToStringValue(value) {
@@ -1801,7 +1801,7 @@ function requireReactDomClient_production() {
     if ("undefined" === typeof doc) return null;
     try {
       return doc.activeElement || doc.body;
-    } catch (e2) {
+    } catch (e) {
       return doc.body;
     }
   }
@@ -2088,8 +2088,8 @@ function requireReactDomClient_production() {
     }
   }
   var isInsideEventHandler = false;
-  function batchedUpdates$1(fn, a2, b2) {
-    if (isInsideEventHandler) return fn(a2, b2);
+  function batchedUpdates$1(fn, a2, b) {
+    if (isInsideEventHandler) return fn(a2, b);
     isInsideEventHandler = true;
     try {
       var JSCompiler_inline_result = fn(a2);
@@ -2143,7 +2143,7 @@ function requireReactDomClient_production() {
       });
       window.addEventListener("test", options, options);
       window.removeEventListener("test", options, options);
-    } catch (e2) {
+    } catch (e) {
       passiveBrowserEventsSupported = false;
     }
   var root = null, startText = null, fallbackText = null;
@@ -2505,8 +2505,8 @@ function requireReactDomClient_production() {
     if ("input" === domEventName || "change" === domEventName)
       return getInstIfValueChanged(targetInst);
   }
-  function is(x2, y2) {
-    return x2 === y2 && (0 !== x2 || 1 / x2 === 1 / y2) || x2 !== x2 && y2 !== y2;
+  function is(x, y) {
+    return x === y && (0 !== x || 1 / x === 1 / y) || x !== x && y !== y;
   }
   var objectIs = "function" === typeof Object.is ? Object.is : is;
   function shallowEqual(objA, objB) {
@@ -3664,14 +3664,14 @@ function requireReactDomClient_production() {
   function basicStateReducer(state, action) {
     return "function" === typeof action ? action(state) : action;
   }
-  function updateReducer(reducer2) {
+  function updateReducer(reducer) {
     var hook = updateWorkInProgressHook();
-    return updateReducerImpl(hook, currentHook, reducer2);
+    return updateReducerImpl(hook, currentHook, reducer);
   }
-  function updateReducerImpl(hook, current, reducer2) {
+  function updateReducerImpl(hook, current, reducer) {
     var queue = hook.queue;
     if (null === queue) throw Error(formatProdErrorMessage(311));
-    queue.lastRenderedReducer = reducer2;
+    queue.lastRenderedReducer = reducer;
     var baseQueue = hook.baseQueue, pendingQueue = queue.pending;
     if (null !== pendingQueue) {
       if (null !== baseQueue) {
@@ -3714,8 +3714,8 @@ function requireReactDomClient_production() {
               next: null
             }, null === newBaseQueueLast ? (newBaseQueueFirst = newBaseQueueLast = updateLane, baseFirst = pendingQueue) : newBaseQueueLast = newBaseQueueLast.next = updateLane, currentlyRenderingFiber.lanes |= revertLane, workInProgressRootSkippedLanes |= revertLane;
           updateLane = update.action;
-          shouldDoubleInvokeUserFnsInHooksDEV && reducer2(pendingQueue, updateLane);
-          pendingQueue = update.hasEagerState ? update.eagerState : reducer2(pendingQueue, updateLane);
+          shouldDoubleInvokeUserFnsInHooksDEV && reducer(pendingQueue, updateLane);
+          pendingQueue = update.hasEagerState ? update.eagerState : reducer(pendingQueue, updateLane);
         } else
           revertLane = {
             lane: updateLane,
@@ -3728,8 +3728,8 @@ function requireReactDomClient_production() {
         update = update.next;
       } while (null !== update && update !== current);
       null === newBaseQueueLast ? baseFirst = pendingQueue : newBaseQueueLast.next = newBaseQueueFirst;
-      if (!objectIs(pendingQueue, hook.memoizedState) && (didReceiveUpdate = true, didReadFromEntangledAsyncAction$32 && (reducer2 = currentEntangledActionThenable, null !== reducer2)))
-        throw reducer2;
+      if (!objectIs(pendingQueue, hook.memoizedState) && (didReceiveUpdate = true, didReadFromEntangledAsyncAction$32 && (reducer = currentEntangledActionThenable, null !== reducer)))
+        throw reducer;
       hook.memoizedState = pendingQueue;
       hook.baseState = baseFirst;
       hook.baseQueue = newBaseQueueLast;
@@ -3738,16 +3738,16 @@ function requireReactDomClient_production() {
     null === baseQueue && (queue.lanes = 0);
     return [hook.memoizedState, queue.dispatch];
   }
-  function rerenderReducer(reducer2) {
+  function rerenderReducer(reducer) {
     var hook = updateWorkInProgressHook(), queue = hook.queue;
     if (null === queue) throw Error(formatProdErrorMessage(311));
-    queue.lastRenderedReducer = reducer2;
+    queue.lastRenderedReducer = reducer;
     var dispatch = queue.dispatch, lastRenderPhaseUpdate = queue.pending, newState = hook.memoizedState;
     if (null !== lastRenderPhaseUpdate) {
       queue.pending = null;
       var update = lastRenderPhaseUpdate = lastRenderPhaseUpdate.next;
       do
-        newState = reducer2(newState, update.action), update = update.next;
+        newState = reducer(newState, update.action), update = update.next;
       while (update !== lastRenderPhaseUpdate);
       objectIs(newState, hook.memoizedState) || (didReceiveUpdate = true);
       hook.memoizedState = newState;
@@ -3843,12 +3843,12 @@ function requireReactDomClient_production() {
     };
     return hook;
   }
-  function updateOptimisticImpl(hook, current, passthrough, reducer2) {
+  function updateOptimisticImpl(hook, current, passthrough, reducer) {
     hook.baseState = passthrough;
     return updateReducerImpl(
       hook,
       currentHook,
-      "function" === typeof reducer2 ? reducer2 : basicStateReducer
+      "function" === typeof reducer ? reducer : basicStateReducer
     );
   }
   function dispatchActionState(fiber, actionQueue, setPendingState, setState2, payload) {
@@ -4028,9 +4028,9 @@ function requireReactDomClient_production() {
     if ("object" === typeof currentStateHook && null !== currentStateHook && "function" === typeof currentStateHook.then)
       try {
         var state = useThenable(currentStateHook);
-      } catch (x2) {
-        if (x2 === SuspenseException) throw SuspenseActionException;
-        throw x2;
+      } catch (x) {
+        if (x === SuspenseException) throw SuspenseActionException;
+        throw x;
       }
     else state = currentStateHook;
     currentStateHook = updateWorkInProgressHook();
@@ -4438,7 +4438,7 @@ function requireReactDomClient_production() {
       hook.memoizedState = [nextValue, deps];
       return nextValue;
     },
-    useReducer: function(reducer2, initialArg, init2) {
+    useReducer: function(reducer, initialArg, init2) {
       var hook = mountWorkInProgressHook();
       if (void 0 !== init2) {
         var initialState = init2(initialArg);
@@ -4452,20 +4452,20 @@ function requireReactDomClient_production() {
         }
       } else initialState = initialArg;
       hook.memoizedState = hook.baseState = initialState;
-      reducer2 = {
+      reducer = {
         pending: null,
         lanes: 0,
         dispatch: null,
-        lastRenderedReducer: reducer2,
+        lastRenderedReducer: reducer,
         lastRenderedState: initialState
       };
-      hook.queue = reducer2;
-      reducer2 = reducer2.dispatch = dispatchReducerAction.bind(
+      hook.queue = reducer;
+      reducer = reducer.dispatch = dispatchReducerAction.bind(
         null,
         currentlyRenderingFiber,
-        reducer2
+        reducer
       );
-      return [hook.memoizedState, reducer2];
+      return [hook.memoizedState, reducer];
     },
     useRef: function(initialValue) {
       var hook = mountWorkInProgressHook();
@@ -4609,9 +4609,9 @@ function requireReactDomClient_production() {
     useHostTransitionStatus,
     useFormState: updateActionState,
     useActionState: updateActionState,
-    useOptimistic: function(passthrough, reducer2) {
+    useOptimistic: function(passthrough, reducer) {
       var hook = updateWorkInProgressHook();
-      return updateOptimisticImpl(hook, currentHook, passthrough, reducer2);
+      return updateOptimisticImpl(hook, currentHook, passthrough, reducer);
     },
     useMemoCache,
     useCacheRefresh: updateRefresh
@@ -4652,10 +4652,10 @@ function requireReactDomClient_production() {
     useHostTransitionStatus,
     useFormState: rerenderActionState,
     useActionState: rerenderActionState,
-    useOptimistic: function(passthrough, reducer2) {
+    useOptimistic: function(passthrough, reducer) {
       var hook = updateWorkInProgressHook();
       if (null !== currentHook)
-        return updateOptimisticImpl(hook, currentHook, passthrough, reducer2);
+        return updateOptimisticImpl(hook, currentHook, passthrough, reducer);
       hook.baseState = passthrough;
       return [passthrough, hook.queue.dispatch];
     },
@@ -5118,9 +5118,9 @@ function requireReactDomClient_production() {
         );
         thenableState = null;
         return firstChildFiber;
-      } catch (x2) {
-        if (x2 === SuspenseException || x2 === SuspenseActionException) throw x2;
-        var fiber = createFiberImplClass(29, x2, null, returnFiber.mode);
+      } catch (x) {
+        if (x === SuspenseException || x === SuspenseActionException) throw x;
+        var fiber = createFiberImplClass(29, x, null, returnFiber.mode);
         fiber.lanes = lanes;
         fiber.return = returnFiber;
         return fiber;
@@ -12080,2369 +12080,113 @@ function requireClient() {
 }
 var clientExports = requireClient();
 const ReactDOM = /* @__PURE__ */ getDefaultExportFromCjs(clientExports);
-var dist = {};
-var hasRequiredDist;
-function requireDist() {
-  if (hasRequiredDist) return dist;
-  hasRequiredDist = 1;
-  Object.defineProperty(dist, "__esModule", { value: true });
-  dist.parse = parse;
-  dist.serialize = serialize;
-  const cookieNameRegExp = /^[\u0021-\u003A\u003C\u003E-\u007E]+$/;
-  const cookieValueRegExp = /^[\u0021-\u003A\u003C-\u007E]*$/;
-  const domainValueRegExp = /^([.]?[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?)([.][a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?)*$/i;
-  const pathValueRegExp = /^[\u0020-\u003A\u003D-\u007E]*$/;
-  const __toString = Object.prototype.toString;
-  const NullObject = /* @__PURE__ */ (() => {
-    const C2 = function() {
-    };
-    C2.prototype = /* @__PURE__ */ Object.create(null);
-    return C2;
-  })();
-  function parse(str, options) {
-    const obj = new NullObject();
-    const len = str.length;
-    if (len < 2)
-      return obj;
-    const dec = (options == null ? void 0 : options.decode) || decode;
-    let index2 = 0;
-    do {
-      const eqIdx = str.indexOf("=", index2);
-      if (eqIdx === -1)
-        break;
-      const colonIdx = str.indexOf(";", index2);
-      const endIdx = colonIdx === -1 ? len : colonIdx;
-      if (eqIdx > endIdx) {
-        index2 = str.lastIndexOf(";", eqIdx - 1) + 1;
-        continue;
-      }
-      const keyStartIdx = startIndex(str, index2, eqIdx);
-      const keyEndIdx = endIndex(str, eqIdx, keyStartIdx);
-      const key = str.slice(keyStartIdx, keyEndIdx);
-      if (obj[key] === void 0) {
-        let valStartIdx = startIndex(str, eqIdx + 1, endIdx);
-        let valEndIdx = endIndex(str, endIdx, valStartIdx);
-        const value = dec(str.slice(valStartIdx, valEndIdx));
-        obj[key] = value;
-      }
-      index2 = endIdx + 1;
-    } while (index2 < len);
-    return obj;
-  }
-  function startIndex(str, index2, max) {
-    do {
-      const code = str.charCodeAt(index2);
-      if (code !== 32 && code !== 9)
-        return index2;
-    } while (++index2 < max);
-    return max;
-  }
-  function endIndex(str, index2, min) {
-    while (index2 > min) {
-      const code = str.charCodeAt(--index2);
-      if (code !== 32 && code !== 9)
-        return index2 + 1;
-    }
-    return min;
-  }
-  function serialize(name, val, options) {
-    const enc = (options == null ? void 0 : options.encode) || encodeURIComponent;
-    if (!cookieNameRegExp.test(name)) {
-      throw new TypeError(`argument name is invalid: ${name}`);
-    }
-    const value = enc(val);
-    if (!cookieValueRegExp.test(value)) {
-      throw new TypeError(`argument val is invalid: ${val}`);
-    }
-    let str = name + "=" + value;
-    if (!options)
-      return str;
-    if (options.maxAge !== void 0) {
-      if (!Number.isInteger(options.maxAge)) {
-        throw new TypeError(`option maxAge is invalid: ${options.maxAge}`);
-      }
-      str += "; Max-Age=" + options.maxAge;
-    }
-    if (options.domain) {
-      if (!domainValueRegExp.test(options.domain)) {
-        throw new TypeError(`option domain is invalid: ${options.domain}`);
-      }
-      str += "; Domain=" + options.domain;
-    }
-    if (options.path) {
-      if (!pathValueRegExp.test(options.path)) {
-        throw new TypeError(`option path is invalid: ${options.path}`);
-      }
-      str += "; Path=" + options.path;
-    }
-    if (options.expires) {
-      if (!isDate(options.expires) || !Number.isFinite(options.expires.valueOf())) {
-        throw new TypeError(`option expires is invalid: ${options.expires}`);
-      }
-      str += "; Expires=" + options.expires.toUTCString();
-    }
-    if (options.httpOnly) {
-      str += "; HttpOnly";
-    }
-    if (options.secure) {
-      str += "; Secure";
-    }
-    if (options.partitioned) {
-      str += "; Partitioned";
-    }
-    if (options.priority) {
-      const priority = typeof options.priority === "string" ? options.priority.toLowerCase() : void 0;
-      switch (priority) {
-        case "low":
-          str += "; Priority=Low";
-          break;
-        case "medium":
-          str += "; Priority=Medium";
-          break;
-        case "high":
-          str += "; Priority=High";
-          break;
-        default:
-          throw new TypeError(`option priority is invalid: ${options.priority}`);
-      }
-    }
-    if (options.sameSite) {
-      const sameSite = typeof options.sameSite === "string" ? options.sameSite.toLowerCase() : options.sameSite;
-      switch (sameSite) {
-        case true:
-        case "strict":
-          str += "; SameSite=Strict";
-          break;
-        case "lax":
-          str += "; SameSite=Lax";
-          break;
-        case "none":
-          str += "; SameSite=None";
-          break;
-        default:
-          throw new TypeError(`option sameSite is invalid: ${options.sameSite}`);
-      }
-    }
-    return str;
-  }
-  function decode(str) {
-    if (str.indexOf("%") === -1)
-      return str;
-    try {
-      return decodeURIComponent(str);
-    } catch (e2) {
-      return str;
-    }
-  }
-  function isDate(val) {
-    return __toString.call(val) === "[object Date]";
-  }
-  return dist;
-}
-requireDist();
-var PopStateEventType = "popstate";
-function createHashHistory(options = {}) {
-  function createHashLocation(window2, globalHistory) {
-    let {
-      pathname = "/",
-      search = "",
-      hash = ""
-    } = parsePath(window2.location.hash.substring(1));
-    if (!pathname.startsWith("/") && !pathname.startsWith(".")) {
-      pathname = "/" + pathname;
-    }
-    return createLocation(
-      "",
-      { pathname, search, hash },
-      // state defaults to `null` because `window.history.state` does
-      globalHistory.state && globalHistory.state.usr || null,
-      globalHistory.state && globalHistory.state.key || "default"
-    );
-  }
-  function createHashHref(window2, to) {
-    let base = window2.document.querySelector("base");
-    let href2 = "";
-    if (base && base.getAttribute("href")) {
-      let url = window2.location.href;
-      let hashIndex = url.indexOf("#");
-      href2 = hashIndex === -1 ? url : url.slice(0, hashIndex);
-    }
-    return href2 + "#" + (typeof to === "string" ? to : createPath(to));
-  }
-  function validateHashLocation(location, to) {
-    warning(
-      location.pathname.charAt(0) === "/",
-      `relative pathnames are not supported in hash history.push(${JSON.stringify(
-        to
-      )})`
-    );
-  }
-  return getUrlBasedHistory(
-    createHashLocation,
-    createHashHref,
-    validateHashLocation,
-    options
-  );
-}
-function invariant(value, message) {
-  if (value === false || value === null || typeof value === "undefined") {
-    throw new Error(message);
-  }
-}
-function warning(cond, message) {
-  if (!cond) {
-    if (typeof console !== "undefined") console.warn(message);
-    try {
-      throw new Error(message);
-    } catch (e2) {
-    }
-  }
-}
-function createKey() {
-  return Math.random().toString(36).substring(2, 10);
-}
-function getHistoryState(location, index2) {
-  return {
-    usr: location.state,
-    key: location.key,
-    idx: index2
+var extendStatics = function(d, b) {
+  extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d2, b2) {
+    d2.__proto__ = b2;
+  } || function(d2, b2) {
+    for (var p in b2) if (Object.prototype.hasOwnProperty.call(b2, p)) d2[p] = b2[p];
   };
-}
-function createLocation(current, to, state = null, key) {
-  let location = {
-    pathname: typeof current === "string" ? current : current.pathname,
-    search: "",
-    hash: "",
-    ...typeof to === "string" ? parsePath(to) : to,
-    state,
-    // TODO: This could be cleaned up.  push/replace should probably just take
-    // full Locations now and avoid the need to run through this flow at all
-    // But that's a pretty big refactor to the current test suite so going to
-    // keep as is for the time being and just let any incoming keys take precedence
-    key: to && to.key || key || createKey()
-  };
-  return location;
-}
-function createPath({
-  pathname = "/",
-  search = "",
-  hash = ""
-}) {
-  if (search && search !== "?")
-    pathname += search.charAt(0) === "?" ? search : "?" + search;
-  if (hash && hash !== "#")
-    pathname += hash.charAt(0) === "#" ? hash : "#" + hash;
-  return pathname;
-}
-function parsePath(path) {
-  let parsedPath = {};
-  if (path) {
-    let hashIndex = path.indexOf("#");
-    if (hashIndex >= 0) {
-      parsedPath.hash = path.substring(hashIndex);
-      path = path.substring(0, hashIndex);
-    }
-    let searchIndex = path.indexOf("?");
-    if (searchIndex >= 0) {
-      parsedPath.search = path.substring(searchIndex);
-      path = path.substring(0, searchIndex);
-    }
-    if (path) {
-      parsedPath.pathname = path;
-    }
-  }
-  return parsedPath;
-}
-function getUrlBasedHistory(getLocation, createHref2, validateLocation, options = {}) {
-  let { window: window2 = document.defaultView, v5Compat = false } = options;
-  let globalHistory = window2.history;
-  let action = "POP";
-  let listener = null;
-  let index2 = getIndex();
-  if (index2 == null) {
-    index2 = 0;
-    globalHistory.replaceState({ ...globalHistory.state, idx: index2 }, "");
-  }
-  function getIndex() {
-    let state = globalHistory.state || { idx: null };
-    return state.idx;
-  }
-  function handlePop() {
-    action = "POP";
-    let nextIndex = getIndex();
-    let delta = nextIndex == null ? null : nextIndex - index2;
-    index2 = nextIndex;
-    if (listener) {
-      listener({ action, location: history.location, delta });
-    }
-  }
-  function push(to, state) {
-    action = "PUSH";
-    let location = createLocation(history.location, to, state);
-    if (validateLocation) validateLocation(location, to);
-    index2 = getIndex() + 1;
-    let historyState = getHistoryState(location, index2);
-    let url = history.createHref(location);
-    try {
-      globalHistory.pushState(historyState, "", url);
-    } catch (error) {
-      if (error instanceof DOMException && error.name === "DataCloneError") {
-        throw error;
-      }
-      window2.location.assign(url);
-    }
-    if (v5Compat && listener) {
-      listener({ action, location: history.location, delta: 1 });
-    }
-  }
-  function replace2(to, state) {
-    action = "REPLACE";
-    let location = createLocation(history.location, to, state);
-    if (validateLocation) validateLocation(location, to);
-    index2 = getIndex();
-    let historyState = getHistoryState(location, index2);
-    let url = history.createHref(location);
-    globalHistory.replaceState(historyState, "", url);
-    if (v5Compat && listener) {
-      listener({ action, location: history.location, delta: 0 });
-    }
-  }
-  function createURL(to) {
-    return createBrowserURLImpl(to);
-  }
-  let history = {
-    get action() {
-      return action;
-    },
-    get location() {
-      return getLocation(window2, globalHistory);
-    },
-    listen(fn) {
-      if (listener) {
-        throw new Error("A history only accepts one active listener");
-      }
-      window2.addEventListener(PopStateEventType, handlePop);
-      listener = fn;
-      return () => {
-        window2.removeEventListener(PopStateEventType, handlePop);
-        listener = null;
-      };
-    },
-    createHref(to) {
-      return createHref2(window2, to);
-    },
-    createURL,
-    encodeLocation(to) {
-      let url = createURL(to);
-      return {
-        pathname: url.pathname,
-        search: url.search,
-        hash: url.hash
-      };
-    },
-    push,
-    replace: replace2,
-    go(n2) {
-      return globalHistory.go(n2);
-    }
-  };
-  return history;
-}
-function createBrowserURLImpl(to, isAbsolute = false) {
-  let base = "http://localhost";
-  if (typeof window !== "undefined") {
-    base = window.location.origin !== "null" ? window.location.origin : window.location.href;
-  }
-  invariant(base, "No window.location.(origin|href) available to create URL");
-  let href2 = typeof to === "string" ? to : createPath(to);
-  href2 = href2.replace(/ $/, "%20");
-  if (!isAbsolute && href2.startsWith("//")) {
-    href2 = base + href2;
-  }
-  return new URL(href2, base);
-}
-function matchRoutes(routes, locationArg, basename = "/") {
-  return matchRoutesImpl(routes, locationArg, basename, false);
-}
-function matchRoutesImpl(routes, locationArg, basename, allowPartial) {
-  let location = typeof locationArg === "string" ? parsePath(locationArg) : locationArg;
-  let pathname = stripBasename(location.pathname || "/", basename);
-  if (pathname == null) {
-    return null;
-  }
-  let branches = flattenRoutes(routes);
-  rankRouteBranches(branches);
-  let matches = null;
-  for (let i2 = 0; matches == null && i2 < branches.length; ++i2) {
-    let decoded = decodePath(pathname);
-    matches = matchRouteBranch(
-      branches[i2],
-      decoded,
-      allowPartial
-    );
-  }
-  return matches;
-}
-function flattenRoutes(routes, branches = [], parentsMeta = [], parentPath = "") {
-  let flattenRoute = (route, index2, relativePath) => {
-    let meta = {
-      relativePath: relativePath === void 0 ? route.path || "" : relativePath,
-      caseSensitive: route.caseSensitive === true,
-      childrenIndex: index2,
-      route
-    };
-    if (meta.relativePath.startsWith("/")) {
-      invariant(
-        meta.relativePath.startsWith(parentPath),
-        `Absolute route path "${meta.relativePath}" nested under path "${parentPath}" is not valid. An absolute child route path must start with the combined path of all its parent routes.`
-      );
-      meta.relativePath = meta.relativePath.slice(parentPath.length);
-    }
-    let path = joinPaths([parentPath, meta.relativePath]);
-    let routesMeta = parentsMeta.concat(meta);
-    if (route.children && route.children.length > 0) {
-      invariant(
-        // Our types know better, but runtime JS may not!
-        // @ts-expect-error
-        route.index !== true,
-        `Index routes must not have child routes. Please remove all child routes from route path "${path}".`
-      );
-      flattenRoutes(route.children, branches, routesMeta, path);
-    }
-    if (route.path == null && !route.index) {
-      return;
-    }
-    branches.push({
-      path,
-      score: computeScore(path, route.index),
-      routesMeta
-    });
-  };
-  routes.forEach((route, index2) => {
-    var _a;
-    if (route.path === "" || !((_a = route.path) == null ? void 0 : _a.includes("?"))) {
-      flattenRoute(route, index2);
-    } else {
-      for (let exploded of explodeOptionalSegments(route.path)) {
-        flattenRoute(route, index2, exploded);
-      }
-    }
-  });
-  return branches;
-}
-function explodeOptionalSegments(path) {
-  let segments = path.split("/");
-  if (segments.length === 0) return [];
-  let [first, ...rest] = segments;
-  let isOptional = first.endsWith("?");
-  let required = first.replace(/\?$/, "");
-  if (rest.length === 0) {
-    return isOptional ? [required, ""] : [required];
-  }
-  let restExploded = explodeOptionalSegments(rest.join("/"));
-  let result = [];
-  result.push(
-    ...restExploded.map(
-      (subpath) => subpath === "" ? required : [required, subpath].join("/")
-    )
-  );
-  if (isOptional) {
-    result.push(...restExploded);
-  }
-  return result.map(
-    (exploded) => path.startsWith("/") && exploded === "" ? "/" : exploded
-  );
-}
-function rankRouteBranches(branches) {
-  branches.sort(
-    (a2, b2) => a2.score !== b2.score ? b2.score - a2.score : compareIndexes(
-      a2.routesMeta.map((meta) => meta.childrenIndex),
-      b2.routesMeta.map((meta) => meta.childrenIndex)
-    )
-  );
-}
-var paramRe = /^:[\w-]+$/;
-var dynamicSegmentValue = 3;
-var indexRouteValue = 2;
-var emptySegmentValue = 1;
-var staticSegmentValue = 10;
-var splatPenalty = -2;
-var isSplat = (s2) => s2 === "*";
-function computeScore(path, index2) {
-  let segments = path.split("/");
-  let initialScore = segments.length;
-  if (segments.some(isSplat)) {
-    initialScore += splatPenalty;
-  }
-  if (index2) {
-    initialScore += indexRouteValue;
-  }
-  return segments.filter((s2) => !isSplat(s2)).reduce(
-    (score, segment) => score + (paramRe.test(segment) ? dynamicSegmentValue : segment === "" ? emptySegmentValue : staticSegmentValue),
-    initialScore
-  );
-}
-function compareIndexes(a2, b2) {
-  let siblings = a2.length === b2.length && a2.slice(0, -1).every((n2, i2) => n2 === b2[i2]);
-  return siblings ? (
-    // If two routes are siblings, we should try to match the earlier sibling
-    // first. This allows people to have fine-grained control over the matching
-    // behavior by simply putting routes with identical paths in the order they
-    // want them tried.
-    a2[a2.length - 1] - b2[b2.length - 1]
-  ) : (
-    // Otherwise, it doesn't really make sense to rank non-siblings by index,
-    // so they sort equally.
-    0
-  );
-}
-function matchRouteBranch(branch, pathname, allowPartial = false) {
-  let { routesMeta } = branch;
-  let matchedParams = {};
-  let matchedPathname = "/";
-  let matches = [];
-  for (let i2 = 0; i2 < routesMeta.length; ++i2) {
-    let meta = routesMeta[i2];
-    let end = i2 === routesMeta.length - 1;
-    let remainingPathname = matchedPathname === "/" ? pathname : pathname.slice(matchedPathname.length) || "/";
-    let match = matchPath(
-      { path: meta.relativePath, caseSensitive: meta.caseSensitive, end },
-      remainingPathname
-    );
-    let route = meta.route;
-    if (!match && end && allowPartial && !routesMeta[routesMeta.length - 1].route.index) {
-      match = matchPath(
-        {
-          path: meta.relativePath,
-          caseSensitive: meta.caseSensitive,
-          end: false
-        },
-        remainingPathname
-      );
-    }
-    if (!match) {
-      return null;
-    }
-    Object.assign(matchedParams, match.params);
-    matches.push({
-      // TODO: Can this as be avoided?
-      params: matchedParams,
-      pathname: joinPaths([matchedPathname, match.pathname]),
-      pathnameBase: normalizePathname(
-        joinPaths([matchedPathname, match.pathnameBase])
-      ),
-      route
-    });
-    if (match.pathnameBase !== "/") {
-      matchedPathname = joinPaths([matchedPathname, match.pathnameBase]);
-    }
-  }
-  return matches;
-}
-function matchPath(pattern, pathname) {
-  if (typeof pattern === "string") {
-    pattern = { path: pattern, caseSensitive: false, end: true };
-  }
-  let [matcher, compiledParams] = compilePath(
-    pattern.path,
-    pattern.caseSensitive,
-    pattern.end
-  );
-  let match = pathname.match(matcher);
-  if (!match) return null;
-  let matchedPathname = match[0];
-  let pathnameBase = matchedPathname.replace(/(.)\/+$/, "$1");
-  let captureGroups = match.slice(1);
-  let params = compiledParams.reduce(
-    (memo2, { paramName, isOptional }, index2) => {
-      if (paramName === "*") {
-        let splatValue = captureGroups[index2] || "";
-        pathnameBase = matchedPathname.slice(0, matchedPathname.length - splatValue.length).replace(/(.)\/+$/, "$1");
-      }
-      const value = captureGroups[index2];
-      if (isOptional && !value) {
-        memo2[paramName] = void 0;
-      } else {
-        memo2[paramName] = (value || "").replace(/%2F/g, "/");
-      }
-      return memo2;
-    },
-    {}
-  );
-  return {
-    params,
-    pathname: matchedPathname,
-    pathnameBase,
-    pattern
-  };
-}
-function compilePath(path, caseSensitive = false, end = true) {
-  warning(
-    path === "*" || !path.endsWith("*") || path.endsWith("/*"),
-    `Route path "${path}" will be treated as if it were "${path.replace(/\*$/, "/*")}" because the \`*\` character must always follow a \`/\` in the pattern. To get rid of this warning, please change the route path to "${path.replace(/\*$/, "/*")}".`
-  );
-  let params = [];
-  let regexpSource = "^" + path.replace(/\/*\*?$/, "").replace(/^\/*/, "/").replace(/[\\.*+^${}|()[\]]/g, "\\$&").replace(
-    /\/:([\w-]+)(\?)?/g,
-    (_2, paramName, isOptional) => {
-      params.push({ paramName, isOptional: isOptional != null });
-      return isOptional ? "/?([^\\/]+)?" : "/([^\\/]+)";
-    }
-  );
-  if (path.endsWith("*")) {
-    params.push({ paramName: "*" });
-    regexpSource += path === "*" || path === "/*" ? "(.*)$" : "(?:\\/(.+)|\\/*)$";
-  } else if (end) {
-    regexpSource += "\\/*$";
-  } else if (path !== "" && path !== "/") {
-    regexpSource += "(?:(?=\\/|$))";
-  } else ;
-  let matcher = new RegExp(regexpSource, caseSensitive ? void 0 : "i");
-  return [matcher, params];
-}
-function decodePath(value) {
-  try {
-    return value.split("/").map((v2) => decodeURIComponent(v2).replace(/\//g, "%2F")).join("/");
-  } catch (error) {
-    warning(
-      false,
-      `The URL path "${value}" could not be decoded because it is a malformed URL segment. This is probably due to a bad percent encoding (${error}).`
-    );
-    return value;
-  }
-}
-function stripBasename(pathname, basename) {
-  if (basename === "/") return pathname;
-  if (!pathname.toLowerCase().startsWith(basename.toLowerCase())) {
-    return null;
-  }
-  let startIndex = basename.endsWith("/") ? basename.length - 1 : basename.length;
-  let nextChar = pathname.charAt(startIndex);
-  if (nextChar && nextChar !== "/") {
-    return null;
-  }
-  return pathname.slice(startIndex) || "/";
-}
-function resolvePath(to, fromPathname = "/") {
-  let {
-    pathname: toPathname,
-    search = "",
-    hash = ""
-  } = typeof to === "string" ? parsePath(to) : to;
-  let pathname = toPathname ? toPathname.startsWith("/") ? toPathname : resolvePathname(toPathname, fromPathname) : fromPathname;
-  return {
-    pathname,
-    search: normalizeSearch(search),
-    hash: normalizeHash(hash)
-  };
-}
-function resolvePathname(relativePath, fromPathname) {
-  let segments = fromPathname.replace(/\/+$/, "").split("/");
-  let relativeSegments = relativePath.split("/");
-  relativeSegments.forEach((segment) => {
-    if (segment === "..") {
-      if (segments.length > 1) segments.pop();
-    } else if (segment !== ".") {
-      segments.push(segment);
-    }
-  });
-  return segments.length > 1 ? segments.join("/") : "/";
-}
-function getInvalidPathError(char, field, dest, path) {
-  return `Cannot include a '${char}' character in a manually specified \`to.${field}\` field [${JSON.stringify(
-    path
-  )}].  Please separate it out to the \`to.${dest}\` field. Alternatively you may provide the full path as a string in <Link to="..."> and the router will parse it for you.`;
-}
-function getPathContributingMatches(matches) {
-  return matches.filter(
-    (match, index2) => index2 === 0 || match.route.path && match.route.path.length > 0
-  );
-}
-function getResolveToMatches(matches) {
-  let pathMatches = getPathContributingMatches(matches);
-  return pathMatches.map(
-    (match, idx) => idx === pathMatches.length - 1 ? match.pathname : match.pathnameBase
-  );
-}
-function resolveTo(toArg, routePathnames, locationPathname, isPathRelative = false) {
-  let to;
-  if (typeof toArg === "string") {
-    to = parsePath(toArg);
-  } else {
-    to = { ...toArg };
-    invariant(
-      !to.pathname || !to.pathname.includes("?"),
-      getInvalidPathError("?", "pathname", "search", to)
-    );
-    invariant(
-      !to.pathname || !to.pathname.includes("#"),
-      getInvalidPathError("#", "pathname", "hash", to)
-    );
-    invariant(
-      !to.search || !to.search.includes("#"),
-      getInvalidPathError("#", "search", "hash", to)
-    );
-  }
-  let isEmptyPath = toArg === "" || to.pathname === "";
-  let toPathname = isEmptyPath ? "/" : to.pathname;
-  let from;
-  if (toPathname == null) {
-    from = locationPathname;
-  } else {
-    let routePathnameIndex = routePathnames.length - 1;
-    if (!isPathRelative && toPathname.startsWith("..")) {
-      let toSegments = toPathname.split("/");
-      while (toSegments[0] === "..") {
-        toSegments.shift();
-        routePathnameIndex -= 1;
-      }
-      to.pathname = toSegments.join("/");
-    }
-    from = routePathnameIndex >= 0 ? routePathnames[routePathnameIndex] : "/";
-  }
-  let path = resolvePath(to, from);
-  let hasExplicitTrailingSlash = toPathname && toPathname !== "/" && toPathname.endsWith("/");
-  let hasCurrentTrailingSlash = (isEmptyPath || toPathname === ".") && locationPathname.endsWith("/");
-  if (!path.pathname.endsWith("/") && (hasExplicitTrailingSlash || hasCurrentTrailingSlash)) {
-    path.pathname += "/";
-  }
-  return path;
-}
-var joinPaths = (paths) => paths.join("/").replace(/\/\/+/g, "/");
-var normalizePathname = (pathname) => pathname.replace(/\/+$/, "").replace(/^\/*/, "/");
-var normalizeSearch = (search) => !search || search === "?" ? "" : search.startsWith("?") ? search : "?" + search;
-var normalizeHash = (hash) => !hash || hash === "#" ? "" : hash.startsWith("#") ? hash : "#" + hash;
-function isRouteErrorResponse(error) {
-  return error != null && typeof error.status === "number" && typeof error.statusText === "string" && typeof error.internal === "boolean" && "data" in error;
-}
-var validMutationMethodsArr = [
-  "POST",
-  "PUT",
-  "PATCH",
-  "DELETE"
-];
-new Set(
-  validMutationMethodsArr
-);
-var validRequestMethodsArr = [
-  "GET",
-  ...validMutationMethodsArr
-];
-new Set(validRequestMethodsArr);
-var DataRouterContext = reactExports.createContext(null);
-DataRouterContext.displayName = "DataRouter";
-var DataRouterStateContext = reactExports.createContext(null);
-DataRouterStateContext.displayName = "DataRouterState";
-var ViewTransitionContext = reactExports.createContext({
-  isTransitioning: false
-});
-ViewTransitionContext.displayName = "ViewTransition";
-var FetchersContext = reactExports.createContext(
-  /* @__PURE__ */ new Map()
-);
-FetchersContext.displayName = "Fetchers";
-var AwaitContext = reactExports.createContext(null);
-AwaitContext.displayName = "Await";
-var NavigationContext = reactExports.createContext(
-  null
-);
-NavigationContext.displayName = "Navigation";
-var LocationContext = reactExports.createContext(
-  null
-);
-LocationContext.displayName = "Location";
-var RouteContext = reactExports.createContext({
-  outlet: null,
-  matches: [],
-  isDataRoute: false
-});
-RouteContext.displayName = "Route";
-var RouteErrorContext = reactExports.createContext(null);
-RouteErrorContext.displayName = "RouteError";
-function useHref(to, { relative } = {}) {
-  invariant(
-    useInRouterContext(),
-    // TODO: This error is probably because they somehow have 2 versions of the
-    // router loaded. We can help them understand how to avoid that.
-    `useHref() may be used only in the context of a <Router> component.`
-  );
-  let { basename, navigator } = reactExports.useContext(NavigationContext);
-  let { hash, pathname, search } = useResolvedPath(to, { relative });
-  let joinedPathname = pathname;
-  if (basename !== "/") {
-    joinedPathname = pathname === "/" ? basename : joinPaths([basename, pathname]);
-  }
-  return navigator.createHref({ pathname: joinedPathname, search, hash });
-}
-function useInRouterContext() {
-  return reactExports.useContext(LocationContext) != null;
-}
-function useLocation() {
-  invariant(
-    useInRouterContext(),
-    // TODO: This error is probably because they somehow have 2 versions of the
-    // router loaded. We can help them understand how to avoid that.
-    `useLocation() may be used only in the context of a <Router> component.`
-  );
-  return reactExports.useContext(LocationContext).location;
-}
-var navigateEffectWarning = `You should call navigate() in a React.useEffect(), not when your component is first rendered.`;
-function useIsomorphicLayoutEffect(cb) {
-  let isStatic = reactExports.useContext(NavigationContext).static;
-  if (!isStatic) {
-    reactExports.useLayoutEffect(cb);
-  }
-}
-function useNavigate() {
-  let { isDataRoute } = reactExports.useContext(RouteContext);
-  return isDataRoute ? useNavigateStable() : useNavigateUnstable();
-}
-function useNavigateUnstable() {
-  invariant(
-    useInRouterContext(),
-    // TODO: This error is probably because they somehow have 2 versions of the
-    // router loaded. We can help them understand how to avoid that.
-    `useNavigate() may be used only in the context of a <Router> component.`
-  );
-  let dataRouterContext = reactExports.useContext(DataRouterContext);
-  let { basename, navigator } = reactExports.useContext(NavigationContext);
-  let { matches } = reactExports.useContext(RouteContext);
-  let { pathname: locationPathname } = useLocation();
-  let routePathnamesJson = JSON.stringify(getResolveToMatches(matches));
-  let activeRef = reactExports.useRef(false);
-  useIsomorphicLayoutEffect(() => {
-    activeRef.current = true;
-  });
-  let navigate = reactExports.useCallback(
-    (to, options = {}) => {
-      warning(activeRef.current, navigateEffectWarning);
-      if (!activeRef.current) return;
-      if (typeof to === "number") {
-        navigator.go(to);
-        return;
-      }
-      let path = resolveTo(
-        to,
-        JSON.parse(routePathnamesJson),
-        locationPathname,
-        options.relative === "path"
-      );
-      if (dataRouterContext == null && basename !== "/") {
-        path.pathname = path.pathname === "/" ? basename : joinPaths([basename, path.pathname]);
-      }
-      (!!options.replace ? navigator.replace : navigator.push)(
-        path,
-        options.state,
-        options
-      );
-    },
-    [
-      basename,
-      navigator,
-      routePathnamesJson,
-      locationPathname,
-      dataRouterContext
-    ]
-  );
-  return navigate;
-}
-reactExports.createContext(null);
-function useResolvedPath(to, { relative } = {}) {
-  let { matches } = reactExports.useContext(RouteContext);
-  let { pathname: locationPathname } = useLocation();
-  let routePathnamesJson = JSON.stringify(getResolveToMatches(matches));
-  return reactExports.useMemo(
-    () => resolveTo(
-      to,
-      JSON.parse(routePathnamesJson),
-      locationPathname,
-      relative === "path"
-    ),
-    [to, routePathnamesJson, locationPathname, relative]
-  );
-}
-function useRoutesImpl(routes, locationArg, dataRouterState, future) {
-  invariant(
-    useInRouterContext(),
-    // TODO: This error is probably because they somehow have 2 versions of the
-    // router loaded. We can help them understand how to avoid that.
-    `useRoutes() may be used only in the context of a <Router> component.`
-  );
-  let { navigator } = reactExports.useContext(NavigationContext);
-  let { matches: parentMatches } = reactExports.useContext(RouteContext);
-  let routeMatch = parentMatches[parentMatches.length - 1];
-  let parentParams = routeMatch ? routeMatch.params : {};
-  let parentPathname = routeMatch ? routeMatch.pathname : "/";
-  let parentPathnameBase = routeMatch ? routeMatch.pathnameBase : "/";
-  let parentRoute = routeMatch && routeMatch.route;
-  {
-    let parentPath = parentRoute && parentRoute.path || "";
-    warningOnce(
-      parentPathname,
-      !parentRoute || parentPath.endsWith("*") || parentPath.endsWith("*?"),
-      `You rendered descendant <Routes> (or called \`useRoutes()\`) at "${parentPathname}" (under <Route path="${parentPath}">) but the parent route path has no trailing "*". This means if you navigate deeper, the parent won't match anymore and therefore the child routes will never render.
-
-Please change the parent <Route path="${parentPath}"> to <Route path="${parentPath === "/" ? "*" : `${parentPath}/*`}">.`
-    );
-  }
-  let locationFromContext = useLocation();
-  let location;
-  {
-    location = locationFromContext;
-  }
-  let pathname = location.pathname || "/";
-  let remainingPathname = pathname;
-  if (parentPathnameBase !== "/") {
-    let parentSegments = parentPathnameBase.replace(/^\//, "").split("/");
-    let segments = pathname.replace(/^\//, "").split("/");
-    remainingPathname = "/" + segments.slice(parentSegments.length).join("/");
-  }
-  let matches = matchRoutes(routes, { pathname: remainingPathname });
-  {
-    warning(
-      parentRoute || matches != null,
-      `No routes matched location "${location.pathname}${location.search}${location.hash}" `
-    );
-    warning(
-      matches == null || matches[matches.length - 1].route.element !== void 0 || matches[matches.length - 1].route.Component !== void 0 || matches[matches.length - 1].route.lazy !== void 0,
-      `Matched leaf route at location "${location.pathname}${location.search}${location.hash}" does not have an element or Component. This means it will render an <Outlet /> with a null value by default resulting in an "empty" page.`
-    );
-  }
-  let renderedMatches = _renderMatches(
-    matches && matches.map(
-      (match) => Object.assign({}, match, {
-        params: Object.assign({}, parentParams, match.params),
-        pathname: joinPaths([
-          parentPathnameBase,
-          // Re-encode pathnames that were decoded inside matchRoutes
-          navigator.encodeLocation ? navigator.encodeLocation(match.pathname).pathname : match.pathname
-        ]),
-        pathnameBase: match.pathnameBase === "/" ? parentPathnameBase : joinPaths([
-          parentPathnameBase,
-          // Re-encode pathnames that were decoded inside matchRoutes
-          navigator.encodeLocation ? navigator.encodeLocation(match.pathnameBase).pathname : match.pathnameBase
-        ])
-      })
-    ),
-    parentMatches,
-    dataRouterState,
-    future
-  );
-  return renderedMatches;
-}
-function DefaultErrorComponent() {
-  let error = useRouteError();
-  let message = isRouteErrorResponse(error) ? `${error.status} ${error.statusText}` : error instanceof Error ? error.message : JSON.stringify(error);
-  let stack = error instanceof Error ? error.stack : null;
-  let lightgrey = "rgba(200,200,200, 0.5)";
-  let preStyles = { padding: "0.5rem", backgroundColor: lightgrey };
-  let codeStyles = { padding: "2px 4px", backgroundColor: lightgrey };
-  let devInfo = null;
-  {
-    console.error(
-      "Error handled by React Router default ErrorBoundary:",
-      error
-    );
-    devInfo = /* @__PURE__ */ reactExports.createElement(reactExports.Fragment, null, /* @__PURE__ */ reactExports.createElement("p", null, "💿 Hey developer 👋"), /* @__PURE__ */ reactExports.createElement("p", null, "You can provide a way better UX than this when your app throws errors by providing your own ", /* @__PURE__ */ reactExports.createElement("code", { style: codeStyles }, "ErrorBoundary"), " or", " ", /* @__PURE__ */ reactExports.createElement("code", { style: codeStyles }, "errorElement"), " prop on your route."));
-  }
-  return /* @__PURE__ */ reactExports.createElement(reactExports.Fragment, null, /* @__PURE__ */ reactExports.createElement("h2", null, "Unexpected Application Error!"), /* @__PURE__ */ reactExports.createElement("h3", { style: { fontStyle: "italic" } }, message), stack ? /* @__PURE__ */ reactExports.createElement("pre", { style: preStyles }, stack) : null, devInfo);
-}
-var defaultErrorElement = /* @__PURE__ */ reactExports.createElement(DefaultErrorComponent, null);
-var RenderErrorBoundary = class extends reactExports.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      location: props.location,
-      revalidation: props.revalidation,
-      error: props.error
-    };
-  }
-  static getDerivedStateFromError(error) {
-    return { error };
-  }
-  static getDerivedStateFromProps(props, state) {
-    if (state.location !== props.location || state.revalidation !== "idle" && props.revalidation === "idle") {
-      return {
-        error: props.error,
-        location: props.location,
-        revalidation: props.revalidation
-      };
-    }
-    return {
-      error: props.error !== void 0 ? props.error : state.error,
-      location: state.location,
-      revalidation: props.revalidation || state.revalidation
-    };
-  }
-  componentDidCatch(error, errorInfo) {
-    console.error(
-      "React Router caught the following error during render",
-      error,
-      errorInfo
-    );
-  }
-  render() {
-    return this.state.error !== void 0 ? /* @__PURE__ */ reactExports.createElement(RouteContext.Provider, { value: this.props.routeContext }, /* @__PURE__ */ reactExports.createElement(
-      RouteErrorContext.Provider,
-      {
-        value: this.state.error,
-        children: this.props.component
-      }
-    )) : this.props.children;
-  }
+  return extendStatics(d, b);
 };
-function RenderedRoute({ routeContext, match, children }) {
-  let dataRouterContext = reactExports.useContext(DataRouterContext);
-  if (dataRouterContext && dataRouterContext.static && dataRouterContext.staticContext && (match.route.errorElement || match.route.ErrorBoundary)) {
-    dataRouterContext.staticContext._deepestRenderedBoundaryId = match.route.id;
-  }
-  return /* @__PURE__ */ reactExports.createElement(RouteContext.Provider, { value: routeContext }, children);
-}
-function _renderMatches(matches, parentMatches = [], dataRouterState = null, future = null) {
-  if (matches == null) {
-    if (!dataRouterState) {
-      return null;
-    }
-    if (dataRouterState.errors) {
-      matches = dataRouterState.matches;
-    } else if (parentMatches.length === 0 && !dataRouterState.initialized && dataRouterState.matches.length > 0) {
-      matches = dataRouterState.matches;
-    } else {
-      return null;
-    }
-  }
-  let renderedMatches = matches;
-  let errors = dataRouterState == null ? void 0 : dataRouterState.errors;
-  if (errors != null) {
-    let errorIndex = renderedMatches.findIndex(
-      (m2) => m2.route.id && (errors == null ? void 0 : errors[m2.route.id]) !== void 0
-    );
-    invariant(
-      errorIndex >= 0,
-      `Could not find a matching route for errors on route IDs: ${Object.keys(
-        errors
-      ).join(",")}`
-    );
-    renderedMatches = renderedMatches.slice(
-      0,
-      Math.min(renderedMatches.length, errorIndex + 1)
-    );
-  }
-  let renderFallback = false;
-  let fallbackIndex = -1;
-  if (dataRouterState) {
-    for (let i2 = 0; i2 < renderedMatches.length; i2++) {
-      let match = renderedMatches[i2];
-      if (match.route.HydrateFallback || match.route.hydrateFallbackElement) {
-        fallbackIndex = i2;
-      }
-      if (match.route.id) {
-        let { loaderData, errors: errors2 } = dataRouterState;
-        let needsToRunLoader = match.route.loader && !loaderData.hasOwnProperty(match.route.id) && (!errors2 || errors2[match.route.id] === void 0);
-        if (match.route.lazy || needsToRunLoader) {
-          renderFallback = true;
-          if (fallbackIndex >= 0) {
-            renderedMatches = renderedMatches.slice(0, fallbackIndex + 1);
-          } else {
-            renderedMatches = [renderedMatches[0]];
-          }
-          break;
-        }
-      }
-    }
-  }
-  return renderedMatches.reduceRight((outlet, match, index2) => {
-    let error;
-    let shouldRenderHydrateFallback = false;
-    let errorElement = null;
-    let hydrateFallbackElement = null;
-    if (dataRouterState) {
-      error = errors && match.route.id ? errors[match.route.id] : void 0;
-      errorElement = match.route.errorElement || defaultErrorElement;
-      if (renderFallback) {
-        if (fallbackIndex < 0 && index2 === 0) {
-          warningOnce(
-            "route-fallback",
-            false,
-            "No `HydrateFallback` element provided to render during initial hydration"
-          );
-          shouldRenderHydrateFallback = true;
-          hydrateFallbackElement = null;
-        } else if (fallbackIndex === index2) {
-          shouldRenderHydrateFallback = true;
-          hydrateFallbackElement = match.route.hydrateFallbackElement || null;
-        }
-      }
-    }
-    let matches2 = parentMatches.concat(renderedMatches.slice(0, index2 + 1));
-    let getChildren = () => {
-      let children;
-      if (error) {
-        children = errorElement;
-      } else if (shouldRenderHydrateFallback) {
-        children = hydrateFallbackElement;
-      } else if (match.route.Component) {
-        children = /* @__PURE__ */ reactExports.createElement(match.route.Component, null);
-      } else if (match.route.element) {
-        children = match.route.element;
-      } else {
-        children = outlet;
-      }
-      return /* @__PURE__ */ reactExports.createElement(
-        RenderedRoute,
-        {
-          match,
-          routeContext: {
-            outlet,
-            matches: matches2,
-            isDataRoute: dataRouterState != null
-          },
-          children
-        }
-      );
-    };
-    return dataRouterState && (match.route.ErrorBoundary || match.route.errorElement || index2 === 0) ? /* @__PURE__ */ reactExports.createElement(
-      RenderErrorBoundary,
-      {
-        location: dataRouterState.location,
-        revalidation: dataRouterState.revalidation,
-        component: errorElement,
-        error,
-        children: getChildren(),
-        routeContext: { outlet: null, matches: matches2, isDataRoute: true }
-      }
-    ) : getChildren();
-  }, null);
-}
-function getDataRouterConsoleError(hookName) {
-  return `${hookName} must be used within a data router.  See https://reactrouter.com/en/main/routers/picking-a-router.`;
-}
-function useDataRouterContext(hookName) {
-  let ctx = reactExports.useContext(DataRouterContext);
-  invariant(ctx, getDataRouterConsoleError(hookName));
-  return ctx;
-}
-function useDataRouterState(hookName) {
-  let state = reactExports.useContext(DataRouterStateContext);
-  invariant(state, getDataRouterConsoleError(hookName));
-  return state;
-}
-function useRouteContext(hookName) {
-  let route = reactExports.useContext(RouteContext);
-  invariant(route, getDataRouterConsoleError(hookName));
-  return route;
-}
-function useCurrentRouteId(hookName) {
-  let route = useRouteContext(hookName);
-  let thisRoute = route.matches[route.matches.length - 1];
-  invariant(
-    thisRoute.route.id,
-    `${hookName} can only be used on routes that contain a unique "id"`
-  );
-  return thisRoute.route.id;
-}
-function useRouteId() {
-  return useCurrentRouteId(
-    "useRouteId"
-    /* UseRouteId */
-  );
-}
-function useRouteError() {
-  var _a;
-  let error = reactExports.useContext(RouteErrorContext);
-  let state = useDataRouterState(
-    "useRouteError"
-    /* UseRouteError */
-  );
-  let routeId = useCurrentRouteId(
-    "useRouteError"
-    /* UseRouteError */
-  );
-  if (error !== void 0) {
-    return error;
-  }
-  return (_a = state.errors) == null ? void 0 : _a[routeId];
-}
-function useNavigateStable() {
-  let { router } = useDataRouterContext(
-    "useNavigate"
-    /* UseNavigateStable */
-  );
-  let id = useCurrentRouteId(
-    "useNavigate"
-    /* UseNavigateStable */
-  );
-  let activeRef = reactExports.useRef(false);
-  useIsomorphicLayoutEffect(() => {
-    activeRef.current = true;
-  });
-  let navigate = reactExports.useCallback(
-    async (to, options = {}) => {
-      warning(activeRef.current, navigateEffectWarning);
-      if (!activeRef.current) return;
-      if (typeof to === "number") {
-        router.navigate(to);
-      } else {
-        await router.navigate(to, { fromRouteId: id, ...options });
-      }
-    },
-    [router, id]
-  );
-  return navigate;
-}
-var alreadyWarned = {};
-function warningOnce(key, cond, message) {
-  if (!cond && !alreadyWarned[key]) {
-    alreadyWarned[key] = true;
-    warning(false, message);
-  }
-}
-reactExports.memo(DataRoutes);
-function DataRoutes({
-  routes,
-  future,
-  state
-}) {
-  return useRoutesImpl(routes, void 0, state, future);
-}
-function Router({
-  basename: basenameProp = "/",
-  children = null,
-  location: locationProp,
-  navigationType = "POP",
-  navigator,
-  static: staticProp = false
-}) {
-  invariant(
-    !useInRouterContext(),
-    `You cannot render a <Router> inside another <Router>. You should never have more than one in your app.`
-  );
-  let basename = basenameProp.replace(/^\/*/, "/");
-  let navigationContext = reactExports.useMemo(
-    () => ({
-      basename,
-      navigator,
-      static: staticProp,
-      future: {}
-    }),
-    [basename, navigator, staticProp]
-  );
-  if (typeof locationProp === "string") {
-    locationProp = parsePath(locationProp);
-  }
-  let {
-    pathname = "/",
-    search = "",
-    hash = "",
-    state = null,
-    key = "default"
-  } = locationProp;
-  let locationContext = reactExports.useMemo(() => {
-    let trailingPathname = stripBasename(pathname, basename);
-    if (trailingPathname == null) {
-      return null;
-    }
-    return {
-      location: {
-        pathname: trailingPathname,
-        search,
-        hash,
-        state,
-        key
-      },
-      navigationType
-    };
-  }, [basename, pathname, search, hash, state, key, navigationType]);
-  warning(
-    locationContext != null,
-    `<Router basename="${basename}"> is not able to match the URL "${pathname}${search}${hash}" because it does not start with the basename, so the <Router> won't render anything.`
-  );
-  if (locationContext == null) {
-    return null;
-  }
-  return /* @__PURE__ */ reactExports.createElement(NavigationContext.Provider, { value: navigationContext }, /* @__PURE__ */ reactExports.createElement(LocationContext.Provider, { children, value: locationContext }));
-}
-var defaultMethod = "get";
-var defaultEncType = "application/x-www-form-urlencoded";
-function isHtmlElement(object) {
-  return object != null && typeof object.tagName === "string";
-}
-function isButtonElement(object) {
-  return isHtmlElement(object) && object.tagName.toLowerCase() === "button";
-}
-function isFormElement(object) {
-  return isHtmlElement(object) && object.tagName.toLowerCase() === "form";
-}
-function isInputElement(object) {
-  return isHtmlElement(object) && object.tagName.toLowerCase() === "input";
-}
-function isModifiedEvent(event) {
-  return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
-}
-function shouldProcessLinkClick(event, target) {
-  return event.button === 0 && // Ignore everything but left clicks
-  (!target || target === "_self") && // Let browser handle "target=_blank" etc.
-  !isModifiedEvent(event);
-}
-var _formDataSupportsSubmitter = null;
-function isFormDataSubmitterSupported() {
-  if (_formDataSupportsSubmitter === null) {
-    try {
-      new FormData(
-        document.createElement("form"),
-        // @ts-expect-error if FormData supports the submitter parameter, this will throw
-        0
-      );
-      _formDataSupportsSubmitter = false;
-    } catch (e2) {
-      _formDataSupportsSubmitter = true;
-    }
-  }
-  return _formDataSupportsSubmitter;
-}
-var supportedFormEncTypes = /* @__PURE__ */ new Set([
-  "application/x-www-form-urlencoded",
-  "multipart/form-data",
-  "text/plain"
-]);
-function getFormEncType(encType) {
-  if (encType != null && !supportedFormEncTypes.has(encType)) {
-    warning(
-      false,
-      `"${encType}" is not a valid \`encType\` for \`<Form>\`/\`<fetcher.Form>\` and will default to "${defaultEncType}"`
-    );
-    return null;
-  }
-  return encType;
-}
-function getFormSubmissionInfo(target, basename) {
-  let method;
-  let action;
-  let encType;
-  let formData;
-  let body;
-  if (isFormElement(target)) {
-    let attr = target.getAttribute("action");
-    action = attr ? stripBasename(attr, basename) : null;
-    method = target.getAttribute("method") || defaultMethod;
-    encType = getFormEncType(target.getAttribute("enctype")) || defaultEncType;
-    formData = new FormData(target);
-  } else if (isButtonElement(target) || isInputElement(target) && (target.type === "submit" || target.type === "image")) {
-    let form = target.form;
-    if (form == null) {
-      throw new Error(
-        `Cannot submit a <button> or <input type="submit"> without a <form>`
-      );
-    }
-    let attr = target.getAttribute("formaction") || form.getAttribute("action");
-    action = attr ? stripBasename(attr, basename) : null;
-    method = target.getAttribute("formmethod") || form.getAttribute("method") || defaultMethod;
-    encType = getFormEncType(target.getAttribute("formenctype")) || getFormEncType(form.getAttribute("enctype")) || defaultEncType;
-    formData = new FormData(form, target);
-    if (!isFormDataSubmitterSupported()) {
-      let { name, type, value } = target;
-      if (type === "image") {
-        let prefix = name ? `${name}.` : "";
-        formData.append(`${prefix}x`, "0");
-        formData.append(`${prefix}y`, "0");
-      } else if (name) {
-        formData.append(name, value);
-      }
-    }
-  } else if (isHtmlElement(target)) {
-    throw new Error(
-      `Cannot submit element that is not <form>, <button>, or <input type="submit|image">`
-    );
-  } else {
-    method = defaultMethod;
-    action = null;
-    encType = defaultEncType;
-    body = target;
-  }
-  if (formData && encType === "text/plain") {
-    body = formData;
-    formData = void 0;
-  }
-  return { action, method: method.toLowerCase(), encType, formData, body };
-}
-function invariant2(value, message) {
-  if (value === false || value === null || typeof value === "undefined") {
-    throw new Error(message);
-  }
-}
-async function loadRouteModule(route, routeModulesCache) {
-  if (route.id in routeModulesCache) {
-    return routeModulesCache[route.id];
-  }
-  try {
-    let routeModule = await import(
-      /* @vite-ignore */
-      /* webpackIgnore: true */
-      route.module
-    );
-    routeModulesCache[route.id] = routeModule;
-    return routeModule;
-  } catch (error) {
-    console.error(
-      `Error loading route module \`${route.module}\`, reloading page...`
-    );
-    console.error(error);
-    if (window.__reactRouterContext && window.__reactRouterContext.isSpaMode && // @ts-expect-error
-    void 0) ;
-    window.location.reload();
-    return new Promise(() => {
-    });
-  }
-}
-function isHtmlLinkDescriptor(object) {
-  if (object == null) {
-    return false;
-  }
-  if (object.href == null) {
-    return object.rel === "preload" && typeof object.imageSrcSet === "string" && typeof object.imageSizes === "string";
-  }
-  return typeof object.rel === "string" && typeof object.href === "string";
-}
-async function getKeyedPrefetchLinks(matches, manifest, routeModules) {
-  let links = await Promise.all(
-    matches.map(async (match) => {
-      let route = manifest.routes[match.route.id];
-      if (route) {
-        let mod = await loadRouteModule(route, routeModules);
-        return mod.links ? mod.links() : [];
-      }
-      return [];
-    })
-  );
-  return dedupeLinkDescriptors(
-    links.flat(1).filter(isHtmlLinkDescriptor).filter((link) => link.rel === "stylesheet" || link.rel === "preload").map(
-      (link) => link.rel === "stylesheet" ? { ...link, rel: "prefetch", as: "style" } : { ...link, rel: "prefetch" }
-    )
-  );
-}
-function getNewMatchesForLinks(page, nextMatches, currentMatches, manifest, location, mode) {
-  let isNew = (match, index2) => {
-    if (!currentMatches[index2]) return true;
-    return match.route.id !== currentMatches[index2].route.id;
-  };
-  let matchPathChanged = (match, index2) => {
-    var _a;
-    return (
-      // param change, /users/123 -> /users/456
-      currentMatches[index2].pathname !== match.pathname || // splat param changed, which is not present in match.path
-      // e.g. /files/images/avatar.jpg -> files/finances.xls
-      ((_a = currentMatches[index2].route.path) == null ? void 0 : _a.endsWith("*")) && currentMatches[index2].params["*"] !== match.params["*"]
-    );
-  };
-  if (mode === "assets") {
-    return nextMatches.filter(
-      (match, index2) => isNew(match, index2) || matchPathChanged(match, index2)
-    );
-  }
-  if (mode === "data") {
-    return nextMatches.filter((match, index2) => {
-      var _a;
-      let manifestRoute = manifest.routes[match.route.id];
-      if (!manifestRoute || !manifestRoute.hasLoader) {
-        return false;
-      }
-      if (isNew(match, index2) || matchPathChanged(match, index2)) {
-        return true;
-      }
-      if (match.route.shouldRevalidate) {
-        let routeChoice = match.route.shouldRevalidate({
-          currentUrl: new URL(
-            location.pathname + location.search + location.hash,
-            window.origin
-          ),
-          currentParams: ((_a = currentMatches[0]) == null ? void 0 : _a.params) || {},
-          nextUrl: new URL(page, window.origin),
-          nextParams: match.params,
-          defaultShouldRevalidate: true
-        });
-        if (typeof routeChoice === "boolean") {
-          return routeChoice;
-        }
-      }
-      return true;
-    });
-  }
-  return [];
-}
-function getModuleLinkHrefs(matches, manifest, { includeHydrateFallback } = {}) {
-  return dedupeHrefs(
-    matches.map((match) => {
-      let route = manifest.routes[match.route.id];
-      if (!route) return [];
-      let hrefs = [route.module];
-      if (route.clientActionModule) {
-        hrefs = hrefs.concat(route.clientActionModule);
-      }
-      if (route.clientLoaderModule) {
-        hrefs = hrefs.concat(route.clientLoaderModule);
-      }
-      if (includeHydrateFallback && route.hydrateFallbackModule) {
-        hrefs = hrefs.concat(route.hydrateFallbackModule);
-      }
-      if (route.imports) {
-        hrefs = hrefs.concat(route.imports);
-      }
-      return hrefs;
-    }).flat(1)
-  );
-}
-function dedupeHrefs(hrefs) {
-  return [...new Set(hrefs)];
-}
-function sortKeys(obj) {
-  let sorted = {};
-  let keys = Object.keys(obj).sort();
-  for (let key of keys) {
-    sorted[key] = obj[key];
-  }
-  return sorted;
-}
-function dedupeLinkDescriptors(descriptors, preloads) {
-  let set = /* @__PURE__ */ new Set();
-  new Set(preloads);
-  return descriptors.reduce((deduped, descriptor) => {
-    let key = JSON.stringify(sortKeys(descriptor));
-    if (!set.has(key)) {
-      set.add(key);
-      deduped.push({ key, link: descriptor });
-    }
-    return deduped;
-  }, []);
-}
-Object.getOwnPropertyNames(Object.prototype).sort().join("\0");
-var NO_BODY_STATUS_CODES = /* @__PURE__ */ new Set([100, 101, 204, 205]);
-function singleFetchUrl(reqUrl, basename) {
-  let url = typeof reqUrl === "string" ? new URL(
-    reqUrl,
-    // This can be called during the SSR flow via PrefetchPageLinksImpl so
-    // don't assume window is available
-    typeof window === "undefined" ? "server://singlefetch/" : window.location.origin
-  ) : reqUrl;
-  if (url.pathname === "/") {
-    url.pathname = "_root.data";
-  } else if (basename && stripBasename(url.pathname, basename) === "/") {
-    url.pathname = `${basename.replace(/\/$/, "")}/_root.data`;
-  } else {
-    url.pathname = `${url.pathname.replace(/\/$/, "")}.data`;
-  }
-  return url;
-}
-function useDataRouterContext2() {
-  let context = reactExports.useContext(DataRouterContext);
-  invariant2(
-    context,
-    "You must render this element inside a <DataRouterContext.Provider> element"
-  );
-  return context;
-}
-function useDataRouterStateContext() {
-  let context = reactExports.useContext(DataRouterStateContext);
-  invariant2(
-    context,
-    "You must render this element inside a <DataRouterStateContext.Provider> element"
-  );
-  return context;
-}
-var FrameworkContext = reactExports.createContext(void 0);
-FrameworkContext.displayName = "FrameworkContext";
-function useFrameworkContext() {
-  let context = reactExports.useContext(FrameworkContext);
-  invariant2(
-    context,
-    "You must render this element inside a <HydratedRouter> element"
-  );
-  return context;
-}
-function usePrefetchBehavior(prefetch, theirElementProps) {
-  let frameworkContext = reactExports.useContext(FrameworkContext);
-  let [maybePrefetch, setMaybePrefetch] = reactExports.useState(false);
-  let [shouldPrefetch, setShouldPrefetch] = reactExports.useState(false);
-  let { onFocus, onBlur, onMouseEnter, onMouseLeave, onTouchStart } = theirElementProps;
-  let ref = reactExports.useRef(null);
-  reactExports.useEffect(() => {
-    if (prefetch === "render") {
-      setShouldPrefetch(true);
-    }
-    if (prefetch === "viewport") {
-      let callback = (entries) => {
-        entries.forEach((entry) => {
-          setShouldPrefetch(entry.isIntersecting);
-        });
-      };
-      let observer = new IntersectionObserver(callback, { threshold: 0.5 });
-      if (ref.current) observer.observe(ref.current);
-      return () => {
-        observer.disconnect();
-      };
-    }
-  }, [prefetch]);
-  reactExports.useEffect(() => {
-    if (maybePrefetch) {
-      let id = setTimeout(() => {
-        setShouldPrefetch(true);
-      }, 100);
-      return () => {
-        clearTimeout(id);
-      };
-    }
-  }, [maybePrefetch]);
-  let setIntent = () => {
-    setMaybePrefetch(true);
-  };
-  let cancelIntent = () => {
-    setMaybePrefetch(false);
-    setShouldPrefetch(false);
-  };
-  if (!frameworkContext) {
-    return [false, ref, {}];
-  }
-  if (prefetch !== "intent") {
-    return [shouldPrefetch, ref, {}];
-  }
-  return [
-    shouldPrefetch,
-    ref,
-    {
-      onFocus: composeEventHandlers(onFocus, setIntent),
-      onBlur: composeEventHandlers(onBlur, cancelIntent),
-      onMouseEnter: composeEventHandlers(onMouseEnter, setIntent),
-      onMouseLeave: composeEventHandlers(onMouseLeave, cancelIntent),
-      onTouchStart: composeEventHandlers(onTouchStart, setIntent)
-    }
-  ];
-}
-function composeEventHandlers(theirHandler, ourHandler) {
-  return (event) => {
-    theirHandler && theirHandler(event);
-    if (!event.defaultPrevented) {
-      ourHandler(event);
-    }
-  };
-}
-function PrefetchPageLinks({
-  page,
-  ...dataLinkProps
-}) {
-  let { router } = useDataRouterContext2();
-  let matches = reactExports.useMemo(
-    () => matchRoutes(router.routes, page, router.basename),
-    [router.routes, page, router.basename]
-  );
-  if (!matches) {
-    return null;
-  }
-  return /* @__PURE__ */ reactExports.createElement(PrefetchPageLinksImpl, { page, matches, ...dataLinkProps });
-}
-function useKeyedPrefetchLinks(matches) {
-  let { manifest, routeModules } = useFrameworkContext();
-  let [keyedPrefetchLinks, setKeyedPrefetchLinks] = reactExports.useState([]);
-  reactExports.useEffect(() => {
-    let interrupted = false;
-    void getKeyedPrefetchLinks(matches, manifest, routeModules).then(
-      (links) => {
-        if (!interrupted) {
-          setKeyedPrefetchLinks(links);
-        }
-      }
-    );
-    return () => {
-      interrupted = true;
-    };
-  }, [matches, manifest, routeModules]);
-  return keyedPrefetchLinks;
-}
-function PrefetchPageLinksImpl({
-  page,
-  matches: nextMatches,
-  ...linkProps
-}) {
-  let location = useLocation();
-  let { manifest, routeModules } = useFrameworkContext();
-  let { basename } = useDataRouterContext2();
-  let { loaderData, matches } = useDataRouterStateContext();
-  let newMatchesForData = reactExports.useMemo(
-    () => getNewMatchesForLinks(
-      page,
-      nextMatches,
-      matches,
-      manifest,
-      location,
-      "data"
-    ),
-    [page, nextMatches, matches, manifest, location]
-  );
-  let newMatchesForAssets = reactExports.useMemo(
-    () => getNewMatchesForLinks(
-      page,
-      nextMatches,
-      matches,
-      manifest,
-      location,
-      "assets"
-    ),
-    [page, nextMatches, matches, manifest, location]
-  );
-  let dataHrefs = reactExports.useMemo(() => {
-    if (page === location.pathname + location.search + location.hash) {
-      return [];
-    }
-    let routesParams = /* @__PURE__ */ new Set();
-    let foundOptOutRoute = false;
-    nextMatches.forEach((m2) => {
-      var _a;
-      let manifestRoute = manifest.routes[m2.route.id];
-      if (!manifestRoute || !manifestRoute.hasLoader) {
-        return;
-      }
-      if (!newMatchesForData.some((m22) => m22.route.id === m2.route.id) && m2.route.id in loaderData && ((_a = routeModules[m2.route.id]) == null ? void 0 : _a.shouldRevalidate)) {
-        foundOptOutRoute = true;
-      } else if (manifestRoute.hasClientLoader) {
-        foundOptOutRoute = true;
-      } else {
-        routesParams.add(m2.route.id);
-      }
-    });
-    if (routesParams.size === 0) {
-      return [];
-    }
-    let url = singleFetchUrl(page, basename);
-    if (foundOptOutRoute && routesParams.size > 0) {
-      url.searchParams.set(
-        "_routes",
-        nextMatches.filter((m2) => routesParams.has(m2.route.id)).map((m2) => m2.route.id).join(",")
-      );
-    }
-    return [url.pathname + url.search];
-  }, [
-    basename,
-    loaderData,
-    location,
-    manifest,
-    newMatchesForData,
-    nextMatches,
-    page,
-    routeModules
-  ]);
-  let moduleHrefs = reactExports.useMemo(
-    () => getModuleLinkHrefs(newMatchesForAssets, manifest),
-    [newMatchesForAssets, manifest]
-  );
-  let keyedPrefetchLinks = useKeyedPrefetchLinks(newMatchesForAssets);
-  return /* @__PURE__ */ reactExports.createElement(reactExports.Fragment, null, dataHrefs.map((href2) => /* @__PURE__ */ reactExports.createElement("link", { key: href2, rel: "prefetch", as: "fetch", href: href2, ...linkProps })), moduleHrefs.map((href2) => /* @__PURE__ */ reactExports.createElement("link", { key: href2, rel: "modulepreload", href: href2, ...linkProps })), keyedPrefetchLinks.map(({ key, link }) => (
-    // these don't spread `linkProps` because they are full link descriptors
-    // already with their own props
-    /* @__PURE__ */ reactExports.createElement("link", { key, ...link })
-  )));
-}
-function mergeRefs(...refs) {
-  return (value) => {
-    refs.forEach((ref) => {
-      if (typeof ref === "function") {
-        ref(value);
-      } else if (ref != null) {
-        ref.current = value;
-      }
-    });
-  };
-}
-var isBrowser = typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.document.createElement !== "undefined";
-try {
-  if (isBrowser) {
-    window.__reactRouterVersion = "7.6.3";
-  }
-} catch (e2) {
-}
-function HashRouter({ basename, children, window: window2 }) {
-  let historyRef = reactExports.useRef();
-  if (historyRef.current == null) {
-    historyRef.current = createHashHistory({ window: window2, v5Compat: true });
-  }
-  let history = historyRef.current;
-  let [state, setStateImpl] = reactExports.useState({
-    action: history.action,
-    location: history.location
-  });
-  let setState2 = reactExports.useCallback(
-    (newState) => {
-      reactExports.startTransition(() => setStateImpl(newState));
-    },
-    [setStateImpl]
-  );
-  reactExports.useLayoutEffect(() => history.listen(setState2), [history, setState2]);
-  return /* @__PURE__ */ reactExports.createElement(
-    Router,
-    {
-      basename,
-      children,
-      location: state.location,
-      navigationType: state.action,
-      navigator: history
-    }
-  );
-}
-var ABSOLUTE_URL_REGEX2 = /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i;
-var Link = reactExports.forwardRef(
-  function LinkWithRef({
-    onClick,
-    discover = "render",
-    prefetch = "none",
-    relative,
-    reloadDocument,
-    replace: replace2,
-    state,
-    target,
-    to,
-    preventScrollReset,
-    viewTransition,
-    ...rest
-  }, forwardedRef) {
-    let { basename } = reactExports.useContext(NavigationContext);
-    let isAbsolute = typeof to === "string" && ABSOLUTE_URL_REGEX2.test(to);
-    let absoluteHref;
-    let isExternal = false;
-    if (typeof to === "string" && isAbsolute) {
-      absoluteHref = to;
-      if (isBrowser) {
-        try {
-          let currentUrl = new URL(window.location.href);
-          let targetUrl = to.startsWith("//") ? new URL(currentUrl.protocol + to) : new URL(to);
-          let path = stripBasename(targetUrl.pathname, basename);
-          if (targetUrl.origin === currentUrl.origin && path != null) {
-            to = path + targetUrl.search + targetUrl.hash;
-          } else {
-            isExternal = true;
-          }
-        } catch (e2) {
-          warning(
-            false,
-            `<Link to="${to}"> contains an invalid URL which will probably break when clicked - please update to a valid URL path.`
-          );
-        }
-      }
-    }
-    let href2 = useHref(to, { relative });
-    let [shouldPrefetch, prefetchRef, prefetchHandlers] = usePrefetchBehavior(
-      prefetch,
-      rest
-    );
-    let internalOnClick = useLinkClickHandler(to, {
-      replace: replace2,
-      state,
-      target,
-      preventScrollReset,
-      relative,
-      viewTransition
-    });
-    function handleClick(event) {
-      if (onClick) onClick(event);
-      if (!event.defaultPrevented) {
-        internalOnClick(event);
-      }
-    }
-    let link = (
-      // eslint-disable-next-line jsx-a11y/anchor-has-content
-      /* @__PURE__ */ reactExports.createElement(
-        "a",
-        {
-          ...rest,
-          ...prefetchHandlers,
-          href: absoluteHref || href2,
-          onClick: isExternal || reloadDocument ? onClick : handleClick,
-          ref: mergeRefs(forwardedRef, prefetchRef),
-          target,
-          "data-discover": !isAbsolute && discover === "render" ? "true" : void 0
-        }
-      )
-    );
-    return shouldPrefetch && !isAbsolute ? /* @__PURE__ */ reactExports.createElement(reactExports.Fragment, null, link, /* @__PURE__ */ reactExports.createElement(PrefetchPageLinks, { page: href2 })) : link;
-  }
-);
-Link.displayName = "Link";
-var NavLink = reactExports.forwardRef(
-  function NavLinkWithRef({
-    "aria-current": ariaCurrentProp = "page",
-    caseSensitive = false,
-    className: classNameProp = "",
-    end = false,
-    style: styleProp,
-    to,
-    viewTransition,
-    children,
-    ...rest
-  }, ref) {
-    let path = useResolvedPath(to, { relative: rest.relative });
-    let location = useLocation();
-    let routerState = reactExports.useContext(DataRouterStateContext);
-    let { navigator, basename } = reactExports.useContext(NavigationContext);
-    let isTransitioning = routerState != null && // Conditional usage is OK here because the usage of a data router is static
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useViewTransitionState(path) && viewTransition === true;
-    let toPathname = navigator.encodeLocation ? navigator.encodeLocation(path).pathname : path.pathname;
-    let locationPathname = location.pathname;
-    let nextLocationPathname = routerState && routerState.navigation && routerState.navigation.location ? routerState.navigation.location.pathname : null;
-    if (!caseSensitive) {
-      locationPathname = locationPathname.toLowerCase();
-      nextLocationPathname = nextLocationPathname ? nextLocationPathname.toLowerCase() : null;
-      toPathname = toPathname.toLowerCase();
-    }
-    if (nextLocationPathname && basename) {
-      nextLocationPathname = stripBasename(nextLocationPathname, basename) || nextLocationPathname;
-    }
-    const endSlashPosition = toPathname !== "/" && toPathname.endsWith("/") ? toPathname.length - 1 : toPathname.length;
-    let isActive = locationPathname === toPathname || !end && locationPathname.startsWith(toPathname) && locationPathname.charAt(endSlashPosition) === "/";
-    let isPending = nextLocationPathname != null && (nextLocationPathname === toPathname || !end && nextLocationPathname.startsWith(toPathname) && nextLocationPathname.charAt(toPathname.length) === "/");
-    let renderProps = {
-      isActive,
-      isPending,
-      isTransitioning
-    };
-    let ariaCurrent = isActive ? ariaCurrentProp : void 0;
-    let className;
-    if (typeof classNameProp === "function") {
-      className = classNameProp(renderProps);
-    } else {
-      className = [
-        classNameProp,
-        isActive ? "active" : null,
-        isPending ? "pending" : null,
-        isTransitioning ? "transitioning" : null
-      ].filter(Boolean).join(" ");
-    }
-    let style = typeof styleProp === "function" ? styleProp(renderProps) : styleProp;
-    return /* @__PURE__ */ reactExports.createElement(
-      Link,
-      {
-        ...rest,
-        "aria-current": ariaCurrent,
-        className,
-        ref,
-        style,
-        to,
-        viewTransition
-      },
-      typeof children === "function" ? children(renderProps) : children
-    );
-  }
-);
-NavLink.displayName = "NavLink";
-var Form = reactExports.forwardRef(
-  ({
-    discover = "render",
-    fetcherKey,
-    navigate,
-    reloadDocument,
-    replace: replace2,
-    state,
-    method = defaultMethod,
-    action,
-    onSubmit,
-    relative,
-    preventScrollReset,
-    viewTransition,
-    ...props
-  }, forwardedRef) => {
-    let submit = useSubmit();
-    let formAction = useFormAction(action, { relative });
-    let formMethod = method.toLowerCase() === "get" ? "get" : "post";
-    let isAbsolute = typeof action === "string" && ABSOLUTE_URL_REGEX2.test(action);
-    let submitHandler = (event) => {
-      onSubmit && onSubmit(event);
-      if (event.defaultPrevented) return;
-      event.preventDefault();
-      let submitter = event.nativeEvent.submitter;
-      let submitMethod = (submitter == null ? void 0 : submitter.getAttribute("formmethod")) || method;
-      submit(submitter || event.currentTarget, {
-        fetcherKey,
-        method: submitMethod,
-        navigate,
-        replace: replace2,
-        state,
-        relative,
-        preventScrollReset,
-        viewTransition
-      });
-    };
-    return /* @__PURE__ */ reactExports.createElement(
-      "form",
-      {
-        ref: forwardedRef,
-        method: formMethod,
-        action: formAction,
-        onSubmit: reloadDocument ? onSubmit : submitHandler,
-        ...props,
-        "data-discover": !isAbsolute && discover === "render" ? "true" : void 0
-      }
-    );
-  }
-);
-Form.displayName = "Form";
-function getDataRouterConsoleError2(hookName) {
-  return `${hookName} must be used within a data router.  See https://reactrouter.com/en/main/routers/picking-a-router.`;
-}
-function useDataRouterContext3(hookName) {
-  let ctx = reactExports.useContext(DataRouterContext);
-  invariant(ctx, getDataRouterConsoleError2(hookName));
-  return ctx;
-}
-function useLinkClickHandler(to, {
-  target,
-  replace: replaceProp,
-  state,
-  preventScrollReset,
-  relative,
-  viewTransition
-} = {}) {
-  let navigate = useNavigate();
-  let location = useLocation();
-  let path = useResolvedPath(to, { relative });
-  return reactExports.useCallback(
-    (event) => {
-      if (shouldProcessLinkClick(event, target)) {
-        event.preventDefault();
-        let replace2 = replaceProp !== void 0 ? replaceProp : createPath(location) === createPath(path);
-        navigate(to, {
-          replace: replace2,
-          state,
-          preventScrollReset,
-          relative,
-          viewTransition
-        });
-      }
-    },
-    [
-      location,
-      navigate,
-      path,
-      replaceProp,
-      state,
-      target,
-      to,
-      preventScrollReset,
-      relative,
-      viewTransition
-    ]
-  );
-}
-var fetcherId = 0;
-var getUniqueFetcherId = () => `__${String(++fetcherId)}__`;
-function useSubmit() {
-  let { router } = useDataRouterContext3(
-    "useSubmit"
-    /* UseSubmit */
-  );
-  let { basename } = reactExports.useContext(NavigationContext);
-  let currentRouteId = useRouteId();
-  return reactExports.useCallback(
-    async (target, options = {}) => {
-      let { action, method, encType, formData, body } = getFormSubmissionInfo(
-        target,
-        basename
-      );
-      if (options.navigate === false) {
-        let key = options.fetcherKey || getUniqueFetcherId();
-        await router.fetch(key, currentRouteId, options.action || action, {
-          preventScrollReset: options.preventScrollReset,
-          formData,
-          body,
-          formMethod: options.method || method,
-          formEncType: options.encType || encType,
-          flushSync: options.flushSync
-        });
-      } else {
-        await router.navigate(options.action || action, {
-          preventScrollReset: options.preventScrollReset,
-          formData,
-          body,
-          formMethod: options.method || method,
-          formEncType: options.encType || encType,
-          replace: options.replace,
-          state: options.state,
-          fromRouteId: currentRouteId,
-          flushSync: options.flushSync,
-          viewTransition: options.viewTransition
-        });
-      }
-    },
-    [router, basename, currentRouteId]
-  );
-}
-function useFormAction(action, { relative } = {}) {
-  let { basename } = reactExports.useContext(NavigationContext);
-  let routeContext = reactExports.useContext(RouteContext);
-  invariant(routeContext, "useFormAction must be used inside a RouteContext");
-  let [match] = routeContext.matches.slice(-1);
-  let path = { ...useResolvedPath(action ? action : ".", { relative }) };
-  let location = useLocation();
-  if (action == null) {
-    path.search = location.search;
-    let params = new URLSearchParams(path.search);
-    let indexValues = params.getAll("index");
-    let hasNakedIndexParam = indexValues.some((v2) => v2 === "");
-    if (hasNakedIndexParam) {
-      params.delete("index");
-      indexValues.filter((v2) => v2).forEach((v2) => params.append("index", v2));
-      let qs = params.toString();
-      path.search = qs ? `?${qs}` : "";
-    }
-  }
-  if ((!action || action === ".") && match.route.index) {
-    path.search = path.search ? path.search.replace(/^\?/, "?index&") : "?index";
-  }
-  if (basename !== "/") {
-    path.pathname = path.pathname === "/" ? basename : joinPaths([basename, path.pathname]);
-  }
-  return createPath(path);
-}
-function useViewTransitionState(to, opts = {}) {
-  let vtContext = reactExports.useContext(ViewTransitionContext);
-  invariant(
-    vtContext != null,
-    "`useViewTransitionState` must be used within `react-router-dom`'s `RouterProvider`.  Did you accidentally import `RouterProvider` from `react-router`?"
-  );
-  let { basename } = useDataRouterContext3(
-    "useViewTransitionState"
-    /* useViewTransitionState */
-  );
-  let path = useResolvedPath(to, { relative: opts.relative });
-  if (!vtContext.isTransitioning) {
-    return false;
-  }
-  let currentPath = stripBasename(vtContext.currentLocation.pathname, basename) || vtContext.currentLocation.pathname;
-  let nextPath = stripBasename(vtContext.nextLocation.pathname, basename) || vtContext.nextLocation.pathname;
-  return matchPath(path.pathname, nextPath) != null || matchPath(path.pathname, currentPath) != null;
-}
-/* @__PURE__ */ new Set([
-  ...NO_BODY_STATUS_CODES,
-  304
-]);
-var extendStatics = function(d2, b2) {
-  extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d3, b3) {
-    d3.__proto__ = b3;
-  } || function(d3, b3) {
-    for (var p2 in b3) if (Object.prototype.hasOwnProperty.call(b3, p2)) d3[p2] = b3[p2];
-  };
-  return extendStatics(d2, b2);
-};
-function __extends(d2, b2) {
-  if (typeof b2 !== "function" && b2 !== null)
-    throw new TypeError("Class extends value " + String(b2) + " is not a constructor or null");
-  extendStatics(d2, b2);
+function __extends(d, b) {
+  if (typeof b !== "function" && b !== null)
+    throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+  extendStatics(d, b);
   function __() {
-    this.constructor = d2;
+    this.constructor = d;
   }
-  d2.prototype = b2 === null ? Object.create(b2) : (__.prototype = b2.prototype, new __());
+  d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 }
 var __assign = function() {
   __assign = Object.assign || function __assign2(t2) {
-    for (var s2, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
-      s2 = arguments[i2];
-      for (var p2 in s2) if (Object.prototype.hasOwnProperty.call(s2, p2)) t2[p2] = s2[p2];
+    for (var s, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
+      s = arguments[i2];
+      for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t2[p] = s[p];
     }
     return t2;
   };
   return __assign.apply(this, arguments);
 };
-function __rest(s2, e2) {
-  var t2 = {};
-  for (var p2 in s2) if (Object.prototype.hasOwnProperty.call(s2, p2) && e2.indexOf(p2) < 0)
-    t2[p2] = s2[p2];
-  if (s2 != null && typeof Object.getOwnPropertySymbols === "function")
-    for (var i2 = 0, p2 = Object.getOwnPropertySymbols(s2); i2 < p2.length; i2++) {
-      if (e2.indexOf(p2[i2]) < 0 && Object.prototype.propertyIsEnumerable.call(s2, p2[i2]))
-        t2[p2[i2]] = s2[p2[i2]];
-    }
-  return t2;
-}
-function __awaiter(thisArg, _arguments, P2, generator) {
-  function adopt(value) {
-    return value instanceof P2 ? value : new P2(function(resolve) {
-      resolve(value);
-    });
-  }
-  return new (P2 || (P2 = Promise))(function(resolve, reject) {
-    function fulfilled(value) {
-      try {
-        step(generator.next(value));
-      } catch (e2) {
-        reject(e2);
-      }
-    }
-    function rejected(value) {
-      try {
-        step(generator["throw"](value));
-      } catch (e2) {
-        reject(e2);
-      }
-    }
-    function step(result) {
-      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-    }
-    step((generator = generator.apply(thisArg, [])).next());
-  });
-}
-function __generator(thisArg, body) {
-  var _2 = { label: 0, sent: function() {
-    if (t2[0] & 1) throw t2[1];
-    return t2[1];
-  }, trys: [], ops: [] }, f2, y2, t2, g2 = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
-  return g2.next = verb(0), g2["throw"] = verb(1), g2["return"] = verb(2), typeof Symbol === "function" && (g2[Symbol.iterator] = function() {
-    return this;
-  }), g2;
-  function verb(n2) {
-    return function(v2) {
-      return step([n2, v2]);
-    };
-  }
-  function step(op) {
-    if (f2) throw new TypeError("Generator is already executing.");
-    while (g2 && (g2 = 0, op[0] && (_2 = 0)), _2) try {
-      if (f2 = 1, y2 && (t2 = op[0] & 2 ? y2["return"] : op[0] ? y2["throw"] || ((t2 = y2["return"]) && t2.call(y2), 0) : y2.next) && !(t2 = t2.call(y2, op[1])).done) return t2;
-      if (y2 = 0, t2) op = [op[0] & 2, t2.value];
-      switch (op[0]) {
-        case 0:
-        case 1:
-          t2 = op;
-          break;
-        case 4:
-          _2.label++;
-          return { value: op[1], done: false };
-        case 5:
-          _2.label++;
-          y2 = op[1];
-          op = [0];
-          continue;
-        case 7:
-          op = _2.ops.pop();
-          _2.trys.pop();
-          continue;
-        default:
-          if (!(t2 = _2.trys, t2 = t2.length > 0 && t2[t2.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-            _2 = 0;
-            continue;
-          }
-          if (op[0] === 3 && (!t2 || op[1] > t2[0] && op[1] < t2[3])) {
-            _2.label = op[1];
-            break;
-          }
-          if (op[0] === 6 && _2.label < t2[1]) {
-            _2.label = t2[1];
-            t2 = op;
-            break;
-          }
-          if (t2 && _2.label < t2[2]) {
-            _2.label = t2[2];
-            _2.ops.push(op);
-            break;
-          }
-          if (t2[2]) _2.ops.pop();
-          _2.trys.pop();
-          continue;
-      }
-      op = body.call(thisArg, _2);
-    } catch (e2) {
-      op = [6, e2];
-      y2 = 0;
-    } finally {
-      f2 = t2 = 0;
-    }
-    if (op[0] & 5) throw op[1];
-    return { value: op[0] ? op[1] : void 0, done: true };
-  }
-}
 typeof SuppressedError === "function" ? SuppressedError : function(error, suppressed, message) {
-  var e2 = new Error(message);
-  return e2.name = "SuppressedError", e2.error = error, e2.suppressed = suppressed, e2;
+  var e = new Error(message);
+  return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
 };
-function e(e2, t2) {
-  var i2 = {};
-  for (var o2 in e2) Object.prototype.hasOwnProperty.call(e2, o2) && t2.indexOf(o2) < 0 && (i2[o2] = e2[o2]);
-  if (null != e2 && "function" == typeof Object.getOwnPropertySymbols) {
-    var n2 = 0;
-    for (o2 = Object.getOwnPropertySymbols(e2); n2 < o2.length; n2++) t2.indexOf(o2[n2]) < 0 && Object.prototype.propertyIsEnumerable.call(e2, o2[n2]) && (i2[o2[n2]] = e2[o2[n2]]);
-  }
-  return i2;
-}
 "function" == typeof SuppressedError && SuppressedError;
 var t = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof self ? self : {};
-function i(e2) {
-  return e2 && e2.__esModule && Object.prototype.hasOwnProperty.call(e2, "default") ? e2.default : e2;
+function i(e) {
+  return e && e.__esModule && Object.prototype.hasOwnProperty.call(e, "default") ? e.default : e;
 }
-function o(e2, t2) {
-  return e2(t2 = { exports: {} }, t2.exports), t2.exports;
+function o(e, t2) {
+  return e(t2 = { exports: {} }, t2.exports), t2.exports;
 }
-var n = o(function(e2, t2) {
+var n = o(function(e, t2) {
   Object.defineProperty(t2, "__esModule", { value: true });
   var i2 = function() {
-    function e3() {
-      var e4 = this;
+    function e2() {
+      var e3 = this;
       this.locked = /* @__PURE__ */ new Map(), this.addToLocked = function(t3, i3) {
-        var o2 = e4.locked.get(t3);
-        void 0 === o2 ? void 0 === i3 ? e4.locked.set(t3, []) : e4.locked.set(t3, [i3]) : void 0 !== i3 && (o2.unshift(i3), e4.locked.set(t3, o2));
+        var o2 = e3.locked.get(t3);
+        void 0 === o2 ? void 0 === i3 ? e3.locked.set(t3, []) : e3.locked.set(t3, [i3]) : void 0 !== i3 && (o2.unshift(i3), e3.locked.set(t3, o2));
       }, this.isLocked = function(t3) {
-        return e4.locked.has(t3);
+        return e3.locked.has(t3);
       }, this.lock = function(t3) {
         return new Promise(function(i3, o2) {
-          e4.isLocked(t3) ? e4.addToLocked(t3, i3) : (e4.addToLocked(t3), i3());
+          e3.isLocked(t3) ? e3.addToLocked(t3, i3) : (e3.addToLocked(t3), i3());
         });
       }, this.unlock = function(t3) {
-        var i3 = e4.locked.get(t3);
+        var i3 = e3.locked.get(t3);
         if (void 0 !== i3 && 0 !== i3.length) {
           var o2 = i3.pop();
-          e4.locked.set(t3, i3), void 0 !== o2 && setTimeout(o2, 0);
-        } else e4.locked.delete(t3);
+          e3.locked.set(t3, i3), void 0 !== o2 && setTimeout(o2, 0);
+        } else e3.locked.delete(t3);
       };
     }
-    return e3.getInstance = function() {
-      return void 0 === e3.instance && (e3.instance = new e3()), e3.instance;
-    }, e3;
+    return e2.getInstance = function() {
+      return void 0 === e2.instance && (e2.instance = new e2()), e2.instance;
+    }, e2;
   }();
   t2.default = function() {
     return i2.getInstance();
   };
 });
 i(n);
-var a = i(o(function(e2, i2) {
-  var o2 = t && t.__awaiter || function(e3, t2, i3, o3) {
+var a = i(o(function(e, i2) {
+  var o2 = t && t.__awaiter || function(e2, t2, i3, o3) {
     return new (i3 || (i3 = Promise))(function(n2, a3) {
-      function r3(e4) {
+      function r2(e3) {
         try {
-          c3(o3.next(e4));
-        } catch (e5) {
-          a3(e5);
+          c2(o3.next(e3));
+        } catch (e4) {
+          a3(e4);
         }
       }
-      function s3(e4) {
+      function s2(e3) {
         try {
-          c3(o3.throw(e4));
-        } catch (e5) {
-          a3(e5);
+          c2(o3.throw(e3));
+        } catch (e4) {
+          a3(e4);
         }
       }
-      function c3(e4) {
-        e4.done ? n2(e4.value) : new i3(function(t3) {
-          t3(e4.value);
-        }).then(r3, s3);
+      function c2(e3) {
+        e3.done ? n2(e3.value) : new i3(function(t3) {
+          t3(e3.value);
+        }).then(r2, s2);
       }
-      c3((o3 = o3.apply(e3, t2 || [])).next());
+      c2((o3 = o3.apply(e2, t2 || [])).next());
     });
-  }, a2 = t && t.__generator || function(e3, t2) {
-    var i3, o3, n2, a3, r3 = { label: 0, sent: function() {
+  }, a2 = t && t.__generator || function(e2, t2) {
+    var i3, o3, n2, a3, r2 = { label: 0, sent: function() {
       if (1 & n2[0]) throw n2[1];
       return n2[1];
     }, trys: [], ops: [] };
-    return a3 = { next: s3(0), throw: s3(1), return: s3(2) }, "function" == typeof Symbol && (a3[Symbol.iterator] = function() {
+    return a3 = { next: s2(0), throw: s2(1), return: s2(2) }, "function" == typeof Symbol && (a3[Symbol.iterator] = function() {
       return this;
     }), a3;
-    function s3(a4) {
-      return function(s4) {
+    function s2(a4) {
+      return function(s3) {
         return function(a5) {
           if (i3) throw new TypeError("Generator is already executing.");
-          for (; r3; ) try {
+          for (; r2; ) try {
             if (i3 = 1, o3 && (n2 = 2 & a5[0] ? o3.return : a5[0] ? o3.throw || ((n2 = o3.return) && n2.call(o3), 0) : o3.next) && !(n2 = n2.call(o3, a5[1])).done) return n2;
             switch (o3 = 0, n2 && (a5 = [2 & a5[0], n2.value]), a5[0]) {
               case 0:
@@ -14450,851 +12194,274 @@ var a = i(o(function(e2, i2) {
                 n2 = a5;
                 break;
               case 4:
-                return r3.label++, { value: a5[1], done: false };
+                return r2.label++, { value: a5[1], done: false };
               case 5:
-                r3.label++, o3 = a5[1], a5 = [0];
+                r2.label++, o3 = a5[1], a5 = [0];
                 continue;
               case 7:
-                a5 = r3.ops.pop(), r3.trys.pop();
+                a5 = r2.ops.pop(), r2.trys.pop();
                 continue;
               default:
-                if (!(n2 = r3.trys, (n2 = n2.length > 0 && n2[n2.length - 1]) || 6 !== a5[0] && 2 !== a5[0])) {
-                  r3 = 0;
+                if (!(n2 = r2.trys, (n2 = n2.length > 0 && n2[n2.length - 1]) || 6 !== a5[0] && 2 !== a5[0])) {
+                  r2 = 0;
                   continue;
                 }
                 if (3 === a5[0] && (!n2 || a5[1] > n2[0] && a5[1] < n2[3])) {
-                  r3.label = a5[1];
+                  r2.label = a5[1];
                   break;
                 }
-                if (6 === a5[0] && r3.label < n2[1]) {
-                  r3.label = n2[1], n2 = a5;
+                if (6 === a5[0] && r2.label < n2[1]) {
+                  r2.label = n2[1], n2 = a5;
                   break;
                 }
-                if (n2 && r3.label < n2[2]) {
-                  r3.label = n2[2], r3.ops.push(a5);
+                if (n2 && r2.label < n2[2]) {
+                  r2.label = n2[2], r2.ops.push(a5);
                   break;
                 }
-                n2[2] && r3.ops.pop(), r3.trys.pop();
+                n2[2] && r2.ops.pop(), r2.trys.pop();
                 continue;
             }
-            a5 = t2.call(e3, r3);
-          } catch (e4) {
-            a5 = [6, e4], o3 = 0;
+            a5 = t2.call(e2, r2);
+          } catch (e3) {
+            a5 = [6, e3], o3 = 0;
           } finally {
             i3 = n2 = 0;
           }
           if (5 & a5[0]) throw a5[1];
           return { value: a5[0] ? a5[1] : void 0, done: true };
-        }([a4, s4]);
+        }([a4, s3]);
       };
     }
-  }, r2 = t;
+  }, r = t;
   Object.defineProperty(i2, "__esModule", { value: true });
-  var s2 = "browser-tabs-lock-key", c2 = { key: function(e3) {
-    return o2(r2, void 0, void 0, function() {
-      return a2(this, function(e4) {
+  var s = "browser-tabs-lock-key", c = { key: function(e2) {
+    return o2(r, void 0, void 0, function() {
+      return a2(this, function(e3) {
         throw new Error("Unsupported");
       });
     });
-  }, getItem: function(e3) {
-    return o2(r2, void 0, void 0, function() {
-      return a2(this, function(e4) {
+  }, getItem: function(e2) {
+    return o2(r, void 0, void 0, function() {
+      return a2(this, function(e3) {
         throw new Error("Unsupported");
       });
     });
   }, clear: function() {
-    return o2(r2, void 0, void 0, function() {
-      return a2(this, function(e3) {
+    return o2(r, void 0, void 0, function() {
+      return a2(this, function(e2) {
         return [2, window.localStorage.clear()];
       });
     });
-  }, removeItem: function(e3) {
-    return o2(r2, void 0, void 0, function() {
-      return a2(this, function(e4) {
+  }, removeItem: function(e2) {
+    return o2(r, void 0, void 0, function() {
+      return a2(this, function(e3) {
         throw new Error("Unsupported");
       });
     });
-  }, setItem: function(e3, t2) {
-    return o2(r2, void 0, void 0, function() {
-      return a2(this, function(e4) {
+  }, setItem: function(e2, t2) {
+    return o2(r, void 0, void 0, function() {
+      return a2(this, function(e3) {
         throw new Error("Unsupported");
       });
     });
-  }, keySync: function(e3) {
-    return window.localStorage.key(e3);
-  }, getItemSync: function(e3) {
-    return window.localStorage.getItem(e3);
+  }, keySync: function(e2) {
+    return window.localStorage.key(e2);
+  }, getItemSync: function(e2) {
+    return window.localStorage.getItem(e2);
   }, clearSync: function() {
     return window.localStorage.clear();
-  }, removeItemSync: function(e3) {
-    return window.localStorage.removeItem(e3);
-  }, setItemSync: function(e3, t2) {
-    return window.localStorage.setItem(e3, t2);
+  }, removeItemSync: function(e2) {
+    return window.localStorage.removeItem(e2);
+  }, setItemSync: function(e2, t2) {
+    return window.localStorage.setItem(e2, t2);
   } };
-  function d2(e3) {
+  function d(e2) {
     return new Promise(function(t2) {
-      return setTimeout(t2, e3);
+      return setTimeout(t2, e2);
     });
   }
-  function u2(e3) {
-    for (var t2 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz", i3 = "", o3 = 0; o3 < e3; o3++) {
+  function u(e2) {
+    for (var t2 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz", i3 = "", o3 = 0; o3 < e2; o3++) {
       i3 += t2[Math.floor(Math.random() * t2.length)];
     }
     return i3;
   }
-  var l3 = function() {
-    function e3(t2) {
-      this.acquiredIatSet = /* @__PURE__ */ new Set(), this.storageHandler = void 0, this.id = Date.now().toString() + u2(15), this.acquireLock = this.acquireLock.bind(this), this.releaseLock = this.releaseLock.bind(this), this.releaseLock__private__ = this.releaseLock__private__.bind(this), this.waitForSomethingToChange = this.waitForSomethingToChange.bind(this), this.refreshLockWhileAcquired = this.refreshLockWhileAcquired.bind(this), this.storageHandler = t2, void 0 === e3.waiters && (e3.waiters = []);
+  var l2 = function() {
+    function e2(t2) {
+      this.acquiredIatSet = /* @__PURE__ */ new Set(), this.storageHandler = void 0, this.id = Date.now().toString() + u(15), this.acquireLock = this.acquireLock.bind(this), this.releaseLock = this.releaseLock.bind(this), this.releaseLock__private__ = this.releaseLock__private__.bind(this), this.waitForSomethingToChange = this.waitForSomethingToChange.bind(this), this.refreshLockWhileAcquired = this.refreshLockWhileAcquired.bind(this), this.storageHandler = t2, void 0 === e2.waiters && (e2.waiters = []);
     }
-    return e3.prototype.acquireLock = function(t2, i3) {
+    return e2.prototype.acquireLock = function(t2, i3) {
       return void 0 === i3 && (i3 = 5e3), o2(this, void 0, void 0, function() {
-        var o3, n2, r3, l4, h3, p2, m2;
+        var o3, n2, r2, l3, h2, p, m;
         return a2(this, function(a3) {
           switch (a3.label) {
             case 0:
-              o3 = Date.now() + u2(4), n2 = Date.now() + i3, r3 = s2 + "-" + t2, l4 = void 0 === this.storageHandler ? c2 : this.storageHandler, a3.label = 1;
+              o3 = Date.now() + u(4), n2 = Date.now() + i3, r2 = s + "-" + t2, l3 = void 0 === this.storageHandler ? c : this.storageHandler, a3.label = 1;
             case 1:
-              return Date.now() < n2 ? [4, d2(30)] : [3, 8];
+              return Date.now() < n2 ? [4, d(30)] : [3, 8];
             case 2:
-              return a3.sent(), null !== l4.getItemSync(r3) ? [3, 5] : (h3 = this.id + "-" + t2 + "-" + o3, [4, d2(Math.floor(25 * Math.random()))]);
+              return a3.sent(), null !== l3.getItemSync(r2) ? [3, 5] : (h2 = this.id + "-" + t2 + "-" + o3, [4, d(Math.floor(25 * Math.random()))]);
             case 3:
-              return a3.sent(), l4.setItemSync(r3, JSON.stringify({ id: this.id, iat: o3, timeoutKey: h3, timeAcquired: Date.now(), timeRefreshed: Date.now() })), [4, d2(30)];
+              return a3.sent(), l3.setItemSync(r2, JSON.stringify({ id: this.id, iat: o3, timeoutKey: h2, timeAcquired: Date.now(), timeRefreshed: Date.now() })), [4, d(30)];
             case 4:
-              return a3.sent(), null !== (p2 = l4.getItemSync(r3)) && (m2 = JSON.parse(p2)).id === this.id && m2.iat === o3 ? (this.acquiredIatSet.add(o3), this.refreshLockWhileAcquired(r3, o3), [2, true]) : [3, 7];
+              return a3.sent(), null !== (p = l3.getItemSync(r2)) && (m = JSON.parse(p)).id === this.id && m.iat === o3 ? (this.acquiredIatSet.add(o3), this.refreshLockWhileAcquired(r2, o3), [2, true]) : [3, 7];
             case 5:
-              return e3.lockCorrector(void 0 === this.storageHandler ? c2 : this.storageHandler), [4, this.waitForSomethingToChange(n2)];
+              return e2.lockCorrector(void 0 === this.storageHandler ? c : this.storageHandler), [4, this.waitForSomethingToChange(n2)];
             case 6:
               a3.sent(), a3.label = 7;
             case 7:
-              return o3 = Date.now() + u2(4), [3, 1];
+              return o3 = Date.now() + u(4), [3, 1];
             case 8:
               return [2, false];
           }
         });
       });
-    }, e3.prototype.refreshLockWhileAcquired = function(e4, t2) {
+    }, e2.prototype.refreshLockWhileAcquired = function(e3, t2) {
       return o2(this, void 0, void 0, function() {
         var i3 = this;
-        return a2(this, function(r3) {
+        return a2(this, function(r2) {
           return setTimeout(function() {
             return o2(i3, void 0, void 0, function() {
-              var i4, o3, r4;
+              var i4, o3, r3;
               return a2(this, function(a3) {
                 switch (a3.label) {
                   case 0:
                     return [4, n.default().lock(t2)];
                   case 1:
-                    return a3.sent(), this.acquiredIatSet.has(t2) ? (i4 = void 0 === this.storageHandler ? c2 : this.storageHandler, null === (o3 = i4.getItemSync(e4)) ? (n.default().unlock(t2), [2]) : ((r4 = JSON.parse(o3)).timeRefreshed = Date.now(), i4.setItemSync(e4, JSON.stringify(r4)), n.default().unlock(t2), this.refreshLockWhileAcquired(e4, t2), [2])) : (n.default().unlock(t2), [2]);
+                    return a3.sent(), this.acquiredIatSet.has(t2) ? (i4 = void 0 === this.storageHandler ? c : this.storageHandler, null === (o3 = i4.getItemSync(e3)) ? (n.default().unlock(t2), [2]) : ((r3 = JSON.parse(o3)).timeRefreshed = Date.now(), i4.setItemSync(e3, JSON.stringify(r3)), n.default().unlock(t2), this.refreshLockWhileAcquired(e3, t2), [2])) : (n.default().unlock(t2), [2]);
                 }
               });
             });
           }, 1e3), [2];
         });
       });
-    }, e3.prototype.waitForSomethingToChange = function(t2) {
+    }, e2.prototype.waitForSomethingToChange = function(t2) {
       return o2(this, void 0, void 0, function() {
         return a2(this, function(i3) {
           switch (i3.label) {
             case 0:
               return [4, new Promise(function(i4) {
                 var o3 = false, n2 = Date.now(), a3 = false;
-                function r3() {
-                  if (a3 || (window.removeEventListener("storage", r3), e3.removeFromWaiting(r3), clearTimeout(s3), a3 = true), !o3) {
+                function r2() {
+                  if (a3 || (window.removeEventListener("storage", r2), e2.removeFromWaiting(r2), clearTimeout(s2), a3 = true), !o3) {
                     o3 = true;
                     var t3 = 50 - (Date.now() - n2);
                     t3 > 0 ? setTimeout(i4, t3) : i4(null);
                   }
                 }
-                window.addEventListener("storage", r3), e3.addToWaiting(r3);
-                var s3 = setTimeout(r3, Math.max(0, t2 - Date.now()));
+                window.addEventListener("storage", r2), e2.addToWaiting(r2);
+                var s2 = setTimeout(r2, Math.max(0, t2 - Date.now()));
               })];
             case 1:
               return i3.sent(), [2];
           }
         });
       });
-    }, e3.addToWaiting = function(t2) {
-      this.removeFromWaiting(t2), void 0 !== e3.waiters && e3.waiters.push(t2);
-    }, e3.removeFromWaiting = function(t2) {
-      void 0 !== e3.waiters && (e3.waiters = e3.waiters.filter(function(e4) {
-        return e4 !== t2;
+    }, e2.addToWaiting = function(t2) {
+      this.removeFromWaiting(t2), void 0 !== e2.waiters && e2.waiters.push(t2);
+    }, e2.removeFromWaiting = function(t2) {
+      void 0 !== e2.waiters && (e2.waiters = e2.waiters.filter(function(e3) {
+        return e3 !== t2;
       }));
-    }, e3.notifyWaiters = function() {
-      void 0 !== e3.waiters && e3.waiters.slice().forEach(function(e4) {
-        return e4();
+    }, e2.notifyWaiters = function() {
+      void 0 !== e2.waiters && e2.waiters.slice().forEach(function(e3) {
+        return e3();
       });
-    }, e3.prototype.releaseLock = function(e4) {
+    }, e2.prototype.releaseLock = function(e3) {
       return o2(this, void 0, void 0, function() {
         return a2(this, function(t2) {
           switch (t2.label) {
             case 0:
-              return [4, this.releaseLock__private__(e4)];
+              return [4, this.releaseLock__private__(e3)];
             case 1:
               return [2, t2.sent()];
           }
         });
       });
-    }, e3.prototype.releaseLock__private__ = function(t2) {
+    }, e2.prototype.releaseLock__private__ = function(t2) {
       return o2(this, void 0, void 0, function() {
-        var i3, o3, r3, d3;
+        var i3, o3, r2, d2;
         return a2(this, function(a3) {
           switch (a3.label) {
             case 0:
-              return i3 = void 0 === this.storageHandler ? c2 : this.storageHandler, o3 = s2 + "-" + t2, null === (r3 = i3.getItemSync(o3)) ? [2] : (d3 = JSON.parse(r3)).id !== this.id ? [3, 2] : [4, n.default().lock(d3.iat)];
+              return i3 = void 0 === this.storageHandler ? c : this.storageHandler, o3 = s + "-" + t2, null === (r2 = i3.getItemSync(o3)) ? [2] : (d2 = JSON.parse(r2)).id !== this.id ? [3, 2] : [4, n.default().lock(d2.iat)];
             case 1:
-              a3.sent(), this.acquiredIatSet.delete(d3.iat), i3.removeItemSync(o3), n.default().unlock(d3.iat), e3.notifyWaiters(), a3.label = 2;
+              a3.sent(), this.acquiredIatSet.delete(d2.iat), i3.removeItemSync(o3), n.default().unlock(d2.iat), e2.notifyWaiters(), a3.label = 2;
             case 2:
               return [2];
           }
         });
       });
-    }, e3.lockCorrector = function(t2) {
+    }, e2.lockCorrector = function(t2) {
       for (var i3 = Date.now() - 5e3, o3 = t2, n2 = [], a3 = 0; ; ) {
-        var r3 = o3.keySync(a3);
-        if (null === r3) break;
-        n2.push(r3), a3++;
+        var r2 = o3.keySync(a3);
+        if (null === r2) break;
+        n2.push(r2), a3++;
       }
-      for (var c3 = false, d3 = 0; d3 < n2.length; d3++) {
-        var u3 = n2[d3];
-        if (u3.includes(s2)) {
-          var l4 = o3.getItemSync(u3);
-          if (null !== l4) {
-            var h3 = JSON.parse(l4);
-            (void 0 === h3.timeRefreshed && h3.timeAcquired < i3 || void 0 !== h3.timeRefreshed && h3.timeRefreshed < i3) && (o3.removeItemSync(u3), c3 = true);
+      for (var c2 = false, d2 = 0; d2 < n2.length; d2++) {
+        var u2 = n2[d2];
+        if (u2.includes(s)) {
+          var l3 = o3.getItemSync(u2);
+          if (null !== l3) {
+            var h2 = JSON.parse(l3);
+            (void 0 === h2.timeRefreshed && h2.timeAcquired < i3 || void 0 !== h2.timeRefreshed && h2.timeRefreshed < i3) && (o3.removeItemSync(u2), c2 = true);
           }
         }
       }
-      c3 && e3.notifyWaiters();
-    }, e3.waiters = void 0, e3;
+      c2 && e2.notifyWaiters();
+    }, e2.waiters = void 0, e2;
   }();
-  i2.default = l3;
+  i2.default = l2;
 }));
-const r = { timeoutInSeconds: 60 }, s = { name: "auth0-spa-js", version: "2.1.3" }, c = () => Date.now();
-class d extends Error {
-  constructor(e2, t2) {
-    super(t2), this.error = e2, this.error_description = t2, Object.setPrototypeOf(this, d.prototype);
-  }
-  static fromPayload({ error: e2, error_description: t2 }) {
-    return new d(e2, t2);
-  }
-}
-class u extends d {
-  constructor(e2, t2, i2, o2 = null) {
-    super(e2, t2), this.state = i2, this.appState = o2, Object.setPrototypeOf(this, u.prototype);
-  }
-}
-let l$1 = class l extends d {
-  constructor() {
-    super("timeout", "Timeout"), Object.setPrototypeOf(this, l.prototype);
-  }
-};
-let h$1 = class h extends l$1 {
-  constructor(e2) {
-    super(), this.popup = e2, Object.setPrototypeOf(this, h.prototype);
-  }
-};
-class p extends d {
-  constructor(e2) {
-    super("cancelled", "Popup closed"), this.popup = e2, Object.setPrototypeOf(this, p.prototype);
-  }
-}
-class m extends d {
-  constructor(e2, t2, i2) {
-    super(e2, t2), this.mfa_token = i2, Object.setPrototypeOf(this, m.prototype);
-  }
-}
-class f extends d {
-  constructor(e2, t2) {
-    super("missing_refresh_token", `Missing Refresh Token (audience: '${g(e2, ["default"])}', scope: '${g(t2)}')`), this.audience = e2, this.scope = t2, Object.setPrototypeOf(this, f.prototype);
-  }
-}
-function g(e2, t2 = []) {
-  return e2 && !t2.includes(e2) ? e2 : "";
-}
-const w = () => window.crypto, y = () => {
-  const e2 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_~.";
-  let t2 = "";
-  return Array.from(w().getRandomValues(new Uint8Array(43))).forEach((i2) => t2 += e2[i2 % e2.length]), t2;
-}, k$1 = (e2) => btoa(e2), v$1 = (t2) => {
-  var { clientId: i2 } = t2, o2 = e(t2, ["clientId"]);
-  return new URLSearchParams(((e2) => Object.keys(e2).filter((t3) => void 0 !== e2[t3]).reduce((t3, i3) => Object.assign(Object.assign({}, t3), { [i3]: e2[i3] }), {}))(Object.assign({ client_id: i2 }, o2))).toString();
-}, b = (e2) => ((e3) => decodeURIComponent(atob(e3).split("").map((e4) => "%" + ("00" + e4.charCodeAt(0).toString(16)).slice(-2)).join("")))(e2.replace(/_/g, "/").replace(/-/g, "+")), _$1 = async (e2, t2) => {
-  const i2 = await fetch(e2, t2);
-  return { ok: i2.ok, json: await i2.json() };
-}, I = async (e2, t2, i2) => {
-  const o2 = new AbortController();
-  let n2;
-  return t2.signal = o2.signal, Promise.race([_$1(e2, t2), new Promise((e3, t3) => {
-    n2 = setTimeout(() => {
-      o2.abort(), t3(new Error("Timeout when executing 'fetch'"));
-    }, i2);
-  })]).finally(() => {
-    clearTimeout(n2);
-  });
-}, S = async (e2, t2, i2, o2, n2, a2, r2) => {
-  return s2 = { auth: { audience: t2, scope: i2 }, timeout: n2, fetchUrl: e2, fetchOptions: o2, useFormData: r2 }, c2 = a2, new Promise(function(e3, t3) {
-    const i3 = new MessageChannel();
-    i3.port1.onmessage = function(o3) {
-      o3.data.error ? t3(new Error(o3.data.error)) : e3(o3.data), i3.port1.close();
-    }, c2.postMessage(s2, [i3.port2]);
-  });
-  var s2, c2;
-}, O = async (e2, t2, i2, o2, n2, a2, r2 = 1e4) => n2 ? S(e2, t2, i2, o2, r2, n2, a2) : I(e2, o2, r2);
-async function T(t2, i2) {
-  var { baseUrl: o2, timeout: n2, audience: a2, scope: r2, auth0Client: c2, useFormData: u2 } = t2, l3 = e(t2, ["baseUrl", "timeout", "audience", "scope", "auth0Client", "useFormData"]);
-  const h3 = u2 ? v$1(l3) : JSON.stringify(l3);
-  return await async function(t3, i3, o3, n3, a3, r3, s2) {
-    let c3, u3 = null;
-    for (let e2 = 0; e2 < 3; e2++) try {
-      c3 = await O(t3, o3, n3, a3, r3, s2, i3), u3 = null;
-      break;
-    } catch (e3) {
-      u3 = e3;
-    }
-    if (u3) throw u3;
-    const l4 = c3.json, { error: h4, error_description: p2 } = l4, g2 = e(l4, ["error", "error_description"]), { ok: w2 } = c3;
-    if (!w2) {
-      const e2 = p2 || `HTTP error. Unable to fetch ${t3}`;
-      if ("mfa_required" === h4) throw new m(h4, e2, g2.mfa_token);
-      if ("missing_refresh_token" === h4) throw new f(o3, n3);
-      throw new d(h4 || "request_error", e2);
-    }
-    return g2;
-  }(`${o2}/oauth/token`, n2, a2 || "default", r2, { method: "POST", body: h3, headers: { "Content-Type": u2 ? "application/x-www-form-urlencoded" : "application/json", "Auth0-Client": btoa(JSON.stringify(c2 || s)) } }, i2, u2);
-}
-const j = (...e2) => {
-  return (t2 = e2.filter(Boolean).join(" ").trim().split(/\s+/), Array.from(new Set(t2))).join(" ");
-  var t2;
-};
-class C {
-  constructor(e2, t2 = "@@auth0spajs@@", i2) {
-    this.prefix = t2, this.suffix = i2, this.clientId = e2.clientId, this.scope = e2.scope, this.audience = e2.audience;
-  }
-  toKey() {
-    return [this.prefix, this.clientId, this.audience, this.scope, this.suffix].filter(Boolean).join("::");
-  }
-  static fromKey(e2) {
-    const [t2, i2, o2, n2] = e2.split("::");
-    return new C({ clientId: i2, scope: n2, audience: o2 }, t2);
-  }
-  static fromCacheEntry(e2) {
-    const { scope: t2, audience: i2, client_id: o2 } = e2;
-    return new C({ scope: t2, audience: i2, clientId: o2 });
-  }
-}
-class z {
-  set(e2, t2) {
-    localStorage.setItem(e2, JSON.stringify(t2));
-  }
-  get(e2) {
-    const t2 = window.localStorage.getItem(e2);
-    if (t2) try {
-      return JSON.parse(t2);
-    } catch (e3) {
-      return;
-    }
-  }
-  remove(e2) {
-    localStorage.removeItem(e2);
-  }
-  allKeys() {
-    return Object.keys(window.localStorage).filter((e2) => e2.startsWith("@@auth0spajs@@"));
-  }
-}
-class P {
-  constructor() {
-    this.enclosedCache = /* @__PURE__ */ function() {
-      let e2 = {};
-      return { set(t2, i2) {
-        e2[t2] = i2;
-      }, get(t2) {
-        const i2 = e2[t2];
-        if (i2) return i2;
-      }, remove(t2) {
-        delete e2[t2];
-      }, allKeys: () => Object.keys(e2) };
-    }();
-  }
-}
-class x {
-  constructor(e2, t2, i2) {
-    this.cache = e2, this.keyManifest = t2, this.nowProvider = i2 || c;
-  }
-  async setIdToken(e2, t2, i2) {
-    var o2;
-    const n2 = this.getIdTokenCacheKey(e2);
-    await this.cache.set(n2, { id_token: t2, decodedToken: i2 }), await (null === (o2 = this.keyManifest) || void 0 === o2 ? void 0 : o2.add(n2));
-  }
-  async getIdToken(e2) {
-    const t2 = await this.cache.get(this.getIdTokenCacheKey(e2.clientId));
-    if (!t2 && e2.scope && e2.audience) {
-      const t3 = await this.get(e2);
-      if (!t3) return;
-      if (!t3.id_token || !t3.decodedToken) return;
-      return { id_token: t3.id_token, decodedToken: t3.decodedToken };
-    }
-    if (t2) return { id_token: t2.id_token, decodedToken: t2.decodedToken };
-  }
-  async get(e2, t2 = 0) {
-    var i2;
-    let o2 = await this.cache.get(e2.toKey());
-    if (!o2) {
-      const t3 = await this.getCacheKeys();
-      if (!t3) return;
-      const i3 = this.matchExistingCacheKey(e2, t3);
-      i3 && (o2 = await this.cache.get(i3));
-    }
-    if (!o2) return;
-    const n2 = await this.nowProvider(), a2 = Math.floor(n2 / 1e3);
-    return o2.expiresAt - t2 < a2 ? o2.body.refresh_token ? (o2.body = { refresh_token: o2.body.refresh_token }, await this.cache.set(e2.toKey(), o2), o2.body) : (await this.cache.remove(e2.toKey()), void await (null === (i2 = this.keyManifest) || void 0 === i2 ? void 0 : i2.remove(e2.toKey()))) : o2.body;
-  }
-  async set(e2) {
-    var t2;
-    const i2 = new C({ clientId: e2.client_id, scope: e2.scope, audience: e2.audience }), o2 = await this.wrapCacheEntry(e2);
-    await this.cache.set(i2.toKey(), o2), await (null === (t2 = this.keyManifest) || void 0 === t2 ? void 0 : t2.add(i2.toKey()));
-  }
-  async clear(e2) {
-    var t2;
-    const i2 = await this.getCacheKeys();
-    i2 && (await i2.filter((t3) => !e2 || t3.includes(e2)).reduce(async (e3, t3) => {
-      await e3, await this.cache.remove(t3);
-    }, Promise.resolve()), await (null === (t2 = this.keyManifest) || void 0 === t2 ? void 0 : t2.clear()));
-  }
-  async wrapCacheEntry(e2) {
-    const t2 = await this.nowProvider();
-    return { body: e2, expiresAt: Math.floor(t2 / 1e3) + e2.expires_in };
-  }
-  async getCacheKeys() {
-    var e2;
-    return this.keyManifest ? null === (e2 = await this.keyManifest.get()) || void 0 === e2 ? void 0 : e2.keys : this.cache.allKeys ? this.cache.allKeys() : void 0;
-  }
-  getIdTokenCacheKey(e2) {
-    return new C({ clientId: e2 }, "@@auth0spajs@@", "@@user@@").toKey();
-  }
-  matchExistingCacheKey(e2, t2) {
-    return t2.filter((t3) => {
-      var i2;
-      const o2 = C.fromKey(t3), n2 = new Set(o2.scope && o2.scope.split(" ")), a2 = (null === (i2 = e2.scope) || void 0 === i2 ? void 0 : i2.split(" ")) || [], r2 = o2.scope && a2.reduce((e3, t4) => e3 && n2.has(t4), true);
-      return "@@auth0spajs@@" === o2.prefix && o2.clientId === e2.clientId && o2.audience === e2.audience && r2;
-    })[0];
-  }
-}
-let Z$1 = class Z {
-  constructor(e2, t2, i2) {
-    this.storage = e2, this.clientId = t2, this.cookieDomain = i2, this.storageKey = `a0.spajs.txs.${this.clientId}`;
-  }
-  create(e2) {
-    this.storage.save(this.storageKey, e2, { daysUntilExpire: 1, cookieDomain: this.cookieDomain });
-  }
-  get() {
-    return this.storage.get(this.storageKey);
-  }
-  remove() {
-    this.storage.remove(this.storageKey, { cookieDomain: this.cookieDomain });
-  }
-};
-const K = (e2) => "number" == typeof e2, W = ["iss", "aud", "exp", "nbf", "iat", "jti", "azp", "nonce", "auth_time", "at_hash", "c_hash", "acr", "amr", "sub_jwk", "cnf", "sip_from_tag", "sip_date", "sip_callid", "sip_cseq_num", "sip_via_branch", "orig", "dest", "mky", "events", "toe", "txn", "rph", "sid", "vot", "vtm"], E = (e2) => {
-  if (!e2.id_token) throw new Error("ID token is required but missing");
-  const t2 = ((e3) => {
-    const t3 = e3.split("."), [i3, o3, n3] = t3;
-    if (3 !== t3.length || !i3 || !o3 || !n3) throw new Error("ID token could not be decoded");
-    const a2 = JSON.parse(b(o3)), r2 = { __raw: e3 }, s2 = {};
-    return Object.keys(a2).forEach((e4) => {
-      r2[e4] = a2[e4], W.includes(e4) || (s2[e4] = a2[e4]);
-    }), { encoded: { header: i3, payload: o3, signature: n3 }, header: JSON.parse(b(i3)), claims: r2, user: s2 };
-  })(e2.id_token);
-  if (!t2.claims.iss) throw new Error("Issuer (iss) claim must be a string present in the ID token");
-  if (t2.claims.iss !== e2.iss) throw new Error(`Issuer (iss) claim mismatch in the ID token; expected "${e2.iss}", found "${t2.claims.iss}"`);
-  if (!t2.user.sub) throw new Error("Subject (sub) claim must be a string present in the ID token");
-  if ("RS256" !== t2.header.alg) throw new Error(`Signature algorithm of "${t2.header.alg}" is not supported. Expected the ID token to be signed with "RS256".`);
-  if (!t2.claims.aud || "string" != typeof t2.claims.aud && !Array.isArray(t2.claims.aud)) throw new Error("Audience (aud) claim must be a string or array of strings present in the ID token");
-  if (Array.isArray(t2.claims.aud)) {
-    if (!t2.claims.aud.includes(e2.aud)) throw new Error(`Audience (aud) claim mismatch in the ID token; expected "${e2.aud}" but was not one of "${t2.claims.aud.join(", ")}"`);
-    if (t2.claims.aud.length > 1) {
-      if (!t2.claims.azp) throw new Error("Authorized Party (azp) claim must be a string present in the ID token when Audience (aud) claim has multiple values");
-      if (t2.claims.azp !== e2.aud) throw new Error(`Authorized Party (azp) claim mismatch in the ID token; expected "${e2.aud}", found "${t2.claims.azp}"`);
-    }
-  } else if (t2.claims.aud !== e2.aud) throw new Error(`Audience (aud) claim mismatch in the ID token; expected "${e2.aud}" but found "${t2.claims.aud}"`);
-  if (e2.nonce) {
-    if (!t2.claims.nonce) throw new Error("Nonce (nonce) claim must be a string present in the ID token");
-    if (t2.claims.nonce !== e2.nonce) throw new Error(`Nonce (nonce) claim mismatch in the ID token; expected "${e2.nonce}", found "${t2.claims.nonce}"`);
-  }
-  if (e2.max_age && !K(t2.claims.auth_time)) throw new Error("Authentication Time (auth_time) claim must be a number present in the ID token when Max Age (max_age) is specified");
-  if (null == t2.claims.exp || !K(t2.claims.exp)) throw new Error("Expiration Time (exp) claim must be a number present in the ID token");
-  if (!K(t2.claims.iat)) throw new Error("Issued At (iat) claim must be a number present in the ID token");
-  const i2 = e2.leeway || 60, o2 = new Date(e2.now || Date.now()), n2 = /* @__PURE__ */ new Date(0);
-  if (n2.setUTCSeconds(t2.claims.exp + i2), o2 > n2) throw new Error(`Expiration Time (exp) claim error in the ID token; current time (${o2}) is after expiration time (${n2})`);
-  if (null != t2.claims.nbf && K(t2.claims.nbf)) {
-    const e3 = /* @__PURE__ */ new Date(0);
-    if (e3.setUTCSeconds(t2.claims.nbf - i2), o2 < e3) throw new Error(`Not Before time (nbf) claim in the ID token indicates that this token can't be used just yet. Current time (${o2}) is before ${e3}`);
-  }
-  if (null != t2.claims.auth_time && K(t2.claims.auth_time)) {
-    const n3 = /* @__PURE__ */ new Date(0);
-    if (n3.setUTCSeconds(parseInt(t2.claims.auth_time) + e2.max_age + i2), o2 > n3) throw new Error(`Authentication Time (auth_time) claim in the ID token indicates that too much time has passed since the last end-user authentication. Current time (${o2}) is after last auth at ${n3}`);
-  }
-  if (e2.organization) {
-    const i3 = e2.organization.trim();
-    if (i3.startsWith("org_")) {
-      const e3 = i3;
-      if (!t2.claims.org_id) throw new Error("Organization ID (org_id) claim must be a string present in the ID token");
-      if (e3 !== t2.claims.org_id) throw new Error(`Organization ID (org_id) claim mismatch in the ID token; expected "${e3}", found "${t2.claims.org_id}"`);
-    } else {
-      const e3 = i3.toLowerCase();
-      if (!t2.claims.org_name) throw new Error("Organization Name (org_name) claim must be a string present in the ID token");
-      if (e3 !== t2.claims.org_name) throw new Error(`Organization Name (org_name) claim mismatch in the ID token; expected "${e3}", found "${t2.claims.org_name}"`);
-    }
-  }
-  return t2;
-};
-var R = o(function(e2, i2) {
+var R = o(function(e, i2) {
   var o2 = t && t.__assign || function() {
-    return o2 = Object.assign || function(e3) {
-      for (var t2, i3 = 1, o3 = arguments.length; i3 < o3; i3++) for (var n3 in t2 = arguments[i3]) Object.prototype.hasOwnProperty.call(t2, n3) && (e3[n3] = t2[n3]);
-      return e3;
+    return o2 = Object.assign || function(e2) {
+      for (var t2, i3 = 1, o3 = arguments.length; i3 < o3; i3++) for (var n3 in t2 = arguments[i3]) Object.prototype.hasOwnProperty.call(t2, n3) && (e2[n3] = t2[n3]);
+      return e2;
     }, o2.apply(this, arguments);
   };
-  function n2(e3, t2) {
+  function n2(e2, t2) {
     if (!t2) return "";
-    var i3 = "; " + e3;
+    var i3 = "; " + e2;
     return true === t2 ? i3 : i3 + "=" + t2;
   }
-  function a2(e3, t2, i3) {
-    return encodeURIComponent(e3).replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent).replace(/\(/g, "%28").replace(/\)/g, "%29") + "=" + encodeURIComponent(t2).replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent) + function(e4) {
-      if ("number" == typeof e4.expires) {
+  function a2(e2, t2, i3) {
+    return encodeURIComponent(e2).replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent).replace(/\(/g, "%28").replace(/\)/g, "%29") + "=" + encodeURIComponent(t2).replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent) + function(e3) {
+      if ("number" == typeof e3.expires) {
         var t3 = /* @__PURE__ */ new Date();
-        t3.setMilliseconds(t3.getMilliseconds() + 864e5 * e4.expires), e4.expires = t3;
+        t3.setMilliseconds(t3.getMilliseconds() + 864e5 * e3.expires), e3.expires = t3;
       }
-      return n2("Expires", e4.expires ? e4.expires.toUTCString() : "") + n2("Domain", e4.domain) + n2("Path", e4.path) + n2("Secure", e4.secure) + n2("SameSite", e4.sameSite);
+      return n2("Expires", e3.expires ? e3.expires.toUTCString() : "") + n2("Domain", e3.domain) + n2("Path", e3.path) + n2("Secure", e3.secure) + n2("SameSite", e3.sameSite);
     }(i3);
   }
-  function r2(e3) {
-    for (var t2 = {}, i3 = e3 ? e3.split("; ") : [], o3 = /(%[\dA-F]{2})+/gi, n3 = 0; n3 < i3.length; n3++) {
-      var a3 = i3[n3].split("="), r3 = a3.slice(1).join("=");
-      '"' === r3.charAt(0) && (r3 = r3.slice(1, -1));
+  function r(e2) {
+    for (var t2 = {}, i3 = e2 ? e2.split("; ") : [], o3 = /(%[\dA-F]{2})+/gi, n3 = 0; n3 < i3.length; n3++) {
+      var a3 = i3[n3].split("="), r2 = a3.slice(1).join("=");
+      '"' === r2.charAt(0) && (r2 = r2.slice(1, -1));
       try {
-        t2[a3[0].replace(o3, decodeURIComponent)] = r3.replace(o3, decodeURIComponent);
-      } catch (e4) {
+        t2[a3[0].replace(o3, decodeURIComponent)] = r2.replace(o3, decodeURIComponent);
+      } catch (e3) {
       }
     }
     return t2;
   }
-  function s2() {
-    return r2(document.cookie);
+  function s() {
+    return r(document.cookie);
   }
-  function c2(e3, t2, i3) {
-    document.cookie = a2(e3, t2, o2({ path: "/" }, i3));
+  function c(e2, t2, i3) {
+    document.cookie = a2(e2, t2, o2({ path: "/" }, i3));
   }
-  i2.__esModule = true, i2.encode = a2, i2.parse = r2, i2.getAll = s2, i2.get = function(e3) {
-    return s2()[e3];
-  }, i2.set = c2, i2.remove = function(e3, t2) {
-    c2(e3, "", o2(o2({}, t2), { expires: -1 }));
+  i2.__esModule = true, i2.encode = a2, i2.parse = r, i2.getAll = s, i2.get = function(e2) {
+    return s()[e2];
+  }, i2.set = c, i2.remove = function(e2, t2) {
+    c(e2, "", o2(o2({}, t2), { expires: -1 }));
   };
 });
 i(R), R.encode, R.parse, R.getAll;
-var U = R.get, L = R.set, D$1 = R.remove;
-const X = { get(e2) {
-  const t2 = U(e2);
-  if (void 0 !== t2) return JSON.parse(t2);
-}, save(e2, t2, i2) {
-  let o2 = {};
-  "https:" === window.location.protocol && (o2 = { secure: true, sameSite: "none" }), (null == i2 ? void 0 : i2.daysUntilExpire) && (o2.expires = i2.daysUntilExpire), (null == i2 ? void 0 : i2.cookieDomain) && (o2.domain = i2.cookieDomain), L(e2, JSON.stringify(t2), o2);
-}, remove(e2, t2) {
-  let i2 = {};
-  (null == t2 ? void 0 : t2.cookieDomain) && (i2.domain = t2.cookieDomain), D$1(e2, i2);
-} }, N = { get(e2) {
-  const t2 = X.get(e2);
-  return t2 || X.get(`_legacy_${e2}`);
-}, save(e2, t2, i2) {
-  let o2 = {};
-  "https:" === window.location.protocol && (o2 = { secure: true }), (null == i2 ? void 0 : i2.daysUntilExpire) && (o2.expires = i2.daysUntilExpire), (null == i2 ? void 0 : i2.cookieDomain) && (o2.domain = i2.cookieDomain), L(`_legacy_${e2}`, JSON.stringify(t2), o2), X.save(e2, t2, i2);
-}, remove(e2, t2) {
-  let i2 = {};
-  (null == t2 ? void 0 : t2.cookieDomain) && (i2.domain = t2.cookieDomain), D$1(e2, i2), X.remove(e2, t2), X.remove(`_legacy_${e2}`, t2);
-} }, J = { get(e2) {
-  if ("undefined" == typeof sessionStorage) return;
-  const t2 = sessionStorage.getItem(e2);
-  return null != t2 ? JSON.parse(t2) : void 0;
-}, save(e2, t2) {
-  sessionStorage.setItem(e2, JSON.stringify(t2));
-}, remove(e2) {
-  sessionStorage.removeItem(e2);
-} };
-function F(e2, t2, i2) {
-  var o2 = void 0 === t2 ? null : t2, n2 = function(e3, t3) {
-    var i3 = atob(e3);
-    if (t3) {
-      for (var o3 = new Uint8Array(i3.length), n3 = 0, a3 = i3.length; n3 < a3; ++n3) o3[n3] = i3.charCodeAt(n3);
-      return String.fromCharCode.apply(null, new Uint16Array(o3.buffer));
-    }
-    return i3;
-  }(e2, void 0 !== i2 && i2), a2 = n2.indexOf("\n", 10) + 1, r2 = n2.substring(a2) + (o2 ? "//# sourceMappingURL=" + o2 : ""), s2 = new Blob([r2], { type: "application/javascript" });
-  return URL.createObjectURL(s2);
-}
-var H$1, Y$1, G, V, M = (H$1 = "Lyogcm9sbHVwLXBsdWdpbi13ZWItd29ya2VyLWxvYWRlciAqLwohZnVuY3Rpb24oKXsidXNlIHN0cmljdCI7Y2xhc3MgZSBleHRlbmRzIEVycm9ye2NvbnN0cnVjdG9yKHQscil7c3VwZXIociksdGhpcy5lcnJvcj10LHRoaXMuZXJyb3JfZGVzY3JpcHRpb249cixPYmplY3Quc2V0UHJvdG90eXBlT2YodGhpcyxlLnByb3RvdHlwZSl9c3RhdGljIGZyb21QYXlsb2FkKHtlcnJvcjp0LGVycm9yX2Rlc2NyaXB0aW9uOnJ9KXtyZXR1cm4gbmV3IGUodCxyKX19Y2xhc3MgdCBleHRlbmRzIGV7Y29uc3RydWN0b3IoZSxzKXtzdXBlcigibWlzc2luZ19yZWZyZXNoX3Rva2VuIixgTWlzc2luZyBSZWZyZXNoIFRva2VuIChhdWRpZW5jZTogJyR7cihlLFsiZGVmYXVsdCJdKX0nLCBzY29wZTogJyR7cihzKX0nKWApLHRoaXMuYXVkaWVuY2U9ZSx0aGlzLnNjb3BlPXMsT2JqZWN0LnNldFByb3RvdHlwZU9mKHRoaXMsdC5wcm90b3R5cGUpfX1mdW5jdGlvbiByKGUsdD1bXSl7cmV0dXJuIGUmJiF0LmluY2x1ZGVzKGUpP2U6IiJ9ImZ1bmN0aW9uIj09dHlwZW9mIFN1cHByZXNzZWRFcnJvciYmU3VwcHJlc3NlZEVycm9yO2NvbnN0IHM9ZT0+e3ZhcntjbGllbnRJZDp0fT1lLHI9ZnVuY3Rpb24oZSx0KXt2YXIgcj17fTtmb3IodmFyIHMgaW4gZSlPYmplY3QucHJvdG90eXBlLmhhc093blByb3BlcnR5LmNhbGwoZSxzKSYmdC5pbmRleE9mKHMpPDAmJihyW3NdPWVbc10pO2lmKG51bGwhPWUmJiJmdW5jdGlvbiI9PXR5cGVvZiBPYmplY3QuZ2V0T3duUHJvcGVydHlTeW1ib2xzKXt2YXIgbz0wO2ZvcihzPU9iamVjdC5nZXRPd25Qcm9wZXJ0eVN5bWJvbHMoZSk7bzxzLmxlbmd0aDtvKyspdC5pbmRleE9mKHNbb10pPDAmJk9iamVjdC5wcm90b3R5cGUucHJvcGVydHlJc0VudW1lcmFibGUuY2FsbChlLHNbb10pJiYocltzW29dXT1lW3Nbb11dKX1yZXR1cm4gcn0oZSxbImNsaWVudElkIl0pO3JldHVybiBuZXcgVVJMU2VhcmNoUGFyYW1zKChlPT5PYmplY3Qua2V5cyhlKS5maWx0ZXIoKHQ9PnZvaWQgMCE9PWVbdF0pKS5yZWR1Y2UoKCh0LHIpPT5PYmplY3QuYXNzaWduKE9iamVjdC5hc3NpZ24oe30sdCkse1tyXTplW3JdfSkpLHt9KSkoT2JqZWN0LmFzc2lnbih7Y2xpZW50X2lkOnR9LHIpKSkudG9TdHJpbmcoKX07bGV0IG89e307Y29uc3Qgbj0oZSx0KT0+YCR7ZX18JHt0fWA7YWRkRXZlbnRMaXN0ZW5lcigibWVzc2FnZSIsKGFzeW5jKHtkYXRhOnt0aW1lb3V0OmUsYXV0aDpyLGZldGNoVXJsOmksZmV0Y2hPcHRpb25zOmMsdXNlRm9ybURhdGE6YX0scG9ydHM6W3BdfSk9PntsZXQgZjtjb25zdHthdWRpZW5jZTp1LHNjb3BlOmx9PXJ8fHt9O3RyeXtjb25zdCByPWE/KGU9Pntjb25zdCB0PW5ldyBVUkxTZWFyY2hQYXJhbXMoZSkscj17fTtyZXR1cm4gdC5mb3JFYWNoKCgoZSx0KT0+e3JbdF09ZX0pKSxyfSkoYy5ib2R5KTpKU09OLnBhcnNlKGMuYm9keSk7aWYoIXIucmVmcmVzaF90b2tlbiYmInJlZnJlc2hfdG9rZW4iPT09ci5ncmFudF90eXBlKXtjb25zdCBlPSgoZSx0KT0+b1tuKGUsdCldKSh1LGwpO2lmKCFlKXRocm93IG5ldyB0KHUsbCk7Yy5ib2R5PWE/cyhPYmplY3QuYXNzaWduKE9iamVjdC5hc3NpZ24oe30scikse3JlZnJlc2hfdG9rZW46ZX0pKTpKU09OLnN0cmluZ2lmeShPYmplY3QuYXNzaWduKE9iamVjdC5hc3NpZ24oe30scikse3JlZnJlc2hfdG9rZW46ZX0pKX1sZXQgaCxnOyJmdW5jdGlvbiI9PXR5cGVvZiBBYm9ydENvbnRyb2xsZXImJihoPW5ldyBBYm9ydENvbnRyb2xsZXIsYy5zaWduYWw9aC5zaWduYWwpO3RyeXtnPWF3YWl0IFByb21pc2UucmFjZShbKGQ9ZSxuZXcgUHJvbWlzZSgoZT0+c2V0VGltZW91dChlLGQpKSkpLGZldGNoKGksT2JqZWN0LmFzc2lnbih7fSxjKSldKX1jYXRjaChlKXtyZXR1cm4gdm9pZCBwLnBvc3RNZXNzYWdlKHtlcnJvcjplLm1lc3NhZ2V9KX1pZighZylyZXR1cm4gaCYmaC5hYm9ydCgpLHZvaWQgcC5wb3N0TWVzc2FnZSh7ZXJyb3I6IlRpbWVvdXQgd2hlbiBleGVjdXRpbmcgJ2ZldGNoJyJ9KTtmPWF3YWl0IGcuanNvbigpLGYucmVmcmVzaF90b2tlbj8oKChlLHQscik9PntvW24odCxyKV09ZX0pKGYucmVmcmVzaF90b2tlbix1LGwpLGRlbGV0ZSBmLnJlZnJlc2hfdG9rZW4pOigoZSx0KT0+e2RlbGV0ZSBvW24oZSx0KV19KSh1LGwpLHAucG9zdE1lc3NhZ2Uoe29rOmcub2ssanNvbjpmfSl9Y2F0Y2goZSl7cC5wb3N0TWVzc2FnZSh7b2s6ITEsanNvbjp7ZXJyb3I6ZS5lcnJvcixlcnJvcl9kZXNjcmlwdGlvbjplLm1lc3NhZ2V9fSl9dmFyIGR9KSl9KCk7Cgo=", Y$1 = null, G = false, function(e2) {
-  return V = V || F(H$1, Y$1, G), new Worker(V, e2);
-});
-const A = {};
-class B {
-  constructor(e2, t2) {
-    this.cache = e2, this.clientId = t2, this.manifestKey = this.createManifestKeyFrom(this.clientId);
-  }
-  async add(e2) {
-    var t2;
-    const i2 = new Set((null === (t2 = await this.cache.get(this.manifestKey)) || void 0 === t2 ? void 0 : t2.keys) || []);
-    i2.add(e2), await this.cache.set(this.manifestKey, { keys: [...i2] });
-  }
-  async remove(e2) {
-    const t2 = await this.cache.get(this.manifestKey);
-    if (t2) {
-      const i2 = new Set(t2.keys);
-      return i2.delete(e2), i2.size > 0 ? await this.cache.set(this.manifestKey, { keys: [...i2] }) : await this.cache.remove(this.manifestKey);
-    }
-  }
-  get() {
-    return this.cache.get(this.manifestKey);
-  }
-  clear() {
-    return this.cache.remove(this.manifestKey);
-  }
-  createManifestKeyFrom(e2) {
-    return `@@auth0spajs@@::${e2}`;
-  }
-}
-const $$1 = { memory: () => new P().enclosedCache, localstorage: () => new z() }, q = (e2) => $$1[e2], Q = (t2) => {
-  const { openUrl: i2, onRedirect: o2 } = t2, n2 = e(t2, ["openUrl", "onRedirect"]);
-  return Object.assign(Object.assign({}, n2), { openUrl: false === i2 || i2 ? i2 : o2 });
-}, ee$1 = new a();
-let te$1 = class te {
-  constructor(e2) {
-    let t2, i2;
-    if (this.userCache = new P().enclosedCache, this.defaultOptions = { authorizationParams: { scope: "openid profile email" }, useRefreshTokensFallback: false, useFormData: true }, this._releaseLockOnPageHide = async () => {
-      await ee$1.releaseLock("auth0.lock.getTokenSilently"), window.removeEventListener("pagehide", this._releaseLockOnPageHide);
-    }, this.options = Object.assign(Object.assign(Object.assign({}, this.defaultOptions), e2), { authorizationParams: Object.assign(Object.assign({}, this.defaultOptions.authorizationParams), e2.authorizationParams) }), "undefined" != typeof window && (() => {
-      if (!w()) throw new Error("For security reasons, `window.crypto` is required to run `auth0-spa-js`.");
-      if (void 0 === w().subtle) throw new Error("\n      auth0-spa-js must run on a secure origin. See https://github.com/auth0/auth0-spa-js/blob/main/FAQ.md#why-do-i-get-auth0-spa-js-must-run-on-a-secure-origin for more information.\n    ");
-    })(), e2.cache && e2.cacheLocation && console.warn("Both `cache` and `cacheLocation` options have been specified in the Auth0Client configuration; ignoring `cacheLocation` and using `cache`."), e2.cache) i2 = e2.cache;
-    else {
-      if (t2 = e2.cacheLocation || "memory", !q(t2)) throw new Error(`Invalid cache location "${t2}"`);
-      i2 = q(t2)();
-    }
-    this.httpTimeoutMs = e2.httpTimeoutInSeconds ? 1e3 * e2.httpTimeoutInSeconds : 1e4, this.cookieStorage = false === e2.legacySameSiteCookie ? X : N, this.orgHintCookieName = `auth0.${this.options.clientId}.organization_hint`, this.isAuthenticatedCookieName = ((e3) => `auth0.${e3}.is.authenticated`)(this.options.clientId), this.sessionCheckExpiryDays = e2.sessionCheckExpiryDays || 1;
-    const o2 = e2.useCookiesForTransactions ? this.cookieStorage : J;
-    var n2;
-    this.scope = j("openid", this.options.authorizationParams.scope, this.options.useRefreshTokens ? "offline_access" : ""), this.transactionManager = new Z$1(o2, this.options.clientId, this.options.cookieDomain), this.nowProvider = this.options.nowProvider || c, this.cacheManager = new x(i2, i2.allKeys ? void 0 : new B(i2, this.options.clientId), this.nowProvider), this.domainUrl = (n2 = this.options.domain, /^https?:\/\//.test(n2) ? n2 : `https://${n2}`), this.tokenIssuer = ((e3, t3) => e3 ? e3.startsWith("https://") ? e3 : `https://${e3}/` : `${t3}/`)(this.options.issuer, this.domainUrl), "undefined" != typeof window && window.Worker && this.options.useRefreshTokens && "memory" === t2 && (this.options.workerUrl ? this.worker = new Worker(this.options.workerUrl) : this.worker = new M());
-  }
-  _url(e2) {
-    const t2 = encodeURIComponent(btoa(JSON.stringify(this.options.auth0Client || s)));
-    return `${this.domainUrl}${e2}&auth0Client=${t2}`;
-  }
-  _authorizeUrl(e2) {
-    return this._url(`/authorize?${v$1(e2)}`);
-  }
-  async _verifyIdToken(e2, t2, i2) {
-    const o2 = await this.nowProvider();
-    return E({ iss: this.tokenIssuer, aud: this.options.clientId, id_token: e2, nonce: t2, organization: i2, leeway: this.options.leeway, max_age: (n2 = this.options.authorizationParams.max_age, "string" != typeof n2 ? n2 : parseInt(n2, 10) || void 0), now: o2 });
-    var n2;
-  }
-  _processOrgHint(e2) {
-    e2 ? this.cookieStorage.save(this.orgHintCookieName, e2, { daysUntilExpire: this.sessionCheckExpiryDays, cookieDomain: this.options.cookieDomain }) : this.cookieStorage.remove(this.orgHintCookieName, { cookieDomain: this.options.cookieDomain });
-  }
-  async _prepareAuthorizeUrl(e2, t2, i2) {
-    const o2 = k$1(y()), n2 = k$1(y()), a2 = y(), r2 = ((e3) => {
-      const t3 = new Uint8Array(e3);
-      return ((e4) => {
-        const t4 = { "+": "-", "/": "_", "=": "" };
-        return e4.replace(/[+/=]/g, (e5) => t4[e5]);
-      })(window.btoa(String.fromCharCode(...Array.from(t3))));
-    })(await (async (e3) => {
-      const t3 = w().subtle.digest({ name: "SHA-256" }, new TextEncoder().encode(e3));
-      return await t3;
-    })(a2)), s2 = ((e3, t3, i3, o3, n3, a3, r3, s3) => Object.assign(Object.assign(Object.assign({ client_id: e3.clientId }, e3.authorizationParams), i3), { scope: j(t3, i3.scope), response_type: "code", response_mode: s3 || "query", state: o3, nonce: n3, redirect_uri: r3 || e3.authorizationParams.redirect_uri, code_challenge: a3, code_challenge_method: "S256" }))(this.options, this.scope, e2, o2, n2, r2, e2.redirect_uri || this.options.authorizationParams.redirect_uri || i2, null == t2 ? void 0 : t2.response_mode), c2 = this._authorizeUrl(s2);
-    return { nonce: n2, code_verifier: a2, scope: s2.scope, audience: s2.audience || "default", redirect_uri: s2.redirect_uri, state: o2, url: c2 };
-  }
-  async loginWithPopup(e2, t2) {
-    var i2;
-    if (e2 = e2 || {}, !(t2 = t2 || {}).popup && (t2.popup = ((e3) => {
-      const t3 = window.screenX + (window.innerWidth - 400) / 2, i3 = window.screenY + (window.innerHeight - 600) / 2;
-      return window.open(e3, "auth0:authorize:popup", `left=${t3},top=${i3},width=400,height=600,resizable,scrollbars=yes,status=1`);
-    })(""), !t2.popup)) throw new Error("Unable to open a popup for loginWithPopup - window.open returned `null`");
-    const o2 = await this._prepareAuthorizeUrl(e2.authorizationParams || {}, { response_mode: "web_message" }, window.location.origin);
-    t2.popup.location.href = o2.url;
-    const n2 = await ((e3) => new Promise((t3, i3) => {
-      let o3;
-      const n3 = setInterval(() => {
-        e3.popup && e3.popup.closed && (clearInterval(n3), clearTimeout(a3), window.removeEventListener("message", o3, false), i3(new p(e3.popup)));
-      }, 1e3), a3 = setTimeout(() => {
-        clearInterval(n3), i3(new h$1(e3.popup)), window.removeEventListener("message", o3, false);
-      }, 1e3 * (e3.timeoutInSeconds || 60));
-      o3 = function(r2) {
-        if (r2.data && "authorization_response" === r2.data.type) {
-          if (clearTimeout(a3), clearInterval(n3), window.removeEventListener("message", o3, false), e3.popup.close(), r2.data.response.error) return i3(d.fromPayload(r2.data.response));
-          t3(r2.data.response);
-        }
-      }, window.addEventListener("message", o3);
-    }))(Object.assign(Object.assign({}, t2), { timeoutInSeconds: t2.timeoutInSeconds || this.options.authorizeTimeoutInSeconds || 60 }));
-    if (o2.state !== n2.state) throw new d("state_mismatch", "Invalid state");
-    const a2 = (null === (i2 = e2.authorizationParams) || void 0 === i2 ? void 0 : i2.organization) || this.options.authorizationParams.organization;
-    await this._requestToken({ audience: o2.audience, scope: o2.scope, code_verifier: o2.code_verifier, grant_type: "authorization_code", code: n2.code, redirect_uri: o2.redirect_uri }, { nonceIn: o2.nonce, organization: a2 });
-  }
-  async getUser() {
-    var e2;
-    const t2 = await this._getIdTokenFromCache();
-    return null === (e2 = null == t2 ? void 0 : t2.decodedToken) || void 0 === e2 ? void 0 : e2.user;
-  }
-  async getIdTokenClaims() {
-    var e2;
-    const t2 = await this._getIdTokenFromCache();
-    return null === (e2 = null == t2 ? void 0 : t2.decodedToken) || void 0 === e2 ? void 0 : e2.claims;
-  }
-  async loginWithRedirect(t2 = {}) {
-    var i2;
-    const o2 = Q(t2), { openUrl: n2, fragment: a2, appState: r2 } = o2, s2 = e(o2, ["openUrl", "fragment", "appState"]), c2 = (null === (i2 = s2.authorizationParams) || void 0 === i2 ? void 0 : i2.organization) || this.options.authorizationParams.organization, d2 = await this._prepareAuthorizeUrl(s2.authorizationParams || {}), { url: u2 } = d2, l3 = e(d2, ["url"]);
-    this.transactionManager.create(Object.assign(Object.assign(Object.assign({}, l3), { appState: r2 }), c2 && { organization: c2 }));
-    const h3 = a2 ? `${u2}#${a2}` : u2;
-    n2 ? await n2(h3) : window.location.assign(h3);
-  }
-  async handleRedirectCallback(e2 = window.location.href) {
-    const t2 = e2.split("?").slice(1);
-    if (0 === t2.length) throw new Error("There are no query params available for parsing.");
-    const { state: i2, code: o2, error: n2, error_description: a2 } = ((e3) => {
-      e3.indexOf("#") > -1 && (e3 = e3.substring(0, e3.indexOf("#")));
-      const t3 = new URLSearchParams(e3);
-      return { state: t3.get("state"), code: t3.get("code") || void 0, error: t3.get("error") || void 0, error_description: t3.get("error_description") || void 0 };
-    })(t2.join("")), r2 = this.transactionManager.get();
-    if (!r2) throw new d("missing_transaction", "Invalid state");
-    if (this.transactionManager.remove(), n2) throw new u(n2, a2 || n2, i2, r2.appState);
-    if (!r2.code_verifier || r2.state && r2.state !== i2) throw new d("state_mismatch", "Invalid state");
-    const s2 = r2.organization, c2 = r2.nonce, l3 = r2.redirect_uri;
-    return await this._requestToken(Object.assign({ audience: r2.audience, scope: r2.scope, code_verifier: r2.code_verifier, grant_type: "authorization_code", code: o2 }, l3 ? { redirect_uri: l3 } : {}), { nonceIn: c2, organization: s2 }), { appState: r2.appState };
-  }
-  async checkSession(e2) {
-    if (!this.cookieStorage.get(this.isAuthenticatedCookieName)) {
-      if (!this.cookieStorage.get("auth0.is.authenticated")) return;
-      this.cookieStorage.save(this.isAuthenticatedCookieName, true, { daysUntilExpire: this.sessionCheckExpiryDays, cookieDomain: this.options.cookieDomain }), this.cookieStorage.remove("auth0.is.authenticated");
-    }
-    try {
-      await this.getTokenSilently(e2);
-    } catch (e3) {
-    }
-  }
-  async getTokenSilently(e2 = {}) {
-    var t2;
-    const i2 = Object.assign(Object.assign({ cacheMode: "on" }, e2), { authorizationParams: Object.assign(Object.assign(Object.assign({}, this.options.authorizationParams), e2.authorizationParams), { scope: j(this.scope, null === (t2 = e2.authorizationParams) || void 0 === t2 ? void 0 : t2.scope) }) }), o2 = await ((e3, t3) => {
-      let i3 = A[t3];
-      return i3 || (i3 = e3().finally(() => {
-        delete A[t3], i3 = null;
-      }), A[t3] = i3), i3;
-    })(() => this._getTokenSilently(i2), `${this.options.clientId}::${i2.authorizationParams.audience}::${i2.authorizationParams.scope}`);
-    return e2.detailedResponse ? o2 : null == o2 ? void 0 : o2.access_token;
-  }
-  async _getTokenSilently(t2) {
-    const { cacheMode: i2 } = t2, o2 = e(t2, ["cacheMode"]);
-    if ("off" !== i2) {
-      const e2 = await this._getEntryFromCache({ scope: o2.authorizationParams.scope, audience: o2.authorizationParams.audience || "default", clientId: this.options.clientId });
-      if (e2) return e2;
-    }
-    if ("cache-only" !== i2) {
-      if (!await (async (e2, t3 = 3) => {
-        for (let i3 = 0; i3 < t3; i3++) if (await e2()) return true;
-        return false;
-      })(() => ee$1.acquireLock("auth0.lock.getTokenSilently", 5e3), 10)) throw new l$1();
-      try {
-        if (window.addEventListener("pagehide", this._releaseLockOnPageHide), "off" !== i2) {
-          const e3 = await this._getEntryFromCache({ scope: o2.authorizationParams.scope, audience: o2.authorizationParams.audience || "default", clientId: this.options.clientId });
-          if (e3) return e3;
-        }
-        const e2 = this.options.useRefreshTokens ? await this._getTokenUsingRefreshToken(o2) : await this._getTokenFromIFrame(o2), { id_token: t3, access_token: n2, oauthTokenScope: a2, expires_in: r2 } = e2;
-        return Object.assign(Object.assign({ id_token: t3, access_token: n2 }, a2 ? { scope: a2 } : null), { expires_in: r2 });
-      } finally {
-        await ee$1.releaseLock("auth0.lock.getTokenSilently"), window.removeEventListener("pagehide", this._releaseLockOnPageHide);
-      }
-    }
-  }
-  async getTokenWithPopup(e2 = {}, t2 = {}) {
-    var i2;
-    const o2 = Object.assign(Object.assign({}, e2), { authorizationParams: Object.assign(Object.assign(Object.assign({}, this.options.authorizationParams), e2.authorizationParams), { scope: j(this.scope, null === (i2 = e2.authorizationParams) || void 0 === i2 ? void 0 : i2.scope) }) });
-    t2 = Object.assign(Object.assign({}, r), t2), await this.loginWithPopup(o2, t2);
-    return (await this.cacheManager.get(new C({ scope: o2.authorizationParams.scope, audience: o2.authorizationParams.audience || "default", clientId: this.options.clientId }))).access_token;
-  }
-  async isAuthenticated() {
-    return !!await this.getUser();
-  }
-  _buildLogoutUrl(t2) {
-    null !== t2.clientId ? t2.clientId = t2.clientId || this.options.clientId : delete t2.clientId;
-    const i2 = t2.logoutParams || {}, { federated: o2 } = i2, n2 = e(i2, ["federated"]), a2 = o2 ? "&federated" : "";
-    return this._url(`/v2/logout?${v$1(Object.assign({ clientId: t2.clientId }, n2))}`) + a2;
-  }
-  async logout(t2 = {}) {
-    const i2 = Q(t2), { openUrl: o2 } = i2, n2 = e(i2, ["openUrl"]);
-    null === t2.clientId ? await this.cacheManager.clear() : await this.cacheManager.clear(t2.clientId || this.options.clientId), this.cookieStorage.remove(this.orgHintCookieName, { cookieDomain: this.options.cookieDomain }), this.cookieStorage.remove(this.isAuthenticatedCookieName, { cookieDomain: this.options.cookieDomain }), this.userCache.remove("@@user@@");
-    const a2 = this._buildLogoutUrl(n2);
-    o2 ? await o2(a2) : false !== o2 && window.location.assign(a2);
-  }
-  async _getTokenFromIFrame(e2) {
-    const t2 = Object.assign(Object.assign({}, e2.authorizationParams), { prompt: "none" }), i2 = this.cookieStorage.get(this.orgHintCookieName);
-    i2 && !t2.organization && (t2.organization = i2);
-    const { url: o2, state: n2, nonce: a2, code_verifier: r2, redirect_uri: s2, scope: c2, audience: u2 } = await this._prepareAuthorizeUrl(t2, { response_mode: "web_message" }, window.location.origin);
-    try {
-      if (window.crossOriginIsolated) throw new d("login_required", "The application is running in a Cross-Origin Isolated context, silently retrieving a token without refresh token is not possible.");
-      const i3 = e2.timeoutInSeconds || this.options.authorizeTimeoutInSeconds, h3 = await ((e3, t3, i4 = 60) => new Promise((o3, n3) => {
-        const a3 = window.document.createElement("iframe");
-        a3.setAttribute("width", "0"), a3.setAttribute("height", "0"), a3.style.display = "none";
-        const r3 = () => {
-          window.document.body.contains(a3) && (window.document.body.removeChild(a3), window.removeEventListener("message", s3, false));
-        };
-        let s3;
-        const c3 = setTimeout(() => {
-          n3(new l$1()), r3();
-        }, 1e3 * i4);
-        s3 = function(e4) {
-          if (e4.origin != t3) return;
-          if (!e4.data || "authorization_response" !== e4.data.type) return;
-          const i5 = e4.source;
-          i5 && i5.close(), e4.data.response.error ? n3(d.fromPayload(e4.data.response)) : o3(e4.data.response), clearTimeout(c3), window.removeEventListener("message", s3, false), setTimeout(r3, 2e3);
-        }, window.addEventListener("message", s3, false), window.document.body.appendChild(a3), a3.setAttribute("src", e3);
-      }))(o2, this.domainUrl, i3);
-      if (n2 !== h3.state) throw new d("state_mismatch", "Invalid state");
-      const p2 = await this._requestToken(Object.assign(Object.assign({}, e2.authorizationParams), { code_verifier: r2, code: h3.code, grant_type: "authorization_code", redirect_uri: s2, timeout: e2.authorizationParams.timeout || this.httpTimeoutMs }), { nonceIn: a2, organization: t2.organization });
-      return Object.assign(Object.assign({}, p2), { scope: c2, oauthTokenScope: p2.scope, audience: u2 });
-    } catch (e3) {
-      throw "login_required" === e3.error && this.logout({ openUrl: false }), e3;
-    }
-  }
-  async _getTokenUsingRefreshToken(e2) {
-    const t2 = await this.cacheManager.get(new C({ scope: e2.authorizationParams.scope, audience: e2.authorizationParams.audience || "default", clientId: this.options.clientId }));
-    if (!(t2 && t2.refresh_token || this.worker)) {
-      if (this.options.useRefreshTokensFallback) return await this._getTokenFromIFrame(e2);
-      throw new f(e2.authorizationParams.audience || "default", e2.authorizationParams.scope);
-    }
-    const i2 = e2.authorizationParams.redirect_uri || this.options.authorizationParams.redirect_uri || window.location.origin, o2 = "number" == typeof e2.timeoutInSeconds ? 1e3 * e2.timeoutInSeconds : null;
-    try {
-      const n2 = await this._requestToken(Object.assign(Object.assign(Object.assign({}, e2.authorizationParams), { grant_type: "refresh_token", refresh_token: t2 && t2.refresh_token, redirect_uri: i2 }), o2 && { timeout: o2 }));
-      return Object.assign(Object.assign({}, n2), { scope: e2.authorizationParams.scope, oauthTokenScope: n2.scope, audience: e2.authorizationParams.audience || "default" });
-    } catch (t3) {
-      if ((t3.message.indexOf("Missing Refresh Token") > -1 || t3.message && t3.message.indexOf("invalid refresh token") > -1) && this.options.useRefreshTokensFallback) return await this._getTokenFromIFrame(e2);
-      throw t3;
-    }
-  }
-  async _saveEntryInCache(t2) {
-    const { id_token: i2, decodedToken: o2 } = t2, n2 = e(t2, ["id_token", "decodedToken"]);
-    this.userCache.set("@@user@@", { id_token: i2, decodedToken: o2 }), await this.cacheManager.setIdToken(this.options.clientId, t2.id_token, t2.decodedToken), await this.cacheManager.set(n2);
-  }
-  async _getIdTokenFromCache() {
-    const e2 = this.options.authorizationParams.audience || "default", t2 = await this.cacheManager.getIdToken(new C({ clientId: this.options.clientId, audience: e2, scope: this.scope })), i2 = this.userCache.get("@@user@@");
-    return t2 && t2.id_token === (null == i2 ? void 0 : i2.id_token) ? i2 : (this.userCache.set("@@user@@", t2), t2);
-  }
-  async _getEntryFromCache({ scope: e2, audience: t2, clientId: i2 }) {
-    const o2 = await this.cacheManager.get(new C({ scope: e2, audience: t2, clientId: i2 }), 60);
-    if (o2 && o2.access_token) {
-      const { access_token: e3, oauthTokenScope: t3, expires_in: i3 } = o2, n2 = await this._getIdTokenFromCache();
-      return n2 && Object.assign(Object.assign({ id_token: n2.id_token, access_token: e3 }, t3 ? { scope: t3 } : null), { expires_in: i3 });
-    }
-  }
-  async _requestToken(e2, t2) {
-    const { nonceIn: i2, organization: o2 } = t2 || {}, n2 = await T(Object.assign({ baseUrl: this.domainUrl, client_id: this.options.clientId, auth0Client: this.options.auth0Client, useFormData: this.options.useFormData, timeout: this.httpTimeoutMs }, e2), this.worker), a2 = await this._verifyIdToken(n2.id_token, i2, o2);
-    return await this._saveEntryInCache(Object.assign(Object.assign(Object.assign(Object.assign({}, n2), { decodedToken: a2, scope: e2.scope, audience: e2.audience || "default" }), n2.scope ? { oauthTokenScope: n2.scope } : null), { client_id: this.options.clientId })), this.cookieStorage.save(this.isAuthenticatedCookieName, true, { daysUntilExpire: this.sessionCheckExpiryDays, cookieDomain: this.options.cookieDomain }), this._processOrgHint(o2 || a2.claims.org_id), Object.assign(Object.assign({}, n2), { decodedToken: a2 });
-  }
-};
+R.get;
+R.set;
+R.remove;
+new a();
 var initialAuthState = {
   isAuthenticated: false,
   isLoading: true
@@ -15303,735 +12470,18 @@ var stub = function() {
   throw new Error("You forgot to wrap your component in <Auth0Provider>.");
 };
 var initialContext = __assign(__assign({}, initialAuthState), { buildAuthorizeUrl: stub, buildLogoutUrl: stub, getAccessTokenSilently: stub, getAccessTokenWithPopup: stub, getIdTokenClaims: stub, loginWithRedirect: stub, loginWithPopup: stub, logout: stub, handleRedirectCallback: stub });
-var Auth0Context = reactExports.createContext(initialContext);
-var OAuthError = (
-  /** @class */
-  function(_super) {
-    __extends(OAuthError2, _super);
-    function OAuthError2(error, error_description) {
-      var _this = _super.call(this, error_description || error) || this;
-      _this.error = error;
-      _this.error_description = error_description;
-      Object.setPrototypeOf(_this, OAuthError2.prototype);
-      return _this;
-    }
-    return OAuthError2;
-  }(Error)
-);
-var CODE_RE = /[?&]code=[^&]+/;
-var STATE_RE = /[?&]state=[^&]+/;
-var ERROR_RE = /[?&]error=[^&]+/;
-var hasAuthParams = function(searchParams) {
-  if (searchParams === void 0) {
-    searchParams = window.location.search;
+reactExports.createContext(initialContext);
+(function(_super) {
+  __extends(OAuthError, _super);
+  function OAuthError(error, error_description) {
+    var _this = _super.call(this, error_description || error) || this;
+    _this.error = error;
+    _this.error_description = error_description;
+    Object.setPrototypeOf(_this, OAuthError.prototype);
+    return _this;
   }
-  return (CODE_RE.test(searchParams) || ERROR_RE.test(searchParams)) && STATE_RE.test(searchParams);
-};
-var normalizeErrorFn = function(fallbackMessage) {
-  return function(error) {
-    if (error instanceof Error) {
-      return error;
-    }
-    if (error !== null && typeof error === "object" && "error" in error && typeof error.error === "string") {
-      if ("error_description" in error && typeof error.error_description === "string") {
-        return new OAuthError(error.error, error.error_description);
-      }
-      return new OAuthError(error.error);
-    }
-    return new Error(fallbackMessage);
-  };
-};
-var loginError = normalizeErrorFn("Login failed");
-var tokenError = normalizeErrorFn("Get access token failed");
-var deprecateRedirectUri = function(options) {
-  var _a;
-  if (options === null || options === void 0 ? void 0 : options.redirectUri) {
-    console.warn("Using `redirectUri` has been deprecated, please use `authorizationParams.redirect_uri` instead as `redirectUri` will be no longer supported in a future version");
-    options.authorizationParams = options.authorizationParams || {};
-    options.authorizationParams.redirect_uri = options.redirectUri;
-    delete options.redirectUri;
-  }
-  if ((_a = options === null || options === void 0 ? void 0 : options.authorizationParams) === null || _a === void 0 ? void 0 : _a.redirectUri) {
-    console.warn("Using `authorizationParams.redirectUri` has been deprecated, please use `authorizationParams.redirect_uri` instead as `authorizationParams.redirectUri` will be removed in a future version");
-    options.authorizationParams.redirect_uri = options.authorizationParams.redirectUri;
-    delete options.authorizationParams.redirectUri;
-  }
-};
-var reducer = function(state, action) {
-  switch (action.type) {
-    case "LOGIN_POPUP_STARTED":
-      return __assign(__assign({}, state), { isLoading: true });
-    case "LOGIN_POPUP_COMPLETE":
-    case "INITIALISED":
-      return __assign(__assign({}, state), { isAuthenticated: !!action.user, user: action.user, isLoading: false, error: void 0 });
-    case "HANDLE_REDIRECT_COMPLETE":
-    case "GET_ACCESS_TOKEN_COMPLETE":
-      if (state.user === action.user) {
-        return state;
-      }
-      return __assign(__assign({}, state), { isAuthenticated: !!action.user, user: action.user });
-    case "LOGOUT":
-      return __assign(__assign({}, state), { isAuthenticated: false, user: void 0 });
-    case "ERROR":
-      return __assign(__assign({}, state), { isLoading: false, error: action.error });
-  }
-};
-var toAuth0ClientOptions = function(opts) {
-  deprecateRedirectUri(opts);
-  return __assign(__assign({}, opts), { auth0Client: {
-    name: "auth0-react",
-    version: "2.3.0"
-  } });
-};
-var defaultOnRedirectCallback = function(appState) {
-  window.history.replaceState({}, document.title, (appState === null || appState === void 0 ? void 0 : appState.returnTo) || window.location.pathname);
-};
-var Auth0Provider = function(opts) {
-  var children = opts.children, skipRedirectCallback = opts.skipRedirectCallback, _a = opts.onRedirectCallback, onRedirectCallback = _a === void 0 ? defaultOnRedirectCallback : _a, _b = opts.context, context = _b === void 0 ? Auth0Context : _b, clientOpts = __rest(opts, ["children", "skipRedirectCallback", "onRedirectCallback", "context"]);
-  var client2 = reactExports.useState(function() {
-    return new te$1(toAuth0ClientOptions(clientOpts));
-  })[0];
-  var _c = reactExports.useReducer(reducer, initialAuthState), state = _c[0], dispatch = _c[1];
-  var didInitialise = reactExports.useRef(false);
-  var handleError = reactExports.useCallback(function(error) {
-    dispatch({ type: "ERROR", error });
-    return error;
-  }, []);
-  reactExports.useEffect(function() {
-    if (didInitialise.current) {
-      return;
-    }
-    didInitialise.current = true;
-    (function() {
-      return __awaiter(void 0, void 0, void 0, function() {
-        var user, appState, error_1;
-        return __generator(this, function(_a2) {
-          switch (_a2.label) {
-            case 0:
-              _a2.trys.push([0, 7, , 8]);
-              user = void 0;
-              if (!(hasAuthParams() && !skipRedirectCallback)) return [3, 3];
-              return [4, client2.handleRedirectCallback()];
-            case 1:
-              appState = _a2.sent().appState;
-              return [4, client2.getUser()];
-            case 2:
-              user = _a2.sent();
-              onRedirectCallback(appState, user);
-              return [3, 6];
-            case 3:
-              return [4, client2.checkSession()];
-            case 4:
-              _a2.sent();
-              return [4, client2.getUser()];
-            case 5:
-              user = _a2.sent();
-              _a2.label = 6;
-            case 6:
-              dispatch({ type: "INITIALISED", user });
-              return [3, 8];
-            case 7:
-              error_1 = _a2.sent();
-              handleError(loginError(error_1));
-              return [3, 8];
-            case 8:
-              return [
-                2
-                /*return*/
-              ];
-          }
-        });
-      });
-    })();
-  }, [client2, onRedirectCallback, skipRedirectCallback, handleError]);
-  var loginWithRedirect = reactExports.useCallback(function(opts2) {
-    deprecateRedirectUri(opts2);
-    return client2.loginWithRedirect(opts2);
-  }, [client2]);
-  var loginWithPopup = reactExports.useCallback(function(options, config2) {
-    return __awaiter(void 0, void 0, void 0, function() {
-      var error_2, user;
-      return __generator(this, function(_a2) {
-        switch (_a2.label) {
-          case 0:
-            dispatch({ type: "LOGIN_POPUP_STARTED" });
-            _a2.label = 1;
-          case 1:
-            _a2.trys.push([1, 3, , 4]);
-            return [4, client2.loginWithPopup(options, config2)];
-          case 2:
-            _a2.sent();
-            return [3, 4];
-          case 3:
-            error_2 = _a2.sent();
-            handleError(loginError(error_2));
-            return [
-              2
-              /*return*/
-            ];
-          case 4:
-            return [4, client2.getUser()];
-          case 5:
-            user = _a2.sent();
-            dispatch({ type: "LOGIN_POPUP_COMPLETE", user });
-            return [
-              2
-              /*return*/
-            ];
-        }
-      });
-    });
-  }, [client2]);
-  var logout = reactExports.useCallback(function(opts2) {
-    if (opts2 === void 0) {
-      opts2 = {};
-    }
-    return __awaiter(void 0, void 0, void 0, function() {
-      return __generator(this, function(_a2) {
-        switch (_a2.label) {
-          case 0:
-            return [4, client2.logout(opts2)];
-          case 1:
-            _a2.sent();
-            if (opts2.openUrl || opts2.openUrl === false) {
-              dispatch({ type: "LOGOUT" });
-            }
-            return [
-              2
-              /*return*/
-            ];
-        }
-      });
-    });
-  }, [client2]);
-  var getAccessTokenSilently = reactExports.useCallback(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    function(opts2) {
-      return __awaiter(void 0, void 0, void 0, function() {
-        var token, error_3, _a2;
-        var _b2;
-        return __generator(this, function(_c2) {
-          switch (_c2.label) {
-            case 0:
-              _c2.trys.push([0, 2, 3, 5]);
-              return [4, client2.getTokenSilently(opts2)];
-            case 1:
-              token = _c2.sent();
-              return [3, 5];
-            case 2:
-              error_3 = _c2.sent();
-              throw tokenError(error_3);
-            case 3:
-              _a2 = dispatch;
-              _b2 = {
-                type: "GET_ACCESS_TOKEN_COMPLETE"
-              };
-              return [4, client2.getUser()];
-            case 4:
-              _a2.apply(void 0, [(_b2.user = _c2.sent(), _b2)]);
-              return [
-                7
-                /*endfinally*/
-              ];
-            case 5:
-              return [2, token];
-          }
-        });
-      });
-    },
-    [client2]
-  );
-  var getAccessTokenWithPopup = reactExports.useCallback(function(opts2, config2) {
-    return __awaiter(void 0, void 0, void 0, function() {
-      var token, error_4, _a2;
-      var _b2;
-      return __generator(this, function(_c2) {
-        switch (_c2.label) {
-          case 0:
-            _c2.trys.push([0, 2, 3, 5]);
-            return [4, client2.getTokenWithPopup(opts2, config2)];
-          case 1:
-            token = _c2.sent();
-            return [3, 5];
-          case 2:
-            error_4 = _c2.sent();
-            throw tokenError(error_4);
-          case 3:
-            _a2 = dispatch;
-            _b2 = {
-              type: "GET_ACCESS_TOKEN_COMPLETE"
-            };
-            return [4, client2.getUser()];
-          case 4:
-            _a2.apply(void 0, [(_b2.user = _c2.sent(), _b2)]);
-            return [
-              7
-              /*endfinally*/
-            ];
-          case 5:
-            return [2, token];
-        }
-      });
-    });
-  }, [client2]);
-  var getIdTokenClaims = reactExports.useCallback(function() {
-    return client2.getIdTokenClaims();
-  }, [client2]);
-  var handleRedirectCallback = reactExports.useCallback(function(url) {
-    return __awaiter(void 0, void 0, void 0, function() {
-      var error_5, _a2;
-      var _b2;
-      return __generator(this, function(_c2) {
-        switch (_c2.label) {
-          case 0:
-            _c2.trys.push([0, 2, 3, 5]);
-            return [4, client2.handleRedirectCallback(url)];
-          case 1:
-            return [2, _c2.sent()];
-          case 2:
-            error_5 = _c2.sent();
-            throw tokenError(error_5);
-          case 3:
-            _a2 = dispatch;
-            _b2 = {
-              type: "HANDLE_REDIRECT_COMPLETE"
-            };
-            return [4, client2.getUser()];
-          case 4:
-            _a2.apply(void 0, [(_b2.user = _c2.sent(), _b2)]);
-            return [
-              7
-              /*endfinally*/
-            ];
-          case 5:
-            return [
-              2
-              /*return*/
-            ];
-        }
-      });
-    });
-  }, [client2]);
-  var contextValue = reactExports.useMemo(function() {
-    return __assign(__assign({}, state), { getAccessTokenSilently, getAccessTokenWithPopup, getIdTokenClaims, loginWithRedirect, loginWithPopup, logout, handleRedirectCallback });
-  }, [
-    state,
-    getAccessTokenSilently,
-    getAccessTokenWithPopup,
-    getIdTokenClaims,
-    loginWithRedirect,
-    loginWithPopup,
-    logout,
-    handleRedirectCallback
-  ]);
-  return React.createElement(context.Provider, { value: contextValue }, children);
-};
-var useAuth0 = function(context) {
-  if (context === void 0) {
-    context = Auth0Context;
-  }
-  return reactExports.useContext(context);
-};
-const __vite_import_meta_env__ = { "BASE_URL": "/dsamentorai/", "DEV": false, "MODE": "production", "PROD": true, "SSR": false, "VITE_AUTH0_CLIENT_ID": "wetVbccRWFxGMtiWEfAI9XGFZnWRj4Gd", "VITE_AUTH0_DOMAIN": "merajmunshi.us.auth0.com" };
-console.log("🔍 Environment check:", {
-  isDev: false,
-  mode: "production",
-  auth0Domain: "merajmunshi.us.auth0.com",
-  auth0ClientId: "wetVbccRWFxGMtiWEfAI9XGFZnWRj4Gd",
-  allEnv: __vite_import_meta_env__
-});
-const AUTH0_DOMAIN = "merajmunshi.us.auth0.com";
-const AUTH0_CLIENT_ID = "wetVbccRWFxGMtiWEfAI9XGFZnWRj4Gd";
-const AUTH0_AUDIENCE = "";
-console.log("🔧 Final Auth0 config values:", {
-  domain: AUTH0_DOMAIN,
-  clientId: AUTH0_CLIENT_ID,
-  audience: AUTH0_AUDIENCE
-});
-const getRedirectUri = () => {
-  {
-    const redirectUri = "https://merajmunshiofficial.github.io/dsamentorai/callback";
-    console.log("🔄 Prod redirect URI:", redirectUri);
-    return redirectUri;
-  }
-};
-const auth0Config = {
-  domain: AUTH0_DOMAIN,
-  clientId: AUTH0_CLIENT_ID,
-  authorizationParams: {
-    redirect_uri: getRedirectUri(),
-    audience: AUTH0_AUDIENCE
-  },
-  cacheLocation: "localstorage",
-  useRefreshTokens: true
-};
-const isAuth0Configured = () => {
-  console.log("Auth0 Debug Info:", {
-    domain: AUTH0_DOMAIN,
-    clientId: AUTH0_CLIENT_ID,
-    env: "production",
-    isDev: false,
-    importMetaEnv: __vite_import_meta_env__
-  });
-  const hasValidDomain = AUTH0_DOMAIN.includes("auth0.com");
-  const hasValidClientId = AUTH0_CLIENT_ID.length > 10;
-  const isConfigured = hasValidDomain && hasValidClientId;
-  console.log("Auth0 Configuration Check:", {
-    domain: AUTH0_DOMAIN,
-    clientId: AUTH0_CLIENT_ID,
-    hasValidDomain,
-    hasValidClientId,
-    isConfigured
-  });
-  return isConfigured;
-};
-console.log("🔍 Full import.meta.env:", __vite_import_meta_env__);
-const Auth0ProviderWithHistory = ({ children }) => {
-  const onRedirectCallback = (appState) => {
-    window.history.replaceState(
-      {},
-      document.title,
-      (appState == null ? void 0 : appState.returnTo) || window.location.pathname
-    );
-  };
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    Auth0Provider,
-    {
-      domain: auth0Config.domain,
-      clientId: auth0Config.clientId,
-      authorizationParams: auth0Config.authorizationParams,
-      onRedirectCallback,
-      cacheLocation: auth0Config.cacheLocation,
-      useRefreshTokens: auth0Config.useRefreshTokens,
-      children
-    }
-  );
-};
-const Auth0Login = () => {
-  const { loginWithRedirect, isLoading, isAuthenticated, logout, user } = useAuth0();
-  const [showApiKeyPrompt, setShowApiKeyPrompt] = reactExports.useState(false);
-  const [apiKeyInput, setApiKeyInput] = reactExports.useState("");
-  const [apiKeyError, setApiKeyError] = reactExports.useState("");
-  reactExports.useEffect(() => {
-    if (isAuthenticated && !localStorage.getItem("openai_api_key")) {
-      setShowApiKeyPrompt(true);
-    }
-  }, [isAuthenticated]);
-  const handleLogout = () => {
-    localStorage.removeItem("openai_api_key");
-    logout({ returnTo: window.location.origin });
-  };
-  const handleApiKeySubmit = (e2) => {
-    e2.preventDefault();
-    if (!apiKeyInput.trim().startsWith("sk-") && !apiKeyInput.trim().startsWith("sk-proj-")) {
-      setApiKeyError("Please enter a valid OpenAI API key.");
-      return;
-    }
-    localStorage.setItem("openai_api_key", apiKeyInput.trim());
-    setShowApiKeyPrompt(false);
-    setApiKeyInput("");
-    setApiKeyError("");
-  };
-  const handleApiKeyChange = (e2) => {
-    setApiKeyInput(e2.target.value);
-    setApiKeyError("");
-  };
-  if (isAuthenticated) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-indigo-900 via-blue-900 to-purple-900", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-white/10 backdrop-blur-2xl rounded-3xl p-8 border border-white/20 shadow-2xl w-full max-w-md mt-12", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center space-y-4", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-2xl font-bold text-white", children: [
-          "Welcome, ",
-          (user == null ? void 0 : user.name) || (user == null ? void 0 : user.email) || "User",
-          "!"
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-gray-300", children: "You are logged in." }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "button",
-          {
-            onClick: handleLogout,
-            className: "mt-4 px-6 py-2 bg-red-600 text-white rounded hover:bg-red-700",
-            children: "Log Out"
-          }
-        )
-      ] }) }),
-      showApiKeyPrompt && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-white rounded-xl p-8 shadow-xl w-full max-w-sm", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-semibold mb-4", children: "Enter your OpenAI API Key" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleApiKeySubmit, children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "input",
-            {
-              type: "password",
-              className: "w-full border border-gray-300 rounded px-3 py-2 mb-2 focus:outline-none focus:ring-2 focus:ring-blue-400",
-              placeholder: "sk-... or sk-proj-...",
-              value: apiKeyInput,
-              onChange: handleApiKeyChange,
-              autoFocus: true
-            }
-          ),
-          apiKeyError && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-red-600 text-sm mb-2", children: apiKeyError }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "button",
-            {
-              type: "submit",
-              className: "w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 mt-2",
-              children: "Save API Key"
-            }
-          )
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-gray-500 mt-2", children: "Your API key is stored only in your browser for this session." })
-      ] }) })
-    ] });
-  }
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-gradient-to-br from-indigo-900 via-blue-900 to-purple-900 relative overflow-hidden", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute inset-0", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-pulse" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-700" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-1000" })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative z-10 min-h-screen flex items-center justify-center p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-7xl w-full grid lg:grid-cols-2 gap-12 items-center", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-white space-y-8 lg:pr-8", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-16 h-16 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center transform rotate-3 shadow-2xl", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-3xl", children: "💡" }) }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-r from-pink-400 to-red-500 rounded-full animate-bounce" })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-5xl lg:text-6xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent", children: "DSA Mentor" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-2 mt-2", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-2 h-2 bg-green-400 rounded-full animate-pulse" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400 text-sm font-medium", children: "Interactive Learning Platform" })
-              ] })
-            ] })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-2xl lg:text-3xl text-gray-300 font-light leading-relaxed", children: [
-            "Transform your coding skills with",
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent", children: " hands-on practice" }),
-            " and",
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent", children: " real-time execution" })
-          ] })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid md:grid-cols-2 gap-4", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-white/5 backdrop-blur-xl rounded-2xl p-4 border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:scale-105", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-3", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 h-10 bg-gradient-to-r from-green-400 to-blue-500 rounded-xl flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-lg", children: "📚" }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-semibold text-white", children: "18+ Topics" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-gray-400 text-sm", children: "Comprehensive coverage" })
-            ] })
-          ] }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-white/5 backdrop-blur-xl rounded-2xl p-4 border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:scale-105", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-3", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 h-10 bg-gradient-to-r from-purple-400 to-pink-500 rounded-xl flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-lg", children: "⚡" }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-semibold text-white", children: "Live Execution" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-gray-400 text-sm", children: "Test instantly" })
-            ] })
-          ] }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-white/5 backdrop-blur-xl rounded-2xl p-4 border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:scale-105", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-3", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 h-10 bg-gradient-to-r from-orange-400 to-red-500 rounded-xl flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-lg", children: "🎯" }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-semibold text-white", children: "Smart Progress" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-gray-400 text-sm", children: "Track your journey" })
-            ] })
-          ] }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-white/5 backdrop-blur-xl rounded-2xl p-4 border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:scale-105", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-3", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 h-10 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-lg", children: "🔧" }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-semibold text-white", children: "Interactive UI" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-gray-400 text-sm", children: "Modern experience" })
-            ] })
-          ] }) })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-8 pt-4", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent", children: "18+" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-gray-400 text-sm", children: "DSA Topics" })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-3xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent", children: "200+" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-gray-400 text-sm", children: "Practice Problems" })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent", children: "100%" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-gray-400 text-sm", children: "Interactive" })
-          ] })
-        ] })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex justify-center lg:justify-end", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full max-w-md", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-white/10 backdrop-blur-2xl rounded-3xl p-8 border border-white/20 shadow-2xl", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center space-y-6", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-2", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-3xl font-bold text-white", children: "Welcome Back!" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-gray-300", children: "Ready to level up your coding skills?" })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "button",
-            {
-              onClick: loginWithRedirect,
-              disabled: isLoading,
-              className: "w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold py-4 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-3",
-              children: isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Signing you in..." })
-              ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "🚀" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Start Learning Now" })
-              ] })
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-gray-400 text-sm", children: "Join thousands of developers mastering DSA" }) })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-3 pt-4 border-t border-white/10", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-white font-medium", children: "What's Inside:" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-2 text-sm text-gray-300", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-2", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: "✓" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Arrays, Strings, Linked Lists" })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-2", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: "✓" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Trees, Graphs, Dynamic Programming" })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-2", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: "✓" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Binary Search, Sorting, Recursion" })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-2", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400", children: "✓" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Heaps, Hashing, Bit Manipulation" })
-            ] })
-          ] })
-        ] })
-      ] }) }) }) })
-    ] }) })
-  ] });
-};
-const Auth0Header = () => {
-  const { logout, user } = useAuth0();
-  const [showApiKeyModal, setShowApiKeyModal] = reactExports.useState(false);
-  const [apiKeyInput, setApiKeyInput] = reactExports.useState(localStorage.getItem("openai_api_key") || "");
-  const [apiKeyError, setApiKeyError] = reactExports.useState("");
-  const handleLogout = () => {
-    localStorage.removeItem("openai_api_key");
-    logout({
-      logoutParams: {
-        returnTo: window.location.origin,
-        federated: true
-      }
-    });
-  };
-  const handleApiKeySave = (e2) => {
-    e2.preventDefault();
-    if (!apiKeyInput.trim().startsWith("sk-") && !apiKeyInput.trim().startsWith("sk-proj-")) {
-      setApiKeyError("Please enter a valid OpenAI API key.");
-      return;
-    }
-    localStorage.setItem("openai_api_key", apiKeyInput.trim());
-    setShowApiKeyModal(false);
-    setApiKeyError("");
-  };
-  const handleApiKeyChange = (e2) => {
-    setApiKeyInput(e2.target.value);
-    setApiKeyError("");
-  };
-  const handleApiKeyClear = () => {
-    localStorage.removeItem("openai_api_key");
-    setApiKeyInput("");
-    setShowApiKeyModal(false);
-    setApiKeyError("");
-  };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: "bg-gradient-to-r from-indigo-900 via-blue-900 to-purple-900 text-white shadow-2xl border-b border-cyan-500/20", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between items-center h-16", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-3", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 h-10 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xl", children: "💡" }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent", children: "DSA Mentor" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-2", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-2 h-2 bg-green-400 rounded-full animate-pulse" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-green-400 text-xs font-medium", children: "Live Session" })
-          ] })
-        ] })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-4", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "button",
-          {
-            onClick: () => setShowApiKeyModal(true),
-            className: "bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white px-4 py-2 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg text-sm font-medium",
-            children: "API Key"
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-3 bg-white/10 rounded-2xl px-4 py-2 backdrop-blur-xl border border-white/20", children: [
-          (user == null ? void 0 : user.picture) && /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "img",
-            {
-              src: user.picture,
-              alt: user.name || "User",
-              className: "w-8 h-8 rounded-full ring-2 ring-cyan-400/50 shadow-lg"
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-right", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-sm font-medium text-white", children: (user == null ? void 0 : user.name) || "User" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs text-gray-300", children: "Learning Mode" })
-          ] })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "button",
-          {
-            onClick: handleLogout,
-            className: "bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white px-4 py-2 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg text-sm font-medium",
-            children: "Sign Out"
-          }
-        )
-      ] })
-    ] }) }),
-    showApiKeyModal && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fixed inset-0 z-50 flex items-center justify-center", style: { background: "rgba(0,0,0,0.7)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-white rounded-xl p-8 shadow-xl w-full max-w-sm relative", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-semibold mb-4", children: "OpenAI API Key" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleApiKeySave, children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "input",
-          {
-            type: "password",
-            className: "w-full border border-gray-300 rounded px-3 py-2 mb-2 focus:outline-none focus:ring-2 focus:ring-blue-400",
-            placeholder: "sk-... or sk-proj-...",
-            value: apiKeyInput,
-            onChange: handleApiKeyChange,
-            autoFocus: true
-          }
-        ),
-        apiKeyError && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-red-600 text-sm mb-2", children: apiKeyError }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex space-x-2 mt-2", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "button",
-            {
-              type: "submit",
-              className: "flex-1 bg-blue-600 text-white py-2 rounded hover:bg-blue-700",
-              children: "Save"
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "button",
-            {
-              type: "button",
-              className: "flex-1 bg-gray-300 text-gray-800 py-2 rounded hover:bg-gray-400",
-              onClick: () => setShowApiKeyModal(false),
-              children: "Cancel"
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "button",
-            {
-              type: "button",
-              className: "flex-1 bg-red-500 text-white py-2 rounded hover:bg-red-600",
-              onClick: handleApiKeyClear,
-              disabled: !localStorage.getItem("openai_api_key"),
-              children: "Clear"
-            }
-          )
-        ] })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-gray-500 mt-2", children: "Your API key is stored only in your browser for this session." })
-    ] }) })
-  ] });
-};
+  return OAuthError;
+})(Error);
 const Auth0Setup = () => {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "min-h-screen bg-gradient-to-br from-slate-900 via-red-900 to-slate-900 flex items-center justify-center p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-4xl w-full bg-white/10 backdrop-blur-md rounded-3xl shadow-2xl p-8 lg:p-12 border border-white/20", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center mb-10", children: [
@@ -16152,127 +12602,6 @@ const Auth0Setup = () => {
     ] }) })
   ] }) });
 };
-const LoadingSpinner = () => {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-gradient-to-br from-indigo-900 via-blue-900 to-purple-900 flex items-center justify-center relative overflow-hidden", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute inset-0", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-1/4 left-1/4 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl animate-pulse" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-700" })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative z-10 text-white text-center", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative mb-8", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-24 h-24 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center mx-auto shadow-2xl", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-3xl", children: "💡" }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 w-24 h-24 border-4 border-cyan-400/30 rounded-2xl animate-spin mx-auto" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-2 w-20 h-20 border-2 border-blue-500/50 rounded-xl animate-spin mx-auto", style: { animationDirection: "reverse", animationDuration: "3s" } })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-3xl font-bold mb-2 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent", children: "DSA Mentor" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xl text-gray-300 mb-6", children: "Setting up your learning environment..." }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-center space-x-3 mb-6", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-3 h-3 bg-cyan-400 rounded-full animate-bounce" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-3 h-3 bg-blue-500 rounded-full animate-bounce", style: { animationDelay: "0.1s" } }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-3 h-3 bg-purple-500 rounded-full animate-bounce", style: { animationDelay: "0.2s" } })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20 max-w-md mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-gray-300 text-sm", children: "Preparing your interactive DSA learning experience" }) })
-    ] })
-  ] });
-};
-const CallbackPage = () => {
-  const { handleRedirectCallback, isLoading, error } = useAuth0();
-  reactExports.useEffect(() => {
-    const handleCallback = async () => {
-      try {
-        await handleRedirectCallback();
-        const basePath = true ? "/dsamentorai" : "";
-        window.location.href = basePath + "/";
-      } catch (err) {
-        console.error("Auth0 callback error:", err);
-      }
-    };
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get("code")) {
-      handleCallback();
-    }
-  }, [handleRedirectCallback]);
-  if (isLoading) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      height: "100vh",
-      flexDirection: "column"
-    }, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Processing authentication..." }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: "Please wait while we log you in." })
-    ] });
-  }
-  if (error) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      height: "100vh",
-      flexDirection: "column"
-    }, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Authentication Error" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: error.message }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: () => {
-        const basePath = "/dsamentorai";
-        window.location.href = basePath + "/";
-      }, children: "Return to Home" })
-    ] });
-  }
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100vh"
-  }, children: /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Redirecting..." }) });
-};
-function TopicSelector({ topics, selectedTopic, onSelectTopic }) {
-  const topicRefs = reactExports.useRef([]);
-  reactExports.useEffect(() => {
-    const idx = topics.indexOf(selectedTopic);
-    if (topicRefs.current[idx]) {
-      topicRefs.current[idx].scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  }, [selectedTopic, topics]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col bg-gray-100 w-[200px] overflow-hidden border-r border-gray-300", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 border-b border-gray-300 bg-gray-200", children: /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-bold text-lg", children: "Topics" }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 overflow-y-auto p-2", children: topics.map((topic, idx) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "button",
-      {
-        ref: (el) => topicRefs.current[idx] = el,
-        className: `w-full text-left px-3 py-2 mb-1 rounded hover:bg-blue-200 transition-colors ${selectedTopic === topic ? "bg-blue-500 text-white ring-2 ring-blue-700" : "bg-white"}`,
-        onClick: () => onSelectTopic(topic),
-        children: topic.charAt(0).toUpperCase() + topic.slice(1)
-      },
-      topic
-    )) })
-  ] });
-}
-function ProblemList({ problems, selectedProblemIdx, onSelectProblem }) {
-  const problemRefs = reactExports.useRef([]);
-  reactExports.useEffect(() => {
-    if (problemRefs.current[selectedProblemIdx]) {
-      problemRefs.current[selectedProblemIdx].scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  }, [selectedProblemIdx]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col bg-gray-50 w-[280px] overflow-hidden border-r border-gray-300", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 border-b border-gray-300 bg-gray-100", children: /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-bold text-lg", children: "Problems" }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 overflow-y-auto p-2", children: problems.map((problem, idx) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "button",
-      {
-        ref: (el) => problemRefs.current[idx] = el,
-        className: `w-full text-left px-3 py-2 mb-1 rounded hover:bg-blue-100 transition-colors text-sm ${selectedProblemIdx === idx ? "bg-blue-400 text-white ring-2 ring-blue-700" : "bg-white"}`,
-        onClick: () => onSelectProblem(idx),
-        children: problem.name
-      },
-      problem.name
-    )) })
-  ] });
-}
-function CodeBlock({ code }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { className: "bg-gray-900 text-green-200 rounded p-4 overflow-x-auto text-sm", children: /* @__PURE__ */ jsxRuntimeExports.jsx("code", { children: code }) });
-}
 function _defineProperty$1(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
@@ -16431,10 +12760,10 @@ function compose$1() {
   for (var _len = arguments.length, fns = new Array(_len), _key = 0; _key < _len; _key++) {
     fns[_key] = arguments[_key];
   }
-  return function(x2) {
-    return fns.reduceRight(function(y2, f2) {
-      return f2(y2);
-    }, x2);
+  return function(x) {
+    return fns.reduceRight(function(y, f) {
+      return f(y);
+    }, x);
   };
 }
 function curry$1(fn) {
@@ -16600,10 +12929,10 @@ var compose = function compose2() {
   for (var _len = arguments.length, fns = new Array(_len), _key = 0; _key < _len; _key++) {
     fns[_key] = arguments[_key];
   }
-  return function(x2) {
-    return fns.reduceRight(function(y2, f2) {
-      return f2(y2);
-    }, x2);
+  return function(x) {
+    return fns.reduceRight(function(y, f) {
+      return f(y);
+    }, x);
   };
 };
 function merge(target, source) {
@@ -16740,573 +13069,175 @@ var loader = {
 };
 var le = { wrapper: { display: "flex", position: "relative", textAlign: "initial" }, fullWidth: { width: "100%" }, hide: { display: "none" } }, v = le;
 var ae = { container: { display: "flex", height: "100%", width: "100%", justifyContent: "center", alignItems: "center" } }, Y = ae;
-function Me({ children: e2 }) {
-  return React.createElement("div", { style: Y.container }, e2);
+function Me({ children: e }) {
+  return React.createElement("div", { style: Y.container }, e);
 }
-var Z2 = Me;
-var $ = Z2;
-function Ee({ width: e2, height: r2, isEditorReady: n2, loading: t2, _ref: a2, className: m2, wrapperProps: E2 }) {
-  return React.createElement("section", { style: { ...v.wrapper, width: e2, height: r2 }, ...E2 }, !n2 && React.createElement($, null, t2), React.createElement("div", { ref: a2, style: { ...v.fullWidth, ...!n2 && v.hide }, className: m2 }));
+var Z = Me;
+var $ = Z;
+function Ee({ width: e, height: r, isEditorReady: n2, loading: t2, _ref: a2, className: m, wrapperProps: E }) {
+  return React.createElement("section", { style: { ...v.wrapper, width: e, height: r }, ...E }, !n2 && React.createElement($, null, t2), React.createElement("div", { ref: a2, style: { ...v.fullWidth, ...!n2 && v.hide }, className: m }));
 }
 var ee = Ee;
 var H = reactExports.memo(ee);
-function Ce(e2) {
-  reactExports.useEffect(e2, []);
+function Ce(e) {
+  reactExports.useEffect(e, []);
 }
 var k = Ce;
-function he(e2, r2, n2 = true) {
+function he(e, r, n2 = true) {
   let t2 = reactExports.useRef(true);
   reactExports.useEffect(t2.current || !n2 ? () => {
     t2.current = false;
-  } : e2, r2);
+  } : e, r);
 }
-var l2 = he;
+var l = he;
 function D() {
 }
-function h2(e2, r2, n2, t2) {
-  return De(e2, t2) || be(e2, r2, n2, t2);
+function h(e, r, n2, t2) {
+  return De(e, t2) || be(e, r, n2, t2);
 }
-function De(e2, r2) {
-  return e2.editor.getModel(te2(e2, r2));
+function De(e, r) {
+  return e.editor.getModel(te(e, r));
 }
-function be(e2, r2, n2, t2) {
-  return e2.editor.createModel(r2, n2, t2 ? te2(e2, t2) : void 0);
+function be(e, r, n2, t2) {
+  return e.editor.createModel(r, n2, t2 ? te(e, t2) : void 0);
 }
-function te2(e2, r2) {
-  return e2.Uri.parse(r2);
+function te(e, r) {
+  return e.Uri.parse(r);
 }
-function Oe({ original: e2, modified: r2, language: n2, originalLanguage: t2, modifiedLanguage: a2, originalModelPath: m2, modifiedModelPath: E2, keepCurrentOriginalModel: g2 = false, keepCurrentModifiedModel: N2 = false, theme: x2 = "light", loading: P2 = "Loading...", options: y2 = {}, height: V2 = "100%", width: z2 = "100%", className: F2, wrapperProps: j2 = {}, beforeMount: A2 = D, onMount: q2 = D }) {
-  let [M2, O2] = reactExports.useState(false), [T2, s2] = reactExports.useState(true), u2 = reactExports.useRef(null), c2 = reactExports.useRef(null), w2 = reactExports.useRef(null), d2 = reactExports.useRef(q2), o2 = reactExports.useRef(A2), b2 = reactExports.useRef(false);
+function Oe({ original: e, modified: r, language: n2, originalLanguage: t2, modifiedLanguage: a2, originalModelPath: m, modifiedModelPath: E, keepCurrentOriginalModel: g = false, keepCurrentModifiedModel: N = false, theme: x = "light", loading: P = "Loading...", options: y = {}, height: V = "100%", width: z = "100%", className: F, wrapperProps: j = {}, beforeMount: A = D, onMount: q = D }) {
+  let [M, O] = reactExports.useState(false), [T, s] = reactExports.useState(true), u = reactExports.useRef(null), c = reactExports.useRef(null), w = reactExports.useRef(null), d = reactExports.useRef(q), o2 = reactExports.useRef(A), b = reactExports.useRef(false);
   k(() => {
     let i2 = loader.init();
-    return i2.then((f2) => (c2.current = f2) && s2(false)).catch((f2) => (f2 == null ? void 0 : f2.type) !== "cancelation" && console.error("Monaco initialization: error:", f2)), () => u2.current ? I2() : i2.cancel();
-  }), l2(() => {
-    if (u2.current && c2.current) {
-      let i2 = u2.current.getOriginalEditor(), f2 = h2(c2.current, e2 || "", t2 || n2 || "text", m2 || "");
-      f2 !== i2.getModel() && i2.setModel(f2);
+    return i2.then((f) => (c.current = f) && s(false)).catch((f) => (f == null ? void 0 : f.type) !== "cancelation" && console.error("Monaco initialization: error:", f)), () => u.current ? I() : i2.cancel();
+  }), l(() => {
+    if (u.current && c.current) {
+      let i2 = u.current.getOriginalEditor(), f = h(c.current, e || "", t2 || n2 || "text", m || "");
+      f !== i2.getModel() && i2.setModel(f);
     }
-  }, [m2], M2), l2(() => {
-    if (u2.current && c2.current) {
-      let i2 = u2.current.getModifiedEditor(), f2 = h2(c2.current, r2 || "", a2 || n2 || "text", E2 || "");
-      f2 !== i2.getModel() && i2.setModel(f2);
+  }, [m], M), l(() => {
+    if (u.current && c.current) {
+      let i2 = u.current.getModifiedEditor(), f = h(c.current, r || "", a2 || n2 || "text", E || "");
+      f !== i2.getModel() && i2.setModel(f);
     }
-  }, [E2], M2), l2(() => {
-    let i2 = u2.current.getModifiedEditor();
-    i2.getOption(c2.current.editor.EditorOption.readOnly) ? i2.setValue(r2 || "") : r2 !== i2.getValue() && (i2.executeEdits("", [{ range: i2.getModel().getFullModelRange(), text: r2 || "", forceMoveMarkers: true }]), i2.pushUndoStop());
-  }, [r2], M2), l2(() => {
+  }, [E], M), l(() => {
+    let i2 = u.current.getModifiedEditor();
+    i2.getOption(c.current.editor.EditorOption.readOnly) ? i2.setValue(r || "") : r !== i2.getValue() && (i2.executeEdits("", [{ range: i2.getModel().getFullModelRange(), text: r || "", forceMoveMarkers: true }]), i2.pushUndoStop());
+  }, [r], M), l(() => {
     var _a, _b;
-    (_b = (_a = u2.current) == null ? void 0 : _a.getModel()) == null ? void 0 : _b.original.setValue(e2 || "");
-  }, [e2], M2), l2(() => {
-    let { original: i2, modified: f2 } = u2.current.getModel();
-    c2.current.editor.setModelLanguage(i2, t2 || n2 || "text"), c2.current.editor.setModelLanguage(f2, a2 || n2 || "text");
-  }, [n2, t2, a2], M2), l2(() => {
+    (_b = (_a = u.current) == null ? void 0 : _a.getModel()) == null ? void 0 : _b.original.setValue(e || "");
+  }, [e], M), l(() => {
+    let { original: i2, modified: f } = u.current.getModel();
+    c.current.editor.setModelLanguage(i2, t2 || n2 || "text"), c.current.editor.setModelLanguage(f, a2 || n2 || "text");
+  }, [n2, t2, a2], M), l(() => {
     var _a;
-    (_a = c2.current) == null ? void 0 : _a.editor.setTheme(x2);
-  }, [x2], M2), l2(() => {
+    (_a = c.current) == null ? void 0 : _a.editor.setTheme(x);
+  }, [x], M), l(() => {
     var _a;
-    (_a = u2.current) == null ? void 0 : _a.updateOptions(y2);
-  }, [y2], M2);
-  let L2 = reactExports.useCallback(() => {
+    (_a = u.current) == null ? void 0 : _a.updateOptions(y);
+  }, [y], M);
+  let L = reactExports.useCallback(() => {
     var _a;
-    if (!c2.current) return;
-    o2.current(c2.current);
-    let i2 = h2(c2.current, e2 || "", t2 || n2 || "text", m2 || ""), f2 = h2(c2.current, r2 || "", a2 || n2 || "text", E2 || "");
-    (_a = u2.current) == null ? void 0 : _a.setModel({ original: i2, modified: f2 });
-  }, [n2, r2, a2, e2, t2, m2, E2]), U2 = reactExports.useCallback(() => {
+    if (!c.current) return;
+    o2.current(c.current);
+    let i2 = h(c.current, e || "", t2 || n2 || "text", m || ""), f = h(c.current, r || "", a2 || n2 || "text", E || "");
+    (_a = u.current) == null ? void 0 : _a.setModel({ original: i2, modified: f });
+  }, [n2, r, a2, e, t2, m, E]), U = reactExports.useCallback(() => {
     var _a;
-    !b2.current && w2.current && (u2.current = c2.current.editor.createDiffEditor(w2.current, { automaticLayout: true, ...y2 }), L2(), (_a = c2.current) == null ? void 0 : _a.editor.setTheme(x2), O2(true), b2.current = true);
-  }, [y2, x2, L2]);
+    !b.current && w.current && (u.current = c.current.editor.createDiffEditor(w.current, { automaticLayout: true, ...y }), L(), (_a = c.current) == null ? void 0 : _a.editor.setTheme(x), O(true), b.current = true);
+  }, [y, x, L]);
   reactExports.useEffect(() => {
-    M2 && d2.current(u2.current, c2.current);
-  }, [M2]), reactExports.useEffect(() => {
-    !T2 && !M2 && U2();
-  }, [T2, M2, U2]);
-  function I2() {
+    M && d.current(u.current, c.current);
+  }, [M]), reactExports.useEffect(() => {
+    !T && !M && U();
+  }, [T, M, U]);
+  function I() {
     var _a, _b, _c, _d;
-    let i2 = (_a = u2.current) == null ? void 0 : _a.getModel();
-    g2 || ((_b = i2 == null ? void 0 : i2.original) == null ? void 0 : _b.dispose()), N2 || ((_c = i2 == null ? void 0 : i2.modified) == null ? void 0 : _c.dispose()), (_d = u2.current) == null ? void 0 : _d.dispose();
+    let i2 = (_a = u.current) == null ? void 0 : _a.getModel();
+    g || ((_b = i2 == null ? void 0 : i2.original) == null ? void 0 : _b.dispose()), N || ((_c = i2 == null ? void 0 : i2.modified) == null ? void 0 : _c.dispose()), (_d = u.current) == null ? void 0 : _d.dispose();
   }
-  return React.createElement(H, { width: z2, height: V2, isEditorReady: M2, loading: P2, _ref: w2, className: F2, wrapperProps: j2 });
+  return React.createElement(H, { width: z, height: V, isEditorReady: M, loading: P, _ref: w, className: F, wrapperProps: j });
 }
 var ie = Oe;
 reactExports.memo(ie);
-function He(e2) {
-  let r2 = reactExports.useRef();
+function He(e) {
+  let r = reactExports.useRef();
   return reactExports.useEffect(() => {
-    r2.current = e2;
-  }, [e2]), r2.current;
+    r.current = e;
+  }, [e]), r.current;
 }
 var se = He;
 var _ = /* @__PURE__ */ new Map();
-function Ve({ defaultValue: e2, defaultLanguage: r2, defaultPath: n2, value: t2, language: a2, path: m2, theme: E2 = "light", line: g2, loading: N2 = "Loading...", options: x2 = {}, overrideServices: P2 = {}, saveViewState: y2 = true, keepCurrentModel: V2 = false, width: z2 = "100%", height: F2 = "100%", className: j2, wrapperProps: A2 = {}, beforeMount: q2 = D, onMount: M2 = D, onChange: O2, onValidate: T2 = D }) {
-  let [s2, u2] = reactExports.useState(false), [c2, w2] = reactExports.useState(true), d2 = reactExports.useRef(null), o2 = reactExports.useRef(null), b2 = reactExports.useRef(null), L2 = reactExports.useRef(M2), U2 = reactExports.useRef(q2), I2 = reactExports.useRef(), i2 = reactExports.useRef(t2), f2 = se(m2), Q2 = reactExports.useRef(false), B2 = reactExports.useRef(false);
+function Ve({ defaultValue: e, defaultLanguage: r, defaultPath: n2, value: t2, language: a2, path: m, theme: E = "light", line: g, loading: N = "Loading...", options: x = {}, overrideServices: P = {}, saveViewState: y = true, keepCurrentModel: V = false, width: z = "100%", height: F = "100%", className: j, wrapperProps: A = {}, beforeMount: q = D, onMount: M = D, onChange: O, onValidate: T = D }) {
+  let [s, u] = reactExports.useState(false), [c, w] = reactExports.useState(true), d = reactExports.useRef(null), o2 = reactExports.useRef(null), b = reactExports.useRef(null), L = reactExports.useRef(M), U = reactExports.useRef(q), I = reactExports.useRef(), i2 = reactExports.useRef(t2), f = se(m), Q = reactExports.useRef(false), B = reactExports.useRef(false);
   k(() => {
-    let p2 = loader.init();
-    return p2.then((R2) => (d2.current = R2) && w2(false)).catch((R2) => (R2 == null ? void 0 : R2.type) !== "cancelation" && console.error("Monaco initialization: error:", R2)), () => o2.current ? pe() : p2.cancel();
-  }), l2(() => {
+    let p = loader.init();
+    return p.then((R2) => (d.current = R2) && w(false)).catch((R2) => (R2 == null ? void 0 : R2.type) !== "cancelation" && console.error("Monaco initialization: error:", R2)), () => o2.current ? pe() : p.cancel();
+  }), l(() => {
     var _a, _b, _c, _d;
-    let p2 = h2(d2.current, e2 || t2 || "", r2 || a2 || "", m2 || n2 || "");
-    p2 !== ((_a = o2.current) == null ? void 0 : _a.getModel()) && (y2 && _.set(f2, (_b = o2.current) == null ? void 0 : _b.saveViewState()), (_c = o2.current) == null ? void 0 : _c.setModel(p2), y2 && ((_d = o2.current) == null ? void 0 : _d.restoreViewState(_.get(m2))));
-  }, [m2], s2), l2(() => {
+    let p = h(d.current, e || t2 || "", r || a2 || "", m || n2 || "");
+    p !== ((_a = o2.current) == null ? void 0 : _a.getModel()) && (y && _.set(f, (_b = o2.current) == null ? void 0 : _b.saveViewState()), (_c = o2.current) == null ? void 0 : _c.setModel(p), y && ((_d = o2.current) == null ? void 0 : _d.restoreViewState(_.get(m))));
+  }, [m], s), l(() => {
     var _a;
-    (_a = o2.current) == null ? void 0 : _a.updateOptions(x2);
-  }, [x2], s2), l2(() => {
-    !o2.current || t2 === void 0 || (o2.current.getOption(d2.current.editor.EditorOption.readOnly) ? o2.current.setValue(t2) : t2 !== o2.current.getValue() && (B2.current = true, o2.current.executeEdits("", [{ range: o2.current.getModel().getFullModelRange(), text: t2, forceMoveMarkers: true }]), o2.current.pushUndoStop(), B2.current = false));
-  }, [t2], s2), l2(() => {
+    (_a = o2.current) == null ? void 0 : _a.updateOptions(x);
+  }, [x], s), l(() => {
+    !o2.current || t2 === void 0 || (o2.current.getOption(d.current.editor.EditorOption.readOnly) ? o2.current.setValue(t2) : t2 !== o2.current.getValue() && (B.current = true, o2.current.executeEdits("", [{ range: o2.current.getModel().getFullModelRange(), text: t2, forceMoveMarkers: true }]), o2.current.pushUndoStop(), B.current = false));
+  }, [t2], s), l(() => {
     var _a, _b;
-    let p2 = (_a = o2.current) == null ? void 0 : _a.getModel();
-    p2 && a2 && ((_b = d2.current) == null ? void 0 : _b.editor.setModelLanguage(p2, a2));
-  }, [a2], s2), l2(() => {
+    let p = (_a = o2.current) == null ? void 0 : _a.getModel();
+    p && a2 && ((_b = d.current) == null ? void 0 : _b.editor.setModelLanguage(p, a2));
+  }, [a2], s), l(() => {
     var _a;
-    g2 !== void 0 && ((_a = o2.current) == null ? void 0 : _a.revealLine(g2));
-  }, [g2], s2), l2(() => {
+    g !== void 0 && ((_a = o2.current) == null ? void 0 : _a.revealLine(g));
+  }, [g], s), l(() => {
     var _a;
-    (_a = d2.current) == null ? void 0 : _a.editor.setTheme(E2);
-  }, [E2], s2);
-  let X2 = reactExports.useCallback(() => {
+    (_a = d.current) == null ? void 0 : _a.editor.setTheme(E);
+  }, [E], s);
+  let X = reactExports.useCallback(() => {
     var _a;
-    if (!(!b2.current || !d2.current) && !Q2.current) {
-      U2.current(d2.current);
-      let p2 = m2 || n2, R2 = h2(d2.current, t2 || e2 || "", r2 || a2 || "", p2 || "");
-      o2.current = (_a = d2.current) == null ? void 0 : _a.editor.create(b2.current, { model: R2, automaticLayout: true, ...x2 }, P2), y2 && o2.current.restoreViewState(_.get(p2)), d2.current.editor.setTheme(E2), g2 !== void 0 && o2.current.revealLine(g2), u2(true), Q2.current = true;
+    if (!(!b.current || !d.current) && !Q.current) {
+      U.current(d.current);
+      let p = m || n2, R2 = h(d.current, t2 || e || "", r || a2 || "", p || "");
+      o2.current = (_a = d.current) == null ? void 0 : _a.editor.create(b.current, { model: R2, automaticLayout: true, ...x }, P), y && o2.current.restoreViewState(_.get(p)), d.current.editor.setTheme(E), g !== void 0 && o2.current.revealLine(g), u(true), Q.current = true;
     }
-  }, [e2, r2, n2, t2, a2, m2, x2, P2, y2, E2, g2]);
+  }, [e, r, n2, t2, a2, m, x, P, y, E, g]);
   reactExports.useEffect(() => {
-    s2 && L2.current(o2.current, d2.current);
-  }, [s2]), reactExports.useEffect(() => {
-    !c2 && !s2 && X2();
-  }, [c2, s2, X2]), i2.current = t2, reactExports.useEffect(() => {
+    s && L.current(o2.current, d.current);
+  }, [s]), reactExports.useEffect(() => {
+    !c && !s && X();
+  }, [c, s, X]), i2.current = t2, reactExports.useEffect(() => {
     var _a, _b;
-    s2 && O2 && ((_a = I2.current) == null ? void 0 : _a.dispose(), I2.current = (_b = o2.current) == null ? void 0 : _b.onDidChangeModelContent((p2) => {
-      B2.current || O2(o2.current.getValue(), p2);
+    s && O && ((_a = I.current) == null ? void 0 : _a.dispose(), I.current = (_b = o2.current) == null ? void 0 : _b.onDidChangeModelContent((p) => {
+      B.current || O(o2.current.getValue(), p);
     }));
-  }, [s2, O2]), reactExports.useEffect(() => {
-    if (s2) {
-      let p2 = d2.current.editor.onDidChangeMarkers((R2) => {
+  }, [s, O]), reactExports.useEffect(() => {
+    if (s) {
+      let p = d.current.editor.onDidChangeMarkers((R2) => {
         var _a;
-        let G2 = (_a = o2.current.getModel()) == null ? void 0 : _a.uri;
-        if (G2 && R2.find((J2) => J2.path === G2.path)) {
-          let J2 = d2.current.editor.getModelMarkers({ resource: G2 });
-          T2 == null ? void 0 : T2(J2);
+        let G = (_a = o2.current.getModel()) == null ? void 0 : _a.uri;
+        if (G && R2.find((J) => J.path === G.path)) {
+          let J = d.current.editor.getModelMarkers({ resource: G });
+          T == null ? void 0 : T(J);
         }
       });
       return () => {
-        p2 == null ? void 0 : p2.dispose();
+        p == null ? void 0 : p.dispose();
       };
     }
     return () => {
     };
-  }, [s2, T2]);
+  }, [s, T]);
   function pe() {
     var _a, _b;
-    (_a = I2.current) == null ? void 0 : _a.dispose(), V2 ? y2 && _.set(m2, o2.current.saveViewState()) : (_b = o2.current.getModel()) == null ? void 0 : _b.dispose(), o2.current.dispose();
+    (_a = I.current) == null ? void 0 : _a.dispose(), V ? y && _.set(m, o2.current.saveViewState()) : (_b = o2.current.getModel()) == null ? void 0 : _b.dispose(), o2.current.dispose();
   }
-  return React.createElement(H, { width: z2, height: F2, isEditorReady: s2, loading: N2, _ref: b2, className: j2, wrapperProps: A2 });
+  return React.createElement(H, { width: z, height: F, isEditorReady: s, loading: N, _ref: b, className: j, wrapperProps: A });
 }
 var fe = Ve;
-var de = reactExports.memo(fe);
-var Ft = de;
-const CodeEditor = ({
-  value,
-  onChange,
-  language = "javascript",
-  height = "400px",
-  options = {}
-}) => {
-  const handleEditorWillMount = () => {
-  };
-  const handleEditorDidMount = (editor, monaco) => {
-  };
-  const handleEditorChange = (value2) => {
-    if (onChange) onChange(value2);
-  };
-  const handleEditorError = (error) => {
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { color: "red", padding: "1em" }, children: [
-      "Failed to load code editor: ",
-      (error == null ? void 0 : error.message) || "Unknown error"
-    ] });
-  };
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { border: "1px solid #e5e7eb", borderRadius: 8, overflow: "hidden", width: "100%" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-    Ft,
-    {
-      height,
-      language,
-      value,
-      onChange: handleEditorChange,
-      options: {
-        fontSize: 16,
-        minimap: { enabled: false },
-        scrollBeyondLastLine: false,
-        automaticLayout: true,
-        ...options
-      },
-      beforeMount: handleEditorWillMount,
-      onMount: handleEditorDidMount,
-      loading: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { padding: "1em" }, children: "Loading code editor..." }),
-      onError: handleEditorError
-    }
-  ) });
-};
-function InputForm({ input, setInput, onRun, loading, className = "w-full" }) {
-  const [error, setError] = reactExports.useState("");
-  const [text, setText] = reactExports.useState(JSON.stringify(input, null, 2));
-  reactExports.useEffect(() => {
-    setText(JSON.stringify(input, null, 2));
-  }, [input]);
-  const handleChange = (e2) => {
-    setText(e2.target.value);
-    try {
-      const parsed = JSON.parse(e2.target.value);
-      setError("");
-      setInput(parsed);
-    } catch {
-      setError("Invalid JSON");
-    }
-  };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `bg-white p-4 rounded shadow border ${className}`, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "font-semibold", children: "Input (JSON):" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "textarea",
-      {
-        className: "border rounded p-2 font-mono min-h-[120px] max-h-[200px] resize-y w-full mt-2",
-        value: text,
-        onChange: handleChange,
-        disabled: loading
-      }
-    ),
-    error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-red-500 text-sm mt-1", children: error }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "button",
-      {
-        className: "bg-blue-600 text-white px-4 py-2 rounded disabled:opacity-50 hover:bg-blue-700 transition-colors w-full mt-2",
-        onClick: onRun,
-        disabled: !!error || loading,
-        children: loading ? "Running..." : "Run Solution"
-      }
-    )
-  ] });
-}
-function OutputPanel({ output, loading, error, className = "w-full" }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `bg-white p-4 rounded shadow border ${className}`, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "font-semibold", children: "Output:" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-gray-100 rounded p-3 font-mono mt-2 max-h-[300px] overflow-y-auto w-full", children: [
-      loading && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-500", children: "Loading..." }),
-      error && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-red-500", children: error }),
-      !loading && !error && /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { className: "whitespace-pre-wrap", children: output ? JSON.stringify(output, null, 2) : "No output yet." })
-    ] })
-  ] });
-}
-const tabs = ["Description", "Approach", "Code", "My Solution", "Run Solution"];
-function ProblemDetails({ problem }) {
-  const [activeTab, setActiveTab] = reactExports.useState("Description");
-  const [userCodeMap, setUserCodeMap] = reactExports.useState({});
-  const [feedback, setFeedback] = reactExports.useState(null);
-  const [loading, setLoading] = reactExports.useState(false);
-  const [error, setError] = reactExports.useState(null);
-  const [userCode, setUserCode] = reactExports.useState("");
-  const [input, setInput] = reactExports.useState((problem == null ? void 0 : problem.defaultInput) || {});
-  const [output, setOutput] = reactExports.useState(null);
-  const [runLoading, setRunLoading] = reactExports.useState(false);
-  const [runError, setRunError] = reactExports.useState("");
-  const getProblemKey = () => {
-    if (!problem) return "";
-    return `${problem.topic || ""}::${problem.name || ""}`;
-  };
-  reactExports.useEffect(() => {
-    const key = getProblemKey();
-    setUserCode(userCodeMap[key] || "");
-    setFeedback(null);
-    setError(null);
-    setInput((problem == null ? void 0 : problem.defaultInput) || {});
-    setOutput(null);
-    setRunError("");
-  }, [problem]);
-  reactExports.useEffect(() => {
-    const key = getProblemKey();
-    if (key) {
-      setUserCodeMap((prev) => ({ ...prev, [key]: userCode }));
-    }
-  }, [userCode]);
-  if (!problem) return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4", children: "Select a problem to view details." });
-  const handleCheck = async () => {
-    var _a, _b, _c;
-    setLoading(true);
-    setError(null);
-    setFeedback(null);
-    const apiKey = localStorage.getItem("openai_api_key");
-    if (!apiKey) {
-      setError("No OpenAI API key found. Please log in and provide your API key.");
-      setLoading(false);
-      return;
-    }
-    try {
-      const prompt = `You are a DSA coding mentor. Compare the user's code to the reference solution.
-
-Reference Solution:
-${problem.code}
-
-User's Code:
-${userCode}
-
-If the user's code is correct, reply with 'Correct' and a brief explanation. If incorrect, explain what is wrong, how to fix it, and actionable guidance.`;
-      const response = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${apiKey}`
-        },
-        body: JSON.stringify({
-          model: "gpt-3.5-turbo",
-          messages: [
-            { role: "system", content: "You are a helpful DSA coding mentor." },
-            { role: "user", content: prompt }
-          ],
-          max_tokens: 512
-        })
-      });
-      if (!response.ok) {
-        throw new Error(`OpenAI API error: ${response.status}`);
-      }
-      const data = await response.json();
-      const aiMessage = ((_c = (_b = (_a = data.choices) == null ? void 0 : _a[0]) == null ? void 0 : _b.message) == null ? void 0 : _c.content) || "No feedback received.";
-      setFeedback(aiMessage);
-    } catch (err) {
-      setError(err.message || "Unknown error");
-    } finally {
-      setLoading(false);
-    }
-  };
-  const editorLanguage = problem.language === "java" ? "java" : "javascript";
-  const handleRun = async () => {
-    setOutput(null);
-    setRunError("");
-    setRunLoading(true);
-    if (!problem) return;
-    try {
-      const res = await fetch(problem.endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(input)
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      setOutput(data);
-    } catch (err) {
-      setRunError(err.message || "Error running solution");
-    } finally {
-      setRunLoading(false);
-    }
-  };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col h-full", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-shrink-0 p-4 border-b border-gray-200 bg-white", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-2xl font-bold mb-2", children: problem.name }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex gap-2", children: tabs.map((tab) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "button",
-        {
-          className: `px-4 py-2 rounded-t ${activeTab === tab ? "bg-blue-500 text-white" : "bg-gray-200"}`,
-          onClick: () => setActiveTab(tab),
-          children: tab
-        },
-        tab
-      )) })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 bg-white overflow-y-auto w-full", children: [
-      activeTab === "Description" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "whitespace-pre-wrap p-4 w-full", children: problem.description }),
-      activeTab === "Approach" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "whitespace-pre-wrap p-4 w-full", children: problem.approach }),
-      activeTab === "Code" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 w-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CodeBlock, { code: problem.code }) }),
-      activeTab === "My Solution" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 w-full flex flex-col", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          CodeEditor,
-          {
-            value: userCode,
-            onChange: setUserCode,
-            language: editorLanguage,
-            height: "400px"
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "button",
-          {
-            className: "mt-4 px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700 disabled:opacity-50",
-            onClick: handleCheck,
-            disabled: loading || !userCode.trim(),
-            children: loading ? "Checking..." : "Check"
-          }
-        ),
-        error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 text-red-600", children: error }),
-        feedback && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 p-4 bg-gray-100 rounded whitespace-pre-wrap", children: feedback })
-      ] }),
-      activeTab === "Run Solution" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 w-full flex flex-col", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          InputForm,
-          {
-            input,
-            setInput,
-            onRun: handleRun,
-            loading: runLoading,
-            className: "w-full"
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(OutputPanel, { output, loading: runLoading, error: runError, className: "w-full" })
-      ] })
-    ] })
-  ] });
-}
-function MainApp() {
-  const [topics, setTopics] = reactExports.useState([]);
-  const [problemsByTopic, setProblemsByTopic] = reactExports.useState({});
-  const [selectedTopic, setSelectedTopic] = reactExports.useState(() => localStorage.getItem("lastSelectedTopic") || "");
-  const [selectedProblemIdx, setSelectedProblemIdx] = reactExports.useState(() => {
-    const idx = localStorage.getItem("lastSelectedProblemIdx");
-    return idx ? parseInt(idx, 10) : 0;
-  });
-  const [input, setInput] = reactExports.useState({});
-  const [output, setOutput] = reactExports.useState(null);
-  const [loading, setLoading] = reactExports.useState(true);
-  const [error, setError] = reactExports.useState("");
-  reactExports.useEffect(() => {
-    async function loadAllProblems() {
-      var _a, _b, _c;
-      setLoading(true);
-      setError("");
-      try {
-        const topicList = [
-          "arrays",
-          "dynamicprogramming",
-          "binarysearch",
-          "binarysearchtree",
-          "binarytree",
-          "bitmanipulation",
-          "graph",
-          "greedyalgorithm",
-          "hashing",
-          "heaps",
-          "linkedlist",
-          "maths",
-          "recursion",
-          "slidingwindow",
-          "sorting",
-          "stackandqueue",
-          "string",
-          "tries"
-        ];
-        const problemsByTopicTemp = {};
-        for (const topic of topicList) {
-          try {
-            const dataPath = false ? `/src/data/${topic}/problems.json` : `./data/${topic}/problems.json`;
-            console.log(`Fetching data for ${topic} from:`, dataPath);
-            const res = await fetch(dataPath);
-            if (!res.ok) {
-              console.warn(`Failed to load ${topic}: ${res.status} from ${dataPath}`);
-              continue;
-            }
-            const problems2 = await res.json();
-            problemsByTopicTemp[topic] = problems2;
-            console.log(`Successfully loaded ${topic}:`, problems2.length, "problems");
-          } catch (err) {
-            console.warn(`Error loading ${topic}:`, err);
-          }
-        }
-        const loadedTopics = Object.keys(problemsByTopicTemp);
-        setTopics(loadedTopics);
-        setProblemsByTopic(problemsByTopicTemp);
-        let topicToSelect = localStorage.getItem("lastSelectedTopic");
-        let idxToSelect = parseInt(localStorage.getItem("lastSelectedProblemIdx"), 10);
-        if (!topicToSelect || !problemsByTopicTemp[topicToSelect]) {
-          topicToSelect = loadedTopics[0] || "";
-        }
-        if (isNaN(idxToSelect) || !((_a = problemsByTopicTemp[topicToSelect]) == null ? void 0 : _a[idxToSelect])) {
-          idxToSelect = 0;
-        }
-        setSelectedTopic(topicToSelect);
-        setSelectedProblemIdx(idxToSelect);
-        setInput(
-          ((_c = (_b = problemsByTopicTemp[topicToSelect]) == null ? void 0 : _b[idxToSelect]) == null ? void 0 : _c.defaultInput) || {}
-        );
-        setLoading(false);
-        if (loadedTopics.length === 0) {
-          setError("No topics found. Please check your data files.");
-        }
-      } catch (err) {
-        setError("Failed to load problems data.");
-        setLoading(false);
-      }
-    }
-    loadAllProblems();
-  }, []);
-  reactExports.useEffect(() => {
-    if (!selectedTopic || !problemsByTopic[selectedTopic]) return;
-    const selectedProblem2 = problemsByTopic[selectedTopic][selectedProblemIdx];
-    setInput((selectedProblem2 == null ? void 0 : selectedProblem2.defaultInput) || {});
-    setOutput(null);
-    setError("");
-    localStorage.setItem("lastSelectedTopic", selectedTopic);
-    localStorage.setItem("lastSelectedProblemIdx", selectedProblemIdx);
-  }, [selectedTopic, selectedProblemIdx, problemsByTopic]);
-  reactExports.useEffect(() => {
-    setSelectedProblemIdx(0);
-  }, [selectedTopic]);
-  const problems = problemsByTopic[selectedTopic] || [];
-  const selectedProblem = problems[selectedProblemIdx];
-  if (loading) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center h-screen text-xl", children: "Loading topics and problems..." });
-  }
-  if (error) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center h-screen text-red-600 text-xl", children: error });
-  }
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col h-screen bg-gray-50", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Auth0Header, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-1 overflow-hidden", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        TopicSelector,
-        {
-          topics,
-          selectedTopic,
-          onSelectTopic: setSelectedTopic
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        ProblemList,
-        {
-          problems,
-          selectedProblemIdx,
-          onSelectProblem: setSelectedProblemIdx
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("main", { className: "flex-1 flex flex-row overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 flex flex-col overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ProblemDetails, { problem: selectedProblem }) }) })
-    ] })
-  ] });
-}
-function AuthenticatedApp() {
-  const { isAuthenticated, isLoading, error } = useAuth0();
-  const location = useLocation();
-  if (isLoading) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingSpinner, {});
-  }
-  if (location.pathname === "/callback" || location.pathname === "/dsamentorai/callback") {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(CallbackPage, {});
-  }
-  if (error) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "min-h-screen bg-gradient-to-br from-red-900 via-red-800 to-red-900 flex items-center justify-center p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-white text-center", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-2xl font-bold mb-4", children: "Authentication Error" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-red-200 mb-4", children: error.message }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "button",
-        {
-          onClick: () => window.location.reload(),
-          className: "bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg",
-          children: "Retry"
-        }
-      )
-    ] }) });
-  }
-  return isAuthenticated ? /* @__PURE__ */ jsxRuntimeExports.jsx(MainApp, {}) : /* @__PURE__ */ jsxRuntimeExports.jsx(Auth0Login, {});
-}
+reactExports.memo(fe);
 function App() {
-  if (!isAuth0Configured()) {
+  {
     return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Auth0Setup, {}) });
   }
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(HashRouter, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Auth0ProviderWithHistory, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(AuthenticatedApp, {}) }) });
 }
 ReactDOM.createRoot(document.getElementById("root")).render(
   /* @__PURE__ */ jsxRuntimeExports.jsx(React.StrictMode, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) })
