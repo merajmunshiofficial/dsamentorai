@@ -15983,7 +15983,7 @@ const Auth0Header = () => {
         )
       ] })
     ] }) }),
-    showApiKeyModal && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-white rounded-xl p-8 shadow-xl w-full max-w-sm", children: [
+    showApiKeyModal && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fixed inset-0 z-50 flex items-center justify-center", style: { background: "rgba(0,0,0,0.7)" }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-white rounded-xl p-8 shadow-xl w-full max-w-sm relative", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-semibold mb-4", children: "OpenAI API Key" }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleApiKeySave, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -16947,13 +16947,86 @@ const CodeEditor = ({
     }
   ) });
 };
-const tabs = ["Description", "Approach", "Code", "My Solution"];
+function InputForm({ input, setInput, onRun, loading }) {
+  const [error, setError] = reactExports.useState("");
+  const [text, setText] = reactExports.useState(JSON.stringify(input, null, 2));
+  reactExports.useEffect(() => {
+    setText(JSON.stringify(input, null, 2));
+  }, [input]);
+  const handleChange = (e2) => {
+    setText(e2.target.value);
+    try {
+      const parsed = JSON.parse(e2.target.value);
+      setError("");
+      setInput(parsed);
+    } catch {
+      setError("Invalid JSON");
+    }
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-white p-4 rounded shadow border", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "font-semibold", children: "Input (JSON):" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "textarea",
+      {
+        className: "border rounded p-2 font-mono min-h-[120px] max-h-[200px] resize-y w-full mt-2",
+        value: text,
+        onChange: handleChange,
+        disabled: loading
+      }
+    ),
+    error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-red-500 text-sm mt-1", children: error }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "button",
+      {
+        className: "bg-blue-600 text-white px-4 py-2 rounded disabled:opacity-50 hover:bg-blue-700 transition-colors w-full mt-2",
+        onClick: onRun,
+        disabled: !!error || loading,
+        children: loading ? "Running..." : "Run Solution"
+      }
+    )
+  ] });
+}
+function OutputPanel({ output, loading, error }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-white p-4 rounded shadow border", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "font-semibold", children: "Output:" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-gray-100 rounded p-3 font-mono mt-2 max-h-[300px] overflow-y-auto", children: [
+      loading && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-500", children: "Loading..." }),
+      error && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-red-500", children: error }),
+      !loading && !error && /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { className: "whitespace-pre-wrap", children: output ? JSON.stringify(output, null, 2) : "No output yet." })
+    ] })
+  ] });
+}
+const tabs = ["Description", "Approach", "Code", "My Solution", "Run Solution"];
 function ProblemDetails({ problem }) {
   const [activeTab, setActiveTab] = reactExports.useState("Description");
-  const [userCode, setUserCode] = reactExports.useState("");
+  const [userCodeMap, setUserCodeMap] = reactExports.useState({});
   const [feedback, setFeedback] = reactExports.useState(null);
   const [loading, setLoading] = reactExports.useState(false);
   const [error, setError] = reactExports.useState(null);
+  const [userCode, setUserCode] = reactExports.useState("");
+  const [input, setInput] = reactExports.useState((problem == null ? void 0 : problem.defaultInput) || {});
+  const [output, setOutput] = reactExports.useState(null);
+  const [runLoading, setRunLoading] = reactExports.useState(false);
+  const [runError, setRunError] = reactExports.useState("");
+  const getProblemKey = () => {
+    if (!problem) return "";
+    return `${problem.topic || ""}::${problem.name || ""}`;
+  };
+  reactExports.useEffect(() => {
+    const key = getProblemKey();
+    setUserCode(userCodeMap[key] || "");
+    setFeedback(null);
+    setError(null);
+    setInput((problem == null ? void 0 : problem.defaultInput) || {});
+    setOutput(null);
+    setRunError("");
+  }, [problem]);
+  reactExports.useEffect(() => {
+    const key = getProblemKey();
+    if (key) {
+      setUserCodeMap((prev) => ({ ...prev, [key]: userCode }));
+    }
+  }, [userCode]);
   if (!problem) return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4", children: "Select a problem to view details." });
   const handleCheck = async () => {
     var _a, _b, _c;
@@ -17003,6 +17076,27 @@ If the user's code is correct, reply with 'Correct' and a brief explanation. If 
       setLoading(false);
     }
   };
+  const editorLanguage = problem.language === "java" ? "java" : "javascript";
+  const handleRun = async () => {
+    setOutput(null);
+    setRunError("");
+    setRunLoading(true);
+    if (!problem) return;
+    try {
+      const res = await fetch(problem.endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(input)
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      setOutput(data);
+    } catch (err) {
+      setRunError(err.message || "Error running solution");
+    } finally {
+      setRunLoading(false);
+    }
+  };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col h-full", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-shrink-0 p-4 border-b border-gray-200 bg-white", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-2xl font-bold mb-2", children: problem.name }),
@@ -17026,7 +17120,7 @@ If the user's code is correct, reply with 'Correct' and a brief explanation. If 
           {
             value: userCode,
             onChange: setUserCode,
-            language: "javascript",
+            language: editorLanguage,
             height: "400px"
           }
         ),
@@ -17041,56 +17135,19 @@ If the user's code is correct, reply with 'Correct' and a brief explanation. If 
         ),
         error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 text-red-600", children: error }),
         feedback && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 p-4 bg-gray-100 rounded whitespace-pre-wrap", children: feedback })
+      ] }),
+      activeTab === "Run Solution" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          InputForm,
+          {
+            input,
+            setInput,
+            onRun: handleRun,
+            loading: runLoading
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(OutputPanel, { output, loading: runLoading, error: runError })
       ] })
-    ] })
-  ] });
-}
-function InputForm({ input, setInput, onRun, loading }) {
-  const [error, setError] = reactExports.useState("");
-  const [text, setText] = reactExports.useState(JSON.stringify(input, null, 2));
-  reactExports.useEffect(() => {
-    setText(JSON.stringify(input, null, 2));
-  }, [input]);
-  const handleChange = (e2) => {
-    setText(e2.target.value);
-    try {
-      const parsed = JSON.parse(e2.target.value);
-      setError("");
-      setInput(parsed);
-    } catch {
-      setError("Invalid JSON");
-    }
-  };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-white p-4 rounded shadow border", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "font-semibold", children: "Input (JSON):" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "textarea",
-      {
-        className: "border rounded p-2 font-mono min-h-[120px] max-h-[200px] resize-y w-full mt-2",
-        value: text,
-        onChange: handleChange,
-        disabled: loading
-      }
-    ),
-    error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-red-500 text-sm mt-1", children: error }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "button",
-      {
-        className: "bg-blue-600 text-white px-4 py-2 rounded disabled:opacity-50 hover:bg-blue-700 transition-colors w-full mt-2",
-        onClick: onRun,
-        disabled: !!error || loading,
-        children: loading ? "Running..." : "Run Solution"
-      }
-    )
-  ] });
-}
-function OutputPanel({ output, loading, error }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-white p-4 rounded shadow border", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "font-semibold", children: "Output:" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-gray-100 rounded p-3 font-mono mt-2 max-h-[300px] overflow-y-auto", children: [
-      loading && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-500", children: "Loading..." }),
-      error && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-red-500", children: error }),
-      !loading && !error && /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { className: "whitespace-pre-wrap", children: output ? JSON.stringify(output, null, 2) : "No output yet." })
     ] })
   ] });
 }
