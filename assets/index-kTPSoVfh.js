@@ -17247,23 +17247,6 @@ function MainApp() {
   }, [selectedTopic]);
   const problems = problemsByTopic[selectedTopic] || [];
   const selectedProblem = problems[selectedProblemIdx];
-  const handleRun = async () => {
-    setOutput(null);
-    setError("");
-    if (!selectedProblem) return;
-    try {
-      const res = await fetch(selectedProblem.endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(input)
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      setOutput(data);
-    } catch (err) {
-      setError(err.message || "Error running solution");
-    }
-  };
   if (loading) {
     return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center h-screen text-xl", children: "Loading topics and problems..." });
   }
@@ -17289,21 +17272,7 @@ function MainApp() {
           onSelectProblem: setSelectedProblemIdx
         }
       ),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "flex-1 flex flex-row overflow-hidden", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 min-w-[350px] flex flex-col overflow-hidden border-r border-gray-300", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ProblemDetails, { problem: selectedProblem }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-[350px] flex flex-col overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 overflow-y-auto p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            InputForm,
-            {
-              input,
-              setInput,
-              onRun: handleRun,
-              loading: false
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(OutputPanel, { output, loading: false, error })
-        ] }) }) })
-      ] })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("main", { className: "flex-1 flex flex-row overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 min-w-[350px] flex flex-col overflow-hidden border-r border-gray-300", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ProblemDetails, { problem: selectedProblem }) }) })
     ] })
   ] });
 }
