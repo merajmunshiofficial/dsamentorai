@@ -16911,6 +16911,7 @@ const CodeEditor = ({
   onChange,
   language = "javascript",
   height = "400px",
+  width = "100%",
   options = {}
 }) => {
   const handleEditorWillMount = () => {
@@ -16926,10 +16927,11 @@ const CodeEditor = ({
       (error == null ? void 0 : error.message) || "Unknown error"
     ] });
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { border: "1px solid #e5e7eb", borderRadius: 8, overflow: "hidden" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { border: "1px solid #e5e7eb", borderRadius: 8, overflow: "hidden", width }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
     Ft,
     {
       height,
+      width,
       language,
       value,
       onChange: handleEditorChange,
@@ -16947,7 +16949,7 @@ const CodeEditor = ({
     }
   ) });
 };
-function InputForm({ input, setInput, onRun, loading }) {
+function InputForm({ input, setInput, onRun, loading, className = "w-full" }) {
   const [error, setError] = reactExports.useState("");
   const [text, setText] = reactExports.useState(JSON.stringify(input, null, 2));
   reactExports.useEffect(() => {
@@ -16963,7 +16965,7 @@ function InputForm({ input, setInput, onRun, loading }) {
       setError("Invalid JSON");
     }
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-white p-4 rounded shadow border", children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `bg-white p-4 rounded shadow border ${className}`, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "font-semibold", children: "Input (JSON):" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "textarea",
@@ -16986,10 +16988,10 @@ function InputForm({ input, setInput, onRun, loading }) {
     )
   ] });
 }
-function OutputPanel({ output, loading, error }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-white p-4 rounded shadow border", children: [
+function OutputPanel({ output, loading, error, className = "w-full" }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `bg-white p-4 rounded shadow border ${className}`, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "font-semibold", children: "Output:" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-gray-100 rounded p-3 font-mono mt-2 max-h-[300px] overflow-y-auto", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-gray-100 rounded p-3 font-mono mt-2 max-h-[300px] overflow-y-auto w-full", children: [
       loading && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-500", children: "Loading..." }),
       error && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-red-500", children: error }),
       !loading && !error && /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { className: "whitespace-pre-wrap", children: output ? JSON.stringify(output, null, 2) : "No output yet." })
@@ -17110,18 +17112,19 @@ If the user's code is correct, reply with 'Correct' and a brief explanation. If 
         tab
       )) })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 bg-white overflow-y-auto", children: [
-      activeTab === "Description" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "whitespace-pre-wrap p-4", children: problem.description }),
-      activeTab === "Approach" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "whitespace-pre-wrap p-4", children: problem.approach }),
-      activeTab === "Code" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CodeBlock, { code: problem.code }) }),
-      activeTab === "My Solution" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 bg-white overflow-y-auto w-full h-full", children: [
+      activeTab === "Description" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "whitespace-pre-wrap p-4 w-full h-full", children: problem.description }),
+      activeTab === "Approach" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "whitespace-pre-wrap p-4 w-full h-full", children: problem.approach }),
+      activeTab === "Code" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 w-full h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CodeBlock, { code: problem.code }) }),
+      activeTab === "My Solution" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 w-full h-full flex flex-col", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           CodeEditor,
           {
             value: userCode,
             onChange: setUserCode,
             language: editorLanguage,
-            height: "400px"
+            height: "400px",
+            width: "100%"
           }
         ),
         /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -17136,17 +17139,18 @@ If the user's code is correct, reply with 'Correct' and a brief explanation. If 
         error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 text-red-600", children: error }),
         feedback && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 p-4 bg-gray-100 rounded whitespace-pre-wrap", children: feedback })
       ] }),
-      activeTab === "Run Solution" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4", children: [
+      activeTab === "Run Solution" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 w-full h-full flex flex-col", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           InputForm,
           {
             input,
             setInput,
             onRun: handleRun,
-            loading: runLoading
+            loading: runLoading,
+            className: "w-full"
           }
         ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(OutputPanel, { output, loading: runLoading, error: runError })
+        /* @__PURE__ */ jsxRuntimeExports.jsx(OutputPanel, { output, loading: runLoading, error: runError, className: "w-full" })
       ] })
     ] })
   ] });
