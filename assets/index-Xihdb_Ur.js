@@ -54,21 +54,21 @@ function requireReactJsxRuntime_production() {
   if (hasRequiredReactJsxRuntime_production) return reactJsxRuntime_production;
   hasRequiredReactJsxRuntime_production = 1;
   var REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
-  function jsxProd(type, config, maybeKey) {
+  function jsxProd(type, config2, maybeKey) {
     var key = null;
     void 0 !== maybeKey && (key = "" + maybeKey);
-    void 0 !== config.key && (key = "" + config.key);
-    if ("key" in config) {
+    void 0 !== config2.key && (key = "" + config2.key);
+    if ("key" in config2) {
       maybeKey = {};
-      for (var propName in config)
-        "key" !== propName && (maybeKey[propName] = config[propName]);
-    } else maybeKey = config;
-    config = maybeKey.ref;
+      for (var propName in config2)
+        "key" !== propName && (maybeKey[propName] = config2[propName]);
+    } else maybeKey = config2;
+    config2 = maybeKey.ref;
     return {
       $$typeof: REACT_ELEMENT_TYPE,
       type,
       key,
-      ref: void 0 !== config ? config : null,
+      ref: void 0 !== config2 ? config2 : null,
       props: maybeKey
     };
   }
@@ -149,7 +149,7 @@ function requireReact_production() {
   pureComponentPrototype.constructor = PureComponent;
   assign(pureComponentPrototype, Component.prototype);
   pureComponentPrototype.isPureReactComponent = true;
-  var isArrayImpl = Array.isArray, ReactSharedInternals = { H: null, A: null, T: null, S: null, V: null }, hasOwnProperty = Object.prototype.hasOwnProperty;
+  var isArrayImpl = Array.isArray, ReactSharedInternals = { H: null, A: null, T: null, S: null, V: null }, hasOwnProperty2 = Object.prototype.hasOwnProperty;
   function ReactElement(type, key, self2, source, owner, props) {
     self2 = props.ref;
     return {
@@ -180,8 +180,8 @@ function requireReact_production() {
     });
   }
   var userProvidedKeyEscapeRegex = /\/+/g;
-  function getElementKey(element, index) {
-    return "object" === typeof element && null !== element && null != element.key ? escape("" + element.key) : index.toString(36);
+  function getElementKey(element, index2) {
+    return "object" === typeof element && null !== element && null != element.key ? escape("" + element.key) : index2.toString(36);
   }
   function noop$1() {
   }
@@ -375,15 +375,15 @@ function requireReact_production() {
       return fn.apply(null, arguments);
     };
   };
-  react_production.cloneElement = function(element, config, children) {
+  react_production.cloneElement = function(element, config2, children) {
     if (null === element || void 0 === element)
       throw Error(
         "The argument must be a React element, but you passed " + element + "."
       );
     var props = assign({}, element.props), key = element.key, owner = void 0;
-    if (null != config)
-      for (propName in void 0 !== config.ref && (owner = void 0), void 0 !== config.key && (key = "" + config.key), config)
-        !hasOwnProperty.call(config, propName) || "key" === propName || "__self" === propName || "__source" === propName || "ref" === propName && void 0 === config.ref || (props[propName] = config[propName]);
+    if (null != config2)
+      for (propName in void 0 !== config2.ref && (owner = void 0), void 0 !== config2.key && (key = "" + config2.key), config2)
+        !hasOwnProperty2.call(config2, propName) || "key" === propName || "__self" === propName || "__source" === propName || "ref" === propName && void 0 === config2.ref || (props[propName] = config2[propName]);
     var propName = arguments.length - 2;
     if (1 === propName) props.children = children;
     else if (1 < propName) {
@@ -409,11 +409,11 @@ function requireReact_production() {
     };
     return defaultValue;
   };
-  react_production.createElement = function(type, config, children) {
+  react_production.createElement = function(type, config2, children) {
     var propName, props = {}, key = null;
-    if (null != config)
-      for (propName in void 0 !== config.key && (key = "" + config.key), config)
-        hasOwnProperty.call(config, propName) && "key" !== propName && "__self" !== propName && "__source" !== propName && (props[propName] = config[propName]);
+    if (null != config2)
+      for (propName in void 0 !== config2.key && (key = "" + config2.key), config2)
+        hasOwnProperty2.call(config2, propName) && "key" !== propName && "__self" !== propName && "__source" !== propName && (props[propName] = config2[propName]);
     var childrenLength = arguments.length - 2;
     if (1 === childrenLength) props.children = children;
     else if (1 < childrenLength) {
@@ -480,34 +480,34 @@ function requireReact_production() {
   react_production.useDeferredValue = function(value, initialValue) {
     return ReactSharedInternals.H.useDeferredValue(value, initialValue);
   };
-  react_production.useEffect = function(create, createDeps, update) {
+  react_production.useEffect = function(create2, createDeps, update) {
     var dispatcher = ReactSharedInternals.H;
     if ("function" === typeof update)
       throw Error(
         "useEffect CRUD overload is not enabled in this build of React."
       );
-    return dispatcher.useEffect(create, createDeps);
+    return dispatcher.useEffect(create2, createDeps);
   };
   react_production.useId = function() {
     return ReactSharedInternals.H.useId();
   };
-  react_production.useImperativeHandle = function(ref, create, deps) {
-    return ReactSharedInternals.H.useImperativeHandle(ref, create, deps);
+  react_production.useImperativeHandle = function(ref, create2, deps) {
+    return ReactSharedInternals.H.useImperativeHandle(ref, create2, deps);
   };
-  react_production.useInsertionEffect = function(create, deps) {
-    return ReactSharedInternals.H.useInsertionEffect(create, deps);
+  react_production.useInsertionEffect = function(create2, deps) {
+    return ReactSharedInternals.H.useInsertionEffect(create2, deps);
   };
-  react_production.useLayoutEffect = function(create, deps) {
-    return ReactSharedInternals.H.useLayoutEffect(create, deps);
+  react_production.useLayoutEffect = function(create2, deps) {
+    return ReactSharedInternals.H.useLayoutEffect(create2, deps);
   };
-  react_production.useMemo = function(create, deps) {
-    return ReactSharedInternals.H.useMemo(create, deps);
+  react_production.useMemo = function(create2, deps) {
+    return ReactSharedInternals.H.useMemo(create2, deps);
   };
   react_production.useOptimistic = function(passthrough, reducer2) {
     return ReactSharedInternals.H.useOptimistic(passthrough, reducer2);
   };
-  react_production.useReducer = function(reducer2, initialArg, init) {
-    return ReactSharedInternals.H.useReducer(reducer2, initialArg, init);
+  react_production.useReducer = function(reducer2, initialArg, init2) {
+    return ReactSharedInternals.H.useReducer(reducer2, initialArg, init2);
   };
   react_production.useRef = function(initialValue) {
     return ReactSharedInternals.H.useRef(initialValue);
@@ -558,12 +558,12 @@ function requireScheduler_production() {
   hasRequiredScheduler_production = 1;
   (function(exports) {
     function push(heap, node) {
-      var index = heap.length;
+      var index2 = heap.length;
       heap.push(node);
-      a: for (; 0 < index; ) {
-        var parentIndex = index - 1 >>> 1, parent = heap[parentIndex];
+      a: for (; 0 < index2; ) {
+        var parentIndex = index2 - 1 >>> 1, parent = heap[parentIndex];
         if (0 < compare(parent, node))
-          heap[parentIndex] = node, heap[index] = parent, index = parentIndex;
+          heap[parentIndex] = node, heap[index2] = parent, index2 = parentIndex;
         else break a;
       }
     }
@@ -575,12 +575,12 @@ function requireScheduler_production() {
       var first = heap[0], last = heap.pop();
       if (last !== first) {
         heap[0] = last;
-        a: for (var index = 0, length = heap.length, halfLength = length >>> 1; index < halfLength; ) {
-          var leftIndex = 2 * (index + 1) - 1, left = heap[leftIndex], rightIndex = leftIndex + 1, right = heap[rightIndex];
+        a: for (var index2 = 0, length = heap.length, halfLength = length >>> 1; index2 < halfLength; ) {
+          var leftIndex = 2 * (index2 + 1) - 1, left = heap[leftIndex], rightIndex = leftIndex + 1, right = heap[rightIndex];
           if (0 > compare(left, last))
-            rightIndex < length && 0 > compare(right, left) ? (heap[index] = right, heap[rightIndex] = last, index = rightIndex) : (heap[index] = left, heap[leftIndex] = last, index = leftIndex);
+            rightIndex < length && 0 > compare(right, left) ? (heap[index2] = right, heap[rightIndex] = last, index2 = rightIndex) : (heap[index2] = left, heap[leftIndex] = last, index2 = leftIndex);
           else if (rightIndex < length && 0 > compare(right, last))
-            heap[index] = right, heap[rightIndex] = last, index = rightIndex;
+            heap[index2] = right, heap[rightIndex] = last, index2 = rightIndex;
           else break a;
         }
       }
@@ -1180,16 +1180,16 @@ function requireReactDomClient_production() {
     data: null,
     method: null,
     action: null
-  }, valueStack = [], index = -1;
+  }, valueStack = [], index2 = -1;
   function createCursor(defaultValue) {
     return { current: defaultValue };
   }
   function pop(cursor) {
-    0 > index || (cursor.current = valueStack[index], valueStack[index] = null, index--);
+    0 > index2 || (cursor.current = valueStack[index2], valueStack[index2] = null, index2--);
   }
   function push(cursor, value) {
-    index++;
-    valueStack[index] = cursor.current;
+    index2++;
+    valueStack[index2] = cursor.current;
     cursor.current = value;
   }
   var contextStackCursor = createCursor(null), contextFiberStackCursor = createCursor(null), rootInstanceStackCursor = createCursor(null), hostTransitionProviderCursor = createCursor(null);
@@ -1235,7 +1235,7 @@ function requireReactDomClient_production() {
     contextFiberStackCursor.current === fiber && (pop(contextStackCursor), pop(contextFiberStackCursor));
     hostTransitionProviderCursor.current === fiber && (pop(hostTransitionProviderCursor), HostTransitionContext._currentValue = sharedNotPendingObject);
   }
-  var hasOwnProperty = Object.prototype.hasOwnProperty, scheduleCallback$3 = Scheduler.unstable_scheduleCallback, cancelCallback$1 = Scheduler.unstable_cancelCallback, shouldYield = Scheduler.unstable_shouldYield, requestPaint = Scheduler.unstable_requestPaint, now = Scheduler.unstable_now, getCurrentPriorityLevel = Scheduler.unstable_getCurrentPriorityLevel, ImmediatePriority = Scheduler.unstable_ImmediatePriority, UserBlockingPriority = Scheduler.unstable_UserBlockingPriority, NormalPriority$1 = Scheduler.unstable_NormalPriority, LowPriority = Scheduler.unstable_LowPriority, IdlePriority = Scheduler.unstable_IdlePriority, log$1 = Scheduler.log, unstable_setDisableYieldValue = Scheduler.unstable_setDisableYieldValue, rendererID = null, injectedHook = null;
+  var hasOwnProperty2 = Object.prototype.hasOwnProperty, scheduleCallback$3 = Scheduler.unstable_scheduleCallback, cancelCallback$1 = Scheduler.unstable_cancelCallback, shouldYield = Scheduler.unstable_shouldYield, requestPaint = Scheduler.unstable_requestPaint, now = Scheduler.unstable_now, getCurrentPriorityLevel = Scheduler.unstable_getCurrentPriorityLevel, ImmediatePriority = Scheduler.unstable_ImmediatePriority, UserBlockingPriority = Scheduler.unstable_UserBlockingPriority, NormalPriority$1 = Scheduler.unstable_NormalPriority, LowPriority = Scheduler.unstable_LowPriority, IdlePriority = Scheduler.unstable_IdlePriority, log$1 = Scheduler.log, unstable_setDisableYieldValue = Scheduler.unstable_setDisableYieldValue, rendererID = null, injectedHook = null;
   function setIsStrictModeForDevtools(newIsStrictMode) {
     "function" === typeof log$1 && unstable_setDisableYieldValue(newIsStrictMode);
     if (injectedHook && "function" === typeof injectedHook.setStrictMode)
@@ -1536,9 +1536,9 @@ function requireReactDomClient_production() {
     "^[:A-Z_a-z\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD][:A-Z_a-z\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD\\-.0-9\\u00B7\\u0300-\\u036F\\u203F-\\u2040]*$"
   ), illegalAttributeNameCache = {}, validatedAttributeNameCache = {};
   function isAttributeNameSafe(attributeName) {
-    if (hasOwnProperty.call(validatedAttributeNameCache, attributeName))
+    if (hasOwnProperty2.call(validatedAttributeNameCache, attributeName))
       return true;
-    if (hasOwnProperty.call(illegalAttributeNameCache, attributeName)) return false;
+    if (hasOwnProperty2.call(illegalAttributeNameCache, attributeName)) return false;
     if (VALID_ATTRIBUTE_NAME_REGEX.test(attributeName))
       return validatedAttributeNameCache[attributeName] = true;
     illegalAttributeNameCache[attributeName] = true;
@@ -2517,7 +2517,7 @@ function requireReactDomClient_production() {
     if (keysA.length !== keysB.length) return false;
     for (keysB = 0; keysB < keysA.length; keysB++) {
       var currentKey = keysA[keysB];
-      if (!hasOwnProperty.call(objB, currentKey) || !objectIs(objA[currentKey], objB[currentKey]))
+      if (!hasOwnProperty2.call(objB, currentKey) || !objectIs(objA[currentKey], objB[currentKey]))
         return false;
     }
     return true;
@@ -2836,7 +2836,7 @@ function requireReactDomClient_production() {
     treeForkProvider = workInProgress2;
     treeForkCount = totalChildren;
   }
-  function pushTreeId(workInProgress2, totalChildren, index2) {
+  function pushTreeId(workInProgress2, totalChildren, index3) {
     idStack[idStackIndex++] = treeContextId;
     idStack[idStackIndex++] = treeContextOverflow;
     idStack[idStackIndex++] = treeContextProvider;
@@ -2845,17 +2845,17 @@ function requireReactDomClient_production() {
     workInProgress2 = treeContextOverflow;
     var baseLength = 32 - clz32(baseIdWithLeadingBit) - 1;
     baseIdWithLeadingBit &= ~(1 << baseLength);
-    index2 += 1;
+    index3 += 1;
     var length = 32 - clz32(totalChildren) + baseLength;
     if (30 < length) {
       var numberOfOverflowBits = baseLength - baseLength % 5;
       length = (baseIdWithLeadingBit & (1 << numberOfOverflowBits) - 1).toString(32);
       baseIdWithLeadingBit >>= numberOfOverflowBits;
       baseLength -= numberOfOverflowBits;
-      treeContextId = 1 << 32 - clz32(totalChildren) + baseLength | index2 << baseLength | baseIdWithLeadingBit;
+      treeContextId = 1 << 32 - clz32(totalChildren) + baseLength | index3 << baseLength | baseIdWithLeadingBit;
       treeContextOverflow = length + workInProgress2;
     } else
-      treeContextId = 1 << length | index2 << baseLength | baseIdWithLeadingBit, treeContextOverflow = workInProgress2;
+      treeContextId = 1 << length | index3 << baseLength | baseIdWithLeadingBit, treeContextOverflow = workInProgress2;
   }
   function pushMaterializedTreeId(workInProgress2) {
     null !== workInProgress2.return && (pushTreeFork(workInProgress2, 1), pushTreeId(workInProgress2, 1, 0));
@@ -3238,9 +3238,9 @@ function requireReactDomClient_production() {
   }
   function noop$3() {
   }
-  function trackUsedThenable(thenableState2, thenable, index2) {
-    index2 = thenableState2[index2];
-    void 0 === index2 ? thenableState2.push(thenable) : index2 !== thenable && (thenable.then(noop$3, noop$3), thenable = index2);
+  function trackUsedThenable(thenableState2, thenable, index3) {
+    index3 = thenableState2[index3];
+    void 0 === index3 ? thenableState2.push(thenable) : index3 !== thenable && (thenable.then(noop$3, noop$3), thenable = index3);
     switch (thenable.status) {
       case "fulfilled":
         return thenable.value;
@@ -3624,12 +3624,12 @@ function requireReactDomClient_production() {
     return { lastEffect: null, events: null, stores: null, memoCache: null };
   }
   function useThenable(thenable) {
-    var index2 = thenableIndexCounter$1;
+    var index3 = thenableIndexCounter$1;
     thenableIndexCounter$1 += 1;
     null === thenableState$1 && (thenableState$1 = []);
-    thenable = trackUsedThenable(thenableState$1, thenable, index2);
-    index2 = currentlyRenderingFiber;
-    null === (null === workInProgressHook ? index2.memoizedState : workInProgressHook.next) && (index2 = index2.alternate, ReactSharedInternals.H = null === index2 || null === index2.memoizedState ? HooksDispatcherOnMount : HooksDispatcherOnUpdate);
+    thenable = trackUsedThenable(thenableState$1, thenable, index3);
+    index3 = currentlyRenderingFiber;
+    null === (null === workInProgressHook ? index3.memoizedState : workInProgressHook.next) && (index3 = index3.alternate, ReactSharedInternals.H = null === index3 || null === index3.memoizedState ? HooksDispatcherOnMount : HooksDispatcherOnUpdate);
     return thenable;
   }
   function use(usable) {
@@ -3768,8 +3768,8 @@ function requireReactDomClient_production() {
     );
     snapshotChanged && (hook.memoizedState = getServerSnapshot, didReceiveUpdate = true);
     hook = hook.queue;
-    var create = subscribeToStore.bind(null, fiber, hook, subscribe);
-    updateEffectImpl(2048, 8, create, [subscribe]);
+    var create2 = subscribeToStore.bind(null, fiber, hook, subscribe);
+    updateEffectImpl(2048, 8, create2, [subscribe]);
     if (hook.getSnapshot !== getSnapshot || snapshotChanged || null !== workInProgressHook && workInProgressHook.memoizedState.tag & 1) {
       fiber.flags |= 2048;
       pushSimpleEffect(
@@ -3851,7 +3851,7 @@ function requireReactDomClient_production() {
       "function" === typeof reducer2 ? reducer2 : basicStateReducer
     );
   }
-  function dispatchActionState(fiber, actionQueue, setPendingState, setState, payload) {
+  function dispatchActionState(fiber, actionQueue, setPendingState, setState2, payload) {
     if (isRenderPhaseUpdate(fiber)) throw Error(formatProdErrorMessage(485));
     fiber = actionQueue.action;
     if (null !== fiber) {
@@ -3869,7 +3869,7 @@ function requireReactDomClient_production() {
         }
       };
       null !== ReactSharedInternals.T ? setPendingState(true) : actionNode.isTransition = false;
-      setState(actionNode);
+      setState2(actionNode);
       setPendingState = actionQueue.pending;
       null === setPendingState ? (actionNode.next = actionQueue.pending = actionNode, runActionStateAction(actionQueue, actionNode)) : (actionNode.next = setPendingState.next, actionQueue.pending = setPendingState.next = actionNode);
     }
@@ -4057,12 +4057,12 @@ function requireReactDomClient_production() {
     currentStateHook.memoizedState = action;
     return [stateHook, dispatch, false];
   }
-  function pushSimpleEffect(tag, inst, create, createDeps) {
-    tag = { tag, create, deps: createDeps, inst, next: null };
+  function pushSimpleEffect(tag, inst, create2, createDeps) {
+    tag = { tag, create: create2, deps: createDeps, inst, next: null };
     inst = currentlyRenderingFiber.updateQueue;
     null === inst && (inst = createFunctionComponentUpdateQueue(), currentlyRenderingFiber.updateQueue = inst);
-    create = inst.lastEffect;
-    null === create ? inst.lastEffect = tag.next = tag : (createDeps = create.next, create.next = tag, tag.next = createDeps, inst.lastEffect = tag);
+    create2 = inst.lastEffect;
+    null === create2 ? inst.lastEffect = tag.next = tag : (createDeps = create2.next, create2.next = tag, tag.next = createDeps, inst.lastEffect = tag);
     return tag;
   }
   function createEffectInstance() {
@@ -4071,56 +4071,56 @@ function requireReactDomClient_production() {
   function updateRef() {
     return updateWorkInProgressHook().memoizedState;
   }
-  function mountEffectImpl(fiberFlags, hookFlags, create, createDeps) {
+  function mountEffectImpl(fiberFlags, hookFlags, create2, createDeps) {
     var hook = mountWorkInProgressHook();
     createDeps = void 0 === createDeps ? null : createDeps;
     currentlyRenderingFiber.flags |= fiberFlags;
     hook.memoizedState = pushSimpleEffect(
       1 | hookFlags,
       createEffectInstance(),
-      create,
+      create2,
       createDeps
     );
   }
-  function updateEffectImpl(fiberFlags, hookFlags, create, deps) {
+  function updateEffectImpl(fiberFlags, hookFlags, create2, deps) {
     var hook = updateWorkInProgressHook();
     deps = void 0 === deps ? null : deps;
     var inst = hook.memoizedState.inst;
-    null !== currentHook && null !== deps && areHookInputsEqual(deps, currentHook.memoizedState.deps) ? hook.memoizedState = pushSimpleEffect(hookFlags, inst, create, deps) : (currentlyRenderingFiber.flags |= fiberFlags, hook.memoizedState = pushSimpleEffect(
+    null !== currentHook && null !== deps && areHookInputsEqual(deps, currentHook.memoizedState.deps) ? hook.memoizedState = pushSimpleEffect(hookFlags, inst, create2, deps) : (currentlyRenderingFiber.flags |= fiberFlags, hook.memoizedState = pushSimpleEffect(
       1 | hookFlags,
       inst,
-      create,
+      create2,
       deps
     ));
   }
-  function mountEffect(create, createDeps) {
-    mountEffectImpl(8390656, 8, create, createDeps);
+  function mountEffect(create2, createDeps) {
+    mountEffectImpl(8390656, 8, create2, createDeps);
   }
-  function updateEffect(create, createDeps) {
-    updateEffectImpl(2048, 8, create, createDeps);
+  function updateEffect(create2, createDeps) {
+    updateEffectImpl(2048, 8, create2, createDeps);
   }
-  function updateInsertionEffect(create, deps) {
-    return updateEffectImpl(4, 2, create, deps);
+  function updateInsertionEffect(create2, deps) {
+    return updateEffectImpl(4, 2, create2, deps);
   }
-  function updateLayoutEffect(create, deps) {
-    return updateEffectImpl(4, 4, create, deps);
+  function updateLayoutEffect(create2, deps) {
+    return updateEffectImpl(4, 4, create2, deps);
   }
-  function imperativeHandleEffect(create, ref) {
+  function imperativeHandleEffect(create2, ref) {
     if ("function" === typeof ref) {
-      create = create();
-      var refCleanup = ref(create);
+      create2 = create2();
+      var refCleanup = ref(create2);
       return function() {
         "function" === typeof refCleanup ? refCleanup() : ref(null);
       };
     }
     if (null !== ref && void 0 !== ref)
-      return create = create(), ref.current = create, function() {
+      return create2 = create2(), ref.current = create2, function() {
         ref.current = null;
       };
   }
-  function updateImperativeHandle(ref, create, deps) {
+  function updateImperativeHandle(ref, create2, deps) {
     deps = null !== deps && void 0 !== deps ? deps.concat([ref]) : null;
-    updateEffectImpl(4, 4, imperativeHandleEffect.bind(null, create, ref), deps);
+    updateEffectImpl(4, 4, imperativeHandleEffect.bind(null, create2, ref), deps);
   }
   function mountDebugValue() {
   }
@@ -4408,20 +4408,20 @@ function requireReactDomClient_production() {
     },
     useContext: readContext,
     useEffect: mountEffect,
-    useImperativeHandle: function(ref, create, deps) {
+    useImperativeHandle: function(ref, create2, deps) {
       deps = null !== deps && void 0 !== deps ? deps.concat([ref]) : null;
       mountEffectImpl(
         4194308,
         4,
-        imperativeHandleEffect.bind(null, create, ref),
+        imperativeHandleEffect.bind(null, create2, ref),
         deps
       );
     },
-    useLayoutEffect: function(create, deps) {
-      return mountEffectImpl(4194308, 4, create, deps);
+    useLayoutEffect: function(create2, deps) {
+      return mountEffectImpl(4194308, 4, create2, deps);
     },
-    useInsertionEffect: function(create, deps) {
-      mountEffectImpl(4, 2, create, deps);
+    useInsertionEffect: function(create2, deps) {
+      mountEffectImpl(4, 2, create2, deps);
     },
     useMemo: function(nextCreate, deps) {
       var hook = mountWorkInProgressHook();
@@ -4438,14 +4438,14 @@ function requireReactDomClient_production() {
       hook.memoizedState = [nextValue, deps];
       return nextValue;
     },
-    useReducer: function(reducer2, initialArg, init) {
+    useReducer: function(reducer2, initialArg, init2) {
       var hook = mountWorkInProgressHook();
-      if (void 0 !== init) {
-        var initialState = init(initialArg);
+      if (void 0 !== init2) {
+        var initialState = init2(initialArg);
         if (shouldDoubleInvokeUserFnsInHooksDEV) {
           setIsStrictModeForDevtools(true);
           try {
-            init(initialArg);
+            init2(initialArg);
           } finally {
             setIsStrictModeForDevtools(false);
           }
@@ -4663,10 +4663,10 @@ function requireReactDomClient_production() {
     useCacheRefresh: updateRefresh
   }, thenableState = null, thenableIndexCounter = 0;
   function unwrapThenable(thenable) {
-    var index2 = thenableIndexCounter;
+    var index3 = thenableIndexCounter;
     thenableIndexCounter += 1;
     null === thenableState && (thenableState = []);
-    return trackUsedThenable(thenableState, thenable, index2);
+    return trackUsedThenable(thenableState, thenable, index3);
   }
   function coerceRef(workInProgress2, element) {
     element = element.props.ref;
@@ -4684,8 +4684,8 @@ function requireReactDomClient_production() {
     );
   }
   function resolveLazy(lazyType) {
-    var init = lazyType._init;
-    return init(lazyType._payload);
+    var init2 = lazyType._init;
+    return init2(lazyType._payload);
   }
   function createChildReconciler(shouldTrackSideEffects) {
     function deleteChild(returnFiber, childToDelete) {
@@ -4800,8 +4800,8 @@ function requireReactDomClient_production() {
               lanes
             ), newChild.return = returnFiber, newChild;
           case REACT_LAZY_TYPE:
-            var init = newChild._init;
-            newChild = init(newChild._payload);
+            var init2 = newChild._init;
+            newChild = init2(newChild._payload);
             return createChild(returnFiber, newChild, lanes);
         }
         if (isArrayImpl(newChild) || getIteratorFn(newChild))
@@ -4870,8 +4870,8 @@ function requireReactDomClient_production() {
               null === newChild.key ? newIdx : newChild.key
             ) || null, updatePortal(returnFiber, existingChildren, newChild, lanes);
           case REACT_LAZY_TYPE:
-            var init = newChild._init;
-            newChild = init(newChild._payload);
+            var init2 = newChild._init;
+            newChild = init2(newChild._payload);
             return updateFromMap(
               existingChildren,
               returnFiber,
@@ -6103,8 +6103,8 @@ function requireReactDomClient_production() {
       case 16:
         a: {
           current = workInProgress2.pendingProps;
-          var lazyComponent = workInProgress2.elementType, init = lazyComponent._init;
-          lazyComponent = init(lazyComponent._payload);
+          var lazyComponent = workInProgress2.elementType, init2 = lazyComponent._init;
+          lazyComponent = init2(lazyComponent._payload);
           workInProgress2.type = lazyComponent;
           if ("function" === typeof lazyComponent)
             shouldConstruct(lazyComponent) ? (current = resolveClassComponentProps(lazyComponent, current), workInProgress2.tag = 1, workInProgress2 = updateClassComponent(
@@ -6122,7 +6122,7 @@ function requireReactDomClient_production() {
             ));
           else {
             if (void 0 !== lazyComponent && null !== lazyComponent) {
-              if (init = lazyComponent.$$typeof, init === REACT_FORWARD_REF_TYPE) {
+              if (init2 = lazyComponent.$$typeof, init2 === REACT_FORWARD_REF_TYPE) {
                 workInProgress2.tag = 11;
                 workInProgress2 = updateForwardRef(
                   null,
@@ -6132,7 +6132,7 @@ function requireReactDomClient_production() {
                   renderLanes2
                 );
                 break a;
-              } else if (init === REACT_MEMO_TYPE) {
+              } else if (init2 === REACT_MEMO_TYPE) {
                 workInProgress2.tag = 14;
                 workInProgress2 = updateMemoComponent(
                   null,
@@ -6158,14 +6158,14 @@ function requireReactDomClient_production() {
           renderLanes2
         );
       case 1:
-        return lazyComponent = workInProgress2.type, init = resolveClassComponentProps(
+        return lazyComponent = workInProgress2.type, init2 = resolveClassComponentProps(
           lazyComponent,
           workInProgress2.pendingProps
         ), updateClassComponent(
           current,
           workInProgress2,
           lazyComponent,
-          init,
+          init2,
           renderLanes2
         );
       case 3:
@@ -6177,7 +6177,7 @@ function requireReactDomClient_production() {
           if (null === current) throw Error(formatProdErrorMessage(387));
           lazyComponent = workInProgress2.pendingProps;
           var prevState = workInProgress2.memoizedState;
-          init = prevState.element;
+          init2 = prevState.element;
           cloneUpdateQueue(current, workInProgress2);
           processUpdateQueue(workInProgress2, lazyComponent, null, renderLanes2);
           var nextState = workInProgress2.memoizedState;
@@ -6204,12 +6204,12 @@ function requireReactDomClient_production() {
                 renderLanes2
               );
               break a;
-            } else if (lazyComponent !== init) {
-              init = createCapturedValueAtFiber(
+            } else if (lazyComponent !== init2) {
+              init2 = createCapturedValueAtFiber(
                 Error(formatProdErrorMessage(424)),
                 workInProgress2
               );
-              queueHydrationError(init);
+              queueHydrationError(init2);
               workInProgress2 = mountHostRootWithoutHydrating(
                 current,
                 workInProgress2,
@@ -6242,7 +6242,7 @@ function requireReactDomClient_production() {
             }
           else {
             resetHydrationState();
-            if (lazyComponent === init) {
+            if (lazyComponent === init2) {
               workInProgress2 = bailoutOnAlreadyFinishedWork(
                 current,
                 workInProgress2,
@@ -6279,9 +6279,9 @@ function requireReactDomClient_production() {
           workInProgress2.type,
           workInProgress2.pendingProps,
           rootInstanceStackCursor.current
-        ), hydrationParentFiber = workInProgress2, rootOrSingletonContext = true, init = nextHydratableInstance, isSingletonScope(workInProgress2.type) ? (previousHydratableOnEnteringScopedSingleton = init, nextHydratableInstance = getNextHydratable(
+        ), hydrationParentFiber = workInProgress2, rootOrSingletonContext = true, init2 = nextHydratableInstance, isSingletonScope(workInProgress2.type) ? (previousHydratableOnEnteringScopedSingleton = init2, nextHydratableInstance = getNextHydratable(
           lazyComponent.firstChild
-        )) : nextHydratableInstance = init), reconcileChildren(
+        )) : nextHydratableInstance = init2), reconcileChildren(
           current,
           workInProgress2,
           workInProgress2.pendingProps.children,
@@ -6289,7 +6289,7 @@ function requireReactDomClient_production() {
         ), markRef(current, workInProgress2), null === current && (workInProgress2.flags |= 4194304), workInProgress2.child;
       case 5:
         if (null === current && isHydrating) {
-          if (init = lazyComponent = nextHydratableInstance)
+          if (init2 = lazyComponent = nextHydratableInstance)
             lazyComponent = canHydrateInstance(
               lazyComponent,
               workInProgress2.type,
@@ -6297,23 +6297,23 @@ function requireReactDomClient_production() {
               rootOrSingletonContext
             ), null !== lazyComponent ? (workInProgress2.stateNode = lazyComponent, hydrationParentFiber = workInProgress2, nextHydratableInstance = getNextHydratable(
               lazyComponent.firstChild
-            ), rootOrSingletonContext = false, init = true) : init = false;
-          init || throwOnHydrationMismatch(workInProgress2);
+            ), rootOrSingletonContext = false, init2 = true) : init2 = false;
+          init2 || throwOnHydrationMismatch(workInProgress2);
         }
         pushHostContext(workInProgress2);
-        init = workInProgress2.type;
+        init2 = workInProgress2.type;
         prevState = workInProgress2.pendingProps;
         nextState = null !== current ? current.memoizedProps : null;
         lazyComponent = prevState.children;
-        shouldSetTextContent(init, prevState) ? lazyComponent = null : null !== nextState && shouldSetTextContent(init, nextState) && (workInProgress2.flags |= 32);
-        null !== workInProgress2.memoizedState && (init = renderWithHooks(
+        shouldSetTextContent(init2, prevState) ? lazyComponent = null : null !== nextState && shouldSetTextContent(init2, nextState) && (workInProgress2.flags |= 32);
+        null !== workInProgress2.memoizedState && (init2 = renderWithHooks(
           current,
           workInProgress2,
           TransitionAwareHostComponent,
           null,
           null,
           renderLanes2
-        ), HostTransitionContext._currentValue = init);
+        ), HostTransitionContext._currentValue = init2);
         markRef(current, workInProgress2);
         reconcileChildren(current, workInProgress2, lazyComponent, renderLanes2);
         return workInProgress2.child;
@@ -6382,7 +6382,7 @@ function requireReactDomClient_production() {
           renderLanes2
         ), workInProgress2.child;
       case 9:
-        return init = workInProgress2.type._context, lazyComponent = workInProgress2.pendingProps.children, prepareToReadContext(workInProgress2), init = readContext(init), lazyComponent = lazyComponent(init), workInProgress2.flags |= 1, reconcileChildren(current, workInProgress2, lazyComponent, renderLanes2), workInProgress2.child;
+        return init2 = workInProgress2.type._context, lazyComponent = workInProgress2.pendingProps.children, prepareToReadContext(workInProgress2), init2 = readContext(init2), lazyComponent = lazyComponent(init2), workInProgress2.flags |= 1, reconcileChildren(current, workInProgress2, lazyComponent, renderLanes2), workInProgress2.child;
       case 14:
         return updateMemoComponent(
           current,
@@ -6412,10 +6412,10 @@ function requireReactDomClient_production() {
       case 22:
         return updateOffscreenComponent(current, workInProgress2, renderLanes2);
       case 24:
-        return prepareToReadContext(workInProgress2), lazyComponent = readContext(CacheContext), null === current ? (init = peekCacheFromPool(), null === init && (init = workInProgressRoot, prevState = createCache(), init.pooledCache = prevState, prevState.refCount++, null !== prevState && (init.pooledCacheLanes |= renderLanes2), init = prevState), workInProgress2.memoizedState = {
+        return prepareToReadContext(workInProgress2), lazyComponent = readContext(CacheContext), null === current ? (init2 = peekCacheFromPool(), null === init2 && (init2 = workInProgressRoot, prevState = createCache(), init2.pooledCache = prevState, prevState.refCount++, null !== prevState && (init2.pooledCacheLanes |= renderLanes2), init2 = prevState), workInProgress2.memoizedState = {
           parent: lazyComponent,
-          cache: init
-        }, initializeUpdateQueue(workInProgress2), pushProvider(workInProgress2, CacheContext, init)) : (0 !== (current.lanes & renderLanes2) && (cloneUpdateQueue(current, workInProgress2), processUpdateQueue(workInProgress2, null, null, renderLanes2), suspendIfUpdateReadFromEntangledAsyncAction()), init = current.memoizedState, prevState = workInProgress2.memoizedState, init.parent !== lazyComponent ? (init = { parent: lazyComponent, cache: lazyComponent }, workInProgress2.memoizedState = init, 0 === workInProgress2.lanes && (workInProgress2.memoizedState = workInProgress2.updateQueue.baseState = init), pushProvider(workInProgress2, CacheContext, lazyComponent)) : (lazyComponent = prevState.cache, pushProvider(workInProgress2, CacheContext, lazyComponent), lazyComponent !== init.cache && propagateContextChanges(
+          cache: init2
+        }, initializeUpdateQueue(workInProgress2), pushProvider(workInProgress2, CacheContext, init2)) : (0 !== (current.lanes & renderLanes2) && (cloneUpdateQueue(current, workInProgress2), processUpdateQueue(workInProgress2, null, null, renderLanes2), suspendIfUpdateReadFromEntangledAsyncAction()), init2 = current.memoizedState, prevState = workInProgress2.memoizedState, init2.parent !== lazyComponent ? (init2 = { parent: lazyComponent, cache: lazyComponent }, workInProgress2.memoizedState = init2, 0 === workInProgress2.lanes && (workInProgress2.memoizedState = workInProgress2.updateQueue.baseState = init2), pushProvider(workInProgress2, CacheContext, lazyComponent)) : (lazyComponent = prevState.cache, pushProvider(workInProgress2, CacheContext, lazyComponent), lazyComponent !== init2.cache && propagateContextChanges(
           workInProgress2,
           [CacheContext],
           renderLanes2,
@@ -6834,8 +6834,8 @@ function requireReactDomClient_production() {
         do {
           if ((updateQueue.tag & flags) === flags) {
             lastEffect = void 0;
-            var create = updateQueue.create, inst = updateQueue.inst;
-            lastEffect = create();
+            var create2 = updateQueue.create, inst = updateQueue.inst;
+            lastEffect = create2();
             inst.destroy = lastEffect;
           }
           updateQueue = updateQueue.next;
@@ -12105,18 +12105,18 @@ function requireDist() {
     if (len < 2)
       return obj;
     const dec = (options == null ? void 0 : options.decode) || decode;
-    let index = 0;
+    let index2 = 0;
     do {
-      const eqIdx = str.indexOf("=", index);
+      const eqIdx = str.indexOf("=", index2);
       if (eqIdx === -1)
         break;
-      const colonIdx = str.indexOf(";", index);
+      const colonIdx = str.indexOf(";", index2);
       const endIdx = colonIdx === -1 ? len : colonIdx;
       if (eqIdx > endIdx) {
-        index = str.lastIndexOf(";", eqIdx - 1) + 1;
+        index2 = str.lastIndexOf(";", eqIdx - 1) + 1;
         continue;
       }
-      const keyStartIdx = startIndex(str, index, eqIdx);
+      const keyStartIdx = startIndex(str, index2, eqIdx);
       const keyEndIdx = endIndex(str, eqIdx, keyStartIdx);
       const key = str.slice(keyStartIdx, keyEndIdx);
       if (obj[key] === void 0) {
@@ -12125,23 +12125,23 @@ function requireDist() {
         const value = dec(str.slice(valStartIdx, valEndIdx));
         obj[key] = value;
       }
-      index = endIdx + 1;
-    } while (index < len);
+      index2 = endIdx + 1;
+    } while (index2 < len);
     return obj;
   }
-  function startIndex(str, index, max) {
+  function startIndex(str, index2, max) {
     do {
-      const code = str.charCodeAt(index);
+      const code = str.charCodeAt(index2);
       if (code !== 32 && code !== 9)
-        return index;
-    } while (++index < max);
+        return index2;
+    } while (++index2 < max);
     return max;
   }
-  function endIndex(str, index, min) {
-    while (index > min) {
-      const code = str.charCodeAt(--index);
+  function endIndex(str, index2, min) {
+    while (index2 > min) {
+      const code = str.charCodeAt(--index2);
       if (code !== 32 && code !== 9)
-        return index + 1;
+        return index2 + 1;
     }
     return min;
   }
@@ -12301,11 +12301,11 @@ function warning(cond, message) {
 function createKey() {
   return Math.random().toString(36).substring(2, 10);
 }
-function getHistoryState(location, index) {
+function getHistoryState(location, index2) {
   return {
     usr: location.state,
     key: location.key,
-    idx: index
+    idx: index2
   };
 }
 function createLocation(current, to, state = null, key) {
@@ -12358,10 +12358,10 @@ function getUrlBasedHistory(getLocation, createHref2, validateLocation, options 
   let globalHistory = window2.history;
   let action = "POP";
   let listener = null;
-  let index = getIndex();
-  if (index == null) {
-    index = 0;
-    globalHistory.replaceState({ ...globalHistory.state, idx: index }, "");
+  let index2 = getIndex();
+  if (index2 == null) {
+    index2 = 0;
+    globalHistory.replaceState({ ...globalHistory.state, idx: index2 }, "");
   }
   function getIndex() {
     let state = globalHistory.state || { idx: null };
@@ -12370,8 +12370,8 @@ function getUrlBasedHistory(getLocation, createHref2, validateLocation, options 
   function handlePop() {
     action = "POP";
     let nextIndex = getIndex();
-    let delta = nextIndex == null ? null : nextIndex - index;
-    index = nextIndex;
+    let delta = nextIndex == null ? null : nextIndex - index2;
+    index2 = nextIndex;
     if (listener) {
       listener({ action, location: history.location, delta });
     }
@@ -12380,8 +12380,8 @@ function getUrlBasedHistory(getLocation, createHref2, validateLocation, options 
     action = "PUSH";
     let location = createLocation(history.location, to, state);
     if (validateLocation) validateLocation(location, to);
-    index = getIndex() + 1;
-    let historyState = getHistoryState(location, index);
+    index2 = getIndex() + 1;
+    let historyState = getHistoryState(location, index2);
     let url = history.createHref(location);
     try {
       globalHistory.pushState(historyState, "", url);
@@ -12399,8 +12399,8 @@ function getUrlBasedHistory(getLocation, createHref2, validateLocation, options 
     action = "REPLACE";
     let location = createLocation(history.location, to, state);
     if (validateLocation) validateLocation(location, to);
-    index = getIndex();
-    let historyState = getHistoryState(location, index);
+    index2 = getIndex();
+    let historyState = getHistoryState(location, index2);
     let url = history.createHref(location);
     globalHistory.replaceState(historyState, "", url);
     if (v5Compat && listener) {
@@ -12484,11 +12484,11 @@ function matchRoutesImpl(routes, locationArg, basename, allowPartial) {
   return matches;
 }
 function flattenRoutes(routes, branches = [], parentsMeta = [], parentPath = "") {
-  let flattenRoute = (route, index, relativePath) => {
+  let flattenRoute = (route, index2, relativePath) => {
     let meta = {
       relativePath: relativePath === void 0 ? route.path || "" : relativePath,
       caseSensitive: route.caseSensitive === true,
-      childrenIndex: index,
+      childrenIndex: index2,
       route
     };
     if (meta.relativePath.startsWith("/")) {
@@ -12518,13 +12518,13 @@ function flattenRoutes(routes, branches = [], parentsMeta = [], parentPath = "")
       routesMeta
     });
   };
-  routes.forEach((route, index) => {
+  routes.forEach((route, index2) => {
     var _a;
     if (route.path === "" || !((_a = route.path) == null ? void 0 : _a.includes("?"))) {
-      flattenRoute(route, index);
+      flattenRoute(route, index2);
     } else {
       for (let exploded of explodeOptionalSegments(route.path)) {
-        flattenRoute(route, index, exploded);
+        flattenRoute(route, index2, exploded);
       }
     }
   });
@@ -12568,13 +12568,13 @@ var emptySegmentValue = 1;
 var staticSegmentValue = 10;
 var splatPenalty = -2;
 var isSplat = (s2) => s2 === "*";
-function computeScore(path, index) {
+function computeScore(path, index2) {
   let segments = path.split("/");
   let initialScore = segments.length;
   if (segments.some(isSplat)) {
     initialScore += splatPenalty;
   }
-  if (index) {
+  if (index2) {
     initialScore += indexRouteValue;
   }
   return segments.filter((s2) => !isSplat(s2)).reduce(
@@ -12654,12 +12654,12 @@ function matchPath(pattern, pathname) {
   let pathnameBase = matchedPathname.replace(/(.)\/+$/, "$1");
   let captureGroups = match.slice(1);
   let params = compiledParams.reduce(
-    (memo2, { paramName, isOptional }, index) => {
+    (memo2, { paramName, isOptional }, index2) => {
       if (paramName === "*") {
-        let splatValue = captureGroups[index] || "";
+        let splatValue = captureGroups[index2] || "";
         pathnameBase = matchedPathname.slice(0, matchedPathname.length - splatValue.length).replace(/(.)\/+$/, "$1");
       }
-      const value = captureGroups[index];
+      const value = captureGroups[index2];
       if (isOptional && !value) {
         memo2[paramName] = void 0;
       } else {
@@ -12755,7 +12755,7 @@ function getInvalidPathError(char, field, dest, path) {
 }
 function getPathContributingMatches(matches) {
   return matches.filter(
-    (match, index) => index === 0 || match.route.path && match.route.path.length > 0
+    (match, index2) => index2 === 0 || match.route.path && match.route.path.length > 0
   );
 }
 function getResolveToMatches(matches) {
@@ -13151,7 +13151,7 @@ function _renderMatches(matches, parentMatches = [], dataRouterState = null, fut
       }
     }
   }
-  return renderedMatches.reduceRight((outlet, match, index) => {
+  return renderedMatches.reduceRight((outlet, match, index2) => {
     let error;
     let shouldRenderHydrateFallback = false;
     let errorElement = null;
@@ -13160,7 +13160,7 @@ function _renderMatches(matches, parentMatches = [], dataRouterState = null, fut
       error = errors && match.route.id ? errors[match.route.id] : void 0;
       errorElement = match.route.errorElement || defaultErrorElement;
       if (renderFallback) {
-        if (fallbackIndex < 0 && index === 0) {
+        if (fallbackIndex < 0 && index2 === 0) {
           warningOnce(
             "route-fallback",
             false,
@@ -13168,13 +13168,13 @@ function _renderMatches(matches, parentMatches = [], dataRouterState = null, fut
           );
           shouldRenderHydrateFallback = true;
           hydrateFallbackElement = null;
-        } else if (fallbackIndex === index) {
+        } else if (fallbackIndex === index2) {
           shouldRenderHydrateFallback = true;
           hydrateFallbackElement = match.route.hydrateFallbackElement || null;
         }
       }
     }
-    let matches2 = parentMatches.concat(renderedMatches.slice(0, index + 1));
+    let matches2 = parentMatches.concat(renderedMatches.slice(0, index2 + 1));
     let getChildren = () => {
       let children;
       if (error) {
@@ -13201,7 +13201,7 @@ function _renderMatches(matches, parentMatches = [], dataRouterState = null, fut
         }
       );
     };
-    return dataRouterState && (match.route.ErrorBoundary || match.route.errorElement || index === 0) ? /* @__PURE__ */ reactExports.createElement(
+    return dataRouterState && (match.route.ErrorBoundary || match.route.errorElement || index2 === 0) ? /* @__PURE__ */ reactExports.createElement(
       RenderErrorBoundary,
       {
         location: dataRouterState.location,
@@ -13521,32 +13521,32 @@ async function getKeyedPrefetchLinks(matches, manifest, routeModules) {
   );
 }
 function getNewMatchesForLinks(page, nextMatches, currentMatches, manifest, location, mode) {
-  let isNew = (match, index) => {
-    if (!currentMatches[index]) return true;
-    return match.route.id !== currentMatches[index].route.id;
+  let isNew = (match, index2) => {
+    if (!currentMatches[index2]) return true;
+    return match.route.id !== currentMatches[index2].route.id;
   };
-  let matchPathChanged = (match, index) => {
+  let matchPathChanged = (match, index2) => {
     var _a;
     return (
       // param change, /users/123 -> /users/456
-      currentMatches[index].pathname !== match.pathname || // splat param changed, which is not present in match.path
+      currentMatches[index2].pathname !== match.pathname || // splat param changed, which is not present in match.path
       // e.g. /files/images/avatar.jpg -> files/finances.xls
-      ((_a = currentMatches[index].route.path) == null ? void 0 : _a.endsWith("*")) && currentMatches[index].params["*"] !== match.params["*"]
+      ((_a = currentMatches[index2].route.path) == null ? void 0 : _a.endsWith("*")) && currentMatches[index2].params["*"] !== match.params["*"]
     );
   };
   if (mode === "assets") {
     return nextMatches.filter(
-      (match, index) => isNew(match, index) || matchPathChanged(match, index)
+      (match, index2) => isNew(match, index2) || matchPathChanged(match, index2)
     );
   }
   if (mode === "data") {
-    return nextMatches.filter((match, index) => {
+    return nextMatches.filter((match, index2) => {
       var _a;
       let manifestRoute = manifest.routes[match.route.id];
       if (!manifestRoute || !manifestRoute.hasLoader) {
         return false;
       }
-      if (isNew(match, index) || matchPathChanged(match, index)) {
+      if (isNew(match, index2) || matchPathChanged(match, index2)) {
         return true;
       }
       if (match.route.shouldRevalidate) {
@@ -13867,13 +13867,13 @@ function HashRouter({ basename, children, window: window2 }) {
     action: history.action,
     location: history.location
   });
-  let setState = reactExports.useCallback(
+  let setState2 = reactExports.useCallback(
     (newState) => {
       reactExports.startTransition(() => setStateImpl(newState));
     },
     [setStateImpl]
   );
-  reactExports.useLayoutEffect(() => history.listen(setState), [history, setState]);
+  reactExports.useLayoutEffect(() => history.listen(setState2), [history, setState2]);
   return /* @__PURE__ */ reactExports.createElement(
     Router,
     {
@@ -14542,25 +14542,25 @@ var a = i(o(function(e2, i2) {
     }
     return i3;
   }
-  var l2 = function() {
+  var l3 = function() {
     function e3(t2) {
       this.acquiredIatSet = /* @__PURE__ */ new Set(), this.storageHandler = void 0, this.id = Date.now().toString() + u2(15), this.acquireLock = this.acquireLock.bind(this), this.releaseLock = this.releaseLock.bind(this), this.releaseLock__private__ = this.releaseLock__private__.bind(this), this.waitForSomethingToChange = this.waitForSomethingToChange.bind(this), this.refreshLockWhileAcquired = this.refreshLockWhileAcquired.bind(this), this.storageHandler = t2, void 0 === e3.waiters && (e3.waiters = []);
     }
     return e3.prototype.acquireLock = function(t2, i3) {
       return void 0 === i3 && (i3 = 5e3), o2(this, void 0, void 0, function() {
-        var o3, n2, r3, l3, h2, p2, m2;
+        var o3, n2, r3, l4, h3, p2, m2;
         return a2(this, function(a3) {
           switch (a3.label) {
             case 0:
-              o3 = Date.now() + u2(4), n2 = Date.now() + i3, r3 = s2 + "-" + t2, l3 = void 0 === this.storageHandler ? c2 : this.storageHandler, a3.label = 1;
+              o3 = Date.now() + u2(4), n2 = Date.now() + i3, r3 = s2 + "-" + t2, l4 = void 0 === this.storageHandler ? c2 : this.storageHandler, a3.label = 1;
             case 1:
               return Date.now() < n2 ? [4, d2(30)] : [3, 8];
             case 2:
-              return a3.sent(), null !== l3.getItemSync(r3) ? [3, 5] : (h2 = this.id + "-" + t2 + "-" + o3, [4, d2(Math.floor(25 * Math.random()))]);
+              return a3.sent(), null !== l4.getItemSync(r3) ? [3, 5] : (h3 = this.id + "-" + t2 + "-" + o3, [4, d2(Math.floor(25 * Math.random()))]);
             case 3:
-              return a3.sent(), l3.setItemSync(r3, JSON.stringify({ id: this.id, iat: o3, timeoutKey: h2, timeAcquired: Date.now(), timeRefreshed: Date.now() })), [4, d2(30)];
+              return a3.sent(), l4.setItemSync(r3, JSON.stringify({ id: this.id, iat: o3, timeoutKey: h3, timeAcquired: Date.now(), timeRefreshed: Date.now() })), [4, d2(30)];
             case 4:
-              return a3.sent(), null !== (p2 = l3.getItemSync(r3)) && (m2 = JSON.parse(p2)).id === this.id && m2.iat === o3 ? (this.acquiredIatSet.add(o3), this.refreshLockWhileAcquired(r3, o3), [2, true]) : [3, 7];
+              return a3.sent(), null !== (p2 = l4.getItemSync(r3)) && (m2 = JSON.parse(p2)).id === this.id && m2.iat === o3 ? (this.acquiredIatSet.add(o3), this.refreshLockWhileAcquired(r3, o3), [2, true]) : [3, 7];
             case 5:
               return e3.lockCorrector(void 0 === this.storageHandler ? c2 : this.storageHandler), [4, this.waitForSomethingToChange(n2)];
             case 6:
@@ -14657,17 +14657,17 @@ var a = i(o(function(e2, i2) {
       for (var c3 = false, d3 = 0; d3 < n2.length; d3++) {
         var u3 = n2[d3];
         if (u3.includes(s2)) {
-          var l3 = o3.getItemSync(u3);
-          if (null !== l3) {
-            var h2 = JSON.parse(l3);
-            (void 0 === h2.timeRefreshed && h2.timeAcquired < i3 || void 0 !== h2.timeRefreshed && h2.timeRefreshed < i3) && (o3.removeItemSync(u3), c3 = true);
+          var l4 = o3.getItemSync(u3);
+          if (null !== l4) {
+            var h3 = JSON.parse(l4);
+            (void 0 === h3.timeRefreshed && h3.timeAcquired < i3 || void 0 !== h3.timeRefreshed && h3.timeRefreshed < i3) && (o3.removeItemSync(u3), c3 = true);
           }
         }
       }
       c3 && e3.notifyWaiters();
     }, e3.waiters = void 0, e3;
   }();
-  i2.default = l2;
+  i2.default = l3;
 }));
 const r = { timeoutInSeconds: 60 }, s = { name: "auth0-spa-js", version: "2.1.3" }, c = () => Date.now();
 class d extends Error {
@@ -14683,16 +14683,16 @@ class u extends d {
     super(e2, t2), this.state = i2, this.appState = o2, Object.setPrototypeOf(this, u.prototype);
   }
 }
-class l extends d {
+let l$1 = class l extends d {
   constructor() {
     super("timeout", "Timeout"), Object.setPrototypeOf(this, l.prototype);
   }
-}
-class h extends l {
+};
+let h$1 = class h extends l$1 {
   constructor(e2) {
     super(), this.popup = e2, Object.setPrototypeOf(this, h.prototype);
   }
-}
+};
 class p extends d {
   constructor(e2) {
     super("cancelled", "Popup closed"), this.popup = e2, Object.setPrototypeOf(this, p.prototype);
@@ -14715,16 +14715,16 @@ const w = () => window.crypto, y = () => {
   const e2 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_~.";
   let t2 = "";
   return Array.from(w().getRandomValues(new Uint8Array(43))).forEach((i2) => t2 += e2[i2 % e2.length]), t2;
-}, k = (e2) => btoa(e2), v = (t2) => {
+}, k$1 = (e2) => btoa(e2), v$1 = (t2) => {
   var { clientId: i2 } = t2, o2 = e(t2, ["clientId"]);
   return new URLSearchParams(((e2) => Object.keys(e2).filter((t3) => void 0 !== e2[t3]).reduce((t3, i3) => Object.assign(Object.assign({}, t3), { [i3]: e2[i3] }), {}))(Object.assign({ client_id: i2 }, o2))).toString();
-}, b = (e2) => ((e3) => decodeURIComponent(atob(e3).split("").map((e4) => "%" + ("00" + e4.charCodeAt(0).toString(16)).slice(-2)).join("")))(e2.replace(/_/g, "/").replace(/-/g, "+")), _ = async (e2, t2) => {
+}, b = (e2) => ((e3) => decodeURIComponent(atob(e3).split("").map((e4) => "%" + ("00" + e4.charCodeAt(0).toString(16)).slice(-2)).join("")))(e2.replace(/_/g, "/").replace(/-/g, "+")), _$1 = async (e2, t2) => {
   const i2 = await fetch(e2, t2);
   return { ok: i2.ok, json: await i2.json() };
 }, I = async (e2, t2, i2) => {
   const o2 = new AbortController();
   let n2;
-  return t2.signal = o2.signal, Promise.race([_(e2, t2), new Promise((e3, t3) => {
+  return t2.signal = o2.signal, Promise.race([_$1(e2, t2), new Promise((e3, t3) => {
     n2 = setTimeout(() => {
       o2.abort(), t3(new Error("Timeout when executing 'fetch'"));
     }, i2);
@@ -14741,8 +14741,8 @@ const w = () => window.crypto, y = () => {
   var s2, c2;
 }, O = async (e2, t2, i2, o2, n2, a2, r2 = 1e4) => n2 ? S(e2, t2, i2, o2, r2, n2, a2) : I(e2, o2, r2);
 async function T(t2, i2) {
-  var { baseUrl: o2, timeout: n2, audience: a2, scope: r2, auth0Client: c2, useFormData: u2 } = t2, l2 = e(t2, ["baseUrl", "timeout", "audience", "scope", "auth0Client", "useFormData"]);
-  const h2 = u2 ? v(l2) : JSON.stringify(l2);
+  var { baseUrl: o2, timeout: n2, audience: a2, scope: r2, auth0Client: c2, useFormData: u2 } = t2, l3 = e(t2, ["baseUrl", "timeout", "audience", "scope", "auth0Client", "useFormData"]);
+  const h3 = u2 ? v$1(l3) : JSON.stringify(l3);
   return await async function(t3, i3, o3, n3, a3, r3, s2) {
     let c3, u3 = null;
     for (let e2 = 0; e2 < 3; e2++) try {
@@ -14752,15 +14752,15 @@ async function T(t2, i2) {
       u3 = e3;
     }
     if (u3) throw u3;
-    const l3 = c3.json, { error: h3, error_description: p2 } = l3, g2 = e(l3, ["error", "error_description"]), { ok: w2 } = c3;
+    const l4 = c3.json, { error: h4, error_description: p2 } = l4, g2 = e(l4, ["error", "error_description"]), { ok: w2 } = c3;
     if (!w2) {
       const e2 = p2 || `HTTP error. Unable to fetch ${t3}`;
-      if ("mfa_required" === h3) throw new m(h3, e2, g2.mfa_token);
-      if ("missing_refresh_token" === h3) throw new f(o3, n3);
-      throw new d(h3 || "request_error", e2);
+      if ("mfa_required" === h4) throw new m(h4, e2, g2.mfa_token);
+      if ("missing_refresh_token" === h4) throw new f(o3, n3);
+      throw new d(h4 || "request_error", e2);
     }
     return g2;
-  }(`${o2}/oauth/token`, n2, a2 || "default", r2, { method: "POST", body: h2, headers: { "Content-Type": u2 ? "application/x-www-form-urlencoded" : "application/json", "Auth0-Client": btoa(JSON.stringify(c2 || s)) } }, i2, u2);
+  }(`${o2}/oauth/token`, n2, a2 || "default", r2, { method: "POST", body: h3, headers: { "Content-Type": u2 ? "application/x-www-form-urlencoded" : "application/json", "Auth0-Client": btoa(JSON.stringify(c2 || s)) } }, i2, u2);
 }
 const j = (...e2) => {
   return (t2 = e2.filter(Boolean).join(" ").trim().split(/\s+/), Array.from(new Set(t2))).join(" ");
@@ -14879,7 +14879,7 @@ class x {
     })[0];
   }
 }
-class Z {
+let Z$1 = class Z {
   constructor(e2, t2, i2) {
     this.storage = e2, this.clientId = t2, this.cookieDomain = i2, this.storageKey = `a0.spajs.txs.${this.clientId}`;
   }
@@ -14892,7 +14892,7 @@ class Z {
   remove() {
     this.storage.remove(this.storageKey, { cookieDomain: this.cookieDomain });
   }
-}
+};
 const K = (e2) => "number" == typeof e2, W = ["iss", "aud", "exp", "nbf", "iat", "jti", "azp", "nonce", "auth_time", "at_hash", "c_hash", "acr", "amr", "sub_jwk", "cnf", "sip_from_tag", "sip_date", "sip_callid", "sip_cseq_num", "sip_via_branch", "orig", "dest", "mky", "events", "toe", "txn", "rph", "sid", "vot", "vtm"], E = (e2) => {
   if (!e2.id_token) throw new Error("ID token is required but missing");
   const t2 = ((e3) => {
@@ -14991,7 +14991,7 @@ var R = o(function(e2, i2) {
   };
 });
 i(R), R.encode, R.parse, R.getAll;
-var U = R.get, L = R.set, D = R.remove;
+var U = R.get, L = R.set, D$1 = R.remove;
 const X = { get(e2) {
   const t2 = U(e2);
   if (void 0 !== t2) return JSON.parse(t2);
@@ -15000,7 +15000,7 @@ const X = { get(e2) {
   "https:" === window.location.protocol && (o2 = { secure: true, sameSite: "none" }), (null == i2 ? void 0 : i2.daysUntilExpire) && (o2.expires = i2.daysUntilExpire), (null == i2 ? void 0 : i2.cookieDomain) && (o2.domain = i2.cookieDomain), L(e2, JSON.stringify(t2), o2);
 }, remove(e2, t2) {
   let i2 = {};
-  (null == t2 ? void 0 : t2.cookieDomain) && (i2.domain = t2.cookieDomain), D(e2, i2);
+  (null == t2 ? void 0 : t2.cookieDomain) && (i2.domain = t2.cookieDomain), D$1(e2, i2);
 } }, N = { get(e2) {
   const t2 = X.get(e2);
   return t2 || X.get(`_legacy_${e2}`);
@@ -15009,7 +15009,7 @@ const X = { get(e2) {
   "https:" === window.location.protocol && (o2 = { secure: true }), (null == i2 ? void 0 : i2.daysUntilExpire) && (o2.expires = i2.daysUntilExpire), (null == i2 ? void 0 : i2.cookieDomain) && (o2.domain = i2.cookieDomain), L(`_legacy_${e2}`, JSON.stringify(t2), o2), X.save(e2, t2, i2);
 }, remove(e2, t2) {
   let i2 = {};
-  (null == t2 ? void 0 : t2.cookieDomain) && (i2.domain = t2.cookieDomain), D(e2, i2), X.remove(e2, t2), X.remove(`_legacy_${e2}`, t2);
+  (null == t2 ? void 0 : t2.cookieDomain) && (i2.domain = t2.cookieDomain), D$1(e2, i2), X.remove(e2, t2), X.remove(`_legacy_${e2}`, t2);
 } }, J = { get(e2) {
   if ("undefined" == typeof sessionStorage) return;
   const t2 = sessionStorage.getItem(e2);
@@ -15030,8 +15030,8 @@ function F(e2, t2, i2) {
   }(e2, void 0 !== i2 && i2), a2 = n2.indexOf("\n", 10) + 1, r2 = n2.substring(a2) + (o2 ? "//# sourceMappingURL=" + o2 : ""), s2 = new Blob([r2], { type: "application/javascript" });
   return URL.createObjectURL(s2);
 }
-var H, Y, G, V, M = (H = "Lyogcm9sbHVwLXBsdWdpbi13ZWItd29ya2VyLWxvYWRlciAqLwohZnVuY3Rpb24oKXsidXNlIHN0cmljdCI7Y2xhc3MgZSBleHRlbmRzIEVycm9ye2NvbnN0cnVjdG9yKHQscil7c3VwZXIociksdGhpcy5lcnJvcj10LHRoaXMuZXJyb3JfZGVzY3JpcHRpb249cixPYmplY3Quc2V0UHJvdG90eXBlT2YodGhpcyxlLnByb3RvdHlwZSl9c3RhdGljIGZyb21QYXlsb2FkKHtlcnJvcjp0LGVycm9yX2Rlc2NyaXB0aW9uOnJ9KXtyZXR1cm4gbmV3IGUodCxyKX19Y2xhc3MgdCBleHRlbmRzIGV7Y29uc3RydWN0b3IoZSxzKXtzdXBlcigibWlzc2luZ19yZWZyZXNoX3Rva2VuIixgTWlzc2luZyBSZWZyZXNoIFRva2VuIChhdWRpZW5jZTogJyR7cihlLFsiZGVmYXVsdCJdKX0nLCBzY29wZTogJyR7cihzKX0nKWApLHRoaXMuYXVkaWVuY2U9ZSx0aGlzLnNjb3BlPXMsT2JqZWN0LnNldFByb3RvdHlwZU9mKHRoaXMsdC5wcm90b3R5cGUpfX1mdW5jdGlvbiByKGUsdD1bXSl7cmV0dXJuIGUmJiF0LmluY2x1ZGVzKGUpP2U6IiJ9ImZ1bmN0aW9uIj09dHlwZW9mIFN1cHByZXNzZWRFcnJvciYmU3VwcHJlc3NlZEVycm9yO2NvbnN0IHM9ZT0+e3ZhcntjbGllbnRJZDp0fT1lLHI9ZnVuY3Rpb24oZSx0KXt2YXIgcj17fTtmb3IodmFyIHMgaW4gZSlPYmplY3QucHJvdG90eXBlLmhhc093blByb3BlcnR5LmNhbGwoZSxzKSYmdC5pbmRleE9mKHMpPDAmJihyW3NdPWVbc10pO2lmKG51bGwhPWUmJiJmdW5jdGlvbiI9PXR5cGVvZiBPYmplY3QuZ2V0T3duUHJvcGVydHlTeW1ib2xzKXt2YXIgbz0wO2ZvcihzPU9iamVjdC5nZXRPd25Qcm9wZXJ0eVN5bWJvbHMoZSk7bzxzLmxlbmd0aDtvKyspdC5pbmRleE9mKHNbb10pPDAmJk9iamVjdC5wcm90b3R5cGUucHJvcGVydHlJc0VudW1lcmFibGUuY2FsbChlLHNbb10pJiYocltzW29dXT1lW3Nbb11dKX1yZXR1cm4gcn0oZSxbImNsaWVudElkIl0pO3JldHVybiBuZXcgVVJMU2VhcmNoUGFyYW1zKChlPT5PYmplY3Qua2V5cyhlKS5maWx0ZXIoKHQ9PnZvaWQgMCE9PWVbdF0pKS5yZWR1Y2UoKCh0LHIpPT5PYmplY3QuYXNzaWduKE9iamVjdC5hc3NpZ24oe30sdCkse1tyXTplW3JdfSkpLHt9KSkoT2JqZWN0LmFzc2lnbih7Y2xpZW50X2lkOnR9LHIpKSkudG9TdHJpbmcoKX07bGV0IG89e307Y29uc3Qgbj0oZSx0KT0+YCR7ZX18JHt0fWA7YWRkRXZlbnRMaXN0ZW5lcigibWVzc2FnZSIsKGFzeW5jKHtkYXRhOnt0aW1lb3V0OmUsYXV0aDpyLGZldGNoVXJsOmksZmV0Y2hPcHRpb25zOmMsdXNlRm9ybURhdGE6YX0scG9ydHM6W3BdfSk9PntsZXQgZjtjb25zdHthdWRpZW5jZTp1LHNjb3BlOmx9PXJ8fHt9O3RyeXtjb25zdCByPWE/KGU9Pntjb25zdCB0PW5ldyBVUkxTZWFyY2hQYXJhbXMoZSkscj17fTtyZXR1cm4gdC5mb3JFYWNoKCgoZSx0KT0+e3JbdF09ZX0pKSxyfSkoYy5ib2R5KTpKU09OLnBhcnNlKGMuYm9keSk7aWYoIXIucmVmcmVzaF90b2tlbiYmInJlZnJlc2hfdG9rZW4iPT09ci5ncmFudF90eXBlKXtjb25zdCBlPSgoZSx0KT0+b1tuKGUsdCldKSh1LGwpO2lmKCFlKXRocm93IG5ldyB0KHUsbCk7Yy5ib2R5PWE/cyhPYmplY3QuYXNzaWduKE9iamVjdC5hc3NpZ24oe30scikse3JlZnJlc2hfdG9rZW46ZX0pKTpKU09OLnN0cmluZ2lmeShPYmplY3QuYXNzaWduKE9iamVjdC5hc3NpZ24oe30scikse3JlZnJlc2hfdG9rZW46ZX0pKX1sZXQgaCxnOyJmdW5jdGlvbiI9PXR5cGVvZiBBYm9ydENvbnRyb2xsZXImJihoPW5ldyBBYm9ydENvbnRyb2xsZXIsYy5zaWduYWw9aC5zaWduYWwpO3RyeXtnPWF3YWl0IFByb21pc2UucmFjZShbKGQ9ZSxuZXcgUHJvbWlzZSgoZT0+c2V0VGltZW91dChlLGQpKSkpLGZldGNoKGksT2JqZWN0LmFzc2lnbih7fSxjKSldKX1jYXRjaChlKXtyZXR1cm4gdm9pZCBwLnBvc3RNZXNzYWdlKHtlcnJvcjplLm1lc3NhZ2V9KX1pZighZylyZXR1cm4gaCYmaC5hYm9ydCgpLHZvaWQgcC5wb3N0TWVzc2FnZSh7ZXJyb3I6IlRpbWVvdXQgd2hlbiBleGVjdXRpbmcgJ2ZldGNoJyJ9KTtmPWF3YWl0IGcuanNvbigpLGYucmVmcmVzaF90b2tlbj8oKChlLHQscik9PntvW24odCxyKV09ZX0pKGYucmVmcmVzaF90b2tlbix1LGwpLGRlbGV0ZSBmLnJlZnJlc2hfdG9rZW4pOigoZSx0KT0+e2RlbGV0ZSBvW24oZSx0KV19KSh1LGwpLHAucG9zdE1lc3NhZ2Uoe29rOmcub2ssanNvbjpmfSl9Y2F0Y2goZSl7cC5wb3N0TWVzc2FnZSh7b2s6ITEsanNvbjp7ZXJyb3I6ZS5lcnJvcixlcnJvcl9kZXNjcmlwdGlvbjplLm1lc3NhZ2V9fSl9dmFyIGR9KSl9KCk7Cgo=", Y = null, G = false, function(e2) {
-  return V = V || F(H, Y, G), new Worker(V, e2);
+var H$1, Y$1, G, V, M = (H$1 = "Lyogcm9sbHVwLXBsdWdpbi13ZWItd29ya2VyLWxvYWRlciAqLwohZnVuY3Rpb24oKXsidXNlIHN0cmljdCI7Y2xhc3MgZSBleHRlbmRzIEVycm9ye2NvbnN0cnVjdG9yKHQscil7c3VwZXIociksdGhpcy5lcnJvcj10LHRoaXMuZXJyb3JfZGVzY3JpcHRpb249cixPYmplY3Quc2V0UHJvdG90eXBlT2YodGhpcyxlLnByb3RvdHlwZSl9c3RhdGljIGZyb21QYXlsb2FkKHtlcnJvcjp0LGVycm9yX2Rlc2NyaXB0aW9uOnJ9KXtyZXR1cm4gbmV3IGUodCxyKX19Y2xhc3MgdCBleHRlbmRzIGV7Y29uc3RydWN0b3IoZSxzKXtzdXBlcigibWlzc2luZ19yZWZyZXNoX3Rva2VuIixgTWlzc2luZyBSZWZyZXNoIFRva2VuIChhdWRpZW5jZTogJyR7cihlLFsiZGVmYXVsdCJdKX0nLCBzY29wZTogJyR7cihzKX0nKWApLHRoaXMuYXVkaWVuY2U9ZSx0aGlzLnNjb3BlPXMsT2JqZWN0LnNldFByb3RvdHlwZU9mKHRoaXMsdC5wcm90b3R5cGUpfX1mdW5jdGlvbiByKGUsdD1bXSl7cmV0dXJuIGUmJiF0LmluY2x1ZGVzKGUpP2U6IiJ9ImZ1bmN0aW9uIj09dHlwZW9mIFN1cHByZXNzZWRFcnJvciYmU3VwcHJlc3NlZEVycm9yO2NvbnN0IHM9ZT0+e3ZhcntjbGllbnRJZDp0fT1lLHI9ZnVuY3Rpb24oZSx0KXt2YXIgcj17fTtmb3IodmFyIHMgaW4gZSlPYmplY3QucHJvdG90eXBlLmhhc093blByb3BlcnR5LmNhbGwoZSxzKSYmdC5pbmRleE9mKHMpPDAmJihyW3NdPWVbc10pO2lmKG51bGwhPWUmJiJmdW5jdGlvbiI9PXR5cGVvZiBPYmplY3QuZ2V0T3duUHJvcGVydHlTeW1ib2xzKXt2YXIgbz0wO2ZvcihzPU9iamVjdC5nZXRPd25Qcm9wZXJ0eVN5bWJvbHMoZSk7bzxzLmxlbmd0aDtvKyspdC5pbmRleE9mKHNbb10pPDAmJk9iamVjdC5wcm90b3R5cGUucHJvcGVydHlJc0VudW1lcmFibGUuY2FsbChlLHNbb10pJiYocltzW29dXT1lW3Nbb11dKX1yZXR1cm4gcn0oZSxbImNsaWVudElkIl0pO3JldHVybiBuZXcgVVJMU2VhcmNoUGFyYW1zKChlPT5PYmplY3Qua2V5cyhlKS5maWx0ZXIoKHQ9PnZvaWQgMCE9PWVbdF0pKS5yZWR1Y2UoKCh0LHIpPT5PYmplY3QuYXNzaWduKE9iamVjdC5hc3NpZ24oe30sdCkse1tyXTplW3JdfSkpLHt9KSkoT2JqZWN0LmFzc2lnbih7Y2xpZW50X2lkOnR9LHIpKSkudG9TdHJpbmcoKX07bGV0IG89e307Y29uc3Qgbj0oZSx0KT0+YCR7ZX18JHt0fWA7YWRkRXZlbnRMaXN0ZW5lcigibWVzc2FnZSIsKGFzeW5jKHtkYXRhOnt0aW1lb3V0OmUsYXV0aDpyLGZldGNoVXJsOmksZmV0Y2hPcHRpb25zOmMsdXNlRm9ybURhdGE6YX0scG9ydHM6W3BdfSk9PntsZXQgZjtjb25zdHthdWRpZW5jZTp1LHNjb3BlOmx9PXJ8fHt9O3RyeXtjb25zdCByPWE/KGU9Pntjb25zdCB0PW5ldyBVUkxTZWFyY2hQYXJhbXMoZSkscj17fTtyZXR1cm4gdC5mb3JFYWNoKCgoZSx0KT0+e3JbdF09ZX0pKSxyfSkoYy5ib2R5KTpKU09OLnBhcnNlKGMuYm9keSk7aWYoIXIucmVmcmVzaF90b2tlbiYmInJlZnJlc2hfdG9rZW4iPT09ci5ncmFudF90eXBlKXtjb25zdCBlPSgoZSx0KT0+b1tuKGUsdCldKSh1LGwpO2lmKCFlKXRocm93IG5ldyB0KHUsbCk7Yy5ib2R5PWE/cyhPYmplY3QuYXNzaWduKE9iamVjdC5hc3NpZ24oe30scikse3JlZnJlc2hfdG9rZW46ZX0pKTpKU09OLnN0cmluZ2lmeShPYmplY3QuYXNzaWduKE9iamVjdC5hc3NpZ24oe30scikse3JlZnJlc2hfdG9rZW46ZX0pKX1sZXQgaCxnOyJmdW5jdGlvbiI9PXR5cGVvZiBBYm9ydENvbnRyb2xsZXImJihoPW5ldyBBYm9ydENvbnRyb2xsZXIsYy5zaWduYWw9aC5zaWduYWwpO3RyeXtnPWF3YWl0IFByb21pc2UucmFjZShbKGQ9ZSxuZXcgUHJvbWlzZSgoZT0+c2V0VGltZW91dChlLGQpKSkpLGZldGNoKGksT2JqZWN0LmFzc2lnbih7fSxjKSldKX1jYXRjaChlKXtyZXR1cm4gdm9pZCBwLnBvc3RNZXNzYWdlKHtlcnJvcjplLm1lc3NhZ2V9KX1pZighZylyZXR1cm4gaCYmaC5hYm9ydCgpLHZvaWQgcC5wb3N0TWVzc2FnZSh7ZXJyb3I6IlRpbWVvdXQgd2hlbiBleGVjdXRpbmcgJ2ZldGNoJyJ9KTtmPWF3YWl0IGcuanNvbigpLGYucmVmcmVzaF90b2tlbj8oKChlLHQscik9PntvW24odCxyKV09ZX0pKGYucmVmcmVzaF90b2tlbix1LGwpLGRlbGV0ZSBmLnJlZnJlc2hfdG9rZW4pOigoZSx0KT0+e2RlbGV0ZSBvW24oZSx0KV19KSh1LGwpLHAucG9zdE1lc3NhZ2Uoe29rOmcub2ssanNvbjpmfSl9Y2F0Y2goZSl7cC5wb3N0TWVzc2FnZSh7b2s6ITEsanNvbjp7ZXJyb3I6ZS5lcnJvcixlcnJvcl9kZXNjcmlwdGlvbjplLm1lc3NhZ2V9fSl9dmFyIGR9KSl9KCk7Cgo=", Y$1 = null, G = false, function(e2) {
+  return V = V || F(H$1, Y$1, G), new Worker(V, e2);
 });
 const A = {};
 class B {
@@ -15060,15 +15060,15 @@ class B {
     return `@@auth0spajs@@::${e2}`;
   }
 }
-const $ = { memory: () => new P().enclosedCache, localstorage: () => new z() }, q = (e2) => $[e2], Q = (t2) => {
+const $$1 = { memory: () => new P().enclosedCache, localstorage: () => new z() }, q = (e2) => $$1[e2], Q = (t2) => {
   const { openUrl: i2, onRedirect: o2 } = t2, n2 = e(t2, ["openUrl", "onRedirect"]);
   return Object.assign(Object.assign({}, n2), { openUrl: false === i2 || i2 ? i2 : o2 });
-}, ee = new a();
-class te {
+}, ee$1 = new a();
+let te$1 = class te {
   constructor(e2) {
     let t2, i2;
     if (this.userCache = new P().enclosedCache, this.defaultOptions = { authorizationParams: { scope: "openid profile email" }, useRefreshTokensFallback: false, useFormData: true }, this._releaseLockOnPageHide = async () => {
-      await ee.releaseLock("auth0.lock.getTokenSilently"), window.removeEventListener("pagehide", this._releaseLockOnPageHide);
+      await ee$1.releaseLock("auth0.lock.getTokenSilently"), window.removeEventListener("pagehide", this._releaseLockOnPageHide);
     }, this.options = Object.assign(Object.assign(Object.assign({}, this.defaultOptions), e2), { authorizationParams: Object.assign(Object.assign({}, this.defaultOptions.authorizationParams), e2.authorizationParams) }), "undefined" != typeof window && (() => {
       if (!w()) throw new Error("For security reasons, `window.crypto` is required to run `auth0-spa-js`.");
       if (void 0 === w().subtle) throw new Error("\n      auth0-spa-js must run on a secure origin. See https://github.com/auth0/auth0-spa-js/blob/main/FAQ.md#why-do-i-get-auth0-spa-js-must-run-on-a-secure-origin for more information.\n    ");
@@ -15080,14 +15080,14 @@ class te {
     this.httpTimeoutMs = e2.httpTimeoutInSeconds ? 1e3 * e2.httpTimeoutInSeconds : 1e4, this.cookieStorage = false === e2.legacySameSiteCookie ? X : N, this.orgHintCookieName = `auth0.${this.options.clientId}.organization_hint`, this.isAuthenticatedCookieName = ((e3) => `auth0.${e3}.is.authenticated`)(this.options.clientId), this.sessionCheckExpiryDays = e2.sessionCheckExpiryDays || 1;
     const o2 = e2.useCookiesForTransactions ? this.cookieStorage : J;
     var n2;
-    this.scope = j("openid", this.options.authorizationParams.scope, this.options.useRefreshTokens ? "offline_access" : ""), this.transactionManager = new Z(o2, this.options.clientId, this.options.cookieDomain), this.nowProvider = this.options.nowProvider || c, this.cacheManager = new x(i2, i2.allKeys ? void 0 : new B(i2, this.options.clientId), this.nowProvider), this.domainUrl = (n2 = this.options.domain, /^https?:\/\//.test(n2) ? n2 : `https://${n2}`), this.tokenIssuer = ((e3, t3) => e3 ? e3.startsWith("https://") ? e3 : `https://${e3}/` : `${t3}/`)(this.options.issuer, this.domainUrl), "undefined" != typeof window && window.Worker && this.options.useRefreshTokens && "memory" === t2 && (this.options.workerUrl ? this.worker = new Worker(this.options.workerUrl) : this.worker = new M());
+    this.scope = j("openid", this.options.authorizationParams.scope, this.options.useRefreshTokens ? "offline_access" : ""), this.transactionManager = new Z$1(o2, this.options.clientId, this.options.cookieDomain), this.nowProvider = this.options.nowProvider || c, this.cacheManager = new x(i2, i2.allKeys ? void 0 : new B(i2, this.options.clientId), this.nowProvider), this.domainUrl = (n2 = this.options.domain, /^https?:\/\//.test(n2) ? n2 : `https://${n2}`), this.tokenIssuer = ((e3, t3) => e3 ? e3.startsWith("https://") ? e3 : `https://${e3}/` : `${t3}/`)(this.options.issuer, this.domainUrl), "undefined" != typeof window && window.Worker && this.options.useRefreshTokens && "memory" === t2 && (this.options.workerUrl ? this.worker = new Worker(this.options.workerUrl) : this.worker = new M());
   }
   _url(e2) {
     const t2 = encodeURIComponent(btoa(JSON.stringify(this.options.auth0Client || s)));
     return `${this.domainUrl}${e2}&auth0Client=${t2}`;
   }
   _authorizeUrl(e2) {
-    return this._url(`/authorize?${v(e2)}`);
+    return this._url(`/authorize?${v$1(e2)}`);
   }
   async _verifyIdToken(e2, t2, i2) {
     const o2 = await this.nowProvider();
@@ -15098,7 +15098,7 @@ class te {
     e2 ? this.cookieStorage.save(this.orgHintCookieName, e2, { daysUntilExpire: this.sessionCheckExpiryDays, cookieDomain: this.options.cookieDomain }) : this.cookieStorage.remove(this.orgHintCookieName, { cookieDomain: this.options.cookieDomain });
   }
   async _prepareAuthorizeUrl(e2, t2, i2) {
-    const o2 = k(y()), n2 = k(y()), a2 = y(), r2 = ((e3) => {
+    const o2 = k$1(y()), n2 = k$1(y()), a2 = y(), r2 = ((e3) => {
       const t3 = new Uint8Array(e3);
       return ((e4) => {
         const t4 = { "+": "-", "/": "_", "=": "" };
@@ -15123,7 +15123,7 @@ class te {
       const n3 = setInterval(() => {
         e3.popup && e3.popup.closed && (clearInterval(n3), clearTimeout(a3), window.removeEventListener("message", o3, false), i3(new p(e3.popup)));
       }, 1e3), a3 = setTimeout(() => {
-        clearInterval(n3), i3(new h(e3.popup)), window.removeEventListener("message", o3, false);
+        clearInterval(n3), i3(new h$1(e3.popup)), window.removeEventListener("message", o3, false);
       }, 1e3 * (e3.timeoutInSeconds || 60));
       o3 = function(r2) {
         if (r2.data && "authorization_response" === r2.data.type) {
@@ -15148,10 +15148,10 @@ class te {
   }
   async loginWithRedirect(t2 = {}) {
     var i2;
-    const o2 = Q(t2), { openUrl: n2, fragment: a2, appState: r2 } = o2, s2 = e(o2, ["openUrl", "fragment", "appState"]), c2 = (null === (i2 = s2.authorizationParams) || void 0 === i2 ? void 0 : i2.organization) || this.options.authorizationParams.organization, d2 = await this._prepareAuthorizeUrl(s2.authorizationParams || {}), { url: u2 } = d2, l2 = e(d2, ["url"]);
-    this.transactionManager.create(Object.assign(Object.assign(Object.assign({}, l2), { appState: r2 }), c2 && { organization: c2 }));
-    const h2 = a2 ? `${u2}#${a2}` : u2;
-    n2 ? await n2(h2) : window.location.assign(h2);
+    const o2 = Q(t2), { openUrl: n2, fragment: a2, appState: r2 } = o2, s2 = e(o2, ["openUrl", "fragment", "appState"]), c2 = (null === (i2 = s2.authorizationParams) || void 0 === i2 ? void 0 : i2.organization) || this.options.authorizationParams.organization, d2 = await this._prepareAuthorizeUrl(s2.authorizationParams || {}), { url: u2 } = d2, l3 = e(d2, ["url"]);
+    this.transactionManager.create(Object.assign(Object.assign(Object.assign({}, l3), { appState: r2 }), c2 && { organization: c2 }));
+    const h3 = a2 ? `${u2}#${a2}` : u2;
+    n2 ? await n2(h3) : window.location.assign(h3);
   }
   async handleRedirectCallback(e2 = window.location.href) {
     const t2 = e2.split("?").slice(1);
@@ -15164,8 +15164,8 @@ class te {
     if (!r2) throw new d("missing_transaction", "Invalid state");
     if (this.transactionManager.remove(), n2) throw new u(n2, a2 || n2, i2, r2.appState);
     if (!r2.code_verifier || r2.state && r2.state !== i2) throw new d("state_mismatch", "Invalid state");
-    const s2 = r2.organization, c2 = r2.nonce, l2 = r2.redirect_uri;
-    return await this._requestToken(Object.assign({ audience: r2.audience, scope: r2.scope, code_verifier: r2.code_verifier, grant_type: "authorization_code", code: o2 }, l2 ? { redirect_uri: l2 } : {}), { nonceIn: c2, organization: s2 }), { appState: r2.appState };
+    const s2 = r2.organization, c2 = r2.nonce, l3 = r2.redirect_uri;
+    return await this._requestToken(Object.assign({ audience: r2.audience, scope: r2.scope, code_verifier: r2.code_verifier, grant_type: "authorization_code", code: o2 }, l3 ? { redirect_uri: l3 } : {}), { nonceIn: c2, organization: s2 }), { appState: r2.appState };
   }
   async checkSession(e2) {
     if (!this.cookieStorage.get(this.isAuthenticatedCookieName)) {
@@ -15197,7 +15197,7 @@ class te {
       if (!await (async (e2, t3 = 3) => {
         for (let i3 = 0; i3 < t3; i3++) if (await e2()) return true;
         return false;
-      })(() => ee.acquireLock("auth0.lock.getTokenSilently", 5e3), 10)) throw new l();
+      })(() => ee$1.acquireLock("auth0.lock.getTokenSilently", 5e3), 10)) throw new l$1();
       try {
         if (window.addEventListener("pagehide", this._releaseLockOnPageHide), "off" !== i2) {
           const e3 = await this._getEntryFromCache({ scope: o2.authorizationParams.scope, audience: o2.authorizationParams.audience || "default", clientId: this.options.clientId });
@@ -15206,7 +15206,7 @@ class te {
         const e2 = this.options.useRefreshTokens ? await this._getTokenUsingRefreshToken(o2) : await this._getTokenFromIFrame(o2), { id_token: t3, access_token: n2, oauthTokenScope: a2, expires_in: r2 } = e2;
         return Object.assign(Object.assign({ id_token: t3, access_token: n2 }, a2 ? { scope: a2 } : null), { expires_in: r2 });
       } finally {
-        await ee.releaseLock("auth0.lock.getTokenSilently"), window.removeEventListener("pagehide", this._releaseLockOnPageHide);
+        await ee$1.releaseLock("auth0.lock.getTokenSilently"), window.removeEventListener("pagehide", this._releaseLockOnPageHide);
       }
     }
   }
@@ -15222,7 +15222,7 @@ class te {
   _buildLogoutUrl(t2) {
     null !== t2.clientId ? t2.clientId = t2.clientId || this.options.clientId : delete t2.clientId;
     const i2 = t2.logoutParams || {}, { federated: o2 } = i2, n2 = e(i2, ["federated"]), a2 = o2 ? "&federated" : "";
-    return this._url(`/v2/logout?${v(Object.assign({ clientId: t2.clientId }, n2))}`) + a2;
+    return this._url(`/v2/logout?${v$1(Object.assign({ clientId: t2.clientId }, n2))}`) + a2;
   }
   async logout(t2 = {}) {
     const i2 = Q(t2), { openUrl: o2 } = i2, n2 = e(i2, ["openUrl"]);
@@ -15236,7 +15236,7 @@ class te {
     const { url: o2, state: n2, nonce: a2, code_verifier: r2, redirect_uri: s2, scope: c2, audience: u2 } = await this._prepareAuthorizeUrl(t2, { response_mode: "web_message" }, window.location.origin);
     try {
       if (window.crossOriginIsolated) throw new d("login_required", "The application is running in a Cross-Origin Isolated context, silently retrieving a token without refresh token is not possible.");
-      const i3 = e2.timeoutInSeconds || this.options.authorizeTimeoutInSeconds, h2 = await ((e3, t3, i4 = 60) => new Promise((o3, n3) => {
+      const i3 = e2.timeoutInSeconds || this.options.authorizeTimeoutInSeconds, h3 = await ((e3, t3, i4 = 60) => new Promise((o3, n3) => {
         const a3 = window.document.createElement("iframe");
         a3.setAttribute("width", "0"), a3.setAttribute("height", "0"), a3.style.display = "none";
         const r3 = () => {
@@ -15244,7 +15244,7 @@ class te {
         };
         let s3;
         const c3 = setTimeout(() => {
-          n3(new l()), r3();
+          n3(new l$1()), r3();
         }, 1e3 * i4);
         s3 = function(e4) {
           if (e4.origin != t3) return;
@@ -15253,8 +15253,8 @@ class te {
           i5 && i5.close(), e4.data.response.error ? n3(d.fromPayload(e4.data.response)) : o3(e4.data.response), clearTimeout(c3), window.removeEventListener("message", s3, false), setTimeout(r3, 2e3);
         }, window.addEventListener("message", s3, false), window.document.body.appendChild(a3), a3.setAttribute("src", e3);
       }))(o2, this.domainUrl, i3);
-      if (n2 !== h2.state) throw new d("state_mismatch", "Invalid state");
-      const p2 = await this._requestToken(Object.assign(Object.assign({}, e2.authorizationParams), { code_verifier: r2, code: h2.code, grant_type: "authorization_code", redirect_uri: s2, timeout: e2.authorizationParams.timeout || this.httpTimeoutMs }), { nonceIn: a2, organization: t2.organization });
+      if (n2 !== h3.state) throw new d("state_mismatch", "Invalid state");
+      const p2 = await this._requestToken(Object.assign(Object.assign({}, e2.authorizationParams), { code_verifier: r2, code: h3.code, grant_type: "authorization_code", redirect_uri: s2, timeout: e2.authorizationParams.timeout || this.httpTimeoutMs }), { nonceIn: a2, organization: t2.organization });
       return Object.assign(Object.assign({}, p2), { scope: c2, oauthTokenScope: p2.scope, audience: u2 });
     } catch (e3) {
       throw "login_required" === e3.error && this.logout({ openUrl: false }), e3;
@@ -15294,7 +15294,7 @@ class te {
     const { nonceIn: i2, organization: o2 } = t2 || {}, n2 = await T(Object.assign({ baseUrl: this.domainUrl, client_id: this.options.clientId, auth0Client: this.options.auth0Client, useFormData: this.options.useFormData, timeout: this.httpTimeoutMs }, e2), this.worker), a2 = await this._verifyIdToken(n2.id_token, i2, o2);
     return await this._saveEntryInCache(Object.assign(Object.assign(Object.assign(Object.assign({}, n2), { decodedToken: a2, scope: e2.scope, audience: e2.audience || "default" }), n2.scope ? { oauthTokenScope: n2.scope } : null), { client_id: this.options.clientId })), this.cookieStorage.save(this.isAuthenticatedCookieName, true, { daysUntilExpire: this.sessionCheckExpiryDays, cookieDomain: this.options.cookieDomain }), this._processOrgHint(o2 || a2.claims.org_id), Object.assign(Object.assign({}, n2), { decodedToken: a2 });
   }
-}
+};
 var initialAuthState = {
   isAuthenticated: false,
   isLoading: true
@@ -15389,7 +15389,7 @@ var defaultOnRedirectCallback = function(appState) {
 var Auth0Provider = function(opts) {
   var children = opts.children, skipRedirectCallback = opts.skipRedirectCallback, _a = opts.onRedirectCallback, onRedirectCallback = _a === void 0 ? defaultOnRedirectCallback : _a, _b = opts.context, context = _b === void 0 ? Auth0Context : _b, clientOpts = __rest(opts, ["children", "skipRedirectCallback", "onRedirectCallback", "context"]);
   var client2 = reactExports.useState(function() {
-    return new te(toAuth0ClientOptions(clientOpts));
+    return new te$1(toAuth0ClientOptions(clientOpts));
   })[0];
   var _c = reactExports.useReducer(reducer, initialAuthState), state = _c[0], dispatch = _c[1];
   var didInitialise = reactExports.useRef(false);
@@ -15448,7 +15448,7 @@ var Auth0Provider = function(opts) {
     deprecateRedirectUri(opts2);
     return client2.loginWithRedirect(opts2);
   }, [client2]);
-  var loginWithPopup = reactExports.useCallback(function(options, config) {
+  var loginWithPopup = reactExports.useCallback(function(options, config2) {
     return __awaiter(void 0, void 0, void 0, function() {
       var error_2, user;
       return __generator(this, function(_a2) {
@@ -15458,7 +15458,7 @@ var Auth0Provider = function(opts) {
             _a2.label = 1;
           case 1:
             _a2.trys.push([1, 3, , 4]);
-            return [4, client2.loginWithPopup(options, config)];
+            return [4, client2.loginWithPopup(options, config2)];
           case 2:
             _a2.sent();
             return [3, 4];
@@ -15541,7 +15541,7 @@ var Auth0Provider = function(opts) {
     },
     [client2]
   );
-  var getAccessTokenWithPopup = reactExports.useCallback(function(opts2, config) {
+  var getAccessTokenWithPopup = reactExports.useCallback(function(opts2, config2) {
     return __awaiter(void 0, void 0, void 0, function() {
       var token, error_4, _a2;
       var _b2;
@@ -15549,7 +15549,7 @@ var Auth0Provider = function(opts) {
         switch (_c2.label) {
           case 0:
             _c2.trys.push([0, 2, 3, 5]);
-            return [4, client2.getTokenWithPopup(opts2, config)];
+            return [4, client2.getTokenWithPopup(opts2, config2)];
           case 1:
             token = _c2.sent();
             return [3, 5];
@@ -15708,10 +15708,80 @@ const Auth0ProviderWithHistory = ({ children }) => {
   );
 };
 const Auth0Login = () => {
-  const { loginWithRedirect, isLoading } = useAuth0();
-  const handleLogin = () => {
-    loginWithRedirect();
+  const { loginWithRedirect, isLoading, isAuthenticated, logout, user } = useAuth0();
+  const [showApiKeyPrompt, setShowApiKeyPrompt] = reactExports.useState(false);
+  const [apiKeyInput, setApiKeyInput] = reactExports.useState("");
+  const [apiKeyError, setApiKeyError] = reactExports.useState("");
+  reactExports.useEffect(() => {
+    if (isAuthenticated && !localStorage.getItem("openai_api_key")) {
+      setShowApiKeyPrompt(true);
+    }
+  }, [isAuthenticated]);
+  const handleLogout = () => {
+    localStorage.removeItem("openai_api_key");
+    logout({ returnTo: window.location.origin });
   };
+  const handleApiKeySubmit = (e2) => {
+    e2.preventDefault();
+    if (!apiKeyInput.trim().startsWith("sk-") && !apiKeyInput.trim().startsWith("sk-proj-")) {
+      setApiKeyError("Please enter a valid OpenAI API key.");
+      return;
+    }
+    localStorage.setItem("openai_api_key", apiKeyInput.trim());
+    setShowApiKeyPrompt(false);
+    setApiKeyInput("");
+    setApiKeyError("");
+  };
+  const handleApiKeyChange = (e2) => {
+    setApiKeyInput(e2.target.value);
+    setApiKeyError("");
+  };
+  if (isAuthenticated) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-indigo-900 via-blue-900 to-purple-900", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-white/10 backdrop-blur-2xl rounded-3xl p-8 border border-white/20 shadow-2xl w-full max-w-md mt-12", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center space-y-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-2xl font-bold text-white", children: [
+          "Welcome, ",
+          (user == null ? void 0 : user.name) || (user == null ? void 0 : user.email) || "User",
+          "!"
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-gray-300", children: "You are logged in." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            onClick: handleLogout,
+            className: "mt-4 px-6 py-2 bg-red-600 text-white rounded hover:bg-red-700",
+            children: "Log Out"
+          }
+        )
+      ] }) }),
+      showApiKeyPrompt && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-white rounded-xl p-8 shadow-xl w-full max-w-sm", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-semibold mb-4", children: "Enter your OpenAI API Key" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleApiKeySubmit, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "input",
+            {
+              type: "password",
+              className: "w-full border border-gray-300 rounded px-3 py-2 mb-2 focus:outline-none focus:ring-2 focus:ring-blue-400",
+              placeholder: "sk-... or sk-proj-...",
+              value: apiKeyInput,
+              onChange: handleApiKeyChange,
+              autoFocus: true
+            }
+          ),
+          apiKeyError && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-red-600 text-sm mb-2", children: apiKeyError }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              type: "submit",
+              className: "w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 mt-2",
+              children: "Save API Key"
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-gray-500 mt-2", children: "Your API key is stored only in your browser for this session." })
+      ] }) })
+    ] });
+  }
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-gradient-to-br from-indigo-900 via-blue-900 to-purple-900 relative overflow-hidden", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute inset-0", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-pulse" }),
@@ -15795,7 +15865,7 @@ const Auth0Login = () => {
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "button",
             {
-              onClick: handleLogin,
+              onClick: loginWithRedirect,
               disabled: isLoading,
               className: "w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold py-4 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-3",
               children: isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
@@ -16121,10 +16191,736 @@ function ProblemList({ problems, selectedProblemIdx, onSelectProblem }) {
 function CodeBlock({ code }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { className: "bg-gray-900 text-green-200 rounded p-4 overflow-x-auto text-sm", children: /* @__PURE__ */ jsxRuntimeExports.jsx("code", { children: code }) });
 }
-const tabs = ["Description", "Approach", "Code"];
+function _defineProperty$1(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+function ownKeys$1(object, enumerableOnly) {
+  var keys = Object.keys(object);
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function(sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+  return keys;
+}
+function _objectSpread2$1(target) {
+  for (var i2 = 1; i2 < arguments.length; i2++) {
+    var source = arguments[i2] != null ? arguments[i2] : {};
+    if (i2 % 2) {
+      ownKeys$1(Object(source), true).forEach(function(key) {
+        _defineProperty$1(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys$1(Object(source)).forEach(function(key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+  return target;
+}
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i2;
+  for (i2 = 0; i2 < sourceKeys.length; i2++) {
+    key = sourceKeys[i2];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+  return target;
+}
+function _objectWithoutProperties(source, excluded) {
+  if (source == null) return {};
+  var target = _objectWithoutPropertiesLoose(source, excluded);
+  var key, i2;
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+    for (i2 = 0; i2 < sourceSymbolKeys.length; i2++) {
+      key = sourceSymbolKeys[i2];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+  return target;
+}
+function _slicedToArray(arr, i2) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i2) || _unsupportedIterableToArray(arr, i2) || _nonIterableRest();
+}
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+function _iterableToArrayLimit(arr, i2) {
+  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _e = void 0;
+  try {
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+      if (i2 && _arr.length === i2) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+  return _arr;
+}
+function _unsupportedIterableToArray(o2, minLen) {
+  if (!o2) return;
+  if (typeof o2 === "string") return _arrayLikeToArray(o2, minLen);
+  var n2 = Object.prototype.toString.call(o2).slice(8, -1);
+  if (n2 === "Object" && o2.constructor) n2 = o2.constructor.name;
+  if (n2 === "Map" || n2 === "Set") return Array.from(o2);
+  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray(o2, minLen);
+}
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i2 = 0, arr2 = new Array(len); i2 < len; i2++) arr2[i2] = arr[i2];
+  return arr2;
+}
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function(sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+  return keys;
+}
+function _objectSpread2(target) {
+  for (var i2 = 1; i2 < arguments.length; i2++) {
+    var source = arguments[i2] != null ? arguments[i2] : {};
+    if (i2 % 2) {
+      ownKeys(Object(source), true).forEach(function(key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function(key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+  return target;
+}
+function compose$1() {
+  for (var _len = arguments.length, fns = new Array(_len), _key = 0; _key < _len; _key++) {
+    fns[_key] = arguments[_key];
+  }
+  return function(x2) {
+    return fns.reduceRight(function(y2, f2) {
+      return f2(y2);
+    }, x2);
+  };
+}
+function curry$1(fn) {
+  return function curried() {
+    var _this = this;
+    for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      args[_key2] = arguments[_key2];
+    }
+    return args.length >= fn.length ? fn.apply(this, args) : function() {
+      for (var _len3 = arguments.length, nextArgs = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+        nextArgs[_key3] = arguments[_key3];
+      }
+      return curried.apply(_this, [].concat(args, nextArgs));
+    };
+  };
+}
+function isObject$1(value) {
+  return {}.toString.call(value).includes("Object");
+}
+function isEmpty(obj) {
+  return !Object.keys(obj).length;
+}
+function isFunction(value) {
+  return typeof value === "function";
+}
+function hasOwnProperty(object, property) {
+  return Object.prototype.hasOwnProperty.call(object, property);
+}
+function validateChanges(initial, changes) {
+  if (!isObject$1(changes)) errorHandler$1("changeType");
+  if (Object.keys(changes).some(function(field) {
+    return !hasOwnProperty(initial, field);
+  })) errorHandler$1("changeField");
+  return changes;
+}
+function validateSelector(selector) {
+  if (!isFunction(selector)) errorHandler$1("selectorType");
+}
+function validateHandler(handler) {
+  if (!(isFunction(handler) || isObject$1(handler))) errorHandler$1("handlerType");
+  if (isObject$1(handler) && Object.values(handler).some(function(_handler) {
+    return !isFunction(_handler);
+  })) errorHandler$1("handlersType");
+}
+function validateInitial(initial) {
+  if (!initial) errorHandler$1("initialIsRequired");
+  if (!isObject$1(initial)) errorHandler$1("initialType");
+  if (isEmpty(initial)) errorHandler$1("initialContent");
+}
+function throwError$1(errorMessages2, type) {
+  throw new Error(errorMessages2[type] || errorMessages2["default"]);
+}
+var errorMessages$1 = {
+  initialIsRequired: "initial state is required",
+  initialType: "initial state should be an object",
+  initialContent: "initial state shouldn't be an empty object",
+  handlerType: "handler should be an object or a function",
+  handlersType: "all handlers should be a functions",
+  selectorType: "selector should be a function",
+  changeType: "provided value of changes should be an object",
+  changeField: 'it seams you want to change a field in the state which is not specified in the "initial" state',
+  "default": "an unknown error accured in `state-local` package"
+};
+var errorHandler$1 = curry$1(throwError$1)(errorMessages$1);
+var validators$1 = {
+  changes: validateChanges,
+  selector: validateSelector,
+  handler: validateHandler,
+  initial: validateInitial
+};
+function create(initial) {
+  var handler = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+  validators$1.initial(initial);
+  validators$1.handler(handler);
+  var state = {
+    current: initial
+  };
+  var didUpdate = curry$1(didStateUpdate)(state, handler);
+  var update = curry$1(updateState)(state);
+  var validate = curry$1(validators$1.changes)(initial);
+  var getChanges = curry$1(extractChanges)(state);
+  function getState2() {
+    var selector = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : function(state2) {
+      return state2;
+    };
+    validators$1.selector(selector);
+    return selector(state.current);
+  }
+  function setState2(causedChanges) {
+    compose$1(didUpdate, update, validate, getChanges)(causedChanges);
+  }
+  return [getState2, setState2];
+}
+function extractChanges(state, causedChanges) {
+  return isFunction(causedChanges) ? causedChanges(state.current) : causedChanges;
+}
+function updateState(state, changes) {
+  state.current = _objectSpread2(_objectSpread2({}, state.current), changes);
+  return changes;
+}
+function didStateUpdate(state, handler, changes) {
+  isFunction(handler) ? handler(state.current) : Object.keys(changes).forEach(function(field) {
+    var _handler$field;
+    return (_handler$field = handler[field]) === null || _handler$field === void 0 ? void 0 : _handler$field.call(handler, state.current[field]);
+  });
+  return changes;
+}
+var index = {
+  create
+};
+var config$1 = {
+  paths: {
+    vs: "https://cdn.jsdelivr.net/npm/monaco-editor@0.52.2/min/vs"
+  }
+};
+function curry(fn) {
+  return function curried() {
+    var _this = this;
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+    return args.length >= fn.length ? fn.apply(this, args) : function() {
+      for (var _len2 = arguments.length, nextArgs = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        nextArgs[_key2] = arguments[_key2];
+      }
+      return curried.apply(_this, [].concat(args, nextArgs));
+    };
+  };
+}
+function isObject(value) {
+  return {}.toString.call(value).includes("Object");
+}
+function validateConfig(config2) {
+  if (!config2) errorHandler("configIsRequired");
+  if (!isObject(config2)) errorHandler("configType");
+  if (config2.urls) {
+    informAboutDeprecation();
+    return {
+      paths: {
+        vs: config2.urls.monacoBase
+      }
+    };
+  }
+  return config2;
+}
+function informAboutDeprecation() {
+  console.warn(errorMessages.deprecation);
+}
+function throwError(errorMessages2, type) {
+  throw new Error(errorMessages2[type] || errorMessages2["default"]);
+}
+var errorMessages = {
+  configIsRequired: "the configuration object is required",
+  configType: "the configuration object should be an object",
+  "default": "an unknown error accured in `@monaco-editor/loader` package",
+  deprecation: "Deprecation warning!\n    You are using deprecated way of configuration.\n\n    Instead of using\n      monaco.config({ urls: { monacoBase: '...' } })\n    use\n      monaco.config({ paths: { vs: '...' } })\n\n    For more please check the link https://github.com/suren-atoyan/monaco-loader#config\n  "
+};
+var errorHandler = curry(throwError)(errorMessages);
+var validators = {
+  config: validateConfig
+};
+var compose = function compose2() {
+  for (var _len = arguments.length, fns = new Array(_len), _key = 0; _key < _len; _key++) {
+    fns[_key] = arguments[_key];
+  }
+  return function(x2) {
+    return fns.reduceRight(function(y2, f2) {
+      return f2(y2);
+    }, x2);
+  };
+};
+function merge(target, source) {
+  Object.keys(source).forEach(function(key) {
+    if (source[key] instanceof Object) {
+      if (target[key]) {
+        Object.assign(source[key], merge(target[key], source[key]));
+      }
+    }
+  });
+  return _objectSpread2$1(_objectSpread2$1({}, target), source);
+}
+var CANCELATION_MESSAGE = {
+  type: "cancelation",
+  msg: "operation is manually canceled"
+};
+function makeCancelable(promise) {
+  var hasCanceled_ = false;
+  var wrappedPromise = new Promise(function(resolve, reject) {
+    promise.then(function(val) {
+      return hasCanceled_ ? reject(CANCELATION_MESSAGE) : resolve(val);
+    });
+    promise["catch"](reject);
+  });
+  return wrappedPromise.cancel = function() {
+    return hasCanceled_ = true;
+  }, wrappedPromise;
+}
+var _state$create = index.create({
+  config: config$1,
+  isInitialized: false,
+  resolve: null,
+  reject: null,
+  monaco: null
+}), _state$create2 = _slicedToArray(_state$create, 2), getState = _state$create2[0], setState = _state$create2[1];
+function config(globalConfig) {
+  var _validators$config = validators.config(globalConfig), monaco = _validators$config.monaco, config2 = _objectWithoutProperties(_validators$config, ["monaco"]);
+  setState(function(state) {
+    return {
+      config: merge(state.config, config2),
+      monaco
+    };
+  });
+}
+function init() {
+  var state = getState(function(_ref) {
+    var monaco = _ref.monaco, isInitialized = _ref.isInitialized, resolve = _ref.resolve;
+    return {
+      monaco,
+      isInitialized,
+      resolve
+    };
+  });
+  if (!state.isInitialized) {
+    setState({
+      isInitialized: true
+    });
+    if (state.monaco) {
+      state.resolve(state.monaco);
+      return makeCancelable(wrapperPromise);
+    }
+    if (window.monaco && window.monaco.editor) {
+      storeMonacoInstance(window.monaco);
+      state.resolve(window.monaco);
+      return makeCancelable(wrapperPromise);
+    }
+    compose(injectScripts, getMonacoLoaderScript)(configureLoader);
+  }
+  return makeCancelable(wrapperPromise);
+}
+function injectScripts(script) {
+  return document.body.appendChild(script);
+}
+function createScript(src) {
+  var script = document.createElement("script");
+  return src && (script.src = src), script;
+}
+function getMonacoLoaderScript(configureLoader2) {
+  var state = getState(function(_ref2) {
+    var config2 = _ref2.config, reject = _ref2.reject;
+    return {
+      config: config2,
+      reject
+    };
+  });
+  var loaderScript = createScript("".concat(state.config.paths.vs, "/loader.js"));
+  loaderScript.onload = function() {
+    return configureLoader2();
+  };
+  loaderScript.onerror = state.reject;
+  return loaderScript;
+}
+function configureLoader() {
+  var state = getState(function(_ref3) {
+    var config2 = _ref3.config, resolve = _ref3.resolve, reject = _ref3.reject;
+    return {
+      config: config2,
+      resolve,
+      reject
+    };
+  });
+  var require2 = window.require;
+  require2.config(state.config);
+  require2(["vs/editor/editor.main"], function(monaco) {
+    storeMonacoInstance(monaco);
+    state.resolve(monaco);
+  }, function(error) {
+    state.reject(error);
+  });
+}
+function storeMonacoInstance(monaco) {
+  if (!getState().monaco) {
+    setState({
+      monaco
+    });
+  }
+}
+function __getMonacoInstance() {
+  return getState(function(_ref4) {
+    var monaco = _ref4.monaco;
+    return monaco;
+  });
+}
+var wrapperPromise = new Promise(function(resolve, reject) {
+  return setState({
+    resolve,
+    reject
+  });
+});
+var loader = {
+  config,
+  init,
+  __getMonacoInstance
+};
+var le = { wrapper: { display: "flex", position: "relative", textAlign: "initial" }, fullWidth: { width: "100%" }, hide: { display: "none" } }, v = le;
+var ae = { container: { display: "flex", height: "100%", width: "100%", justifyContent: "center", alignItems: "center" } }, Y = ae;
+function Me({ children: e2 }) {
+  return React.createElement("div", { style: Y.container }, e2);
+}
+var Z2 = Me;
+var $ = Z2;
+function Ee({ width: e2, height: r2, isEditorReady: n2, loading: t2, _ref: a2, className: m2, wrapperProps: E2 }) {
+  return React.createElement("section", { style: { ...v.wrapper, width: e2, height: r2 }, ...E2 }, !n2 && React.createElement($, null, t2), React.createElement("div", { ref: a2, style: { ...v.fullWidth, ...!n2 && v.hide }, className: m2 }));
+}
+var ee = Ee;
+var H = reactExports.memo(ee);
+function Ce(e2) {
+  reactExports.useEffect(e2, []);
+}
+var k = Ce;
+function he(e2, r2, n2 = true) {
+  let t2 = reactExports.useRef(true);
+  reactExports.useEffect(t2.current || !n2 ? () => {
+    t2.current = false;
+  } : e2, r2);
+}
+var l2 = he;
+function D() {
+}
+function h2(e2, r2, n2, t2) {
+  return De(e2, t2) || be(e2, r2, n2, t2);
+}
+function De(e2, r2) {
+  return e2.editor.getModel(te2(e2, r2));
+}
+function be(e2, r2, n2, t2) {
+  return e2.editor.createModel(r2, n2, t2 ? te2(e2, t2) : void 0);
+}
+function te2(e2, r2) {
+  return e2.Uri.parse(r2);
+}
+function Oe({ original: e2, modified: r2, language: n2, originalLanguage: t2, modifiedLanguage: a2, originalModelPath: m2, modifiedModelPath: E2, keepCurrentOriginalModel: g2 = false, keepCurrentModifiedModel: N2 = false, theme: x2 = "light", loading: P2 = "Loading...", options: y2 = {}, height: V2 = "100%", width: z2 = "100%", className: F2, wrapperProps: j2 = {}, beforeMount: A2 = D, onMount: q2 = D }) {
+  let [M2, O2] = reactExports.useState(false), [T2, s2] = reactExports.useState(true), u2 = reactExports.useRef(null), c2 = reactExports.useRef(null), w2 = reactExports.useRef(null), d2 = reactExports.useRef(q2), o2 = reactExports.useRef(A2), b2 = reactExports.useRef(false);
+  k(() => {
+    let i2 = loader.init();
+    return i2.then((f2) => (c2.current = f2) && s2(false)).catch((f2) => (f2 == null ? void 0 : f2.type) !== "cancelation" && console.error("Monaco initialization: error:", f2)), () => u2.current ? I2() : i2.cancel();
+  }), l2(() => {
+    if (u2.current && c2.current) {
+      let i2 = u2.current.getOriginalEditor(), f2 = h2(c2.current, e2 || "", t2 || n2 || "text", m2 || "");
+      f2 !== i2.getModel() && i2.setModel(f2);
+    }
+  }, [m2], M2), l2(() => {
+    if (u2.current && c2.current) {
+      let i2 = u2.current.getModifiedEditor(), f2 = h2(c2.current, r2 || "", a2 || n2 || "text", E2 || "");
+      f2 !== i2.getModel() && i2.setModel(f2);
+    }
+  }, [E2], M2), l2(() => {
+    let i2 = u2.current.getModifiedEditor();
+    i2.getOption(c2.current.editor.EditorOption.readOnly) ? i2.setValue(r2 || "") : r2 !== i2.getValue() && (i2.executeEdits("", [{ range: i2.getModel().getFullModelRange(), text: r2 || "", forceMoveMarkers: true }]), i2.pushUndoStop());
+  }, [r2], M2), l2(() => {
+    var _a, _b;
+    (_b = (_a = u2.current) == null ? void 0 : _a.getModel()) == null ? void 0 : _b.original.setValue(e2 || "");
+  }, [e2], M2), l2(() => {
+    let { original: i2, modified: f2 } = u2.current.getModel();
+    c2.current.editor.setModelLanguage(i2, t2 || n2 || "text"), c2.current.editor.setModelLanguage(f2, a2 || n2 || "text");
+  }, [n2, t2, a2], M2), l2(() => {
+    var _a;
+    (_a = c2.current) == null ? void 0 : _a.editor.setTheme(x2);
+  }, [x2], M2), l2(() => {
+    var _a;
+    (_a = u2.current) == null ? void 0 : _a.updateOptions(y2);
+  }, [y2], M2);
+  let L2 = reactExports.useCallback(() => {
+    var _a;
+    if (!c2.current) return;
+    o2.current(c2.current);
+    let i2 = h2(c2.current, e2 || "", t2 || n2 || "text", m2 || ""), f2 = h2(c2.current, r2 || "", a2 || n2 || "text", E2 || "");
+    (_a = u2.current) == null ? void 0 : _a.setModel({ original: i2, modified: f2 });
+  }, [n2, r2, a2, e2, t2, m2, E2]), U2 = reactExports.useCallback(() => {
+    var _a;
+    !b2.current && w2.current && (u2.current = c2.current.editor.createDiffEditor(w2.current, { automaticLayout: true, ...y2 }), L2(), (_a = c2.current) == null ? void 0 : _a.editor.setTheme(x2), O2(true), b2.current = true);
+  }, [y2, x2, L2]);
+  reactExports.useEffect(() => {
+    M2 && d2.current(u2.current, c2.current);
+  }, [M2]), reactExports.useEffect(() => {
+    !T2 && !M2 && U2();
+  }, [T2, M2, U2]);
+  function I2() {
+    var _a, _b, _c, _d;
+    let i2 = (_a = u2.current) == null ? void 0 : _a.getModel();
+    g2 || ((_b = i2 == null ? void 0 : i2.original) == null ? void 0 : _b.dispose()), N2 || ((_c = i2 == null ? void 0 : i2.modified) == null ? void 0 : _c.dispose()), (_d = u2.current) == null ? void 0 : _d.dispose();
+  }
+  return React.createElement(H, { width: z2, height: V2, isEditorReady: M2, loading: P2, _ref: w2, className: F2, wrapperProps: j2 });
+}
+var ie = Oe;
+reactExports.memo(ie);
+function He(e2) {
+  let r2 = reactExports.useRef();
+  return reactExports.useEffect(() => {
+    r2.current = e2;
+  }, [e2]), r2.current;
+}
+var se = He;
+var _ = /* @__PURE__ */ new Map();
+function Ve({ defaultValue: e2, defaultLanguage: r2, defaultPath: n2, value: t2, language: a2, path: m2, theme: E2 = "light", line: g2, loading: N2 = "Loading...", options: x2 = {}, overrideServices: P2 = {}, saveViewState: y2 = true, keepCurrentModel: V2 = false, width: z2 = "100%", height: F2 = "100%", className: j2, wrapperProps: A2 = {}, beforeMount: q2 = D, onMount: M2 = D, onChange: O2, onValidate: T2 = D }) {
+  let [s2, u2] = reactExports.useState(false), [c2, w2] = reactExports.useState(true), d2 = reactExports.useRef(null), o2 = reactExports.useRef(null), b2 = reactExports.useRef(null), L2 = reactExports.useRef(M2), U2 = reactExports.useRef(q2), I2 = reactExports.useRef(), i2 = reactExports.useRef(t2), f2 = se(m2), Q2 = reactExports.useRef(false), B2 = reactExports.useRef(false);
+  k(() => {
+    let p2 = loader.init();
+    return p2.then((R2) => (d2.current = R2) && w2(false)).catch((R2) => (R2 == null ? void 0 : R2.type) !== "cancelation" && console.error("Monaco initialization: error:", R2)), () => o2.current ? pe() : p2.cancel();
+  }), l2(() => {
+    var _a, _b, _c, _d;
+    let p2 = h2(d2.current, e2 || t2 || "", r2 || a2 || "", m2 || n2 || "");
+    p2 !== ((_a = o2.current) == null ? void 0 : _a.getModel()) && (y2 && _.set(f2, (_b = o2.current) == null ? void 0 : _b.saveViewState()), (_c = o2.current) == null ? void 0 : _c.setModel(p2), y2 && ((_d = o2.current) == null ? void 0 : _d.restoreViewState(_.get(m2))));
+  }, [m2], s2), l2(() => {
+    var _a;
+    (_a = o2.current) == null ? void 0 : _a.updateOptions(x2);
+  }, [x2], s2), l2(() => {
+    !o2.current || t2 === void 0 || (o2.current.getOption(d2.current.editor.EditorOption.readOnly) ? o2.current.setValue(t2) : t2 !== o2.current.getValue() && (B2.current = true, o2.current.executeEdits("", [{ range: o2.current.getModel().getFullModelRange(), text: t2, forceMoveMarkers: true }]), o2.current.pushUndoStop(), B2.current = false));
+  }, [t2], s2), l2(() => {
+    var _a, _b;
+    let p2 = (_a = o2.current) == null ? void 0 : _a.getModel();
+    p2 && a2 && ((_b = d2.current) == null ? void 0 : _b.editor.setModelLanguage(p2, a2));
+  }, [a2], s2), l2(() => {
+    var _a;
+    g2 !== void 0 && ((_a = o2.current) == null ? void 0 : _a.revealLine(g2));
+  }, [g2], s2), l2(() => {
+    var _a;
+    (_a = d2.current) == null ? void 0 : _a.editor.setTheme(E2);
+  }, [E2], s2);
+  let X2 = reactExports.useCallback(() => {
+    var _a;
+    if (!(!b2.current || !d2.current) && !Q2.current) {
+      U2.current(d2.current);
+      let p2 = m2 || n2, R2 = h2(d2.current, t2 || e2 || "", r2 || a2 || "", p2 || "");
+      o2.current = (_a = d2.current) == null ? void 0 : _a.editor.create(b2.current, { model: R2, automaticLayout: true, ...x2 }, P2), y2 && o2.current.restoreViewState(_.get(p2)), d2.current.editor.setTheme(E2), g2 !== void 0 && o2.current.revealLine(g2), u2(true), Q2.current = true;
+    }
+  }, [e2, r2, n2, t2, a2, m2, x2, P2, y2, E2, g2]);
+  reactExports.useEffect(() => {
+    s2 && L2.current(o2.current, d2.current);
+  }, [s2]), reactExports.useEffect(() => {
+    !c2 && !s2 && X2();
+  }, [c2, s2, X2]), i2.current = t2, reactExports.useEffect(() => {
+    var _a, _b;
+    s2 && O2 && ((_a = I2.current) == null ? void 0 : _a.dispose(), I2.current = (_b = o2.current) == null ? void 0 : _b.onDidChangeModelContent((p2) => {
+      B2.current || O2(o2.current.getValue(), p2);
+    }));
+  }, [s2, O2]), reactExports.useEffect(() => {
+    if (s2) {
+      let p2 = d2.current.editor.onDidChangeMarkers((R2) => {
+        var _a;
+        let G2 = (_a = o2.current.getModel()) == null ? void 0 : _a.uri;
+        if (G2 && R2.find((J2) => J2.path === G2.path)) {
+          let J2 = d2.current.editor.getModelMarkers({ resource: G2 });
+          T2 == null ? void 0 : T2(J2);
+        }
+      });
+      return () => {
+        p2 == null ? void 0 : p2.dispose();
+      };
+    }
+    return () => {
+    };
+  }, [s2, T2]);
+  function pe() {
+    var _a, _b;
+    (_a = I2.current) == null ? void 0 : _a.dispose(), V2 ? y2 && _.set(m2, o2.current.saveViewState()) : (_b = o2.current.getModel()) == null ? void 0 : _b.dispose(), o2.current.dispose();
+  }
+  return React.createElement(H, { width: z2, height: F2, isEditorReady: s2, loading: N2, _ref: b2, className: j2, wrapperProps: A2 });
+}
+var fe = Ve;
+var de = reactExports.memo(fe);
+var Ft = de;
+const CodeEditor = ({
+  value,
+  onChange,
+  language = "javascript",
+  height = "400px",
+  options = {}
+}) => {
+  const handleEditorWillMount = () => {
+  };
+  const handleEditorDidMount = (editor, monaco) => {
+  };
+  const handleEditorChange = (value2) => {
+    if (onChange) onChange(value2);
+  };
+  const handleEditorError = (error) => {
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { color: "red", padding: "1em" }, children: [
+      "Failed to load code editor: ",
+      (error == null ? void 0 : error.message) || "Unknown error"
+    ] });
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { border: "1px solid #e5e7eb", borderRadius: 8, overflow: "hidden" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    Ft,
+    {
+      height,
+      language,
+      value,
+      onChange: handleEditorChange,
+      options: {
+        fontSize: 16,
+        minimap: { enabled: false },
+        scrollBeyondLastLine: false,
+        automaticLayout: true,
+        ...options
+      },
+      beforeMount: handleEditorWillMount,
+      onMount: handleEditorDidMount,
+      loading: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { padding: "1em" }, children: "Loading code editor..." }),
+      onError: handleEditorError
+    }
+  ) });
+};
+const tabs = ["Description", "Approach", "Code", "My Solution"];
 function ProblemDetails({ problem }) {
   const [activeTab, setActiveTab] = reactExports.useState("Description");
+  const [userCode, setUserCode] = reactExports.useState("");
+  const [feedback, setFeedback] = reactExports.useState(null);
+  const [loading, setLoading] = reactExports.useState(false);
+  const [error, setError] = reactExports.useState(null);
   if (!problem) return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4", children: "Select a problem to view details." });
+  const handleCheck = async () => {
+    var _a, _b, _c;
+    setLoading(true);
+    setError(null);
+    setFeedback(null);
+    const apiKey = localStorage.getItem("openai_api_key");
+    if (!apiKey) {
+      setError("No OpenAI API key found. Please log in and provide your API key.");
+      setLoading(false);
+      return;
+    }
+    try {
+      const prompt = `You are a DSA coding mentor. Compare the user's code to the reference solution.
+
+Reference Solution:
+${problem.code}
+
+User's Code:
+${userCode}
+
+If the user's code is correct, reply with 'Correct' and a brief explanation. If incorrect, explain what is wrong, how to fix it, and actionable guidance.`;
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({
+          model: "gpt-3.5-turbo",
+          messages: [
+            { role: "system", content: "You are a helpful DSA coding mentor." },
+            { role: "user", content: prompt }
+          ],
+          max_tokens: 512
+        })
+      });
+      if (!response.ok) {
+        throw new Error(`OpenAI API error: ${response.status}`);
+      }
+      const data = await response.json();
+      const aiMessage = ((_c = (_b = (_a = data.choices) == null ? void 0 : _a[0]) == null ? void 0 : _b.message) == null ? void 0 : _c.content) || "No feedback received.";
+      setFeedback(aiMessage);
+    } catch (err) {
+      setError(err.message || "Unknown error");
+    } finally {
+      setLoading(false);
+    }
+  };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col h-full", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-shrink-0 p-4 border-b border-gray-200 bg-white", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-2xl font-bold mb-2", children: problem.name }),
@@ -16141,7 +16937,29 @@ function ProblemDetails({ problem }) {
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 bg-white p-4 overflow-y-auto", children: [
       activeTab === "Description" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "whitespace-pre-wrap", children: problem.description }),
       activeTab === "Approach" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "whitespace-pre-wrap", children: problem.approach }),
-      activeTab === "Code" && /* @__PURE__ */ jsxRuntimeExports.jsx(CodeBlock, { code: problem.code })
+      activeTab === "Code" && /* @__PURE__ */ jsxRuntimeExports.jsx(CodeBlock, { code: problem.code }),
+      activeTab === "My Solution" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          CodeEditor,
+          {
+            value: userCode,
+            onChange: setUserCode,
+            language: "javascript",
+            height: "400px"
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            className: "mt-4 px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700 disabled:opacity-50",
+            onClick: handleCheck,
+            disabled: loading || !userCode.trim(),
+            children: loading ? "Checking..." : "Check"
+          }
+        ),
+        error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 text-red-600", children: error }),
+        feedback && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 p-4 bg-gray-100 rounded whitespace-pre-wrap", children: feedback })
+      ] })
     ] })
   ] });
 }
