@@ -17110,11 +17110,11 @@ If the user's code is correct, reply with 'Correct' and a brief explanation. If 
         tab
       )) })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 bg-white p-4 overflow-y-auto", children: [
-      activeTab === "Description" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "whitespace-pre-wrap", children: problem.description }),
-      activeTab === "Approach" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "whitespace-pre-wrap", children: problem.approach }),
-      activeTab === "Code" && /* @__PURE__ */ jsxRuntimeExports.jsx(CodeBlock, { code: problem.code }),
-      activeTab === "My Solution" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 bg-white overflow-y-auto", children: [
+      activeTab === "Description" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "whitespace-pre-wrap p-4", children: problem.description }),
+      activeTab === "Approach" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "whitespace-pre-wrap p-4", children: problem.approach }),
+      activeTab === "Code" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CodeBlock, { code: problem.code }) }),
+      activeTab === "My Solution" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           CodeEditor,
           {
@@ -17136,7 +17136,7 @@ If the user's code is correct, reply with 'Correct' and a brief explanation. If 
         error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 text-red-600", children: error }),
         feedback && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 p-4 bg-gray-100 rounded whitespace-pre-wrap", children: feedback })
       ] }),
-      activeTab === "Run Solution" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+      activeTab === "Run Solution" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           InputForm,
           {
