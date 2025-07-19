@@ -15863,29 +15863,13 @@ const Auth0Setup = () => {
     ] }) })
   ] }) });
 };
-const LoadingSpinner = () => {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-gradient-to-br from-indigo-900 via-blue-900 to-purple-900 flex items-center justify-center relative overflow-hidden", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute inset-0", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-1/4 left-1/4 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl animate-pulse" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-700" })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative z-10 text-white text-center", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative mb-8", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-24 h-24 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center mx-auto shadow-2xl", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-3xl", children: "💡" }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 w-24 h-24 border-4 border-cyan-400/30 rounded-2xl animate-spin mx-auto" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-2 w-20 h-20 border-2 border-blue-500/50 rounded-xl animate-spin mx-auto", style: { animationDirection: "reverse", animationDuration: "3s" } })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-3xl font-bold mb-2 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent", children: "DSA Mentor" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xl text-gray-300 mb-6", children: "Setting up your learning environment..." }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-center space-x-3 mb-6", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-3 h-3 bg-cyan-400 rounded-full animate-bounce" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-3 h-3 bg-blue-500 rounded-full animate-bounce", style: { animationDelay: "0.1s" } }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-3 h-3 bg-purple-500 rounded-full animate-bounce", style: { animationDelay: "0.2s" } })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20 max-w-md mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-gray-300 text-sm", children: "Preparing your interactive DSA learning experience" }) })
-    ] })
-  ] });
-};
+function LoadingSpinner() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "min-h-screen flex items-center justify-center bg-base-200", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "loading loading-spinner loading-lg text-primary" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-2xl font-bold text-base-content mt-4", children: "DSA Mentor" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base-content/70", children: "Setting up your learning environment..." })
+  ] }) });
+}
 const CallbackPage = () => {
   const { handleRedirectCallback, isLoading, error } = useAuth0();
   reactExports.useEffect(() => {
@@ -15946,13 +15930,13 @@ function TopicSelector({ topics, selectedTopic, onSelectTopic }) {
       topicRefs.current[idx].scrollIntoView({ behavior: "smooth", block: "center" });
     }
   }, [selectedTopic, topics]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col bg-gray-100 w-[200px] overflow-hidden border-r border-gray-300", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 border-b border-gray-300 bg-gray-200", children: /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-bold text-lg", children: "Topics" }) }),
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "w-64 bg-base-200 border-r border-base-300", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 border-b border-base-300", children: /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-bold text-lg text-base-content", children: "Topics" }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 overflow-y-auto p-2", children: topics.map((topic, idx) => /* @__PURE__ */ jsxRuntimeExports.jsx(
       "button",
       {
         ref: (el) => topicRefs.current[idx] = el,
-        className: `w-full text-left px-3 py-2 mb-1 rounded hover:bg-blue-200 transition-colors ${selectedTopic === topic ? "bg-blue-500 text-white ring-2 ring-blue-700" : "bg-white"}`,
+        className: `w-full text-left px-4 py-2 mb-1 rounded-lg transition-all duration-200 ${selectedTopic === topic ? "btn btn-primary btn-sm" : "btn btn-ghost btn-sm hover:bg-base-300"}`,
         onClick: () => onSelectTopic(topic),
         children: topic.charAt(0).toUpperCase() + topic.slice(1)
       },
@@ -15967,13 +15951,13 @@ function ProblemList({ problems, selectedProblemIdx, onSelectProblem }) {
       problemRefs.current[selectedProblemIdx].scrollIntoView({ behavior: "smooth", block: "center" });
     }
   }, [selectedProblemIdx]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col bg-gray-50 w-[280px] overflow-hidden border-r border-gray-300", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 border-b border-gray-300 bg-gray-100", children: /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-bold text-lg", children: "Problems" }) }),
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "w-80 bg-base-100 border-r border-base-300", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 border-b border-base-300", children: /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-bold text-lg text-base-content", children: "Problems" }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 overflow-y-auto p-2", children: problems.map((problem, idx) => /* @__PURE__ */ jsxRuntimeExports.jsx(
       "button",
       {
         ref: (el) => problemRefs.current[idx] = el,
-        className: `w-full text-left px-3 py-2 mb-1 rounded hover:bg-blue-100 transition-colors text-sm ${selectedProblemIdx === idx ? "bg-blue-400 text-white ring-2 ring-blue-700" : "bg-white"}`,
+        className: `w-full text-left px-4 py-3 mb-2 rounded-lg transition-all duration-200 text-sm ${selectedProblemIdx === idx ? "btn btn-primary btn-sm" : "btn btn-ghost btn-sm hover:bg-base-200"}`,
         onClick: () => onSelectProblem(idx),
         children: problem.name
       },
@@ -15982,7 +15966,7 @@ function ProblemList({ problems, selectedProblemIdx, onSelectProblem }) {
   ] });
 }
 function CodeBlock({ code }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { className: "bg-gray-900 text-green-200 rounded p-4 overflow-x-auto text-sm", children: /* @__PURE__ */ jsxRuntimeExports.jsx("code", { children: code }) });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mockup-code", children: /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { "data-prefix": "$", children: /* @__PURE__ */ jsxRuntimeExports.jsx("code", { children: code }) }) });
 }
 function _defineProperty$1(obj, key, value) {
   if (key in obj) {
@@ -16625,20 +16609,16 @@ const CodeEditor = ({
   width = "100%",
   options = {}
 }) => {
-  const handleEditorWillMount = () => {
-  };
-  const handleEditorDidMount = (editor, monaco) => {
-  };
   const handleEditorChange = (value2) => {
     if (onChange) onChange(value2);
   };
   const handleEditorError = (error) => {
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { color: "red", padding: "1em" }, children: [
+    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "alert alert-error", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
       "Failed to load code editor: ",
       (error == null ? void 0 : error.message) || "Unknown error"
-    ] });
+    ] }) });
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full h-full border border-gray-200 rounded-lg overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
     Ft,
     {
       height,
@@ -16647,20 +16627,19 @@ const CodeEditor = ({
       value,
       onChange: handleEditorChange,
       options: {
-        fontSize: 16,
+        fontSize: 14,
         minimap: { enabled: false },
         scrollBeyondLastLine: false,
         automaticLayout: true,
+        theme: "vs-dark",
         ...options
       },
-      beforeMount: handleEditorWillMount,
-      onMount: handleEditorDidMount,
-      loading: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { padding: "1em" }, children: "Loading code editor..." }),
+      loading: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "loading loading-spinner loading-md" }) }),
       onError: handleEditorError
     }
   ) });
 };
-function InputForm({ input, setInput, onRun, loading, className = "w-full" }) {
+function InputForm({ input, setInput, onRun, loading }) {
   const [error, setError] = reactExports.useState("");
   const [text, setText] = reactExports.useState(JSON.stringify(input, null, 2));
   reactExports.useEffect(() => {
@@ -16676,38 +16655,44 @@ function InputForm({ input, setInput, onRun, loading, className = "w-full" }) {
       setError("Invalid JSON");
     }
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `bg-white p-4 rounded shadow border ${className}`, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "font-semibold", children: "Input (JSON):" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "textarea",
-      {
-        className: "border rounded p-2 font-mono min-h-[120px] max-h-[200px] resize-y w-full mt-2",
-        value: text,
-        onChange: handleChange,
-        disabled: loading
-      }
-    ),
-    error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-red-500 text-sm mt-1", children: error }),
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "form-control", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "label", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "label-text font-semibold", children: "Input (JSON)" }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "textarea",
+        {
+          className: "textarea textarea-bordered font-mono h-32",
+          value: text,
+          onChange: handleChange,
+          disabled: loading,
+          placeholder: "Enter JSON input..."
+        }
+      ),
+      error && /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "label", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "label-text-alt text-error", children: error }) })
+    ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "button",
       {
-        className: "bg-blue-600 text-white px-4 py-2 rounded disabled:opacity-50 hover:bg-blue-700 transition-colors w-full mt-2",
+        className: "btn btn-primary w-full",
         onClick: onRun,
         disabled: !!error || loading,
-        children: loading ? "Running..." : "Run Solution"
+        children: loading ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "loading loading-spinner loading-sm" }),
+          "Running..."
+        ] }) : "Run Solution"
       }
     )
   ] });
 }
-function OutputPanel({ output, loading, error, className = "w-full" }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `bg-white p-4 rounded shadow border ${className}`, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "font-semibold", children: "Output:" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-gray-100 rounded p-3 font-mono mt-2 max-h-[300px] overflow-y-auto w-full", children: [
-      loading && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-500", children: "Loading..." }),
-      error && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-red-500", children: error }),
-      !loading && !error && /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { className: "whitespace-pre-wrap", children: output ? JSON.stringify(output, null, 2) : "No output yet." })
+function OutputPanel({ output, loading, error }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "form-control", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "label", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "label-text font-semibold", children: "Output" }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mockup-code", children: [
+      loading && /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { "data-prefix": ">", children: /* @__PURE__ */ jsxRuntimeExports.jsx("code", { children: "Loading..." }) }),
+      error && /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { "data-prefix": "✗", className: "text-error", children: /* @__PURE__ */ jsxRuntimeExports.jsx("code", { children: error }) }),
+      !loading && !error && /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("code", { children: output ? JSON.stringify(output, null, 2) : "No output yet." }) })
     ] })
-  ] });
+  ] }) });
 }
 const tabs = ["Description", "Approach", "Code", "My Solution", "Run Solution"];
 function ProblemDetails({ problem }) {
@@ -16740,7 +16725,13 @@ function ProblemDetails({ problem }) {
       setUserCodeMap((prev) => ({ ...prev, [key]: userCode }));
     }
   }, [userCode]);
-  if (!problem) return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4", children: "Select a problem to view details." });
+  if (!problem) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-semibold text-base-content", children: "Select a problem" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base-content/70", children: "Choose a problem to view details" })
+    ] }) });
+  }
+  const editorLanguage = problem.language === "java" ? "java" : "javascript";
   const handleCheck = async () => {
     var _a, _b, _c;
     setLoading(true);
@@ -16789,7 +16780,6 @@ If the user's code is correct, reply with 'Correct' and a brief explanation. If 
       setLoading(false);
     }
   };
-  const editorLanguage = problem.language === "java" ? "java" : "javascript";
   const handleRun = async () => {
     setOutput(null);
     setRunError("");
@@ -16810,25 +16800,25 @@ If the user's code is correct, reply with 'Correct' and a brief explanation. If 
       setRunLoading(false);
     }
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col h-full", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-shrink-0 p-4 border-b border-gray-200 bg-white", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-2xl font-bold mb-2", children: problem.name }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex gap-2", children: tabs.map((tab) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col h-full bg-base-100", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-shrink-0 p-4 border-b border-base-300", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-2xl font-bold text-base-content mb-4", children: problem.name }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "tabs tabs-boxed", children: tabs.map((tab) => /* @__PURE__ */ jsxRuntimeExports.jsx(
         "button",
         {
-          className: `px-4 py-2 rounded-t ${activeTab === tab ? "bg-blue-500 text-white" : "bg-gray-200"}`,
+          className: `tab ${activeTab === tab ? "tab-active" : ""}`,
           onClick: () => setActiveTab(tab),
           children: tab
         },
         tab
       )) })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 bg-white overflow-y-auto w-full", children: [
-      activeTab === "Description" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "whitespace-pre-wrap p-4 w-full", children: problem.description }),
-      activeTab === "Approach" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "whitespace-pre-wrap p-4 w-full", children: problem.approach }),
-      activeTab === "Code" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 w-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CodeBlock, { code: problem.code }) }),
-      activeTab === "My Solution" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 w-full flex flex-col gap-4", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full h-[400px] flex-shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 overflow-y-auto", children: [
+      activeTab === "Description" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "prose prose-sm max-w-none", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "whitespace-pre-wrap text-base-content", children: problem.description }) }) }),
+      activeTab === "Approach" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "prose prose-sm max-w-none", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "whitespace-pre-wrap text-base-content", children: problem.approach }) }) }),
+      activeTab === "Code" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CodeBlock, { code: problem.code }) }),
+      activeTab === "My Solution" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-6 space-y-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-96", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
           CodeEditor,
           {
             value: userCode,
@@ -16841,27 +16831,29 @@ If the user's code is correct, reply with 'Correct' and a brief explanation. If 
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           "button",
           {
-            className: "px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700 disabled:opacity-50 w-fit",
+            className: "btn btn-primary",
             onClick: handleCheck,
             disabled: loading || !userCode.trim(),
-            children: loading ? "Checking..." : "Check"
+            children: loading ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "loading loading-spinner loading-sm" }),
+              "Checking..."
+            ] }) : "Check Solution"
           }
         ),
-        error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-red-600", children: error }),
-        feedback && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 bg-gray-100 rounded whitespace-pre-wrap", children: feedback })
+        error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "alert alert-error", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: error }) }),
+        feedback && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "alert alert-info", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "whitespace-pre-wrap", children: feedback }) })
       ] }),
-      activeTab === "Run Solution" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 w-full flex flex-col gap-4", children: [
+      activeTab === "Run Solution" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-6 space-y-4", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           InputForm,
           {
             input,
             setInput,
             onRun: handleRun,
-            loading: runLoading,
-            className: "w-full"
+            loading: runLoading
           }
         ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(OutputPanel, { output, loading: runLoading, error: runError, className: "w-full" })
+        /* @__PURE__ */ jsxRuntimeExports.jsx(OutputPanel, { output, loading: runLoading, error: runError })
       ] })
     ] })
   ] });
@@ -16935,14 +16927,13 @@ function DaisyApiKeyModal({ isOpen, onClose, onSave }) {
   const [error, setError] = reactExports.useState("");
   reactExports.useEffect(() => {
     if (isOpen) {
-      const savedKey = localStorage.getItem("openai_api_key") || "";
-      setApiKey(savedKey);
+      setApiKey(localStorage.getItem("openai_api_key") || "");
       setError("");
     }
   }, [isOpen]);
   const handleSave = () => {
     if (!apiKey.trim()) {
-      setError("API Key is required");
+      setError("Please enter a valid API key");
       return;
     }
     localStorage.setItem("openai_api_key", apiKey);
@@ -16952,24 +16943,24 @@ function DaisyApiKeyModal({ isOpen, onClose, onSave }) {
   if (!isOpen) return null;
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "modal modal-open", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "modal-box", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-bold text-lg", children: "OpenAI API Key" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "py-4", children: "Enter your OpenAI API key to enable AI features" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-bold text-lg mb-4", children: "OpenAI API Key" }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "form-control", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "label", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "label-text", children: "API Key" }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "label", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "label-text", children: "Enter your OpenAI API key" }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           "input",
           {
             type: "password",
             placeholder: "sk-...",
-            className: `input input-bordered ${error ? "input-error" : ""}`,
+            className: "input input-bordered w-full",
             value: apiKey,
             onChange: (e2) => setApiKey(e2.target.value)
           }
         ),
         error && /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "label", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "label-text-alt text-error", children: error }) })
       ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-sm text-base-content/70 mt-2", children: "Your API key is stored locally in your browser and never sent to our servers." }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "modal-action", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "btn", onClick: onClose, children: "Cancel" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "btn btn-ghost", onClick: onClose, children: "Cancel" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "btn btn-primary", onClick: handleSave, children: "Save" })
       ] })
     ] }),
@@ -17056,14 +17047,14 @@ function MainApp() {
   const problems = problemsByTopic[selectedTopic] || [];
   const selectedProblem = problems[selectedProblemIdx];
   if (loading) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center h-screen text-xl", children: "Loading topics and problems..." });
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingSpinner, {});
   }
   if (error) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center h-screen text-red-600 text-xl", children: error });
+    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center h-screen", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "alert alert-error max-w-md", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: error }) }) });
   }
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col h-screen bg-base-100", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(DaisyNavbar, { onApiKeyClick: () => setShowApiKeyModal(true), onSearch: setSearchQuery }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-1 overflow-y-auto", style: { paddingTop: "64px" }, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-1 overflow-hidden pt-16", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         TopicSelector,
         {
@@ -17080,7 +17071,7 @@ function MainApp() {
           onSelectProblem: setSelectedProblemIdx
         }
       ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("main", { className: "flex-1 flex flex-row overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 flex flex-col overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ProblemDetails, { problem: selectedProblem }) }) })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("main", { className: "flex-1 flex flex-col overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ProblemDetails, { problem: selectedProblem }) })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       DaisyApiKeyModal,
@@ -17102,17 +17093,17 @@ function AuthenticatedApp() {
     return /* @__PURE__ */ jsxRuntimeExports.jsx(CallbackPage, {});
   }
   if (error) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "min-h-screen bg-gradient-to-br from-red-900 via-red-800 to-red-900 flex items-center justify-center p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-white text-center", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-2xl font-bold mb-4", children: "Authentication Error" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-red-200 mb-4", children: error.message }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: () => window.location.reload(), className: "bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg", children: "Retry" })
-    ] }) });
+    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "min-h-screen bg-base-200 flex items-center justify-center p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "card bg-base-100 shadow-xl", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "card-body", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "card-title text-error", children: "Authentication Error" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: error.message }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "card-actions justify-end", children: /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "btn btn-primary", onClick: () => window.location.reload(), children: "Retry" }) })
+    ] }) }) });
   }
   return isAuthenticated ? /* @__PURE__ */ jsxRuntimeExports.jsx(MainApp, {}) : /* @__PURE__ */ jsxRuntimeExports.jsx(Auth0Login, {});
 }
 function App() {
   if (!isAuth0Configured()) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Auth0Setup, {}) });
+    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "min-h-screen bg-base-200 flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Auth0Setup, {}) });
   }
   return /* @__PURE__ */ jsxRuntimeExports.jsx(HashRouter, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Auth0ProviderWithHistory, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(AuthenticatedApp, {}) }) });
 }
