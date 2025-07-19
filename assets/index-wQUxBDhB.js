@@ -26662,7 +26662,7 @@ function MainApp() {
   }
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col h-screen bg-base-100", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(DaisyNavbar, { onApiKeyClick: () => setShowApiKeyModal(true), onSearch: setSearchQuery }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 lg:grid-cols-[256px_320px_1fr] flex-1 overflow-hidden pt-16 gap-4 p-4", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-1 overflow-hidden", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         TopicSelector,
         {
@@ -26679,46 +26679,44 @@ function MainApp() {
           onSelectProblem: setSelectedProblemIdx
         }
       ),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "flex-1 flex flex-col lg:flex-row overflow-hidden", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full lg:w-1/2 flex flex-col overflow-hidden border-r border-base-300", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ProblemDetails, { problem: selectedProblem }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "w-full lg:w-1/2 flex flex-col overflow-hidden", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full flex flex-col", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-base-200 px-4 py-2 border-b border-base-300", children: /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-semibold", children: "Code Editor" }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 overflow-hidden", children: selectedProblem && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-              CodeEditor,
-              {
-                value: userCode,
-                onChange: setUserCode,
-                language: selectedProblem.language === "java" ? "java" : "javascript",
-                height: "100%",
-                width: "100%",
-                options: {
-                  fontSize: 14,
-                  minimap: { enabled: false },
-                  scrollBeyondLastLine: false,
-                  automaticLayout: true,
-                  theme: "vs-dark"
-                }
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "flex-1 flex flex-col overflow-hidden", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(ProblemDetails, { problem: selectedProblem }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full flex flex-col", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-base-200 px-4 py-2 border-b border-base-300", children: /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-semibold", children: "Code Editor" }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 overflow-hidden", children: selectedProblem && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            CodeEditor,
+            {
+              value: userCode,
+              onChange: setUserCode,
+              language: selectedProblem.language === "java" ? "java" : "javascript",
+              height: "100%",
+              width: "100%",
+              options: {
+                fontSize: 14,
+                minimap: { enabled: false },
+                scrollBeyondLastLine: false,
+                automaticLayout: true,
+                theme: "vs-dark"
               }
-            ) }) })
-          ] }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-80 border-t border-base-300 flex flex-col", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "tabs tabs-bordered bg-base-200", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("a", { className: "tab tab-active", children: "Input" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("a", { className: "tab", children: "Output" })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 flex overflow-hidden", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-1/2 border-r border-base-300 p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-                InputForm,
-                {
-                  input,
-                  onInputChange: setInput,
-                  problem: selectedProblem,
-                  onRun: handleRun
-                }
-              ) }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-1/2 p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(OutputPanel, { output, error }) })
-            ] })
+            }
+          ) }) })
+        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-80 border-t border-base-300 flex flex-col", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "tabs tabs-bordered bg-base-200", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { className: "tab tab-active", children: "Input" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { className: "tab", children: "Output" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 flex overflow-hidden", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-1/2 border-r border-base-300 p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+              InputForm,
+              {
+                input,
+                onInputChange: setInput,
+                problem: selectedProblem,
+                onRun: handleRun
+              }
+            ) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-1/2 p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(OutputPanel, { output, error }) })
           ] })
         ] })
       ] })
