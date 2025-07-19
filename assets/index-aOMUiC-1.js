@@ -15975,27 +15975,133 @@ function ProblemList({ problems, selectedProblemIdx, onSelectProblem }) {
 function CodeBlock({ code: code2 }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mockup-code", children: /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { "data-prefix": "$", children: /* @__PURE__ */ jsxRuntimeExports.jsx("code", { children: code2 }) }) });
 }
-const tabs = ["Description", "Approach", "Code"];
+const tabs = ["Description", "Approach", "Code", "Code Editor"];
 function ProblemDetails({ problem }) {
   const [activeTab, setActiveTab] = reactExports.useState("Description");
-  if (!problem) return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4", children: "Select a problem to view details." });
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col h-full", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-shrink-0 p-4 border-b border-gray-200 bg-white", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-2xl font-bold mb-2", children: problem.name }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex gap-2", children: tabs.map((tab2) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+  const [userCodeMap, setUserCodeMap] = reactExports.useState({});
+  const [feedback, setFeedback] = reactExports.useState(null);
+  const [loading, setLoading] = reactExports.useState(false);
+  const [error, setError] = reactExports.useState(null);
+  const [userCode, setUserCode] = reactExports.useState("");
+  const [input, setInput] = reactExports.useState((problem == null ? void 0 : problem.defaultInput) || {});
+  const [output, setOutput] = reactExports.useState(null);
+  const [runLoading, setRunLoading] = reactExports.useState(false);
+  const [runError, setRunError] = reactExports.useState("");
+  const getProblemKey = () => {
+    if (!problem) return "";
+    return `${problem.topic || ""}::${problem.name || ""}`;
+  };
+  useEffect(() => {
+    const key = getProblemKey();
+    setUserCode(userCodeMap[key] || "");
+    setFeedback(null);
+    setError(null);
+    setInput((problem == null ? void 0 : problem.defaultInput) || {});
+    setOutput(null);
+    setRunError("");
+  }, [problem]);
+  useEffect(() => {
+    const key = getProblemKey();
+    if (key) {
+      setUserCodeMap((prev) => ({ ...prev, [key]: userCode }));
+    }
+  }, [userCode]);
+  if (!problem) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-semibold text-base-content", children: "Select a problem" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base-content/70", children: "Choose a problem to view details" })
+    ] }) });
+  }
+  const editorLanguage = problem.language === "java" ? "java" : "javascript";
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col h-full bg-base-100", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-shrink-0 p-4 border-b border-base-300 bg-base-200", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between mb-3", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-xl font-bold text-base-content", children: problem.name }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "badge badge-primary", children: problem.difficulty || "Medium" })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "tabs tabs-bordered", children: tabs.map((tab2) => /* @__PURE__ */ jsxRuntimeExports.jsx(
         "button",
         {
-          className: `px-4 py-2 rounded-t ${activeTab === tab2 ? "bg-blue-500 text-white" : "bg-gray-200"}`,
+          className: `tab ${activeTab === tab2 ? "tab-active" : ""}`,
           onClick: () => setActiveTab(tab2),
           children: tab2
         },
         tab2
       )) })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 bg-white p-4 overflow-y-auto", children: [
-      activeTab === "Description" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "whitespace-pre-wrap", children: problem.description }),
-      activeTab === "Approach" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "whitespace-pre-wrap", children: problem.approach }),
-      activeTab === "Code" && /* @__PURE__ */ jsxRuntimeExports.jsx(CodeBlock, { code: problem.code })
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 overflow-y-auto p-4", children: [
+      activeTab === "Description" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "card bg-base-100 border border-base-300", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "card-body", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "card-title text-lg", children: "Problem Statement" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "prose prose-sm max-w-none", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "whitespace-pre-wrap text-base-content leading-relaxed", children: problem.description || "No description available." }) })
+        ] }) }),
+        problem.examples && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "card bg-base-100 border border-base-300", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "card-body", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "card-title text-lg", children: "Examples" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3", children: problem.examples.map((example, idx) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-base-200 p-3 rounded-lg", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "font-semibold mb-2", children: [
+              "Example ",
+              idx + 1,
+              ":"
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "font-mono text-sm", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Input:" }),
+                " ",
+                JSON.stringify(example.input)
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Output:" }),
+                " ",
+                JSON.stringify(example.output)
+              ] }),
+              example.explanation && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Explanation:" }),
+                " ",
+                example.explanation
+              ] })
+            ] })
+          ] }, idx)) })
+        ] }) }),
+        problem.constraints && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "card bg-base-100 border border-base-300", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "card-body", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "card-title text-lg", children: "Constraints" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "prose prose-sm max-w-none", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "whitespace-pre-wrap text-base-content", children: problem.constraints }) })
+        ] }) })
+      ] }),
+      activeTab === "Approach" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "card bg-base-100 border border-base-300", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "card-body", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "card-title text-lg", children: "Solution Approach" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "prose prose-sm max-w-none", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "whitespace-pre-wrap text-base-content leading-relaxed", children: problem.approach || "No approach explanation available." }) }),
+        (problem.timeComplexity || problem.spaceComplexity) && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 space-y-2", children: [
+          problem.timeComplexity && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "badge badge-outline", children: "Time Complexity:" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("code", { className: "text-sm", children: problem.timeComplexity })
+          ] }),
+          problem.spaceComplexity && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "badge badge-outline", children: "Space Complexity:" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("code", { className: "text-sm", children: problem.spaceComplexity })
+          ] })
+        ] })
+      ] }) }),
+      activeTab === "Code" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "card bg-base-100 border border-base-300", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "card-body", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "card-title text-lg", children: "Reference Solution" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CodeBlock, { code: problem.code || "// No code available" }) })
+      ] }) }),
+      activeTab === "Code Editor" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        CodeEditor,
+        {
+          value: userCode,
+          onChange: setUserCode,
+          language: editorLanguage,
+          height: "100%",
+          width: "100%",
+          options: {
+            fontSize: 14,
+            minimap: { enabled: false },
+            scrollBeyondLastLine: false,
+            automaticLayout: true,
+            theme: "vs-dark"
+          }
+        }
+      ) })
     ] })
   ] });
 }
@@ -26312,7 +26418,7 @@ function Ve({ defaultValue: e2, defaultLanguage: r2, defaultPath: n2, value: t2,
 var fe = Ve;
 var de = reactExports.memo(fe);
 var Ft = de;
-const CodeEditor = ({
+const CodeEditor$1 = ({
   value,
   onChange,
   language = "javascript",
@@ -26570,7 +26676,7 @@ function MainApp() {
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full flex flex-col", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-base-200 px-4 py-2 border-b border-base-300", children: /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-semibold", children: "Code Editor" }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 overflow-hidden", children: selectedProblem && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-            CodeEditor,
+            CodeEditor$1,
             {
               value: userCode,
               onChange: setUserCode,
