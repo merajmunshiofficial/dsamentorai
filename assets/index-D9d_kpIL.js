@@ -16646,245 +16646,6 @@ const CodeEditor = ({
     }
   ) });
 };
-const tabs = ["Description", "Approach", "Code", "Code Editor"];
-function ProblemDetails({ problem }) {
-  const [activeTab, setActiveTab] = reactExports.useState("Description");
-  const [userCodeMap, setUserCodeMap] = reactExports.useState({});
-  const [feedback, setFeedback] = reactExports.useState(null);
-  const [loading, setLoading] = reactExports.useState(false);
-  const [error, setError] = reactExports.useState(null);
-  const [userCode, setUserCode] = reactExports.useState("");
-  const [input, setInput] = reactExports.useState((problem == null ? void 0 : problem.defaultInput) || {});
-  const [output, setOutput] = reactExports.useState(null);
-  const [runLoading, setRunLoading] = reactExports.useState(false);
-  const [runError, setRunError] = reactExports.useState("");
-  const getProblemKey = () => {
-    if (!problem) return "";
-    return `${problem.topic || ""}::${problem.name || ""}`;
-  };
-  reactExports.useEffect(() => {
-    const key = getProblemKey();
-    setUserCode(userCodeMap[key] || "");
-    setFeedback(null);
-    setError(null);
-    setInput((problem == null ? void 0 : problem.defaultInput) || {});
-    setOutput(null);
-    setRunError("");
-  }, [problem]);
-  reactExports.useEffect(() => {
-    const key = getProblemKey();
-    if (key) {
-      setUserCodeMap((prev) => ({ ...prev, [key]: userCode }));
-    }
-  }, [userCode]);
-  if (!problem) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-semibold text-base-content", children: "Select a problem" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base-content/70", children: "Choose a problem to view details" })
-    ] }) });
-  }
-  const editorLanguage = problem.language === "java" ? "java" : "javascript";
-  const handleCheck = async () => {
-    var _a, _b, _c;
-    setLoading(true);
-    setError(null);
-    setFeedback(null);
-    const apiKey = localStorage.getItem("openai_api_key");
-    if (!apiKey) {
-      setError("No OpenAI API key found. Please log in and provide your API key.");
-      setLoading(false);
-      return;
-    }
-    try {
-      const prompt = `You are a DSA coding mentor. Compare the user's code to the reference solution.
-
-Reference Solution:
-${problem.code}
-
-User's Code:
-${userCode}
-
-If the user's code is correct, reply with 'Correct' and a brief explanation. If incorrect, explain what is wrong, how to fix it, and actionable guidance.`;
-      const response = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${apiKey}`
-        },
-        body: JSON.stringify({
-          model: "gpt-3.5-turbo",
-          messages: [
-            { role: "system", content: "You are a helpful DSA coding mentor." },
-            { role: "user", content: prompt }
-          ],
-          max_tokens: 512
-        })
-      });
-      if (!response.ok) {
-        throw new Error(`OpenAI API error: ${response.status}`);
-      }
-      const data = await response.json();
-      const aiMessage = ((_c = (_b = (_a = data.choices) == null ? void 0 : _a[0]) == null ? void 0 : _b.message) == null ? void 0 : _c.content) || "No feedback received.";
-      setFeedback(aiMessage);
-    } catch (err) {
-      setError(err.message || "Unknown error");
-    } finally {
-      setLoading(false);
-    }
-  };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col h-full bg-base-100", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-shrink-0 p-4 border-b border-base-300 bg-base-200", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between mb-3", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-xl font-bold text-base-content", children: problem.name }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "badge badge-primary", children: problem.difficulty || "Medium" })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "tabs tabs-bordered", children: tabs.map((tab2) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "button",
-        {
-          className: `tab ${activeTab === tab2 ? "tab-active" : ""}`,
-          onClick: () => setActiveTab(tab2),
-          children: tab2
-        },
-        tab2
-      )) })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 overflow-y-auto p-4", children: [
-      activeTab === "Description" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "card bg-base-100 border border-base-300", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "card-body", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "card-title text-lg", children: "Problem Statement" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "prose prose-sm max-w-none", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "whitespace-pre-wrap text-base-content leading-relaxed", children: problem.description || "No description available." }) })
-        ] }) }),
-        problem.examples && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "card bg-base-100 border border-base-300", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "card-body", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "card-title text-lg", children: "Examples" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3", children: problem.examples.map((example, idx) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-base-200 p-3 rounded-lg", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "font-semibold mb-2", children: [
-              "Example ",
-              idx + 1,
-              ":"
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "font-mono text-sm", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Input:" }),
-                " ",
-                JSON.stringify(example.input)
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Output:" }),
-                " ",
-                JSON.stringify(example.output)
-              ] }),
-              example.explanation && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Explanation:" }),
-                " ",
-                example.explanation
-              ] })
-            ] })
-          ] }, idx)) })
-        ] }) }),
-        problem.constraints && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "card bg-base-100 border border-base-300", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "card-body", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "card-title text-lg", children: "Constraints" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "prose prose-sm max-w-none", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "whitespace-pre-wrap text-base-content", children: problem.constraints }) })
-        ] }) })
-      ] }),
-      activeTab === "Approach" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "card bg-base-100 border border-base-300", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "card-body", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "card-title text-lg", children: "Solution Approach" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "prose prose-sm max-w-none", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "whitespace-pre-wrap text-base-content leading-relaxed", children: problem.approach || "No approach explanation available." }) }),
-        (problem.timeComplexity || problem.spaceComplexity) && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 space-y-2", children: [
-          problem.timeComplexity && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "badge badge-outline", children: "Time Complexity:" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("code", { className: "text-sm", children: problem.timeComplexity })
-          ] }),
-          problem.spaceComplexity && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "badge badge-outline", children: "Space Complexity:" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("code", { className: "text-sm", children: problem.spaceComplexity })
-          ] })
-        ] })
-      ] }) }),
-      activeTab === "Code" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "card bg-base-100 border border-base-300", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "card-body", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "card-title text-lg", children: "Reference Solution" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CodeBlock, { code: problem.code || "// No code available" }) })
-      ] }) }),
-      activeTab === "Code Editor" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col flex-1 h-[600px] max-h-[80vh]", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-grow overflow-auto border border-base-300 rounded-lg", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-          CodeEditor,
-          {
-            value: userCode,
-            onChange: setUserCode,
-            language: editorLanguage,
-            height: "100%",
-            width: "100%",
-            options: {
-              fontSize: 14,
-              minimap: { enabled: false },
-              scrollBeyondLastLine: false,
-              automaticLayout: true,
-              theme: "vs-dark"
-            }
-          }
-        ) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-2 flex justify-end", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "button",
-          {
-            className: "btn btn-primary",
-            onClick: handleCheck,
-            disabled: loading,
-            children: loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "loading loading-spinner loading-sm" }) : "Run Code"
-          }
-        ) }),
-        error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-2 alert alert-error", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: error }) }),
-        feedback && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2 card bg-base-100 border border-base-300 p-4 whitespace-pre-wrap", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-semibold mb-2", children: "Feedback:" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { className: "whitespace-pre-wrap", children: feedback })
-        ] })
-      ] })
-    ] })
-  ] });
-}
-function InputForm({ input, onInputChange, problem, onRun, loading }) {
-  const [error, setError] = reactExports.useState("");
-  const [text2, setText] = reactExports.useState(JSON.stringify(input, null, 2));
-  reactExports.useEffect(() => {
-    setText(JSON.stringify(input, null, 2));
-  }, [input]);
-  const handleChange = (e2) => {
-    setText(e2.target.value);
-    try {
-      const parsed = JSON.parse(e2.target.value);
-      setError("");
-      onInputChange(parsed);
-    } catch {
-      setError("Invalid JSON");
-    }
-  };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "form-control", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "label", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "label-text font-semibold", children: "Input (JSON)" }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "textarea",
-        {
-          className: "textarea textarea-bordered font-mono h-32",
-          value: text2,
-          onChange: handleChange,
-          disabled: loading,
-          placeholder: "Enter JSON input..."
-        }
-      ),
-      error && /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "label", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "label-text-alt text-error", children: error }) })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "button",
-      {
-        className: "btn btn-primary w-full",
-        onClick: onRun,
-        disabled: !!error || loading,
-        children: loading ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "loading loading-spinner loading-sm" }),
-          "Running..."
-        ] }) : "Run Solution"
-      }
-    )
-  ] });
-}
 function ok$1() {
 }
 function unreachable() {
@@ -26509,6 +26270,245 @@ function defaultUrlTransform(value) {
     return value;
   }
   return "";
+}
+const tabs = ["Description", "Approach", "Code", "Code Editor"];
+function ProblemDetails({ problem }) {
+  const [activeTab, setActiveTab] = reactExports.useState("Description");
+  const [userCodeMap, setUserCodeMap] = reactExports.useState({});
+  const [feedback, setFeedback] = reactExports.useState(null);
+  const [loading, setLoading] = reactExports.useState(false);
+  const [error, setError] = reactExports.useState(null);
+  const [userCode, setUserCode] = reactExports.useState("");
+  const [input, setInput] = reactExports.useState((problem == null ? void 0 : problem.defaultInput) || {});
+  const [output, setOutput] = reactExports.useState(null);
+  const [runLoading, setRunLoading] = reactExports.useState(false);
+  const [runError, setRunError] = reactExports.useState("");
+  const getProblemKey = () => {
+    if (!problem) return "";
+    return `${problem.topic || ""}::${problem.name || ""}`;
+  };
+  reactExports.useEffect(() => {
+    const key = getProblemKey();
+    setUserCode(userCodeMap[key] || "");
+    setFeedback(null);
+    setError(null);
+    setInput((problem == null ? void 0 : problem.defaultInput) || {});
+    setOutput(null);
+    setRunError("");
+  }, [problem]);
+  reactExports.useEffect(() => {
+    const key = getProblemKey();
+    if (key) {
+      setUserCodeMap((prev) => ({ ...prev, [key]: userCode }));
+    }
+  }, [userCode]);
+  if (!problem) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-semibold text-base-content", children: "Select a problem" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base-content/70", children: "Choose a problem to view details" })
+    ] }) });
+  }
+  const editorLanguage = problem.language === "java" ? "java" : "javascript";
+  const handleCheck = async () => {
+    var _a, _b, _c;
+    setLoading(true);
+    setError(null);
+    setFeedback(null);
+    const apiKey = localStorage.getItem("openai_api_key");
+    if (!apiKey) {
+      setError("No OpenAI API key found. Please log in and provide your API key.");
+      setLoading(false);
+      return;
+    }
+    try {
+      const prompt = `You are a DSA coding mentor. Compare the user's code to the reference solution.
+
+Reference Solution:
+${problem.code}
+
+User's Code:
+${userCode}
+
+If the user's code is correct, reply with 'Correct' and a brief explanation. If incorrect, explain what is wrong, how to fix it, and actionable guidance.`;
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({
+          model: "gpt-3.5-turbo",
+          messages: [
+            { role: "system", content: "You are a helpful DSA coding mentor." },
+            { role: "user", content: prompt }
+          ],
+          max_tokens: 512
+        })
+      });
+      if (!response.ok) {
+        throw new Error(`OpenAI API error: ${response.status}`);
+      }
+      const data = await response.json();
+      const aiMessage = ((_c = (_b = (_a = data.choices) == null ? void 0 : _a[0]) == null ? void 0 : _b.message) == null ? void 0 : _c.content) || "No feedback received.";
+      setFeedback(aiMessage);
+    } catch (err) {
+      setError(err.message || "Unknown error");
+    } finally {
+      setLoading(false);
+    }
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col h-full bg-base-100", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-shrink-0 p-4 border-b border-base-300 bg-base-200", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between mb-3", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-xl font-bold text-base-content", children: problem.name }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "badge badge-primary", children: problem.difficulty || "Medium" })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "tabs tabs-bordered", children: tabs.map((tab2) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "button",
+        {
+          className: `tab ${activeTab === tab2 ? "tab-active" : ""}`,
+          onClick: () => setActiveTab(tab2),
+          children: tab2
+        },
+        tab2
+      )) })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 overflow-y-auto p-4", children: [
+      activeTab === "Description" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "card bg-base-100 border border-base-300", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "card-body", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "card-title text-lg", children: "Problem Statement" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "prose prose-sm max-w-none", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "whitespace-pre-wrap text-base-content leading-relaxed", children: problem.description || "No description available." }) })
+        ] }) }),
+        problem.examples && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "card bg-base-100 border border-base-300", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "card-body", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "card-title text-lg", children: "Examples" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3", children: problem.examples.map((example, idx) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-base-200 p-3 rounded-lg", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "font-semibold mb-2", children: [
+              "Example ",
+              idx + 1,
+              ":"
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "font-mono text-sm", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Input:" }),
+                " ",
+                JSON.stringify(example.input)
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Output:" }),
+                " ",
+                JSON.stringify(example.output)
+              ] }),
+              example.explanation && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Explanation:" }),
+                " ",
+                example.explanation
+              ] })
+            ] })
+          ] }, idx)) })
+        ] }) }),
+        problem.constraints && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "card bg-base-100 border border-base-300", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "card-body", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "card-title text-lg", children: "Constraints" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "prose prose-sm max-w-none", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "whitespace-pre-wrap text-base-content", children: problem.constraints }) })
+        ] }) })
+      ] }),
+      activeTab === "Approach" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "card bg-base-100 border border-base-300", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "card-body", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "card-title text-lg", children: "Solution Approach" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "prose prose-sm max-w-none", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "whitespace-pre-wrap text-base-content leading-relaxed", children: problem.approach || "No approach explanation available." }) }),
+        (problem.timeComplexity || problem.spaceComplexity) && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 space-y-2", children: [
+          problem.timeComplexity && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "badge badge-outline", children: "Time Complexity:" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("code", { className: "text-sm", children: problem.timeComplexity })
+          ] }),
+          problem.spaceComplexity && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "badge badge-outline", children: "Space Complexity:" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("code", { className: "text-sm", children: problem.spaceComplexity })
+          ] })
+        ] })
+      ] }) }),
+      activeTab === "Code" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "card bg-base-100 border border-base-300", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "card-body", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "card-title text-lg", children: "Reference Solution" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CodeBlock, { code: problem.code || "// No code available" }) })
+      ] }) }),
+      activeTab === "Code Editor" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col flex-1 h-[600px] max-h-[80vh]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-grow overflow-auto border border-base-300 rounded-lg", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          CodeEditor,
+          {
+            value: userCode,
+            onChange: setUserCode,
+            language: editorLanguage,
+            height: "100%",
+            width: "100%",
+            options: {
+              fontSize: 14,
+              minimap: { enabled: false },
+              scrollBeyondLastLine: false,
+              automaticLayout: true,
+              theme: "vs-dark"
+            }
+          }
+        ) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-2 flex justify-end", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            className: "btn btn-primary",
+            onClick: handleCheck,
+            disabled: loading,
+            children: loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "loading loading-spinner loading-sm" }) : "Run Code"
+          }
+        ) }),
+        error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-2 alert alert-error", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: error }) }),
+        feedback && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2 card bg-base-100 border border-base-300 p-4 prose max-w-none", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-semibold mb-2", children: "Feedback:" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Markdown, { className: "prose max-w-none", children: feedback })
+        ] })
+      ] })
+    ] })
+  ] });
+}
+function InputForm({ input, onInputChange, problem, onRun, loading }) {
+  const [error, setError] = reactExports.useState("");
+  const [text2, setText] = reactExports.useState(JSON.stringify(input, null, 2));
+  reactExports.useEffect(() => {
+    setText(JSON.stringify(input, null, 2));
+  }, [input]);
+  const handleChange = (e2) => {
+    setText(e2.target.value);
+    try {
+      const parsed = JSON.parse(e2.target.value);
+      setError("");
+      onInputChange(parsed);
+    } catch {
+      setError("Invalid JSON");
+    }
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "form-control", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "label", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "label-text font-semibold", children: "Input (JSON)" }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "textarea",
+        {
+          className: "textarea textarea-bordered font-mono h-32",
+          value: text2,
+          onChange: handleChange,
+          disabled: loading,
+          placeholder: "Enter JSON input..."
+        }
+      ),
+      error && /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "label", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "label-text-alt text-error", children: error }) })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "button",
+      {
+        className: "btn btn-primary w-full",
+        onClick: onRun,
+        disabled: !!error || loading,
+        children: loading ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "loading loading-spinner loading-sm" }),
+          "Running..."
+        ] }) : "Run Solution"
+      }
+    )
+  ] });
 }
 function OutputPanel({ output, loading, error }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "form-control", children: [
