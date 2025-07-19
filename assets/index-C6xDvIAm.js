@@ -16684,6 +16684,54 @@ function ProblemDetails({ problem }) {
     ] }) });
   }
   const editorLanguage = problem.language === "java" ? "java" : "javascript";
+  const handleCheck = async () => {
+    var _a, _b, _c;
+    setLoading(true);
+    setError(null);
+    setFeedback(null);
+    const apiKey = localStorage.getItem("openai_api_key");
+    if (!apiKey) {
+      setError("No OpenAI API key found. Please log in and provide your API key.");
+      setLoading(false);
+      return;
+    }
+    try {
+      const prompt = `You are a DSA coding mentor. Compare the user's code to the reference solution.
+
+Reference Solution:
+${problem.code}
+
+User's Code:
+${userCode}
+
+If the user's code is correct, reply with 'Correct' and a brief explanation. If incorrect, explain what is wrong, how to fix it, and actionable guidance.`;
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({
+          model: "gpt-3.5-turbo",
+          messages: [
+            { role: "system", content: "You are a helpful DSA coding mentor." },
+            { role: "user", content: prompt }
+          ],
+          max_tokens: 512
+        })
+      });
+      if (!response.ok) {
+        throw new Error(`OpenAI API error: ${response.status}`);
+      }
+      const data = await response.json();
+      const aiMessage = ((_c = (_b = (_a = data.choices) == null ? void 0 : _a[0]) == null ? void 0 : _b.message) == null ? void 0 : _c.content) || "No feedback received.";
+      setFeedback(aiMessage);
+    } catch (err) {
+      setError(err.message || "Unknown error");
+    } finally {
+      setLoading(false);
+    }
+  };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col h-full bg-base-100", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-shrink-0 p-4 border-b border-base-300 bg-base-200", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between mb-3", children: [
@@ -16756,23 +16804,39 @@ function ProblemDetails({ problem }) {
         /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "card-title text-lg", children: "Reference Solution" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CodeBlock, { code: problem.code || "// No code available" }) })
       ] }) }),
-      activeTab === "Code Editor" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-        CodeEditor,
-        {
-          value: userCode,
-          onChange: setUserCode,
-          language: editorLanguage,
-          height: "100%",
-          width: "100%",
-          options: {
-            fontSize: 14,
-            minimap: { enabled: false },
-            scrollBeyondLastLine: false,
-            automaticLayout: true,
-            theme: "vs-dark"
+      activeTab === "Code Editor" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col flex-1 h-full", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-grow overflow-auto border border-base-300 rounded-lg", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          CodeEditor,
+          {
+            value: userCode,
+            onChange: setUserCode,
+            language: editorLanguage,
+            height: "100%",
+            width: "100%",
+            options: {
+              fontSize: 14,
+              minimap: { enabled: false },
+              scrollBeyondLastLine: false,
+              automaticLayout: true,
+              theme: "vs-dark"
+            }
           }
-        }
-      ) })
+        ) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-2 flex justify-end", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            className: "btn btn-primary",
+            onClick: handleCheck,
+            disabled: loading,
+            children: loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "loading loading-spinner loading-sm" }) : "Run Code"
+          }
+        ) }),
+        error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-2 alert alert-error", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: error }) }),
+        feedback && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2 card bg-base-100 border border-base-300 p-4 whitespace-pre-wrap", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-semibold mb-2", children: "Feedback:" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { className: "whitespace-pre-wrap", children: feedback })
+        ] })
+      ] })
     ] })
   ] });
 }
