@@ -16979,162 +16979,215 @@ If the user's code is correct, reply with 'Correct' and a brief explanation. If 
     ] })
   ] });
 }
-const Navbar = ({ onApiKeyClick }) => {
-  const { user, logout } = useAuth0();
-  const [darkMode, setDarkMode] = reactExports.useState(() => localStorage.getItem("nightwind-mode") === "dark");
+function AdvancedNavbar({ onApiKeyClick, onSearch }) {
+  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  const [searchQuery, setSearchQuery] = reactExports.useState("");
+  const [isDarkMode, setIsDarkMode] = reactExports.useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = reactExports.useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = reactExports.useState(false);
-  const dropdownRef = reactExports.useRef(null);
+  useNavigate();
+  useLocation();
   reactExports.useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("nightwind-mode", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("nightwind-mode", "light");
+    const savedMode = localStorage.getItem("darkMode");
+    if (savedMode) {
+      setIsDarkMode(savedMode === "true");
+      document.documentElement.classList.toggle("dark", savedMode === "true");
     }
-  }, [darkMode]);
-  reactExports.useEffect(() => {
-    function handleClickOutside(event) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setUserDropdownOpen(false);
-      }
+  }, []);
+  const toggleDarkMode = () => {
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    localStorage.setItem("darkMode", newMode);
+    document.documentElement.classList.toggle("dark", newMode);
+  };
+  const handleSearch = (e2) => {
+    e2.preventDefault();
+    if (searchQuery.trim() && onSearch) {
+      onSearch(searchQuery.trim());
     }
-    if (userDropdownOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [userDropdownOpen]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("nav", { className: "fixed top-0 left-0 right-0 z-20 flex items-center justify-between w-full p-4 transition-transform duration-300 bg-white bg-opacity-80 backdrop-blur-md dark:bg-neutral-900/80 dark:text-white", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", className: "text-2xl font-bold text-neutral-900 dark:text-white", children: "DSA Mentor" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative ml-3 flex flex-col w-full gap-1 mr-auto max-w-64 text-neutral-600 dark:text-neutral-300", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "svg",
-        {
-          xmlns: "http://www.w3.org/2000/svg",
-          fill: "none",
-          viewBox: "0 0 24 24",
-          strokeWidth: "2",
-          stroke: "currentColor",
-          "aria-hidden": "true",
-          className: "absolute left-2.5 top-1/2 size-5 -translate-y-1/2 text-neutral-600/50 dark:text-neutral-300/50",
-          children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "path",
+  };
+  const handleLogout = () => {
+    logout({ returnTo: window.location.origin });
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "nav",
+    {
+      "x-data": "{ mobileMenuIsOpen: false, isVisible: true, lastScrollY: 0 }",
+      className: "fixed top-0 left-0 right-0 z-50 flex items-center justify-between w-full p-4 transition-transform duration-300 bg-white/80 backdrop-blur-md dark:bg-gray-900/80 border-b border-gray-200 dark:border-gray-700",
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between w-full max-w-7xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "/", className: "text-2xl font-bold text-neutral-900 dark:text-white", children: [
+            "DSA",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-blue-600", children: "Mentor" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleSearch, className: "relative hidden md:flex flex-col w-full max-w-md mx-4", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "svg",
+              {
+                xmlns: "http://www.w3.org/2000/svg",
+                fill: "none",
+                viewBox: "0 0 24 24",
+                strokeWidth: "2",
+                stroke: "currentColor",
+                className: "absolute left-3 top-1/2 -translate-y-1/2 size-5 text-neutral-600/50 dark:text-neutral-300/50",
+                children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" })
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                type: "search",
+                value: searchQuery,
+                onChange: (e2) => setSearchQuery(e2.target.value),
+                placeholder: "Search problems...",
+                className: "w-full rounded-md border border-neutral-300 bg-neutral-50 py-2.5 pl-10 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+              }
+            )
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { className: "hidden md:flex items-center gap-6", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "button",
+              {
+                onClick: toggleDarkMode,
+                className: "p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors",
+                "aria-label": "Toggle dark mode",
+                children: isDarkMode ? /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { className: "w-5 h-5 text-yellow-500", fill: "currentColor", viewBox: "0 0 20 20", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { fillRule: "evenodd", d: "M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z", clipRule: "evenodd" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { className: "w-5 h-5 text-gray-600", fill: "currentColor", viewBox: "0 0 20 20", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" }) })
+              }
+            ) }),
+            isAuthenticated ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "button",
+                {
+                  onClick: onApiKeyClick,
+                  className: "px-3 py-1.5 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors",
+                  children: "API Key"
+                }
+              ) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "relative", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  "button",
+                  {
+                    onClick: () => setUserDropdownOpen(!userDropdownOpen),
+                    className: "flex items-center space-x-2 rounded-full focus:outline-none",
+                    children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        "img",
+                        {
+                          src: (user == null ? void 0 : user.picture) || "https://via.placeholder.com/32",
+                          alt: (user == null ? void 0 : user.name) || "User",
+                          className: "w-8 h-8 rounded-full object-cover"
+                        }
+                      ),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-medium text-neutral-900 dark:text-white hidden lg:block", children: (user == null ? void 0 : user.name) || "User" })
+                    ]
+                  }
+                ),
+                userDropdownOpen && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "py-1", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-4 py-2 text-sm text-gray-700 dark:text-gray-300 border-b dark:border-gray-600", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium", children: user == null ? void 0 : user.name }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-gray-500", children: user == null ? void 0 : user.email })
+                  ] }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "button",
+                    {
+                      onClick: handleLogout,
+                      className: "block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700",
+                      children: "Sign Out"
+                    }
+                  )
+                ] }) })
+              ] })
+            ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "button",
+              {
+                onClick: () => loginWithRedirect(),
+                className: "px-4 py-2 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors",
+                children: "Sign In"
+              }
+            ) })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
             {
-              strokeLinecap: "round",
-              strokeLinejoin: "round",
-              d: "m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+              onClick: () => setMobileMenuOpen(!mobileMenuOpen),
+              className: "md:hidden p-2 rounded-md text-gray-600 dark:text-gray-300",
+              "aria-label": "Toggle menu",
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "svg",
+                {
+                  className: "w-6 h-6",
+                  fill: "none",
+                  stroke: "currentColor",
+                  viewBox: "0 0 24 24",
+                  children: mobileMenuOpen ? /* @__PURE__ */ jsxRuntimeExports.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M6 18L18 6M6 6l12 12" }) : /* @__PURE__ */ jsxRuntimeExports.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M4 6h16M4 12h16M4 18h16" })
+                }
+              )
             }
           )
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "input",
-        {
-          type: "search",
-          name: "search",
-          placeholder: "Search",
-          "aria-label": "search",
-          className: "w-full rounded-md border border-neutral-300 bg-neutral-50 py-2.5 pl-10 pr-2 text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black disabled:cursor-not-allowed disabled:opacity-75 dark:border-neutral-700 dark:bg-neutral-900/50 dark:focus-visible:outline-white"
-        }
-      )
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { className: "items-center flex-shrink-0 hidden gap-4 sm:flex", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", className: "font-bold underline-offset-2 hover:text-black focus:outline-none focus:underline dark:text-white dark:hover:text-white", children: "Home" }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", className: "font-bold underline-offset-2 hover:text-black focus:outline-none focus:underline dark:text-white dark:hover:text-white", children: "About" }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "button",
-        {
-          id: "dark-mode",
-          className: "flex items-center justify-center w-8 h-8 text-center transition duration-300 rounded-full focus:outline-none",
-          onClick: () => setDarkMode((d2) => !d2),
-          "aria-label": "Toggle dark mode",
-          children: darkMode ? /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { className: "w-6 h-6 fill-yellow-400", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 512 512", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { className: "w-6 h-6 fill-yellow-400", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 512 512", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M256 0c-13.3 0-24 10.7-24 24V88c0 13.3 10.7 24 24 24s24-10.7 24-24V24c0-13.3-10.7-24-24-24zm0 400c-13.3 0-24 10.7-24 24v64c0 13.3 10.7 24 24 24s24-10.7 24-24V424c0-13.3-10.7-24-24-24zM488 280c13.3 0 24-10.7 24-24s-10.7-24-24-24H424c-13.3 0-24 10.7-24 24s10.7 24 24 24h64zM112 256c0-13.3-10.7-24-24-24H24c-13.3 0-24 10.7-24 24s10.7 24 24 24H88c13.3 0 24-10.7 24-24zM437 108.9c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-45.3 45.3c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0L437 108.9zM154.2 357.8c-9.4-9.4-24.6-9.4-33.9 0L75 403.1c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l45.3-45.3c9.4-9.4 9.4-24.6 0-33.9zM403.1 437c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-45.3-45.3c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9L403.1 437zM154.2 154.2c9.4-9.4 9.4-24.6 0-33.9L108.9 75c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l45.3 45.3c9.4 9.4 24.6 9.4 33.9 0zM256 368a112 112 0 1 0 0-224 112 112 0 1 0 0 224z" }) })
-        }
-      ) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "relative flex items-center", ref: dropdownRef, children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "button",
-          {
-            onClick: () => setUserDropdownOpen((open) => !open),
-            className: "rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black dark:focus-visible:outline-white",
-            "aria-controls": "userMenu",
-            "aria-expanded": userDropdownOpen,
-            children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: (user == null ? void 0 : user.picture) || "https://ui-avatars.com/api/?name=User", alt: "User Profile", className: "object-cover rounded-full w-10 h-10" })
-          }
-        ),
-        userDropdownOpen && /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { className: "absolute right-0 top-12 flex w-full min-w-[12rem] flex-col overflow-hidden rounded-md border border-neutral-300 bg-neutral-50 py-1.5 dark:border-neutral-700 dark:bg-neutral-900 z-50", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("li", { className: "border-b border-neutral-300 dark:border-neutral-700", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col px-4 py-2", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-medium text-neutral-900 dark:text-white", children: (user == null ? void 0 : user.name) || "User" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-neutral-600 dark:text-neutral-300", children: user == null ? void 0 : user.email })
-          ] }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        ] }),
+        mobileMenuOpen && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "md:hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-4 py-2 space-y-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleSearch, className: "relative", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                type: "search",
+                value: searchQuery,
+                onChange: (e2) => setSearchQuery(e2.target.value),
+                placeholder: "Search problems...",
+                className: "w-full rounded-md border border-neutral-300 bg-neutral-50 py-2 pl-8 pr-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "svg",
+              {
+                xmlns: "http://www.w3.org/2000/svg",
+                fill: "none",
+                viewBox: "0 0 24 24",
+                strokeWidth: "2",
+                stroke: "currentColor",
+                className: "absolute left-2 top-1/2 -translate-y-1/2 size-4 text-neutral-600/50",
+                children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" })
+              }
+            )
+          ] }),
+          isAuthenticated ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "button",
+              {
+                onClick: onApiKeyClick,
+                className: "w-full px-3 py-2 text-sm bg-blue-600 text-white rounded-md",
+                children: "API Key"
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "button",
+              {
+                onClick: handleLogout,
+                className: "w-full px-3 py-2 text-sm text-red-600 border border-red-600 rounded-md",
+                children: "Sign Out"
+              }
+            )
+          ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx(
             "button",
             {
-              className: "block w-full text-left px-4 py-2 text-sm bg-neutral-50 text-neutral-600 hover:bg-neutral-900/5 hover:text-neutral-900 focus-visible:bg-neutral-900/10 focus-visible:text-neutral-900 focus-visible:outline-none dark:bg-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-50/5 dark:hover:text-white dark:focus-visible:bg-neutral-50/10 dark:focus-visible:text-white",
-              onClick: onApiKeyClick,
-              children: "API Key"
+              onClick: () => loginWithRedirect(),
+              className: "w-full px-3 py-2 text-sm bg-blue-600 text-white rounded-md",
+              children: "Sign In"
             }
-          ) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
             "button",
             {
-              className: "block w-full text-left px-4 py-2 text-sm bg-neutral-50 text-neutral-600 hover:bg-neutral-900/5 hover:text-neutral-900 focus-visible:bg-neutral-900/10 focus-visible:text-neutral-900 focus-visible:outline-none dark:bg-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-50/5 dark:hover:text-white dark:focus-visible:bg-neutral-50/10 dark:focus-visible:text-white",
-              onClick: () => {
-                localStorage.removeItem("openai_api_key");
-                logout({ logoutParams: { returnTo: window.location.origin } });
-              },
-              children: "Sign Out"
+              onClick: toggleDarkMode,
+              className: "w-full px-3 py-2 text-sm border border-gray-300 rounded-md",
+              children: isDarkMode ? "Light Mode" : "Dark Mode"
             }
-          ) })
-        ] })
-      ] })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "button",
-      {
-        onClick: () => setMobileMenuOpen((open) => !open),
-        "aria-label": "mobile menu",
-        "aria-controls": "mobileMenu",
-        className: "flex text-neutral-600 dark:text-neutral-300 sm:hidden",
-        children: mobileMenuOpen ? /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: "2", stroke: "currentColor", className: "size-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M6 18 18 6M6 6l12 12" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: "2", stroke: "currentColor", className: "size-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" }) })
-      }
-    ),
-    mobileMenuOpen && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fixed inset-0 z-40 bg-black bg-opacity-10 sm:hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute top-0 right-0 w-3/4 max-w-xs h-full bg-white dark:bg-neutral-900 shadow-lg flex flex-col p-6 gap-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", className: "font-bold text-lg", children: "Home" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", className: "font-bold text-lg", children: "About" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "button",
-        {
-          className: "flex items-center gap-2 font-bold text-lg",
-          onClick: () => setDarkMode((d2) => !d2),
-          children: darkMode ? "Light Mode" : "Dark Mode"
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "button",
-        {
-          className: "flex items-center gap-2 font-bold text-lg",
-          onClick: onApiKeyClick,
-          children: "API Key"
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "button",
-        {
-          className: "flex items-center gap-2 font-bold text-lg",
-          onClick: () => {
-            localStorage.removeItem("openai_api_key");
-            logout({ logoutParams: { returnTo: window.location.origin } });
-          },
-          children: "Sign Out"
-        }
-      )
-    ] }) })
-  ] });
-};
+          )
+        ] }) })
+      ]
+    }
+  );
+}
 function MainApp() {
   const [topics, setTopics] = reactExports.useState([]);
   const [problemsByTopic, setProblemsByTopic] = reactExports.useState({});
@@ -17239,7 +17292,15 @@ function MainApp() {
     return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center h-screen text-red-600 text-xl", children: error });
   }
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col h-screen bg-gray-50", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Navbar, { onApiKeyClick: () => setShowApiKeyModal(true) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      AdvancedNavbar,
+      {
+        onApiKeyClick: () => setShowApiKeyModal(true),
+        onSearch: (query) => {
+          console.log("Searching for:", query);
+        }
+      }
+    ),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-1 overflow-hidden", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         TopicSelector,
