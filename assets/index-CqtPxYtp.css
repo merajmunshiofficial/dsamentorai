@@ -2120,12 +2120,6 @@ input.tab:checked + .tab-content,
   background-image: var(--radius-end);
   background-position: top right;
 }
-.tabs-boxed {
-  border-radius: var(--rounded-btn, 0.5rem);
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-bg-opacity)));
-  padding: 0.25rem;
-}
 .tabs-boxed .tab {
   border-radius: var(--rounded-btn, 0.5rem);
 }
@@ -3062,12 +3056,6 @@ input.tab:checked + .tab-content,
 .h-80 {
   height: 20rem;
 }
-.h-\[calc\(100\%-3rem\)\] {
-  height: calc(100% - 3rem);
-}
-.h-\[calc\(100vh-8rem\)\] {
-  height: calc(100vh - 8rem);
-}
 .h-full {
   height: 100%;
 }
@@ -3086,9 +3074,6 @@ input.tab:checked + .tab-content,
 .w-10 {
   width: 2.5rem;
 }
-.w-16 {
-  width: 4rem;
-}
 .w-2 {
   width: 0.5rem;
 }
@@ -3104,14 +3089,8 @@ input.tab:checked + .tab-content,
 .w-52 {
   width: 13rem;
 }
-.w-64 {
-  width: 16rem;
-}
 .w-8 {
   width: 2rem;
-}
-.w-80 {
-  width: 20rem;
 }
 .w-96 {
   width: 24rem;
@@ -3142,9 +3121,6 @@ input.tab:checked + .tab-content,
 }
 .flex-1 {
   flex: 1 1 0%;
-}
-.flex-none {
-  flex: none;
 }
 .flex-shrink-0 {
   flex-shrink: 0;
@@ -3619,9 +3595,6 @@ input.tab:checked + .tab-content,
 .text-base-content {
   --tw-text-opacity: 1;
   color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity, 1)));
-}
-.text-base-content\/30 {
-  color: var(--fallback-bc,oklch(var(--bc)/0.3));
 }
 .text-base-content\/50 {
   color: var(--fallback-bc,oklch(var(--bc)/0.5));

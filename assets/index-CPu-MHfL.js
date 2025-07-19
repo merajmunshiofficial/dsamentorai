@@ -26350,7 +26350,7 @@ const CodeEditor = ({
     }
   ) });
 };
-function ModernDaisyNavbar() {
+function ModernDaisyNavbar({ onApiKeyClick }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "navbar bg-base-100 shadow-lg", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "navbar-start", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "dropdown", children: [
@@ -26368,12 +26368,21 @@ function ModernDaisyNavbar() {
       /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { children: "Problems" }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { children: "About" }) })
     ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "navbar-end", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "btn btn-ghost btn-circle", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-5 w-5", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" }) }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "btn btn-ghost btn-circle", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "indicator", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "navbar-end flex items-center gap-2", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "btn btn-ghost btn-circle", "aria-label": "Search", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-5 w-5", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" }) }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "btn btn-ghost btn-circle", "aria-label": "Notifications", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "indicator", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-5 w-5", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "badge badge-xs badge-primary indicator-item" })
       ] }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "button",
+        {
+          className: "btn btn-primary btn-sm",
+          onClick: onApiKeyClick,
+          "aria-label": "Open OpenAI API Key Modal",
+          children: "API Key"
+        }
+      ),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "dropdown dropdown-end", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("label", { tabIndex: 0, className: "btn btn-ghost btn-circle avatar", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 rounded-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg", alt: "Profile" }) }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { tabIndex: 0, className: "mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52", children: [
@@ -26538,58 +26547,29 @@ function MainApp() {
     return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center h-screen", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "alert alert-error max-w-md", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: error }) }) });
   }
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col min-h-screen bg-base-100", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(ModernDaisyNavbar, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(ModernDaisyNavbar, { onApiKeyClick: () => setShowApiKeyModal(true) }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-1 overflow-hidden", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-64 bg-base-200 border-r border-base-300", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-lg font-bold mb-4", children: "Topics" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          TopicSelector,
-          {
-            topics,
-            selectedTopic,
-            onSelectTopic: setSelectedTopic
-          }
-        )
-      ] }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "w-80 bg-base-100 border-r border-base-300", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 border-b border-base-300", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-lg font-bold", children: "Problems" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-base-content/70", children: [
-            problems.filter((p2) => p2.name.toLowerCase().includes(searchQuery.toLowerCase())).length,
-            " problems"
-          ] })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "overflow-y-auto h-[calc(100vh-8rem)]", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-          ProblemList,
-          {
-            problems: problems.filter((p2) => p2.name.toLowerCase().includes(searchQuery.toLowerCase())),
-            selectedProblemIdx,
-            onSelectProblem: setSelectedProblemIdx
-          }
-        ) })
-      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        TopicSelector,
+        {
+          topics,
+          selectedTopic,
+          onSelectTopic: setSelectedTopic
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        ProblemList,
+        {
+          problems: problems.filter((p2) => p2.name.toLowerCase().includes(searchQuery.toLowerCase())),
+          selectedProblemIdx,
+          onSelectProblem: setSelectedProblemIdx
+        }
+      ),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "flex-1 flex flex-col overflow-hidden", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-base-100 border-b border-base-300", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ProblemDetails, { problem: selectedProblem }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 flex flex-col bg-base-100", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "navbar bg-base-200 border-b border-base-300 px-4 py-2", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1", children: /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-semibold", children: "Code Editor" }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-none", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              "button",
-              {
-                className: "btn btn-primary btn-sm",
-                onClick: handleRun,
-                disabled: !selectedProblem,
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-4 w-4 mr-1", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M21 12a9 9 0 11-18 0 9 9 0 0118 0z" })
-                  ] }),
-                  "Run Code"
-                ]
-              }
-            ) })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 overflow-hidden", children: selectedProblem ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+        /* @__PURE__ */ jsxRuntimeExports.jsx(ProblemDetails, { problem: selectedProblem }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full flex flex-col", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-base-200 px-4 py-2 border-b border-base-300", children: /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-semibold", children: "Code Editor" }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 overflow-hidden", children: selectedProblem && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             CodeEditor,
             {
               value: userCode,
@@ -26605,18 +26585,15 @@ function MainApp() {
                 theme: "vs-dark"
               }
             }
-          ) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-16 w-16 mx-auto mb-4 text-base-content/30", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base-content/50", children: "Select a problem to start coding" })
-          ] }) }) })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-80 bg-base-100 border-t border-base-300", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "tabs tabs-boxed bg-base-200", children: [
+          ) }) })
+        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-80 border-t border-base-300 flex flex-col", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "tabs tabs-bordered bg-base-200", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("a", { className: "tab tab-active", children: "Input" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("a", { className: "tab", children: "Output" })
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-[calc(100%-3rem)]", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-1/2 border-r border-base-300", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 h-full overflow-y-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 flex overflow-hidden", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-1/2 border-r border-base-300 p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
               InputForm,
               {
                 input,
@@ -26624,8 +26601,8 @@ function MainApp() {
                 problem: selectedProblem,
                 onRun: handleRun
               }
-            ) }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-1/2", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 h-full overflow-y-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsx(OutputPanel, { output, error }) }) })
+            ) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-1/2 p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(OutputPanel, { output, error }) })
           ] })
         ] })
       ] })
