@@ -26350,58 +26350,34 @@ const CodeEditor = ({
     }
   ) });
 };
-function DaisyNavbar({ onApiKeyClick, onSearch }) {
-  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
-  const [searchQuery, setSearchQuery] = reactExports.useState("");
-  const handleSearch = (e2) => {
-    e2.preventDefault();
-    if (onSearch) onSearch(searchQuery);
-  };
-  const handleLogout = () => {
-    logout({ returnTo: window.location.origin });
-  };
-  if (!isAuthenticated) {
-    return null;
-  }
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "navbar bg-base-100 w-full justify-between shadow-sm sticky top-0 z-50", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "navbar-start", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "dropdown", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("label", { tabIndex: 0, className: "btn btn-ghost btn-circle lg:hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-5 w-5", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M4 6h16M4 12h16M4 18h16" }) }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { tabIndex: 0, className: "menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#!", children: "Home" }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#!", children: "Profile" }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { onClick: (e2) => {
-          e2.preventDefault();
-          onApiKeyClick();
-        }, children: "API Key" }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { onClick: (e2) => {
-          e2.preventDefault();
-          handleLogout();
-        }, children: "Logout" }) })
-      ] })
-    ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "navbar-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { className: "btn btn-ghost normal-case text-xl", children: "DSA Mentor" }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "navbar-end flex gap-2", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "input",
-        {
-          type: "text",
-          placeholder: "Search",
-          className: "input input-bordered w-24 md:w-auto",
-          value: searchQuery,
-          onChange: (e2) => setSearchQuery(e2.target.value),
-          onKeyPress: (e2) => {
-            if (e2.key === "Enter") {
-              handleSearch(e2);
-            }
+function ModernDaisyNavbar() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "navbar bg-base-100 shadow-sm", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1", children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { className: "btn btn-ghost text-xl", children: "daisyUI" }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-none", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "dropdown dropdown-end", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { tabIndex: 0, role: "button", className: "btn btn-ghost btn-circle", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "indicator", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-5 w-5", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "badge badge-sm indicator-item", children: "8" })
+        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            tabIndex: 0,
+            className: "card card-compact dropdown-content bg-base-100 z-1 mt-3 w-52 shadow",
+            children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "card-body", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-lg font-bold", children: "8 Items" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-info", children: "Subtotal: $999" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "card-actions", children: /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "btn btn-primary btn-block", children: "View cart" }) })
+            ] })
           }
-        }
-      ),
+        )
+      ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "dropdown dropdown-end", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { tabIndex: 0, role: "button", className: "btn btn-ghost btn-circle avatar", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 rounded-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
           "img",
           {
-            alt: "User Profile",
-            src: (user == null ? void 0 : user.picture) || "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+            alt: "Tailwind CSS Navbar component",
+            src: "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
           }
         ) }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -26411,17 +26387,11 @@ function DaisyNavbar({ onApiKeyClick, onSearch }) {
             className: "menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow",
             children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { className: "justify-between", children: [
-                (user == null ? void 0 : user.name) || "Profile",
+                "Profile",
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "badge", children: "New" })
               ] }) }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { onClick: (e2) => {
-                e2.preventDefault();
-                onApiKeyClick();
-              }, children: "API Key" }) }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { onClick: (e2) => {
-                e2.preventDefault();
-                handleLogout();
-              }, children: "Logout" }) })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { children: "Settings" }) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { children: "Logout" }) })
             ]
           }
         )
@@ -26579,7 +26549,7 @@ function MainApp() {
     return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center h-screen", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "alert alert-error max-w-md", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: error }) }) });
   }
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col min-h-screen bg-base-100", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(DaisyNavbar, { onApiKeyClick: () => setShowApiKeyModal(true), onSearch: setSearchQuery }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(ModernDaisyNavbar, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-1 overflow-hidden", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-64 bg-base-200 border-r border-base-300", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-lg font-bold mb-4", children: "Topics" }),
