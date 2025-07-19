@@ -3289,11 +3289,17 @@ input.tab:checked + .tab-content,
 .h-80 {
   height: 20rem;
 }
+.h-\[600px\] {
+  height: 600px;
+}
 .h-full {
   height: 100%;
 }
 .h-screen {
   height: 100vh;
+}
+.max-h-\[80vh\] {
+  max-height: 80vh;
 }
 .min-h-\[150px\] {
   min-height: 150px;
