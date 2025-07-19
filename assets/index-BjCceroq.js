@@ -15975,6 +15975,677 @@ function ProblemList({ problems, selectedProblemIdx, onSelectProblem }) {
 function CodeBlock({ code: code2 }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mockup-code", children: /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { "data-prefix": "$", children: /* @__PURE__ */ jsxRuntimeExports.jsx("code", { children: code2 }) }) });
 }
+function _defineProperty$1(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+function ownKeys$1(object, enumerableOnly) {
+  var keys2 = Object.keys(object);
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function(sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys2.push.apply(keys2, symbols);
+  }
+  return keys2;
+}
+function _objectSpread2$1(target) {
+  for (var i2 = 1; i2 < arguments.length; i2++) {
+    var source = arguments[i2] != null ? arguments[i2] : {};
+    if (i2 % 2) {
+      ownKeys$1(Object(source), true).forEach(function(key) {
+        _defineProperty$1(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys$1(Object(source)).forEach(function(key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+  return target;
+}
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i2;
+  for (i2 = 0; i2 < sourceKeys.length; i2++) {
+    key = sourceKeys[i2];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+  return target;
+}
+function _objectWithoutProperties(source, excluded) {
+  if (source == null) return {};
+  var target = _objectWithoutPropertiesLoose(source, excluded);
+  var key, i2;
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+    for (i2 = 0; i2 < sourceSymbolKeys.length; i2++) {
+      key = sourceSymbolKeys[i2];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+  return target;
+}
+function _slicedToArray(arr, i2) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i2) || _unsupportedIterableToArray(arr, i2) || _nonIterableRest();
+}
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+function _iterableToArrayLimit(arr, i2) {
+  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _e = void 0;
+  try {
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+      if (i2 && _arr.length === i2) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+  return _arr;
+}
+function _unsupportedIterableToArray(o2, minLen) {
+  if (!o2) return;
+  if (typeof o2 === "string") return _arrayLikeToArray(o2, minLen);
+  var n2 = Object.prototype.toString.call(o2).slice(8, -1);
+  if (n2 === "Object" && o2.constructor) n2 = o2.constructor.name;
+  if (n2 === "Map" || n2 === "Set") return Array.from(o2);
+  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray(o2, minLen);
+}
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i2 = 0, arr2 = new Array(len); i2 < len; i2++) arr2[i2] = arr[i2];
+  return arr2;
+}
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+function ownKeys(object, enumerableOnly) {
+  var keys2 = Object.keys(object);
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function(sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys2.push.apply(keys2, symbols);
+  }
+  return keys2;
+}
+function _objectSpread2(target) {
+  for (var i2 = 1; i2 < arguments.length; i2++) {
+    var source = arguments[i2] != null ? arguments[i2] : {};
+    if (i2 % 2) {
+      ownKeys(Object(source), true).forEach(function(key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function(key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+  return target;
+}
+function compose$1() {
+  for (var _len = arguments.length, fns = new Array(_len), _key = 0; _key < _len; _key++) {
+    fns[_key] = arguments[_key];
+  }
+  return function(x2) {
+    return fns.reduceRight(function(y2, f2) {
+      return f2(y2);
+    }, x2);
+  };
+}
+function curry$1(fn) {
+  return function curried() {
+    var _this = this;
+    for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      args[_key2] = arguments[_key2];
+    }
+    return args.length >= fn.length ? fn.apply(this, args) : function() {
+      for (var _len3 = arguments.length, nextArgs = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+        nextArgs[_key3] = arguments[_key3];
+      }
+      return curried.apply(_this, [].concat(args, nextArgs));
+    };
+  };
+}
+function isObject$1(value) {
+  return {}.toString.call(value).includes("Object");
+}
+function isEmpty(obj) {
+  return !Object.keys(obj).length;
+}
+function isFunction(value) {
+  return typeof value === "function";
+}
+function hasOwnProperty$1(object, property) {
+  return Object.prototype.hasOwnProperty.call(object, property);
+}
+function validateChanges(initial, changes) {
+  if (!isObject$1(changes)) errorHandler$1("changeType");
+  if (Object.keys(changes).some(function(field) {
+    return !hasOwnProperty$1(initial, field);
+  })) errorHandler$1("changeField");
+  return changes;
+}
+function validateSelector(selector) {
+  if (!isFunction(selector)) errorHandler$1("selectorType");
+}
+function validateHandler(handler) {
+  if (!(isFunction(handler) || isObject$1(handler))) errorHandler$1("handlerType");
+  if (isObject$1(handler) && Object.values(handler).some(function(_handler) {
+    return !isFunction(_handler);
+  })) errorHandler$1("handlersType");
+}
+function validateInitial(initial) {
+  if (!initial) errorHandler$1("initialIsRequired");
+  if (!isObject$1(initial)) errorHandler$1("initialType");
+  if (isEmpty(initial)) errorHandler$1("initialContent");
+}
+function throwError$1(errorMessages2, type) {
+  throw new Error(errorMessages2[type] || errorMessages2["default"]);
+}
+var errorMessages$1 = {
+  initialIsRequired: "initial state is required",
+  initialType: "initial state should be an object",
+  initialContent: "initial state shouldn't be an empty object",
+  handlerType: "handler should be an object or a function",
+  handlersType: "all handlers should be a functions",
+  selectorType: "selector should be a function",
+  changeType: "provided value of changes should be an object",
+  changeField: 'it seams you want to change a field in the state which is not specified in the "initial" state',
+  "default": "an unknown error accured in `state-local` package"
+};
+var errorHandler$1 = curry$1(throwError$1)(errorMessages$1);
+var validators$1 = {
+  changes: validateChanges,
+  selector: validateSelector,
+  handler: validateHandler,
+  initial: validateInitial
+};
+function create$1(initial) {
+  var handler = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+  validators$1.initial(initial);
+  validators$1.handler(handler);
+  var state = {
+    current: initial
+  };
+  var didUpdate = curry$1(didStateUpdate)(state, handler);
+  var update = curry$1(updateState)(state);
+  var validate = curry$1(validators$1.changes)(initial);
+  var getChanges = curry$1(extractChanges)(state);
+  function getState2() {
+    var selector = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : function(state2) {
+      return state2;
+    };
+    validators$1.selector(selector);
+    return selector(state.current);
+  }
+  function setState2(causedChanges) {
+    compose$1(didUpdate, update, validate, getChanges)(causedChanges);
+  }
+  return [getState2, setState2];
+}
+function extractChanges(state, causedChanges) {
+  return isFunction(causedChanges) ? causedChanges(state.current) : causedChanges;
+}
+function updateState(state, changes) {
+  state.current = _objectSpread2(_objectSpread2({}, state.current), changes);
+  return changes;
+}
+function didStateUpdate(state, handler, changes) {
+  isFunction(handler) ? handler(state.current) : Object.keys(changes).forEach(function(field) {
+    var _handler$field;
+    return (_handler$field = handler[field]) === null || _handler$field === void 0 ? void 0 : _handler$field.call(handler, state.current[field]);
+  });
+  return changes;
+}
+var index$1 = {
+  create: create$1
+};
+var config$1 = {
+  paths: {
+    vs: "https://cdn.jsdelivr.net/npm/monaco-editor@0.52.2/min/vs"
+  }
+};
+function curry(fn) {
+  return function curried() {
+    var _this = this;
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+    return args.length >= fn.length ? fn.apply(this, args) : function() {
+      for (var _len2 = arguments.length, nextArgs = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        nextArgs[_key2] = arguments[_key2];
+      }
+      return curried.apply(_this, [].concat(args, nextArgs));
+    };
+  };
+}
+function isObject(value) {
+  return {}.toString.call(value).includes("Object");
+}
+function validateConfig(config2) {
+  if (!config2) errorHandler("configIsRequired");
+  if (!isObject(config2)) errorHandler("configType");
+  if (config2.urls) {
+    informAboutDeprecation();
+    return {
+      paths: {
+        vs: config2.urls.monacoBase
+      }
+    };
+  }
+  return config2;
+}
+function informAboutDeprecation() {
+  console.warn(errorMessages.deprecation);
+}
+function throwError(errorMessages2, type) {
+  throw new Error(errorMessages2[type] || errorMessages2["default"]);
+}
+var errorMessages = {
+  configIsRequired: "the configuration object is required",
+  configType: "the configuration object should be an object",
+  "default": "an unknown error accured in `@monaco-editor/loader` package",
+  deprecation: "Deprecation warning!\n    You are using deprecated way of configuration.\n\n    Instead of using\n      monaco.config({ urls: { monacoBase: '...' } })\n    use\n      monaco.config({ paths: { vs: '...' } })\n\n    For more please check the link https://github.com/suren-atoyan/monaco-loader#config\n  "
+};
+var errorHandler = curry(throwError)(errorMessages);
+var validators = {
+  config: validateConfig
+};
+var compose = function compose2() {
+  for (var _len = arguments.length, fns = new Array(_len), _key = 0; _key < _len; _key++) {
+    fns[_key] = arguments[_key];
+  }
+  return function(x2) {
+    return fns.reduceRight(function(y2, f2) {
+      return f2(y2);
+    }, x2);
+  };
+};
+function merge$1(target, source) {
+  Object.keys(source).forEach(function(key) {
+    if (source[key] instanceof Object) {
+      if (target[key]) {
+        Object.assign(source[key], merge$1(target[key], source[key]));
+      }
+    }
+  });
+  return _objectSpread2$1(_objectSpread2$1({}, target), source);
+}
+var CANCELATION_MESSAGE = {
+  type: "cancelation",
+  msg: "operation is manually canceled"
+};
+function makeCancelable(promise) {
+  var hasCanceled_ = false;
+  var wrappedPromise = new Promise(function(resolve, reject) {
+    promise.then(function(val) {
+      return hasCanceled_ ? reject(CANCELATION_MESSAGE) : resolve(val);
+    });
+    promise["catch"](reject);
+  });
+  return wrappedPromise.cancel = function() {
+    return hasCanceled_ = true;
+  }, wrappedPromise;
+}
+var _state$create = index$1.create({
+  config: config$1,
+  isInitialized: false,
+  resolve: null,
+  reject: null,
+  monaco: null
+}), _state$create2 = _slicedToArray(_state$create, 2), getState = _state$create2[0], setState = _state$create2[1];
+function config(globalConfig) {
+  var _validators$config = validators.config(globalConfig), monaco = _validators$config.monaco, config2 = _objectWithoutProperties(_validators$config, ["monaco"]);
+  setState(function(state) {
+    return {
+      config: merge$1(state.config, config2),
+      monaco
+    };
+  });
+}
+function init() {
+  var state = getState(function(_ref) {
+    var monaco = _ref.monaco, isInitialized = _ref.isInitialized, resolve = _ref.resolve;
+    return {
+      monaco,
+      isInitialized,
+      resolve
+    };
+  });
+  if (!state.isInitialized) {
+    setState({
+      isInitialized: true
+    });
+    if (state.monaco) {
+      state.resolve(state.monaco);
+      return makeCancelable(wrapperPromise);
+    }
+    if (window.monaco && window.monaco.editor) {
+      storeMonacoInstance(window.monaco);
+      state.resolve(window.monaco);
+      return makeCancelable(wrapperPromise);
+    }
+    compose(injectScripts, getMonacoLoaderScript)(configureLoader);
+  }
+  return makeCancelable(wrapperPromise);
+}
+function injectScripts(script) {
+  return document.body.appendChild(script);
+}
+function createScript(src) {
+  var script = document.createElement("script");
+  return src && (script.src = src), script;
+}
+function getMonacoLoaderScript(configureLoader2) {
+  var state = getState(function(_ref2) {
+    var config2 = _ref2.config, reject = _ref2.reject;
+    return {
+      config: config2,
+      reject
+    };
+  });
+  var loaderScript = createScript("".concat(state.config.paths.vs, "/loader.js"));
+  loaderScript.onload = function() {
+    return configureLoader2();
+  };
+  loaderScript.onerror = state.reject;
+  return loaderScript;
+}
+function configureLoader() {
+  var state = getState(function(_ref3) {
+    var config2 = _ref3.config, resolve = _ref3.resolve, reject = _ref3.reject;
+    return {
+      config: config2,
+      resolve,
+      reject
+    };
+  });
+  var require2 = window.require;
+  require2.config(state.config);
+  require2(["vs/editor/editor.main"], function(monaco) {
+    storeMonacoInstance(monaco);
+    state.resolve(monaco);
+  }, function(error) {
+    state.reject(error);
+  });
+}
+function storeMonacoInstance(monaco) {
+  if (!getState().monaco) {
+    setState({
+      monaco
+    });
+  }
+}
+function __getMonacoInstance() {
+  return getState(function(_ref4) {
+    var monaco = _ref4.monaco;
+    return monaco;
+  });
+}
+var wrapperPromise = new Promise(function(resolve, reject) {
+  return setState({
+    resolve,
+    reject
+  });
+});
+var loader = {
+  config,
+  init,
+  __getMonacoInstance
+};
+var le = { wrapper: { display: "flex", position: "relative", textAlign: "initial" }, fullWidth: { width: "100%" }, hide: { display: "none" } }, v = le;
+var ae = { container: { display: "flex", height: "100%", width: "100%", justifyContent: "center", alignItems: "center" } }, Y = ae;
+function Me({ children: e2 }) {
+  return React.createElement("div", { style: Y.container }, e2);
+}
+var Z2 = Me;
+var $ = Z2;
+function Ee({ width: e2, height: r2, isEditorReady: n2, loading: t2, _ref: a2, className: m2, wrapperProps: E2 }) {
+  return React.createElement("section", { style: { ...v.wrapper, width: e2, height: r2 }, ...E2 }, !n2 && React.createElement($, null, t2), React.createElement("div", { ref: a2, style: { ...v.fullWidth, ...!n2 && v.hide }, className: m2 }));
+}
+var ee = Ee;
+var H = reactExports.memo(ee);
+function Ce(e2) {
+  reactExports.useEffect(e2, []);
+}
+var k = Ce;
+function he(e2, r2, n2 = true) {
+  let t2 = reactExports.useRef(true);
+  reactExports.useEffect(t2.current || !n2 ? () => {
+    t2.current = false;
+  } : e2, r2);
+}
+var l2 = he;
+function D() {
+}
+function h2(e2, r2, n2, t2) {
+  return De(e2, t2) || be(e2, r2, n2, t2);
+}
+function De(e2, r2) {
+  return e2.editor.getModel(te2(e2, r2));
+}
+function be(e2, r2, n2, t2) {
+  return e2.editor.createModel(r2, n2, t2 ? te2(e2, t2) : void 0);
+}
+function te2(e2, r2) {
+  return e2.Uri.parse(r2);
+}
+function Oe({ original: e2, modified: r2, language: n2, originalLanguage: t2, modifiedLanguage: a2, originalModelPath: m2, modifiedModelPath: E2, keepCurrentOriginalModel: g2 = false, keepCurrentModifiedModel: N2 = false, theme: x2 = "light", loading: P2 = "Loading...", options: y2 = {}, height: V2 = "100%", width: z2 = "100%", className: F2, wrapperProps: j2 = {}, beforeMount: A2 = D, onMount: q2 = D }) {
+  let [M2, O2] = reactExports.useState(false), [T2, s2] = reactExports.useState(true), u2 = reactExports.useRef(null), c2 = reactExports.useRef(null), w2 = reactExports.useRef(null), d2 = reactExports.useRef(q2), o2 = reactExports.useRef(A2), b2 = reactExports.useRef(false);
+  k(() => {
+    let i2 = loader.init();
+    return i2.then((f2) => (c2.current = f2) && s2(false)).catch((f2) => (f2 == null ? void 0 : f2.type) !== "cancelation" && console.error("Monaco initialization: error:", f2)), () => u2.current ? I2() : i2.cancel();
+  }), l2(() => {
+    if (u2.current && c2.current) {
+      let i2 = u2.current.getOriginalEditor(), f2 = h2(c2.current, e2 || "", t2 || n2 || "text", m2 || "");
+      f2 !== i2.getModel() && i2.setModel(f2);
+    }
+  }, [m2], M2), l2(() => {
+    if (u2.current && c2.current) {
+      let i2 = u2.current.getModifiedEditor(), f2 = h2(c2.current, r2 || "", a2 || n2 || "text", E2 || "");
+      f2 !== i2.getModel() && i2.setModel(f2);
+    }
+  }, [E2], M2), l2(() => {
+    let i2 = u2.current.getModifiedEditor();
+    i2.getOption(c2.current.editor.EditorOption.readOnly) ? i2.setValue(r2 || "") : r2 !== i2.getValue() && (i2.executeEdits("", [{ range: i2.getModel().getFullModelRange(), text: r2 || "", forceMoveMarkers: true }]), i2.pushUndoStop());
+  }, [r2], M2), l2(() => {
+    var _a, _b;
+    (_b = (_a = u2.current) == null ? void 0 : _a.getModel()) == null ? void 0 : _b.original.setValue(e2 || "");
+  }, [e2], M2), l2(() => {
+    let { original: i2, modified: f2 } = u2.current.getModel();
+    c2.current.editor.setModelLanguage(i2, t2 || n2 || "text"), c2.current.editor.setModelLanguage(f2, a2 || n2 || "text");
+  }, [n2, t2, a2], M2), l2(() => {
+    var _a;
+    (_a = c2.current) == null ? void 0 : _a.editor.setTheme(x2);
+  }, [x2], M2), l2(() => {
+    var _a;
+    (_a = u2.current) == null ? void 0 : _a.updateOptions(y2);
+  }, [y2], M2);
+  let L2 = reactExports.useCallback(() => {
+    var _a;
+    if (!c2.current) return;
+    o2.current(c2.current);
+    let i2 = h2(c2.current, e2 || "", t2 || n2 || "text", m2 || ""), f2 = h2(c2.current, r2 || "", a2 || n2 || "text", E2 || "");
+    (_a = u2.current) == null ? void 0 : _a.setModel({ original: i2, modified: f2 });
+  }, [n2, r2, a2, e2, t2, m2, E2]), U2 = reactExports.useCallback(() => {
+    var _a;
+    !b2.current && w2.current && (u2.current = c2.current.editor.createDiffEditor(w2.current, { automaticLayout: true, ...y2 }), L2(), (_a = c2.current) == null ? void 0 : _a.editor.setTheme(x2), O2(true), b2.current = true);
+  }, [y2, x2, L2]);
+  reactExports.useEffect(() => {
+    M2 && d2.current(u2.current, c2.current);
+  }, [M2]), reactExports.useEffect(() => {
+    !T2 && !M2 && U2();
+  }, [T2, M2, U2]);
+  function I2() {
+    var _a, _b, _c, _d;
+    let i2 = (_a = u2.current) == null ? void 0 : _a.getModel();
+    g2 || ((_b = i2 == null ? void 0 : i2.original) == null ? void 0 : _b.dispose()), N2 || ((_c = i2 == null ? void 0 : i2.modified) == null ? void 0 : _c.dispose()), (_d = u2.current) == null ? void 0 : _d.dispose();
+  }
+  return React.createElement(H, { width: z2, height: V2, isEditorReady: M2, loading: P2, _ref: w2, className: F2, wrapperProps: j2 });
+}
+var ie = Oe;
+reactExports.memo(ie);
+function He(e2) {
+  let r2 = reactExports.useRef();
+  return reactExports.useEffect(() => {
+    r2.current = e2;
+  }, [e2]), r2.current;
+}
+var se = He;
+var _ = /* @__PURE__ */ new Map();
+function Ve({ defaultValue: e2, defaultLanguage: r2, defaultPath: n2, value: t2, language: a2, path: m2, theme: E2 = "light", line: g2, loading: N2 = "Loading...", options: x2 = {}, overrideServices: P2 = {}, saveViewState: y2 = true, keepCurrentModel: V2 = false, width: z2 = "100%", height: F2 = "100%", className: j2, wrapperProps: A2 = {}, beforeMount: q2 = D, onMount: M2 = D, onChange: O2, onValidate: T2 = D }) {
+  let [s2, u2] = reactExports.useState(false), [c2, w2] = reactExports.useState(true), d2 = reactExports.useRef(null), o2 = reactExports.useRef(null), b2 = reactExports.useRef(null), L2 = reactExports.useRef(M2), U2 = reactExports.useRef(q2), I2 = reactExports.useRef(), i2 = reactExports.useRef(t2), f2 = se(m2), Q2 = reactExports.useRef(false), B2 = reactExports.useRef(false);
+  k(() => {
+    let p2 = loader.init();
+    return p2.then((R2) => (d2.current = R2) && w2(false)).catch((R2) => (R2 == null ? void 0 : R2.type) !== "cancelation" && console.error("Monaco initialization: error:", R2)), () => o2.current ? pe() : p2.cancel();
+  }), l2(() => {
+    var _a, _b, _c, _d;
+    let p2 = h2(d2.current, e2 || t2 || "", r2 || a2 || "", m2 || n2 || "");
+    p2 !== ((_a = o2.current) == null ? void 0 : _a.getModel()) && (y2 && _.set(f2, (_b = o2.current) == null ? void 0 : _b.saveViewState()), (_c = o2.current) == null ? void 0 : _c.setModel(p2), y2 && ((_d = o2.current) == null ? void 0 : _d.restoreViewState(_.get(m2))));
+  }, [m2], s2), l2(() => {
+    var _a;
+    (_a = o2.current) == null ? void 0 : _a.updateOptions(x2);
+  }, [x2], s2), l2(() => {
+    !o2.current || t2 === void 0 || (o2.current.getOption(d2.current.editor.EditorOption.readOnly) ? o2.current.setValue(t2) : t2 !== o2.current.getValue() && (B2.current = true, o2.current.executeEdits("", [{ range: o2.current.getModel().getFullModelRange(), text: t2, forceMoveMarkers: true }]), o2.current.pushUndoStop(), B2.current = false));
+  }, [t2], s2), l2(() => {
+    var _a, _b;
+    let p2 = (_a = o2.current) == null ? void 0 : _a.getModel();
+    p2 && a2 && ((_b = d2.current) == null ? void 0 : _b.editor.setModelLanguage(p2, a2));
+  }, [a2], s2), l2(() => {
+    var _a;
+    g2 !== void 0 && ((_a = o2.current) == null ? void 0 : _a.revealLine(g2));
+  }, [g2], s2), l2(() => {
+    var _a;
+    (_a = d2.current) == null ? void 0 : _a.editor.setTheme(E2);
+  }, [E2], s2);
+  let X2 = reactExports.useCallback(() => {
+    var _a;
+    if (!(!b2.current || !d2.current) && !Q2.current) {
+      U2.current(d2.current);
+      let p2 = m2 || n2, R2 = h2(d2.current, t2 || e2 || "", r2 || a2 || "", p2 || "");
+      o2.current = (_a = d2.current) == null ? void 0 : _a.editor.create(b2.current, { model: R2, automaticLayout: true, ...x2 }, P2), y2 && o2.current.restoreViewState(_.get(p2)), d2.current.editor.setTheme(E2), g2 !== void 0 && o2.current.revealLine(g2), u2(true), Q2.current = true;
+    }
+  }, [e2, r2, n2, t2, a2, m2, x2, P2, y2, E2, g2]);
+  reactExports.useEffect(() => {
+    s2 && L2.current(o2.current, d2.current);
+  }, [s2]), reactExports.useEffect(() => {
+    !c2 && !s2 && X2();
+  }, [c2, s2, X2]), i2.current = t2, reactExports.useEffect(() => {
+    var _a, _b;
+    s2 && O2 && ((_a = I2.current) == null ? void 0 : _a.dispose(), I2.current = (_b = o2.current) == null ? void 0 : _b.onDidChangeModelContent((p2) => {
+      B2.current || O2(o2.current.getValue(), p2);
+    }));
+  }, [s2, O2]), reactExports.useEffect(() => {
+    if (s2) {
+      let p2 = d2.current.editor.onDidChangeMarkers((R2) => {
+        var _a;
+        let G2 = (_a = o2.current.getModel()) == null ? void 0 : _a.uri;
+        if (G2 && R2.find((J2) => J2.path === G2.path)) {
+          let J2 = d2.current.editor.getModelMarkers({ resource: G2 });
+          T2 == null ? void 0 : T2(J2);
+        }
+      });
+      return () => {
+        p2 == null ? void 0 : p2.dispose();
+      };
+    }
+    return () => {
+    };
+  }, [s2, T2]);
+  function pe() {
+    var _a, _b;
+    (_a = I2.current) == null ? void 0 : _a.dispose(), V2 ? y2 && _.set(m2, o2.current.saveViewState()) : (_b = o2.current.getModel()) == null ? void 0 : _b.dispose(), o2.current.dispose();
+  }
+  return React.createElement(H, { width: z2, height: F2, isEditorReady: s2, loading: N2, _ref: b2, className: j2, wrapperProps: A2 });
+}
+var fe = Ve;
+var de = reactExports.memo(fe);
+var Ft = de;
+const CodeEditor = ({
+  value,
+  onChange,
+  language = "javascript",
+  height = "100%",
+  width = "100%",
+  options = {}
+}) => {
+  const handleEditorChange = (value2) => {
+    if (onChange) onChange(value2);
+  };
+  const handleEditorError = (error) => {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "alert alert-error", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+      "Failed to load code editor: ",
+      (error == null ? void 0 : error.message) || "Unknown error"
+    ] }) });
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+    Ft,
+    {
+      height,
+      width,
+      language,
+      value,
+      onChange: handleEditorChange,
+      options: {
+        fontSize: 14,
+        minimap: { enabled: false },
+        scrollBeyondLastLine: false,
+        automaticLayout: true,
+        theme: "vs-dark",
+        ...options
+      },
+      loading: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "loading loading-spinner loading-md" }) }),
+      onError: handleEditorError
+    }
+  ) });
+};
 const tabs = ["Description", "Approach", "Code", "Code Editor"];
 function ProblemDetails({ problem }) {
   const [activeTab, setActiveTab] = reactExports.useState("Description");
@@ -16198,7 +16869,7 @@ class Schema {
 Schema.prototype.normal = {};
 Schema.prototype.property = {};
 Schema.prototype.space = void 0;
-function merge$1(definitions, space2) {
+function merge(definitions, space2) {
   const property = {};
   const normal = {};
   for (const definition2 of definitions) {
@@ -16293,7 +16964,7 @@ function mark(values, key, value) {
     values[key] = value;
   }
 }
-function create$1(definition2) {
+function create(definition2) {
   const properties = {};
   const normals = {};
   for (const [property, value] of Object.entries(definition2.properties)) {
@@ -16312,7 +16983,7 @@ function create$1(definition2) {
   }
   return new Schema(properties, normals, definition2.space);
 }
-const aria = create$1({
+const aria = create({
   properties: {
     ariaActiveDescendant: null,
     ariaAtomic: booleanish,
@@ -16374,7 +17045,7 @@ function caseSensitiveTransform(attributes, attribute) {
 function caseInsensitiveTransform(attributes, property) {
   return caseSensitiveTransform(attributes, property.toLowerCase());
 }
-const html$2 = create$1({
+const html$2 = create({
   attributes: {
     acceptcharset: "accept-charset",
     classname: "class",
@@ -16736,7 +17407,7 @@ const html$2 = create$1({
   space: "html",
   transform: caseInsensitiveTransform
 });
-const svg$1 = create$1({
+const svg$1 = create({
   attributes: {
     accentHeight: "accent-height",
     alignmentBaseline: "alignment-baseline",
@@ -17296,7 +17967,7 @@ const svg$1 = create$1({
   space: "svg",
   transform: caseSensitiveTransform
 });
-const xlink = create$1({
+const xlink = create({
   properties: {
     xLinkActuate: null,
     xLinkArcRole: null,
@@ -17311,13 +17982,13 @@ const xlink = create$1({
     return "xlink:" + property.slice(5).toLowerCase();
   }
 });
-const xmlns = create$1({
+const xmlns = create({
   attributes: { xmlnsxlink: "xmlns:xlink" },
   properties: { xmlnsXLink: null, xmlns: null },
   space: "xmlns",
   transform: caseInsensitiveTransform
 });
-const xml = create$1({
+const xml = create({
   properties: { xmlBase: null, xmlLang: null, xmlSpace: null },
   space: "xml",
   transform(_2, property) {
@@ -17377,8 +18048,8 @@ function kebab($0) {
 function camelcase($0) {
   return $0.charAt(1).toUpperCase();
 }
-const html$1 = merge$1([aria, html$2, xlink, xmlns, xml], "html");
-const svg = merge$1([aria, svg$1, xlink, xmlns, xml], "svg");
+const html$1 = merge([aria, html$2, xlink, xmlns, xml], "html");
+const svg = merge([aria, svg$1, xlink, xmlns, xml], "svg");
 function stringify(values) {
   return values.join(" ").trim();
 }
@@ -17659,12 +18330,12 @@ function stringifyPosition(value) {
   return "";
 }
 function point$1(point2) {
-  return index$1(point2 && point2.line) + ":" + index$1(point2 && point2.column);
+  return index(point2 && point2.line) + ":" + index(point2 && point2.column);
 }
 function position(pos) {
   return point$1(pos && pos.start) + "-" + point$1(pos && pos.end);
 }
-function index$1(value) {
+function index(value) {
   return value && typeof value === "number" ? value : 1;
 }
 class VFileMessage extends Error {
@@ -18281,7 +18952,7 @@ function push(list2, items) {
   }
   return items;
 }
-const hasOwnProperty$1 = {}.hasOwnProperty;
+const hasOwnProperty = {}.hasOwnProperty;
 function combineExtensions(extensions) {
   const all2 = {};
   let index2 = -1;
@@ -18293,13 +18964,13 @@ function combineExtensions(extensions) {
 function syntaxExtension(all2, extension2) {
   let hook;
   for (hook in extension2) {
-    const maybe = hasOwnProperty$1.call(all2, hook) ? all2[hook] : void 0;
+    const maybe = hasOwnProperty.call(all2, hook) ? all2[hook] : void 0;
     const left = maybe || (all2[hook] = {});
     const right = extension2[hook];
     let code2;
     if (right) {
       for (code2 in right) {
-        if (!hasOwnProperty$1.call(left, code2)) left[code2] = [];
+        if (!hasOwnProperty.call(left, code2)) left[code2] = [];
         const value = right[code2];
         constructs(
           // @ts-expect-error Looks like a list.
@@ -25785,677 +26456,6 @@ function OutputPanel({ output, loading, error }) {
     ] })
   ] }) });
 }
-function _defineProperty$1(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-  return obj;
-}
-function ownKeys$1(object, enumerableOnly) {
-  var keys2 = Object.keys(object);
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-    if (enumerableOnly) symbols = symbols.filter(function(sym) {
-      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-    });
-    keys2.push.apply(keys2, symbols);
-  }
-  return keys2;
-}
-function _objectSpread2$1(target) {
-  for (var i2 = 1; i2 < arguments.length; i2++) {
-    var source = arguments[i2] != null ? arguments[i2] : {};
-    if (i2 % 2) {
-      ownKeys$1(Object(source), true).forEach(function(key) {
-        _defineProperty$1(target, key, source[key]);
-      });
-    } else if (Object.getOwnPropertyDescriptors) {
-      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-    } else {
-      ownKeys$1(Object(source)).forEach(function(key) {
-        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-      });
-    }
-  }
-  return target;
-}
-function _objectWithoutPropertiesLoose(source, excluded) {
-  if (source == null) return {};
-  var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i2;
-  for (i2 = 0; i2 < sourceKeys.length; i2++) {
-    key = sourceKeys[i2];
-    if (excluded.indexOf(key) >= 0) continue;
-    target[key] = source[key];
-  }
-  return target;
-}
-function _objectWithoutProperties(source, excluded) {
-  if (source == null) return {};
-  var target = _objectWithoutPropertiesLoose(source, excluded);
-  var key, i2;
-  if (Object.getOwnPropertySymbols) {
-    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-    for (i2 = 0; i2 < sourceSymbolKeys.length; i2++) {
-      key = sourceSymbolKeys[i2];
-      if (excluded.indexOf(key) >= 0) continue;
-      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-      target[key] = source[key];
-    }
-  }
-  return target;
-}
-function _slicedToArray(arr, i2) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i2) || _unsupportedIterableToArray(arr, i2) || _nonIterableRest();
-}
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
-}
-function _iterableToArrayLimit(arr, i2) {
-  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
-  var _arr = [];
-  var _n = true;
-  var _d = false;
-  var _e = void 0;
-  try {
-    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-      _arr.push(_s.value);
-      if (i2 && _arr.length === i2) break;
-    }
-  } catch (err) {
-    _d = true;
-    _e = err;
-  } finally {
-    try {
-      if (!_n && _i["return"] != null) _i["return"]();
-    } finally {
-      if (_d) throw _e;
-    }
-  }
-  return _arr;
-}
-function _unsupportedIterableToArray(o2, minLen) {
-  if (!o2) return;
-  if (typeof o2 === "string") return _arrayLikeToArray(o2, minLen);
-  var n2 = Object.prototype.toString.call(o2).slice(8, -1);
-  if (n2 === "Object" && o2.constructor) n2 = o2.constructor.name;
-  if (n2 === "Map" || n2 === "Set") return Array.from(o2);
-  if (n2 === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n2)) return _arrayLikeToArray(o2, minLen);
-}
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-  for (var i2 = 0, arr2 = new Array(len); i2 < len; i2++) arr2[i2] = arr[i2];
-  return arr2;
-}
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-  return obj;
-}
-function ownKeys(object, enumerableOnly) {
-  var keys2 = Object.keys(object);
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-    if (enumerableOnly) symbols = symbols.filter(function(sym) {
-      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-    });
-    keys2.push.apply(keys2, symbols);
-  }
-  return keys2;
-}
-function _objectSpread2(target) {
-  for (var i2 = 1; i2 < arguments.length; i2++) {
-    var source = arguments[i2] != null ? arguments[i2] : {};
-    if (i2 % 2) {
-      ownKeys(Object(source), true).forEach(function(key) {
-        _defineProperty(target, key, source[key]);
-      });
-    } else if (Object.getOwnPropertyDescriptors) {
-      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-    } else {
-      ownKeys(Object(source)).forEach(function(key) {
-        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-      });
-    }
-  }
-  return target;
-}
-function compose$1() {
-  for (var _len = arguments.length, fns = new Array(_len), _key = 0; _key < _len; _key++) {
-    fns[_key] = arguments[_key];
-  }
-  return function(x2) {
-    return fns.reduceRight(function(y2, f2) {
-      return f2(y2);
-    }, x2);
-  };
-}
-function curry$1(fn) {
-  return function curried() {
-    var _this = this;
-    for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-      args[_key2] = arguments[_key2];
-    }
-    return args.length >= fn.length ? fn.apply(this, args) : function() {
-      for (var _len3 = arguments.length, nextArgs = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-        nextArgs[_key3] = arguments[_key3];
-      }
-      return curried.apply(_this, [].concat(args, nextArgs));
-    };
-  };
-}
-function isObject$1(value) {
-  return {}.toString.call(value).includes("Object");
-}
-function isEmpty(obj) {
-  return !Object.keys(obj).length;
-}
-function isFunction(value) {
-  return typeof value === "function";
-}
-function hasOwnProperty(object, property) {
-  return Object.prototype.hasOwnProperty.call(object, property);
-}
-function validateChanges(initial, changes) {
-  if (!isObject$1(changes)) errorHandler$1("changeType");
-  if (Object.keys(changes).some(function(field) {
-    return !hasOwnProperty(initial, field);
-  })) errorHandler$1("changeField");
-  return changes;
-}
-function validateSelector(selector) {
-  if (!isFunction(selector)) errorHandler$1("selectorType");
-}
-function validateHandler(handler) {
-  if (!(isFunction(handler) || isObject$1(handler))) errorHandler$1("handlerType");
-  if (isObject$1(handler) && Object.values(handler).some(function(_handler) {
-    return !isFunction(_handler);
-  })) errorHandler$1("handlersType");
-}
-function validateInitial(initial) {
-  if (!initial) errorHandler$1("initialIsRequired");
-  if (!isObject$1(initial)) errorHandler$1("initialType");
-  if (isEmpty(initial)) errorHandler$1("initialContent");
-}
-function throwError$1(errorMessages2, type) {
-  throw new Error(errorMessages2[type] || errorMessages2["default"]);
-}
-var errorMessages$1 = {
-  initialIsRequired: "initial state is required",
-  initialType: "initial state should be an object",
-  initialContent: "initial state shouldn't be an empty object",
-  handlerType: "handler should be an object or a function",
-  handlersType: "all handlers should be a functions",
-  selectorType: "selector should be a function",
-  changeType: "provided value of changes should be an object",
-  changeField: 'it seams you want to change a field in the state which is not specified in the "initial" state',
-  "default": "an unknown error accured in `state-local` package"
-};
-var errorHandler$1 = curry$1(throwError$1)(errorMessages$1);
-var validators$1 = {
-  changes: validateChanges,
-  selector: validateSelector,
-  handler: validateHandler,
-  initial: validateInitial
-};
-function create(initial) {
-  var handler = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
-  validators$1.initial(initial);
-  validators$1.handler(handler);
-  var state = {
-    current: initial
-  };
-  var didUpdate = curry$1(didStateUpdate)(state, handler);
-  var update = curry$1(updateState)(state);
-  var validate = curry$1(validators$1.changes)(initial);
-  var getChanges = curry$1(extractChanges)(state);
-  function getState2() {
-    var selector = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : function(state2) {
-      return state2;
-    };
-    validators$1.selector(selector);
-    return selector(state.current);
-  }
-  function setState2(causedChanges) {
-    compose$1(didUpdate, update, validate, getChanges)(causedChanges);
-  }
-  return [getState2, setState2];
-}
-function extractChanges(state, causedChanges) {
-  return isFunction(causedChanges) ? causedChanges(state.current) : causedChanges;
-}
-function updateState(state, changes) {
-  state.current = _objectSpread2(_objectSpread2({}, state.current), changes);
-  return changes;
-}
-function didStateUpdate(state, handler, changes) {
-  isFunction(handler) ? handler(state.current) : Object.keys(changes).forEach(function(field) {
-    var _handler$field;
-    return (_handler$field = handler[field]) === null || _handler$field === void 0 ? void 0 : _handler$field.call(handler, state.current[field]);
-  });
-  return changes;
-}
-var index = {
-  create
-};
-var config$1 = {
-  paths: {
-    vs: "https://cdn.jsdelivr.net/npm/monaco-editor@0.52.2/min/vs"
-  }
-};
-function curry(fn) {
-  return function curried() {
-    var _this = this;
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-    return args.length >= fn.length ? fn.apply(this, args) : function() {
-      for (var _len2 = arguments.length, nextArgs = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        nextArgs[_key2] = arguments[_key2];
-      }
-      return curried.apply(_this, [].concat(args, nextArgs));
-    };
-  };
-}
-function isObject(value) {
-  return {}.toString.call(value).includes("Object");
-}
-function validateConfig(config2) {
-  if (!config2) errorHandler("configIsRequired");
-  if (!isObject(config2)) errorHandler("configType");
-  if (config2.urls) {
-    informAboutDeprecation();
-    return {
-      paths: {
-        vs: config2.urls.monacoBase
-      }
-    };
-  }
-  return config2;
-}
-function informAboutDeprecation() {
-  console.warn(errorMessages.deprecation);
-}
-function throwError(errorMessages2, type) {
-  throw new Error(errorMessages2[type] || errorMessages2["default"]);
-}
-var errorMessages = {
-  configIsRequired: "the configuration object is required",
-  configType: "the configuration object should be an object",
-  "default": "an unknown error accured in `@monaco-editor/loader` package",
-  deprecation: "Deprecation warning!\n    You are using deprecated way of configuration.\n\n    Instead of using\n      monaco.config({ urls: { monacoBase: '...' } })\n    use\n      monaco.config({ paths: { vs: '...' } })\n\n    For more please check the link https://github.com/suren-atoyan/monaco-loader#config\n  "
-};
-var errorHandler = curry(throwError)(errorMessages);
-var validators = {
-  config: validateConfig
-};
-var compose = function compose2() {
-  for (var _len = arguments.length, fns = new Array(_len), _key = 0; _key < _len; _key++) {
-    fns[_key] = arguments[_key];
-  }
-  return function(x2) {
-    return fns.reduceRight(function(y2, f2) {
-      return f2(y2);
-    }, x2);
-  };
-};
-function merge(target, source) {
-  Object.keys(source).forEach(function(key) {
-    if (source[key] instanceof Object) {
-      if (target[key]) {
-        Object.assign(source[key], merge(target[key], source[key]));
-      }
-    }
-  });
-  return _objectSpread2$1(_objectSpread2$1({}, target), source);
-}
-var CANCELATION_MESSAGE = {
-  type: "cancelation",
-  msg: "operation is manually canceled"
-};
-function makeCancelable(promise) {
-  var hasCanceled_ = false;
-  var wrappedPromise = new Promise(function(resolve, reject) {
-    promise.then(function(val) {
-      return hasCanceled_ ? reject(CANCELATION_MESSAGE) : resolve(val);
-    });
-    promise["catch"](reject);
-  });
-  return wrappedPromise.cancel = function() {
-    return hasCanceled_ = true;
-  }, wrappedPromise;
-}
-var _state$create = index.create({
-  config: config$1,
-  isInitialized: false,
-  resolve: null,
-  reject: null,
-  monaco: null
-}), _state$create2 = _slicedToArray(_state$create, 2), getState = _state$create2[0], setState = _state$create2[1];
-function config(globalConfig) {
-  var _validators$config = validators.config(globalConfig), monaco = _validators$config.monaco, config2 = _objectWithoutProperties(_validators$config, ["monaco"]);
-  setState(function(state) {
-    return {
-      config: merge(state.config, config2),
-      monaco
-    };
-  });
-}
-function init() {
-  var state = getState(function(_ref) {
-    var monaco = _ref.monaco, isInitialized = _ref.isInitialized, resolve = _ref.resolve;
-    return {
-      monaco,
-      isInitialized,
-      resolve
-    };
-  });
-  if (!state.isInitialized) {
-    setState({
-      isInitialized: true
-    });
-    if (state.monaco) {
-      state.resolve(state.monaco);
-      return makeCancelable(wrapperPromise);
-    }
-    if (window.monaco && window.monaco.editor) {
-      storeMonacoInstance(window.monaco);
-      state.resolve(window.monaco);
-      return makeCancelable(wrapperPromise);
-    }
-    compose(injectScripts, getMonacoLoaderScript)(configureLoader);
-  }
-  return makeCancelable(wrapperPromise);
-}
-function injectScripts(script) {
-  return document.body.appendChild(script);
-}
-function createScript(src) {
-  var script = document.createElement("script");
-  return src && (script.src = src), script;
-}
-function getMonacoLoaderScript(configureLoader2) {
-  var state = getState(function(_ref2) {
-    var config2 = _ref2.config, reject = _ref2.reject;
-    return {
-      config: config2,
-      reject
-    };
-  });
-  var loaderScript = createScript("".concat(state.config.paths.vs, "/loader.js"));
-  loaderScript.onload = function() {
-    return configureLoader2();
-  };
-  loaderScript.onerror = state.reject;
-  return loaderScript;
-}
-function configureLoader() {
-  var state = getState(function(_ref3) {
-    var config2 = _ref3.config, resolve = _ref3.resolve, reject = _ref3.reject;
-    return {
-      config: config2,
-      resolve,
-      reject
-    };
-  });
-  var require2 = window.require;
-  require2.config(state.config);
-  require2(["vs/editor/editor.main"], function(monaco) {
-    storeMonacoInstance(monaco);
-    state.resolve(monaco);
-  }, function(error) {
-    state.reject(error);
-  });
-}
-function storeMonacoInstance(monaco) {
-  if (!getState().monaco) {
-    setState({
-      monaco
-    });
-  }
-}
-function __getMonacoInstance() {
-  return getState(function(_ref4) {
-    var monaco = _ref4.monaco;
-    return monaco;
-  });
-}
-var wrapperPromise = new Promise(function(resolve, reject) {
-  return setState({
-    resolve,
-    reject
-  });
-});
-var loader = {
-  config,
-  init,
-  __getMonacoInstance
-};
-var le = { wrapper: { display: "flex", position: "relative", textAlign: "initial" }, fullWidth: { width: "100%" }, hide: { display: "none" } }, v = le;
-var ae = { container: { display: "flex", height: "100%", width: "100%", justifyContent: "center", alignItems: "center" } }, Y = ae;
-function Me({ children: e2 }) {
-  return React.createElement("div", { style: Y.container }, e2);
-}
-var Z2 = Me;
-var $ = Z2;
-function Ee({ width: e2, height: r2, isEditorReady: n2, loading: t2, _ref: a2, className: m2, wrapperProps: E2 }) {
-  return React.createElement("section", { style: { ...v.wrapper, width: e2, height: r2 }, ...E2 }, !n2 && React.createElement($, null, t2), React.createElement("div", { ref: a2, style: { ...v.fullWidth, ...!n2 && v.hide }, className: m2 }));
-}
-var ee = Ee;
-var H = reactExports.memo(ee);
-function Ce(e2) {
-  reactExports.useEffect(e2, []);
-}
-var k = Ce;
-function he(e2, r2, n2 = true) {
-  let t2 = reactExports.useRef(true);
-  reactExports.useEffect(t2.current || !n2 ? () => {
-    t2.current = false;
-  } : e2, r2);
-}
-var l2 = he;
-function D() {
-}
-function h2(e2, r2, n2, t2) {
-  return De(e2, t2) || be(e2, r2, n2, t2);
-}
-function De(e2, r2) {
-  return e2.editor.getModel(te2(e2, r2));
-}
-function be(e2, r2, n2, t2) {
-  return e2.editor.createModel(r2, n2, t2 ? te2(e2, t2) : void 0);
-}
-function te2(e2, r2) {
-  return e2.Uri.parse(r2);
-}
-function Oe({ original: e2, modified: r2, language: n2, originalLanguage: t2, modifiedLanguage: a2, originalModelPath: m2, modifiedModelPath: E2, keepCurrentOriginalModel: g2 = false, keepCurrentModifiedModel: N2 = false, theme: x2 = "light", loading: P2 = "Loading...", options: y2 = {}, height: V2 = "100%", width: z2 = "100%", className: F2, wrapperProps: j2 = {}, beforeMount: A2 = D, onMount: q2 = D }) {
-  let [M2, O2] = reactExports.useState(false), [T2, s2] = reactExports.useState(true), u2 = reactExports.useRef(null), c2 = reactExports.useRef(null), w2 = reactExports.useRef(null), d2 = reactExports.useRef(q2), o2 = reactExports.useRef(A2), b2 = reactExports.useRef(false);
-  k(() => {
-    let i2 = loader.init();
-    return i2.then((f2) => (c2.current = f2) && s2(false)).catch((f2) => (f2 == null ? void 0 : f2.type) !== "cancelation" && console.error("Monaco initialization: error:", f2)), () => u2.current ? I2() : i2.cancel();
-  }), l2(() => {
-    if (u2.current && c2.current) {
-      let i2 = u2.current.getOriginalEditor(), f2 = h2(c2.current, e2 || "", t2 || n2 || "text", m2 || "");
-      f2 !== i2.getModel() && i2.setModel(f2);
-    }
-  }, [m2], M2), l2(() => {
-    if (u2.current && c2.current) {
-      let i2 = u2.current.getModifiedEditor(), f2 = h2(c2.current, r2 || "", a2 || n2 || "text", E2 || "");
-      f2 !== i2.getModel() && i2.setModel(f2);
-    }
-  }, [E2], M2), l2(() => {
-    let i2 = u2.current.getModifiedEditor();
-    i2.getOption(c2.current.editor.EditorOption.readOnly) ? i2.setValue(r2 || "") : r2 !== i2.getValue() && (i2.executeEdits("", [{ range: i2.getModel().getFullModelRange(), text: r2 || "", forceMoveMarkers: true }]), i2.pushUndoStop());
-  }, [r2], M2), l2(() => {
-    var _a, _b;
-    (_b = (_a = u2.current) == null ? void 0 : _a.getModel()) == null ? void 0 : _b.original.setValue(e2 || "");
-  }, [e2], M2), l2(() => {
-    let { original: i2, modified: f2 } = u2.current.getModel();
-    c2.current.editor.setModelLanguage(i2, t2 || n2 || "text"), c2.current.editor.setModelLanguage(f2, a2 || n2 || "text");
-  }, [n2, t2, a2], M2), l2(() => {
-    var _a;
-    (_a = c2.current) == null ? void 0 : _a.editor.setTheme(x2);
-  }, [x2], M2), l2(() => {
-    var _a;
-    (_a = u2.current) == null ? void 0 : _a.updateOptions(y2);
-  }, [y2], M2);
-  let L2 = reactExports.useCallback(() => {
-    var _a;
-    if (!c2.current) return;
-    o2.current(c2.current);
-    let i2 = h2(c2.current, e2 || "", t2 || n2 || "text", m2 || ""), f2 = h2(c2.current, r2 || "", a2 || n2 || "text", E2 || "");
-    (_a = u2.current) == null ? void 0 : _a.setModel({ original: i2, modified: f2 });
-  }, [n2, r2, a2, e2, t2, m2, E2]), U2 = reactExports.useCallback(() => {
-    var _a;
-    !b2.current && w2.current && (u2.current = c2.current.editor.createDiffEditor(w2.current, { automaticLayout: true, ...y2 }), L2(), (_a = c2.current) == null ? void 0 : _a.editor.setTheme(x2), O2(true), b2.current = true);
-  }, [y2, x2, L2]);
-  reactExports.useEffect(() => {
-    M2 && d2.current(u2.current, c2.current);
-  }, [M2]), reactExports.useEffect(() => {
-    !T2 && !M2 && U2();
-  }, [T2, M2, U2]);
-  function I2() {
-    var _a, _b, _c, _d;
-    let i2 = (_a = u2.current) == null ? void 0 : _a.getModel();
-    g2 || ((_b = i2 == null ? void 0 : i2.original) == null ? void 0 : _b.dispose()), N2 || ((_c = i2 == null ? void 0 : i2.modified) == null ? void 0 : _c.dispose()), (_d = u2.current) == null ? void 0 : _d.dispose();
-  }
-  return React.createElement(H, { width: z2, height: V2, isEditorReady: M2, loading: P2, _ref: w2, className: F2, wrapperProps: j2 });
-}
-var ie = Oe;
-reactExports.memo(ie);
-function He(e2) {
-  let r2 = reactExports.useRef();
-  return reactExports.useEffect(() => {
-    r2.current = e2;
-  }, [e2]), r2.current;
-}
-var se = He;
-var _ = /* @__PURE__ */ new Map();
-function Ve({ defaultValue: e2, defaultLanguage: r2, defaultPath: n2, value: t2, language: a2, path: m2, theme: E2 = "light", line: g2, loading: N2 = "Loading...", options: x2 = {}, overrideServices: P2 = {}, saveViewState: y2 = true, keepCurrentModel: V2 = false, width: z2 = "100%", height: F2 = "100%", className: j2, wrapperProps: A2 = {}, beforeMount: q2 = D, onMount: M2 = D, onChange: O2, onValidate: T2 = D }) {
-  let [s2, u2] = reactExports.useState(false), [c2, w2] = reactExports.useState(true), d2 = reactExports.useRef(null), o2 = reactExports.useRef(null), b2 = reactExports.useRef(null), L2 = reactExports.useRef(M2), U2 = reactExports.useRef(q2), I2 = reactExports.useRef(), i2 = reactExports.useRef(t2), f2 = se(m2), Q2 = reactExports.useRef(false), B2 = reactExports.useRef(false);
-  k(() => {
-    let p2 = loader.init();
-    return p2.then((R2) => (d2.current = R2) && w2(false)).catch((R2) => (R2 == null ? void 0 : R2.type) !== "cancelation" && console.error("Monaco initialization: error:", R2)), () => o2.current ? pe() : p2.cancel();
-  }), l2(() => {
-    var _a, _b, _c, _d;
-    let p2 = h2(d2.current, e2 || t2 || "", r2 || a2 || "", m2 || n2 || "");
-    p2 !== ((_a = o2.current) == null ? void 0 : _a.getModel()) && (y2 && _.set(f2, (_b = o2.current) == null ? void 0 : _b.saveViewState()), (_c = o2.current) == null ? void 0 : _c.setModel(p2), y2 && ((_d = o2.current) == null ? void 0 : _d.restoreViewState(_.get(m2))));
-  }, [m2], s2), l2(() => {
-    var _a;
-    (_a = o2.current) == null ? void 0 : _a.updateOptions(x2);
-  }, [x2], s2), l2(() => {
-    !o2.current || t2 === void 0 || (o2.current.getOption(d2.current.editor.EditorOption.readOnly) ? o2.current.setValue(t2) : t2 !== o2.current.getValue() && (B2.current = true, o2.current.executeEdits("", [{ range: o2.current.getModel().getFullModelRange(), text: t2, forceMoveMarkers: true }]), o2.current.pushUndoStop(), B2.current = false));
-  }, [t2], s2), l2(() => {
-    var _a, _b;
-    let p2 = (_a = o2.current) == null ? void 0 : _a.getModel();
-    p2 && a2 && ((_b = d2.current) == null ? void 0 : _b.editor.setModelLanguage(p2, a2));
-  }, [a2], s2), l2(() => {
-    var _a;
-    g2 !== void 0 && ((_a = o2.current) == null ? void 0 : _a.revealLine(g2));
-  }, [g2], s2), l2(() => {
-    var _a;
-    (_a = d2.current) == null ? void 0 : _a.editor.setTheme(E2);
-  }, [E2], s2);
-  let X2 = reactExports.useCallback(() => {
-    var _a;
-    if (!(!b2.current || !d2.current) && !Q2.current) {
-      U2.current(d2.current);
-      let p2 = m2 || n2, R2 = h2(d2.current, t2 || e2 || "", r2 || a2 || "", p2 || "");
-      o2.current = (_a = d2.current) == null ? void 0 : _a.editor.create(b2.current, { model: R2, automaticLayout: true, ...x2 }, P2), y2 && o2.current.restoreViewState(_.get(p2)), d2.current.editor.setTheme(E2), g2 !== void 0 && o2.current.revealLine(g2), u2(true), Q2.current = true;
-    }
-  }, [e2, r2, n2, t2, a2, m2, x2, P2, y2, E2, g2]);
-  reactExports.useEffect(() => {
-    s2 && L2.current(o2.current, d2.current);
-  }, [s2]), reactExports.useEffect(() => {
-    !c2 && !s2 && X2();
-  }, [c2, s2, X2]), i2.current = t2, reactExports.useEffect(() => {
-    var _a, _b;
-    s2 && O2 && ((_a = I2.current) == null ? void 0 : _a.dispose(), I2.current = (_b = o2.current) == null ? void 0 : _b.onDidChangeModelContent((p2) => {
-      B2.current || O2(o2.current.getValue(), p2);
-    }));
-  }, [s2, O2]), reactExports.useEffect(() => {
-    if (s2) {
-      let p2 = d2.current.editor.onDidChangeMarkers((R2) => {
-        var _a;
-        let G2 = (_a = o2.current.getModel()) == null ? void 0 : _a.uri;
-        if (G2 && R2.find((J2) => J2.path === G2.path)) {
-          let J2 = d2.current.editor.getModelMarkers({ resource: G2 });
-          T2 == null ? void 0 : T2(J2);
-        }
-      });
-      return () => {
-        p2 == null ? void 0 : p2.dispose();
-      };
-    }
-    return () => {
-    };
-  }, [s2, T2]);
-  function pe() {
-    var _a, _b;
-    (_a = I2.current) == null ? void 0 : _a.dispose(), V2 ? y2 && _.set(m2, o2.current.saveViewState()) : (_b = o2.current.getModel()) == null ? void 0 : _b.dispose(), o2.current.dispose();
-  }
-  return React.createElement(H, { width: z2, height: F2, isEditorReady: s2, loading: N2, _ref: b2, className: j2, wrapperProps: A2 });
-}
-var fe = Ve;
-var de = reactExports.memo(fe);
-var Ft = de;
-const CodeEditor$1 = ({
-  value,
-  onChange,
-  language = "javascript",
-  height = "100%",
-  width = "100%",
-  options = {}
-}) => {
-  const handleEditorChange = (value2) => {
-    if (onChange) onChange(value2);
-  };
-  const handleEditorError = (error) => {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "alert alert-error", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-      "Failed to load code editor: ",
-      (error == null ? void 0 : error.message) || "Unknown error"
-    ] }) });
-  };
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-    Ft,
-    {
-      height,
-      width,
-      language,
-      value,
-      onChange: handleEditorChange,
-      options: {
-        fontSize: 14,
-        minimap: { enabled: false },
-        scrollBeyondLastLine: false,
-        automaticLayout: true,
-        theme: "vs-dark",
-        ...options
-      },
-      loading: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "loading loading-spinner loading-md" }) }),
-      onError: handleEditorError
-    }
-  ) });
-};
 function ModernDaisyNavbar({ onApiKeyClick }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "navbar bg-base-100 shadow-lg", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "navbar-start", children: [
@@ -26676,7 +26676,7 @@ function MainApp() {
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full flex flex-col", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-base-200 px-4 py-2 border-b border-base-300", children: /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-lg font-semibold", children: "Code Editor" }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 overflow-hidden", children: selectedProblem && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-            CodeEditor$1,
+            CodeEditor,
             {
               value: userCode,
               onChange: setUserCode,
