@@ -12079,7 +12079,7 @@ function requireClient() {
   return client.exports;
 }
 var clientExports = requireClient();
-const ReactDOM = /* @__PURE__ */ getDefaultExportFromCjs(clientExports);
+const ReactDOM$1 = /* @__PURE__ */ getDefaultExportFromCjs(clientExports);
 var dist = {};
 var hasRequiredDist;
 function requireDist() {
@@ -14220,6 +14220,8 @@ function useViewTransitionState(to, opts = {}) {
   ...NO_BODY_STATUS_CODES,
   304
 ]);
+var reactDomExports = requireReactDom();
+const ReactDOM = /* @__PURE__ */ getDefaultExportFromCjs(reactDomExports);
 var extendStatics = function(d2, b2) {
   extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d3, b3) {
     d3.__proto__ = b3;
@@ -16979,81 +16981,139 @@ If the user's code is correct, reply with 'Correct' and a brief explanation. If 
     ] })
   ] });
 }
-function CorrectNavbar({ onApiKeyClick, onSearch }) {
+const useDarkMode = () => {
+  const [isDarkMode, setIsDarkMode] = reactExports.useState(false);
+  reactExports.useEffect(() => {
+    const initialMode = localStorage.getItem("dsa-mentor-dark-mode") === "true";
+    setIsDarkMode(initialMode);
+    document.documentElement.classList.toggle("dark", initialMode);
+  }, []);
+  const toggleDarkMode = () => {
+    setIsDarkMode((prevMode) => {
+      const newMode = !prevMode;
+      localStorage.setItem("dsa-mentor-dark-mode", newMode);
+      document.documentElement.classList.toggle("dark", newMode);
+      return newMode;
+    });
+  };
+  return [isDarkMode, toggleDarkMode];
+};
+function FinalNavbar({ onApiKeyClick, onSearch }) {
   const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  const [isMobileMenuOpen, setMobileMenuOpen] = reactExports.useState(false);
+  const [isUserMenuOpen, setUserMenuOpen] = reactExports.useState(false);
+  const [isVisible, setIsVisible] = reactExports.useState(true);
+  const [isDarkMode, toggleDarkMode] = useDarkMode();
+  const lastScrollY = reactExports.useRef(0);
   const [searchQuery, setSearchQuery] = reactExports.useState("");
-  const [userDropdownOpen, setUserDropdownOpen] = reactExports.useState(false);
   const handleSearch = (e2) => {
     e2.preventDefault();
-    if (onSearch) {
-      onSearch(searchQuery);
+    if (onSearch) onSearch(searchQuery);
+  };
+  const handleScroll = reactExports.useCallback(() => {
+    const currentScrollY = window.scrollY;
+    if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+      setIsVisible(false);
+    } else {
+      setIsVisible(true);
     }
-  };
-  const handleLogout = () => {
-    logout({ returnTo: window.location.origin });
-  };
+    lastScrollY.current = currentScrollY;
+  }, []);
   reactExports.useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (userDropdownOpen && !event.target.closest(".user-menu-container")) {
-        setUserDropdownOpen(false);
-      }
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
+  reactExports.useEffect(() => {
+    const handleOutsideClick = (e2) => {
+      if (!e2.target.closest(".user-menu-container")) setUserMenuOpen(false);
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [userDropdownOpen]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("header", { className: "fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 h-16", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center w-full h-full mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", className: "text-xl font-bold text-gray-900", children: "LOGO" }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 flex justify-center px-4 lg:px-8", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full max-w-md", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleSearch, className: "relative", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { className: "h-5 w-5 text-gray-400", xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" }) }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "input",
-        {
-          type: "search",
-          value: searchQuery,
-          onChange: (e2) => setSearchQuery(e2.target.value),
-          placeholder: "Search",
-          className: "block w-full rounded-md border border-gray-300 bg-white py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:border-indigo-500 focus:text-gray-900 focus:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-500"
-        }
-      )
-    ] }) }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-end space-x-6", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", className: "text-sm font-medium text-gray-700 hover:text-gray-900 hidden md:block", children: "Home" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", className: "text-sm font-medium text-gray-700 hover:text-gray-900 hidden md:block", children: "About" }),
-      isAuthenticated ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative user-menu-container", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { onClick: () => setUserDropdownOpen((prev) => !prev), className: "flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "sr-only", children: "Open user menu" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "img",
-            {
-              className: "h-8 w-8 rounded-full",
-              src: (user == null ? void 0 : user.picture) || `https://ui-avatars.com/api/?name=${(user == null ? void 0 : user.name) || "User"}&background=random`,
-              alt: user == null ? void 0 : user.name
-            }
-          )
-        ] }),
-        userDropdownOpen && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none", role: "menu", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-4 py-3 border-b", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-gray-900", children: user == null ? void 0 : user.name }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-gray-500 truncate", children: user == null ? void 0 : user.email })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "py-1", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", onClick: (e2) => {
+    document.addEventListener("click", handleOutsideClick);
+    return () => document.removeEventListener("click", handleOutsideClick);
+  }, []);
+  const navClasses = `
+    fixed top-0 left-0 right-0 z-50 flex items-center justify-between w-full p-4 
+    transition-transform duration-300 ease-in-out bg-white bg-opacity-80 
+    backdrop-blur-md dark:bg-gray-900 dark:bg-opacity-80 border-b border-gray-200 dark:border-gray-700
+    ${isVisible ? "translate-y-0" : "-translate-y-full"}
+  `;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("nav", { className: navClasses, "aria-label": "Main menu", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", className: "text-2xl font-bold text-neutral-900 dark:text-white", children: "LOGO" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleSearch, className: "relative ml-3 flex-col w-full gap-1 mr-auto max-w-xs text-neutral-600 dark:text-neutral-300 hidden sm:flex", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: "2", stroke: "currentColor", "aria-hidden": "true", className: "absolute left-2.5 top-1/2 h-5 w-5 -translate-y-1/2 text-neutral-600/50 dark:text-neutral-300/50", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "input",
+          {
+            type: "search",
+            name: "search",
+            placeholder: "Search",
+            "aria-label": "search",
+            value: searchQuery,
+            onChange: (e2) => setSearchQuery(e2.target.value),
+            className: "w-full rounded-md border border-neutral-300 bg-neutral-50 py-2 pl-10 pr-2 text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black disabled:cursor-not-allowed disabled:opacity-75 dark:border-neutral-700 dark:bg-neutral-800 dark:focus-visible:outline-white"
+          }
+        )
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { className: "items-center flex-shrink-0 hidden gap-6 sm:flex", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", className: "font-medium underline-offset-2 hover:text-black focus:outline-none focus:underline dark:text-white dark:hover:text-white text-sm", children: "Home" }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", className: "font-medium underline-offset-2 hover:text-black focus:outline-none focus:underline dark:text-white dark:hover:text-white text-sm", children: "About" }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: toggleDarkMode, className: "flex items-center justify-center w-8 h-8 text-center transition duration-300 rounded-full focus:outline-none", "aria-label": "Toggle Dark Mode", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid w-10 h-10", children: isDarkMode ? /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { className: "w-5 h-5 place-self-center fill-yellow-400", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 512 512", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { className: "w-5 h-5 place-self-center fill-yellow-500", xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 512 512", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M256 0c-13.3 0-24 10.7-24 24V88c0 13.3 10.7 24 24 24s24-10.7 24-24V24c0-13.3-10.7-24-24-24zm0 400c-13.3 0-24 10.7-24 24v64c0 13.3 10.7 24 24 24s24-10.7 24-24V424c0-13.3-10.7-24-24-24zM488 280c13.3 0 24-10.7 24-24s-10.7-24-24-24H424c-13.3 0-24 10.7-24 24s10.7 24 24 24h64zM112 256c0-13.3-10.7-24-24-24H24c-13.3 0-24 10.7-24 24s10.7 24 24 24H88c13.3 0 24-10.7 24-24zM437 108.9c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-45.3 45.3c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0L437 108.9zM154.2 357.8c-9.4-9.4-24.6-9.4-33.9 0L75 403.1c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l45.3-45.3c9.4-9.4 9.4-24.6 0-33.9zM403.1 437c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-45.3-45.3c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9L403.1 437zM154.2 154.2c9.4-9.4 9.4-24.6 0-33.9L108.9 75c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l45.3 45.3c9.4 9.4 24.6 9.4 33.9 0zM256 368a112 112 0 1 0 0-224 112 112 0 1 0 0 224z" }) }) }) }) }),
+        isAuthenticated ? /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "relative user-menu-container", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: () => setUserMenuOpen((o2) => !o2), className: "rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black dark:focus-visible:outline-white", children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: user.picture, alt: "User Profile", className: "object-cover rounded-full h-9 w-9" }) }),
+          isUserMenuOpen && /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { className: "absolute right-0 top-12 flex w-full min-w-[12rem] flex-col overflow-hidden rounded-md border border-neutral-300 bg-neutral-50 py-1.5 dark:border-neutral-700 dark:bg-neutral-900", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("li", { className: "border-b border-neutral-300 dark:border-neutral-700", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col px-4 py-2", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-medium text-neutral-900 dark:text-white", children: user.name }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-neutral-600 dark:text-neutral-300", children: user.email })
+            ] }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", onClick: (e2) => {
               e2.preventDefault();
               onApiKeyClick();
-              setUserDropdownOpen(false);
-            }, className: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", children: "API Key" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", onClick: (e2) => {
+              setUserMenuOpen(false);
+            }, className: "block px-4 py-2 text-sm text-neutral-600 hover:bg-neutral-900/5 focus-visible:outline-none dark:text-neutral-300 dark:hover:bg-neutral-50/5 dark:hover:text-white", children: "API Key" }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", onClick: (e2) => {
               e2.preventDefault();
-              handleLogout();
-            }, className: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", children: "Sign out" })
+              logout({ returnTo: window.location.origin });
+            }, className: "block px-4 py-2 text-sm text-neutral-600 hover:bg-neutral-900/5 focus-visible:outline-none dark:text-neutral-300 dark:hover:bg-neutral-50/5 dark:hover:text-white", children: "Sign Out" }) })
           ] })
-        ] })
-      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", onClick: (e2) => {
-        e2.preventDefault();
-        loginWithRedirect();
-      }, className: "text-sm font-medium text-gray-700 hover:text-gray-900", children: "Sign in" })
-    ] })
-  ] }) });
+        ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: () => loginWithRedirect(), className: "font-medium underline-offset-2 hover:text-black focus:outline-none focus:underline dark:text-white dark:hover:text-white text-sm", children: "Sign In" }) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: () => setMobileMenuOpen((o2) => !o2), type: "button", className: "flex text-neutral-600 dark:text-neutral-300 sm:hidden", "aria-label": "Open mobile menu", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", "aria-hidden": "true", viewBox: "0 0 24 24", strokeWidth: "2", stroke: "currentColor", className: "h-6 w-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" }) }) })
+    ] }),
+    isMobileMenuOpen && ReactDOM.createPortal(
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative z-[99]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { onClick: () => setMobileMenuOpen(false), className: "fixed inset-0 bg-black bg-opacity-10" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fixed inset-y-0 right-0 flex max-w-full pl-10", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-screen max-w-md", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col h-full py-5 overflow-y-scroll bg-white dark:bg-gray-900 border-l shadow-lg border-neutral-100/70 dark:border-neutral-800", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "px-4 sm:px-5", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between pb-1", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-base font-semibold leading-6 text-gray-900 dark:text-white", children: "Menu" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { onClick: () => setMobileMenuOpen(false), className: "flex items-center justify-center p-1 rounded-md text-neutral-600 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: "1.5", stroke: "currentColor", className: "w-6 h-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M6 18L18 6M6 6l12 12" }) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "sr-only", children: "Close menu" })
+            ] })
+          ] }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative flex-1 px-4 mt-5 sm:px-5", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { className: "flex flex-col gap-4", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", className: "block py-2 font-medium text-gray-700 dark:text-gray-200", children: "Home" }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", className: "block py-2 font-medium text-gray-700 dark:text-gray-200", children: "About" }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("li", { className: "pt-4 border-t border-gray-200 dark:border-gray-700", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleSearch, className: "relative", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "input",
+                {
+                  type: "search",
+                  name: "search",
+                  placeholder: "Search",
+                  "aria-label": "search",
+                  value: searchQuery,
+                  onChange: (e2) => setSearchQuery(e2.target.value),
+                  className: "w-full rounded-md border border-neutral-300 bg-neutral-50 py-2 pl-10 pr-2 text-sm dark:border-neutral-700 dark:bg-neutral-800"
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: "2", stroke: "currentColor", "aria-hidden": "true", className: "absolute left-2.5 top-1/2 h-5 w-5 -translate-y-1/2 text-neutral-600/50 dark:text-neutral-300/50", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" }) })
+            ] }) })
+          ] }) })
+        ] }) }) })
+      ] }),
+      document.body
+    )
+  ] });
 }
 function MainApp() {
   const [topics, setTopics] = reactExports.useState([]);
@@ -17161,7 +17221,7 @@ function MainApp() {
   }
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col h-screen bg-gray-50", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(
-      CorrectNavbar,
+      FinalNavbar,
       {
         onApiKeyClick: () => setShowApiKeyModal(true),
         onSearch: setSearchQuery
@@ -17219,6 +17279,6 @@ function App() {
   }
   return /* @__PURE__ */ jsxRuntimeExports.jsx(HashRouter, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Auth0ProviderWithHistory, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(AuthenticatedApp, {}) }) });
 }
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM$1.createRoot(document.getElementById("root")).render(
   /* @__PURE__ */ jsxRuntimeExports.jsx(React.StrictMode, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) })
 );
