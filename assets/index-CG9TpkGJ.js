@@ -16979,14 +16979,14 @@ If the user's code is correct, reply with 'Correct' and a brief explanation. If 
     ] })
   ] });
 }
-function SimpleNavbar({ onApiKeyClick, onSearch }) {
+function NewNavbar({ onApiKeyClick, onSearch }) {
   const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
   const [searchQuery, setSearchQuery] = reactExports.useState("");
   const [userDropdownOpen, setUserDropdownOpen] = reactExports.useState(false);
   const handleSearch = (e2) => {
     e2.preventDefault();
-    if (searchQuery.trim() && onSearch) {
-      onSearch(searchQuery.trim());
+    if (onSearch) {
+      onSearch(searchQuery);
     }
   };
   const handleLogout = () => {
@@ -16994,36 +16994,17 @@ function SimpleNavbar({ onApiKeyClick, onSearch }) {
   };
   reactExports.useEffect(() => {
     const handleClickOutside = (event) => {
-      if (userDropdownOpen && !event.target.closest(".user-dropdown")) {
+      if (userDropdownOpen && !event.target.closest(".user-menu-container")) {
         setUserDropdownOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [userDropdownOpen]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { className: "fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 px-6 py-3", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between max-w-full", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xl font-bold text-gray-900", children: "LOGO" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 max-w-md mx-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleSearch, className: "relative", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "svg",
-        {
-          className: "h-4 w-4 text-gray-400",
-          fill: "none",
-          stroke: "currentColor",
-          viewBox: "0 0 24 24",
-          children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "path",
-            {
-              strokeLinecap: "round",
-              strokeLinejoin: "round",
-              strokeWidth: 2,
-              d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            }
-          )
-        }
-      ) }),
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("header", { className: "fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 h-16", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", className: "text-xl font-bold text-gray-900", children: "LOGO" }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 flex justify-center px-4 lg:px-8", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full max-w-lg", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleSearch, className: "relative", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { className: "h-5 w-5 text-gray-400", xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" }) }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         "input",
         {
@@ -17031,61 +17012,44 @@ function SimpleNavbar({ onApiKeyClick, onSearch }) {
           value: searchQuery,
           onChange: (e2) => setSearchQuery(e2.target.value),
           placeholder: "Search",
-          className: "block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-sm"
+          className: "block w-full rounded-md border border-gray-300 bg-white py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:border-indigo-500 focus:text-gray-900 focus:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-500"
         }
       )
-    ] }) }),
+    ] }) }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center space-x-6", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "hidden md:flex items-center space-x-6", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", className: "text-gray-900 hover:text-gray-700 font-medium text-sm", children: "Home" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", className: "text-gray-900 hover:text-gray-700 font-medium text-sm", children: "About" })
-      ] }),
-      isAuthenticated ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative user-dropdown", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "button",
-          {
-            onClick: () => setUserDropdownOpen(!userDropdownOpen),
-            className: "flex items-center space-x-2 focus:outline-none",
-            children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-              "img",
-              {
-                src: (user == null ? void 0 : user.picture) || "https://via.placeholder.com/32",
-                alt: (user == null ? void 0 : user.name) || "User",
-                className: "w-8 h-8 rounded-full object-cover"
-              }
-            )
-          }
-        ),
-        userDropdownOpen && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 py-1 z-50", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-4 py-2 text-sm text-gray-700 border-b border-gray-100", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium", children: user == null ? void 0 : user.name }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-gray-500 truncate", children: user == null ? void 0 : user.email })
-          ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", className: "text-sm font-medium text-gray-700 hover:text-gray-900 hidden md:block", children: "Home" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", className: "text-sm font-medium text-gray-700 hover:text-gray-900 hidden md:block", children: "About" }),
+      isAuthenticated ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative user-menu-container", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { onClick: () => setUserDropdownOpen((prev) => !prev), className: "flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "sr-only", children: "Open user menu" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "button",
+            "img",
             {
-              onClick: onApiKeyClick,
-              className: "block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50",
-              children: "API Key"
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "button",
-            {
-              onClick: handleLogout,
-              className: "block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50",
-              children: "Sign Out"
+              className: "h-8 w-8 rounded-full",
+              src: (user == null ? void 0 : user.picture) || `https://ui-avatars.com/api/?name=${(user == null ? void 0 : user.name) || "User"}&background=random`,
+              alt: user == null ? void 0 : user.name
             }
           )
+        ] }),
+        userDropdownOpen && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none", role: "menu", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-4 py-2 border-b", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium text-gray-900", children: user == null ? void 0 : user.name }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-gray-500 truncate", children: user == null ? void 0 : user.email })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", onClick: (e2) => {
+            e2.preventDefault();
+            onApiKeyClick();
+            setUserDropdownOpen(false);
+          }, className: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", children: "API Key" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", onClick: (e2) => {
+            e2.preventDefault();
+            handleLogout();
+          }, className: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", children: "Sign out" })
         ] })
-      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "button",
-        {
-          onClick: () => loginWithRedirect(),
-          className: "bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500",
-          children: "Sign In"
-        }
-      )
+      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", onClick: (e2) => {
+        e2.preventDefault();
+        loginWithRedirect();
+      }, className: "text-sm font-medium text-gray-700 hover:text-gray-900", children: "Sign in" })
     ] })
   ] }) });
 }
@@ -17102,6 +17066,7 @@ function MainApp() {
   const [loading, setLoading] = reactExports.useState(true);
   const [error, setError] = reactExports.useState("");
   const [showApiKeyModal, setShowApiKeyModal] = reactExports.useState(false);
+  const [searchQuery, setSearchQuery] = reactExports.useState("");
   reactExports.useEffect(() => {
     async function loadAllProblems() {
       var _a, _b, _c;
@@ -17194,15 +17159,13 @@ function MainApp() {
   }
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col h-screen bg-gray-50", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(
-      SimpleNavbar,
+      NewNavbar,
       {
         onApiKeyClick: () => setShowApiKeyModal(true),
-        onSearch: (query) => {
-          console.log("Searching for:", query);
-        }
+        onSearch: setSearchQuery
       }
     ),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-1 overflow-hidden pt-16", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-1 overflow-y-auto", style: { paddingTop: "64px" }, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         TopicSelector,
         {
@@ -17214,7 +17177,7 @@ function MainApp() {
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         ProblemList,
         {
-          problems,
+          problems: problems.filter((p2) => p2.name.toLowerCase().includes(searchQuery.toLowerCase())),
           selectedProblemIdx,
           onSelectProblem: setSelectedProblemIdx
         }
