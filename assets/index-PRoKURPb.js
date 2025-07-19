@@ -15991,7 +15991,7 @@ function ProblemDetails({ problem }) {
     if (!problem) return "";
     return `${problem.topic || ""}::${problem.name || ""}`;
   };
-  useEffect(() => {
+  reactExports.useEffect(() => {
     const key = getProblemKey();
     setUserCode(userCodeMap[key] || "");
     setFeedback(null);
@@ -16000,7 +16000,7 @@ function ProblemDetails({ problem }) {
     setOutput(null);
     setRunError("");
   }, [problem]);
-  useEffect(() => {
+  reactExports.useEffect(() => {
     const key = getProblemKey();
     if (key) {
       setUserCodeMap((prev) => ({ ...prev, [key]: userCode }));
