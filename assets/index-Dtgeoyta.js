@@ -16979,6 +16979,122 @@ If the user's code is correct, reply with 'Correct' and a brief explanation. If 
     ] })
   ] });
 }
+function DaisyNavbar({ onApiKeyClick, onSearch }) {
+  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  const [searchQuery, setSearchQuery] = reactExports.useState("");
+  const handleSearch = (e2) => {
+    e2.preventDefault();
+    if (onSearch) onSearch(searchQuery);
+  };
+  const handleLogout = () => {
+    logout({ returnTo: window.location.origin });
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "navbar bg-base-100 shadow-lg fixed top-0 left-0 right-0 z-50", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "navbar-start", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "dropdown", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("label", { tabIndex: 0, className: "btn btn-ghost lg:hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-5 w-5", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M4 6h16M4 12h8m-8 6h16" }) }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { tabIndex: 0, className: "menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#home", children: "Home" }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#about", children: "About" }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("form", { onSubmit: handleSearch, className: "form-control", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "input",
+            {
+              type: "search",
+              placeholder: "Search",
+              className: "input input-bordered input-sm w-full max-w-xs",
+              value: searchQuery,
+              onChange: (e2) => setSearchQuery(e2.target.value)
+            }
+          ) }) })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { className: "btn btn-ghost normal-case text-xl", children: "DSA Mentor" })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "navbar-center hidden lg:flex", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { className: "menu menu-horizontal px-1", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#home", children: "Home" }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#about", children: "About" }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("form", { onSubmit: handleSearch, className: "form-control", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "input",
+        {
+          type: "search",
+          placeholder: "Search problems...",
+          className: "input input-bordered input-sm w-full max-w-xs",
+          value: searchQuery,
+          onChange: (e2) => setSearchQuery(e2.target.value)
+        }
+      ) }) })
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "navbar-end", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "dropdown dropdown-end", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("label", { tabIndex: 0, className: "btn btn-ghost btn-circle avatar", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 rounded-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "img",
+        {
+          src: isAuthenticated ? user.picture : "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          alt: "User"
+        }
+      ) }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { tabIndex: 0, className: "mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52", children: isAuthenticated ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { className: "menu-title", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: user == null ? void 0 : user.name }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { onClick: (e2) => {
+          e2.preventDefault();
+          onApiKeyClick();
+        }, children: "API Key" }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { onClick: (e2) => {
+          e2.preventDefault();
+          handleLogout();
+        }, children: "Logout" }) })
+      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { onClick: (e2) => {
+        e2.preventDefault();
+        loginWithRedirect();
+      }, children: "Login" }) }) })
+    ] }) })
+  ] });
+}
+function DaisyApiKeyModal({ isOpen, onClose, onSave }) {
+  const [apiKey, setApiKey] = reactExports.useState("");
+  const [error, setError] = reactExports.useState("");
+  reactExports.useEffect(() => {
+    if (isOpen) {
+      const savedKey = localStorage.getItem("openai_api_key") || "";
+      setApiKey(savedKey);
+      setError("");
+    }
+  }, [isOpen]);
+  const handleSave = () => {
+    if (!apiKey.trim()) {
+      setError("API Key is required");
+      return;
+    }
+    localStorage.setItem("openai_api_key", apiKey);
+    onSave(apiKey);
+    onClose();
+  };
+  if (!isOpen) return null;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "modal modal-open", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "modal-box", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-bold text-lg", children: "OpenAI API Key" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "py-4", children: "Enter your OpenAI API key to enable AI features" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "form-control", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "label", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "label-text", children: "API Key" }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "input",
+          {
+            type: "password",
+            placeholder: "sk-...",
+            className: `input input-bordered ${error ? "input-error" : ""}`,
+            value: apiKey,
+            onChange: (e2) => setApiKey(e2.target.value)
+          }
+        ),
+        error && /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "label", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "label-text-alt text-error", children: error }) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "modal-action", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "btn", onClick: onClose, children: "Cancel" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "btn btn-primary", onClick: handleSave, children: "Save" })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "modal-backdrop", onClick: onClose })
+  ] });
+}
 function MainApp() {
   const [topics, setTopics] = reactExports.useState([]);
   const [problemsByTopic, setProblemsByTopic] = reactExports.useState({});
@@ -16995,7 +17111,7 @@ function MainApp() {
   const [searchQuery, setSearchQuery] = reactExports.useState("");
   reactExports.useEffect(() => {
     async function loadAllProblems() {
-      var _a, _b, _c;
+      var _a, _b;
       setLoading(true);
       setError("");
       try {
@@ -17023,15 +17139,10 @@ function MainApp() {
         for (const topic of topicList) {
           try {
             const dataPath = false ? `/src/data/${topic}/problems.json` : `./data/${topic}/problems.json`;
-            console.log(`Fetching data for ${topic} from:`, dataPath);
             const res = await fetch(dataPath);
-            if (!res.ok) {
-              console.warn(`Failed to load ${topic}: ${res.status} from ${dataPath}`);
-              continue;
-            }
+            if (!res.ok) continue;
             const problems2 = await res.json();
             problemsByTopicTemp[topic] = problems2;
-            console.log(`Successfully loaded ${topic}:`, problems2.length, "problems");
           } catch (err) {
             console.warn(`Error loading ${topic}:`, err);
           }
@@ -17039,23 +17150,12 @@ function MainApp() {
         const loadedTopics = Object.keys(problemsByTopicTemp);
         setTopics(loadedTopics);
         setProblemsByTopic(problemsByTopicTemp);
-        let topicToSelect = localStorage.getItem("lastSelectedTopic");
-        let idxToSelect = parseInt(localStorage.getItem("lastSelectedProblemIdx"), 10);
-        if (!topicToSelect || !problemsByTopicTemp[topicToSelect]) {
-          topicToSelect = loadedTopics[0] || "";
-        }
-        if (isNaN(idxToSelect) || !((_a = problemsByTopicTemp[topicToSelect]) == null ? void 0 : _a[idxToSelect])) {
-          idxToSelect = 0;
-        }
+        let topicToSelect = localStorage.getItem("lastSelectedTopic") || loadedTopics[0] || "";
+        let idxToSelect = parseInt(localStorage.getItem("lastSelectedProblemIdx") || "0", 10);
         setSelectedTopic(topicToSelect);
         setSelectedProblemIdx(idxToSelect);
-        setInput(
-          ((_c = (_b = problemsByTopicTemp[topicToSelect]) == null ? void 0 : _b[idxToSelect]) == null ? void 0 : _c.defaultInput) || {}
-        );
+        setInput(((_b = (_a = problemsByTopicTemp[topicToSelect]) == null ? void 0 : _a[idxToSelect]) == null ? void 0 : _b.defaultInput) || {});
         setLoading(false);
-        if (loadedTopics.length === 0) {
-          setError("No topics found. Please check your data files.");
-        }
       } catch (err) {
         setError("Failed to load problems data.");
         setLoading(false);
@@ -17072,9 +17172,6 @@ function MainApp() {
     localStorage.setItem("lastSelectedTopic", selectedTopic);
     localStorage.setItem("lastSelectedProblemIdx", selectedProblemIdx);
   }, [selectedTopic, selectedProblemIdx, problemsByTopic]);
-  reactExports.useEffect(() => {
-    setSelectedProblemIdx(0);
-  }, [selectedTopic]);
   const problems = problemsByTopic[selectedTopic] || [];
   const selectedProblem = problems[selectedProblemIdx];
   if (loading) {
@@ -17083,14 +17180,8 @@ function MainApp() {
   if (error) {
     return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center h-screen text-red-600 text-xl", children: error });
   }
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col h-screen bg-gray-50", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      HyperUINavbar,
-      {
-        onApiKeyClick: () => setShowApiKeyModal(true),
-        onSearch: setSearchQuery
-      }
-    ),
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col h-screen bg-base-100", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(DaisyNavbar, { onApiKeyClick: () => setShowApiKeyModal(true), onSearch: setSearchQuery }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-1 overflow-y-auto", style: { paddingTop: "64px" }, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         TopicSelector,
@@ -17109,7 +17200,15 @@ function MainApp() {
         }
       ),
       /* @__PURE__ */ jsxRuntimeExports.jsx("main", { className: "flex-1 flex flex-row overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 flex flex-col overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ProblemDetails, { problem: selectedProblem }) }) })
-    ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      DaisyApiKeyModal,
+      {
+        isOpen: showApiKeyModal,
+        onClose: () => setShowApiKeyModal(false),
+        onSave: (key) => setShowApiKeyModal(false)
+      }
+    )
   ] });
 }
 function AuthenticatedApp() {
@@ -17125,14 +17224,7 @@ function AuthenticatedApp() {
     return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "min-h-screen bg-gradient-to-br from-red-900 via-red-800 to-red-900 flex items-center justify-center p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-white text-center", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-2xl font-bold mb-4", children: "Authentication Error" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-red-200 mb-4", children: error.message }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "button",
-        {
-          onClick: () => window.location.reload(),
-          className: "bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg",
-          children: "Retry"
-        }
-      )
+      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: () => window.location.reload(), className: "bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg", children: "Retry" })
     ] }) });
   }
   return isAuthenticated ? /* @__PURE__ */ jsxRuntimeExports.jsx(MainApp, {}) : /* @__PURE__ */ jsxRuntimeExports.jsx(Auth0Login, {});
