@@ -26461,7 +26461,7 @@ If the user's code is correct, reply with 'Correct' and a brief explanation. If 
           /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-semibold mb-2", children: "Feedback:" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(Markdown, { className: "prose max-w-none", components: {
             code({ node: node2, inline, className, children, ...props }) {
-              return !inline ? /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { className: "overflow-x-auto p-4 bg-gray-900 rounded-lg text-white text-sm", style: { maxHeight: "8rem" }, ...props, children: /* @__PURE__ */ jsxRuntimeExports.jsx("code", { style: { fontSize: "1.25rem", lineHeight: "1.5rem" }, children }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("code", { className, ...props, children });
+              return !inline ? /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { className: "overflow-x-auto p-4 bg-gray-900 rounded-lg text-white text-sm", style: { maxHeight: "20rem" }, ...props, children: /* @__PURE__ */ jsxRuntimeExports.jsx("code", { style: { fontSize: "0.875rem", lineHeight: "1.25rem" }, children }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("code", { className, ...props, children });
             }
           }, children: feedback })
         ] })
