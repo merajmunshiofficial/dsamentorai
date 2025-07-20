@@ -26429,7 +26429,7 @@ If the user's code is correct, reply with 'Correct' and a brief explanation. If 
         /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "card-title text-lg", children: "Reference Solution" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CodeBlock, { code: problem.code || "// No code available" }) })
       ] }) }),
-      activeTab === "Code Editor" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col flex-1 max-h-[80vh]", children: [
+      activeTab === "Code Editor" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col flex-1 h-[80vh]", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-grow overflow-auto border border-base-300 rounded-lg mb-2", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
           CodeEditor,
           {
