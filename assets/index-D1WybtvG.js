@@ -26429,8 +26429,8 @@ If the user's code is correct, reply with 'Correct' and a brief explanation. If 
         /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "card-title text-lg", children: "Reference Solution" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CodeBlock, { code: problem.code || "// No code available" }) })
       ] }) }),
-      activeTab === "Code Editor" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col flex-1 h-[600px] max-h-[80vh]", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-grow overflow-auto border border-base-300 rounded-lg", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+      activeTab === "Code Editor" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col flex-1 max-h-[80vh]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-grow overflow-auto border border-base-300 rounded-lg mb-2", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
           CodeEditor,
           {
             value: userCode,
@@ -26447,7 +26447,7 @@ If the user's code is correct, reply with 'Correct' and a brief explanation. If 
             }
           }
         ) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-2 flex justify-end", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex justify-end mb-2", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
           "button",
           {
             className: "btn btn-primary",
@@ -26456,8 +26456,8 @@ If the user's code is correct, reply with 'Correct' and a brief explanation. If 
             children: loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "loading loading-spinner loading-sm" }) : "Run Code"
           }
         ) }),
-        error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-2 alert alert-error", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: error }) }),
-        feedback && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2 card bg-base-100 border border-base-300 p-4 prose max-w-none", children: [
+        error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mb-2 alert alert-error", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: error }) }),
+        feedback && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-grow overflow-auto card bg-base-100 border border-base-300 p-4 prose max-w-none", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-semibold mb-2", children: "Feedback:" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(Markdown, { className: "prose max-w-none", children: feedback })
         ] })
