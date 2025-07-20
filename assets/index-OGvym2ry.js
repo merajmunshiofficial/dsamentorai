@@ -26457,7 +26457,7 @@ If the user's code is correct, reply with 'Correct' and a brief explanation. If 
           }
         ) }),
         error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mb-2 alert alert-error", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: error }) }),
-        feedback && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-grow overflow-auto card bg-base-100 border border-base-300 p-4 prose max-w-none", children: [
+        feedback && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-grow overflow-auto card bg-base-100 border border-base-300 p-4 prose max-w-none", style: { minHeight: "400px" }, children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-semibold mb-2", children: "Feedback:" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(Markdown, { className: "prose max-w-none", children: feedback })
         ] })
