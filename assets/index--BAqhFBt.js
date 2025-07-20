@@ -26339,10 +26339,10 @@ If the user's code is correct, reply with 'Correct' and a brief explanation. If 
         body: JSON.stringify({
           model: "gpt-3.5-turbo",
           messages: [
-            { role: "system", content: "You are a helpful DSA coding mentor." },
+            { role: "system", content: "You are a helpful DSA coding mentor. Provide detailed and in-depth explanations." },
             { role: "user", content: prompt }
           ],
-          max_tokens: 512
+          max_tokens: 1024
         })
       });
       if (!response.ok) {
