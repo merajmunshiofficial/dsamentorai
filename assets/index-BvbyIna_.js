@@ -26524,8 +26524,20 @@ function OutputPanel({ output, loading, error }) {
     ] })
   ] }) });
 }
-function ModernDaisyNavbar({ onApiKeyClick }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "navbar bg-base-100 shadow-lg", children: [
+function ModernDaisyNavbar({ onApiKeyClick, onSearch }) {
+  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  const handleLogout = () => {
+    logout({ returnTo: window.location.origin });
+  };
+  const handleSearch = (e2) => {
+    if (e2.key === "Enter" && onSearch) {
+      onSearch(e2.target.value);
+    }
+  };
+  if (!isAuthenticated) {
+    return null;
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "navbar bg-base-100 shadow-lg w-full", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "navbar-start", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "dropdown", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("label", { tabIndex: 0, className: "btn btn-ghost lg:hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-5 w-5", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M4 6h16M4 12h8m-8 6h16" }) }) }),
@@ -26543,11 +26555,15 @@ function ModernDaisyNavbar({ onApiKeyClick }) {
       /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { children: "About" }) })
     ] }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "navbar-end flex items-center gap-2", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "btn btn-ghost btn-circle", "aria-label": "Search", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-5 w-5", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" }) }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "btn btn-ghost btn-circle", "aria-label": "Notifications", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "indicator", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-5 w-5", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "badge badge-xs badge-primary indicator-item" })
-      ] }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "form-control", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "input",
+        {
+          type: "text",
+          placeholder: "Search",
+          className: "input input-bordered input-sm w-24 md:w-auto",
+          onKeyPress: handleSearch
+        }
+      ) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         "button",
         {
@@ -26558,14 +26574,14 @@ function ModernDaisyNavbar({ onApiKeyClick }) {
         }
       ),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "dropdown dropdown-end", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("label", { tabIndex: 0, className: "btn btn-ghost btn-circle avatar", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 rounded-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg", alt: "Profile" }) }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("label", { tabIndex: 0, className: "btn btn-ghost btn-circle avatar", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 rounded-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: (user == null ? void 0 : user.picture) || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg", alt: "Profile" }) }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { tabIndex: 0, className: "mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { className: "justify-between", children: [
-            "Profile",
+            (user == null ? void 0 : user.name) || "Profile",
             /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "badge", children: "New" })
           ] }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { children: "Settings" }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { children: "Logout" }) })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { onClick: handleLogout, children: "Logout" }) })
         ] })
       ] })
     ] })
@@ -26721,7 +26737,7 @@ function MainApp() {
     return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center h-screen", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "alert alert-error max-w-md", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: error }) }) });
   }
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col min-h-screen bg-base-100", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(ModernDaisyNavbar, { onApiKeyClick: () => setShowApiKeyModal(true) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(ModernDaisyNavbar, { onApiKeyClick: () => setShowApiKeyModal(true), onSearch: setSearchQuery }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-1 overflow-hidden", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         TopicSelector,
