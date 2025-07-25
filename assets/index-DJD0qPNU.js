@@ -26284,7 +26284,7 @@ class AIService {
       perplexity: {
         name: "Perplexity",
         endpoint: "https://api.perplexity.ai/chat/completions",
-        model: "llama-3.1-sonar-small-128k-online",
+        model: "sonar",
         keyPrefix: "pplx-",
         storageKey: "perplexity_api_key"
       }
