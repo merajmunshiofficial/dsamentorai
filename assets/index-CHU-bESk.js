@@ -26271,6 +26271,194 @@ function defaultUrlTransform(value) {
   }
   return "";
 }
+class AIService {
+  constructor() {
+    this.providers = {
+      openai: {
+        name: "OpenAI",
+        endpoint: "https://api.openai.com/v1/chat/completions",
+        model: "gpt-3.5-turbo",
+        keyPrefix: "sk-",
+        storageKey: "openai_api_key"
+      },
+      perplexity: {
+        name: "Perplexity",
+        endpoint: "https://api.perplexity.ai/chat/completions",
+        model: "llama-3.1-sonar-small-128k-online",
+        keyPrefix: "pplx-",
+        storageKey: "perplexity_api_key"
+      }
+    };
+  }
+  // Get current provider preference
+  getCurrentProvider() {
+    return localStorage.getItem("ai_provider_preference") || "openai";
+  }
+  // Set provider preference
+  setCurrentProvider(provider) {
+    if (this.providers[provider]) {
+      localStorage.setItem("ai_provider_preference", provider);
+      return true;
+    }
+    return false;
+  }
+  // Get API key for specific provider
+  getApiKey(provider = null) {
+    const currentProvider = provider || this.getCurrentProvider();
+    const providerConfig = this.providers[currentProvider];
+    if (!providerConfig) return null;
+    return localStorage.getItem(providerConfig.storageKey);
+  }
+  // Set API key for specific provider
+  setApiKey(provider, apiKey) {
+    const providerConfig = this.providers[provider];
+    if (!providerConfig) return false;
+    if (apiKey && apiKey.trim()) {
+      localStorage.setItem(providerConfig.storageKey, apiKey.trim());
+      return true;
+    }
+    return false;
+  }
+  // Remove API key for specific provider
+  removeApiKey(provider) {
+    const providerConfig = this.providers[provider];
+    if (!providerConfig) return false;
+    localStorage.removeItem(providerConfig.storageKey);
+    return true;
+  }
+  // Validate API key format
+  validateApiKey(provider, apiKey) {
+    const providerConfig = this.providers[provider];
+    if (!providerConfig || !apiKey) return false;
+    return apiKey.trim().startsWith(providerConfig.keyPrefix);
+  }
+  // Get available providers with their status
+  getProvidersStatus() {
+    const status = {};
+    Object.keys(this.providers).forEach((provider) => {
+      const apiKey = this.getApiKey(provider);
+      status[provider] = {
+        ...this.providers[provider],
+        hasKey: !!apiKey,
+        isValid: apiKey ? this.validateApiKey(provider, apiKey) : false
+      };
+    });
+    return status;
+  }
+  // Test API connection
+  async testConnection(provider, apiKey = null) {
+    var _a;
+    const providerConfig = this.providers[provider];
+    if (!providerConfig) {
+      throw new Error("Invalid provider");
+    }
+    const key = apiKey || this.getApiKey(provider);
+    if (!key) {
+      throw new Error("No API key provided");
+    }
+    try {
+      const response = await fetch(providerConfig.endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${key}`
+        },
+        body: JSON.stringify({
+          model: providerConfig.model,
+          messages: [
+            { role: "user", content: "Hello, this is a test message." }
+          ],
+          max_tokens: 10
+        })
+      });
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(((_a = errorData.error) == null ? void 0 : _a.message) || `HTTP ${response.status}`);
+      }
+      return { success: true, provider: providerConfig.name };
+    } catch (error) {
+      throw new Error(`Connection test failed: ${error.message}`);
+    }
+  }
+  // Main method to get AI feedback
+  async getCodeFeedback(userCode, referenceCode, provider = null) {
+    var _a, _b, _c, _d;
+    const currentProvider = provider || this.getCurrentProvider();
+    const providerConfig = this.providers[currentProvider];
+    const apiKey = this.getApiKey(currentProvider);
+    if (!providerConfig) {
+      throw new Error("Invalid AI provider selected");
+    }
+    if (!apiKey) {
+      throw new Error(`No ${providerConfig.name} API key found. Please add your API key in settings.`);
+    }
+    const prompt = `You are a DSA coding mentor. Compare the user's code to the reference solution.
+
+Reference Solution:
+${referenceCode}
+
+User's Code:
+${userCode}
+
+If the user's code is correct, reply with 'Correct' and a brief explanation. If incorrect, explain what is wrong, how to fix it, and provide actionable guidance.`;
+    try {
+      const response = await fetch(providerConfig.endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({
+          model: providerConfig.model,
+          messages: [
+            {
+              role: "system",
+              content: "You are a helpful DSA coding mentor. Provide detailed and in-depth explanations."
+            },
+            { role: "user", content: prompt }
+          ],
+          max_tokens: 1024,
+          temperature: 0.7
+        })
+      });
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(`${providerConfig.name} API error: ${((_a = errorData.error) == null ? void 0 : _a.message) || response.status}`);
+      }
+      const data = await response.json();
+      const feedback = ((_d = (_c = (_b = data.choices) == null ? void 0 : _b[0]) == null ? void 0 : _c.message) == null ? void 0 : _d.content) || "No feedback received.";
+      return {
+        feedback,
+        provider: providerConfig.name,
+        model: providerConfig.model
+      };
+    } catch (error) {
+      if (!provider && currentProvider === "openai") {
+        const perplexityKey = this.getApiKey("perplexity");
+        if (perplexityKey) {
+          console.warn("OpenAI failed, trying Perplexity fallback:", error.message);
+          return this.getCodeFeedback(userCode, referenceCode, "perplexity");
+        }
+      } else if (!provider && currentProvider === "perplexity") {
+        const openaiKey = this.getApiKey("openai");
+        if (openaiKey) {
+          console.warn("Perplexity failed, trying OpenAI fallback:", error.message);
+          return this.getCodeFeedback(userCode, referenceCode, "openai");
+        }
+      }
+      throw error;
+    }
+  }
+  // Migration helper for existing OpenAI keys
+  migrateExistingKeys() {
+    const existingKey = localStorage.getItem("openai_api_key");
+    if (existingKey && !localStorage.getItem("ai_provider_preference")) {
+      this.setCurrentProvider("openai");
+      console.log("Migrated existing OpenAI API key");
+    }
+  }
+}
+const aiService = new AIService();
 const tabs = ["Description", "Approach", "Code", "Code Editor"];
 function ProblemDetails({ problem }) {
   const [activeTab, setActiveTab] = reactExports.useState("Description");
@@ -26283,6 +26471,7 @@ function ProblemDetails({ problem }) {
   const [output, setOutput] = reactExports.useState(null);
   const [runLoading, setRunLoading] = reactExports.useState(false);
   const [runError, setRunError] = reactExports.useState("");
+  const [aiProvider, setAiProvider] = reactExports.useState(null);
   const getProblemKey = () => {
     if (!problem) return "";
     return `${problem.topic || ""}::${problem.name || ""}`;
@@ -26295,6 +26484,8 @@ function ProblemDetails({ problem }) {
     setInput((problem == null ? void 0 : problem.defaultInput) || {});
     setOutput(null);
     setRunError("");
+    setAiProvider(null);
+    aiService.migrateExistingKeys();
   }, [problem]);
   reactExports.useEffect(() => {
     const key = getProblemKey();
@@ -26310,49 +26501,19 @@ function ProblemDetails({ problem }) {
   }
   const editorLanguage = problem.language === "java" ? "java" : "javascript";
   const handleCheck = async () => {
-    var _a, _b, _c;
     setLoading(true);
     setError(null);
     setFeedback(null);
-    const apiKey = localStorage.getItem("openai_api_key");
-    if (!apiKey) {
-      setError("No OpenAI API key found. Please log in and provide your API key.");
-      setLoading(false);
-      return;
-    }
+    setAiProvider(null);
     try {
-      const prompt = `You are a DSA coding mentor. Compare the user's code to the reference solution.
-
-Reference Solution:
-${problem.code}
-
-User's Code:
-${userCode}
-
-If the user's code is correct, reply with 'Correct' and a brief explanation. If incorrect, explain what is wrong, how to fix it, and actionable guidance.`;
-      const response = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${apiKey}`
-        },
-        body: JSON.stringify({
-          model: "gpt-3.5-turbo",
-          messages: [
-            { role: "system", content: "You are a helpful DSA coding mentor. Provide detailed and in-depth explanations." },
-            { role: "user", content: prompt }
-          ],
-          max_tokens: 1024
-        })
+      const result = await aiService.getCodeFeedback(userCode, problem.code);
+      setFeedback(result.feedback);
+      setAiProvider({
+        name: result.provider,
+        model: result.model
       });
-      if (!response.ok) {
-        throw new Error(`OpenAI API error: ${response.status}`);
-      }
-      const data = await response.json();
-      const aiMessage = ((_c = (_b = (_a = data.choices) == null ? void 0 : _a[0]) == null ? void 0 : _b.message) == null ? void 0 : _c.content) || "No feedback received.";
-      setFeedback(aiMessage);
     } catch (err) {
-      setError(err.message || "Unknown error");
+      setError(err.message || "Unknown error occurred");
     } finally {
       setLoading(false);
     }
@@ -26458,7 +26619,15 @@ If the user's code is correct, reply with 'Correct' and a brief explanation. If 
         ) }),
         error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mb-2 alert alert-error", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: error }) }),
         feedback && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-grow overflow-auto card bg-base-100 border border-base-300 p-4 prose max-w-none", style: { minHeight: "400px" }, children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-semibold mb-2", children: "Feedback:" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between mb-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-semibold", children: "Feedback:" }),
+            aiProvider && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "badge badge-outline badge-sm", children: [
+              aiProvider.name,
+              " (",
+              aiProvider.model,
+              ")"
+            ] })
+          ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(Markdown, { className: "prose max-w-none", components: {
             code({ node: node2, inline, className, children, ...props }) {
               return !inline ? /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { className: "overflow-x-auto p-4 bg-gray-900 rounded-lg text-white text-sm", style: { maxHeight: "none" }, ...props, children: /* @__PURE__ */ jsxRuntimeExports.jsx("code", { style: { fontSize: "0.875rem", lineHeight: "1.25rem" }, children }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("code", { className, ...props, children });
@@ -26588,45 +26757,240 @@ function ModernDaisyNavbar({ onApiKeyClick, onSearch }) {
   ] });
 }
 function DaisyApiKeyModal({ isOpen, onClose, onSave }) {
-  const [apiKey, setApiKey] = reactExports.useState("");
+  const [selectedProvider, setSelectedProvider] = reactExports.useState("openai");
+  const [apiKeys, setApiKeys] = reactExports.useState({
+    openai: "",
+    perplexity: ""
+  });
   const [error, setError] = reactExports.useState("");
+  const [testing, setTesting] = reactExports.useState(false);
+  const [testResults, setTestResults] = reactExports.useState({});
   reactExports.useEffect(() => {
     if (isOpen) {
-      setApiKey(localStorage.getItem("openai_api_key") || "");
+      const currentProvider = aiService.getCurrentProvider();
+      setSelectedProvider(currentProvider);
+      setApiKeys({
+        openai: aiService.getApiKey("openai") || "",
+        perplexity: aiService.getApiKey("perplexity") || ""
+      });
       setError("");
+      setTestResults({});
     }
   }, [isOpen]);
-  const handleSave = () => {
+  const handleProviderChange = (provider) => {
+    setSelectedProvider(provider);
+    setError("");
+    setTestResults({});
+  };
+  const handleApiKeyChange = (provider, value) => {
+    setApiKeys((prev) => ({
+      ...prev,
+      [provider]: value
+    }));
+    setError("");
+    setTestResults((prev) => ({
+      ...prev,
+      [provider]: null
+    }));
+  };
+  const handleTestConnection = async (provider) => {
+    const apiKey = apiKeys[provider];
     if (!apiKey.trim()) {
+      setError("Please enter an API key first");
+      return;
+    }
+    if (!aiService.validateApiKey(provider, apiKey)) {
+      setError(`Invalid ${provider === "openai" ? "OpenAI" : "Perplexity"} API key format`);
+      return;
+    }
+    setTesting(true);
+    setError("");
+    try {
+      const result = await aiService.testConnection(provider, apiKey);
+      setTestResults((prev) => ({
+        ...prev,
+        [provider]: { success: true, message: `✅ Connected to ${result.provider}` }
+      }));
+    } catch (err) {
+      setTestResults((prev) => ({
+        ...prev,
+        [provider]: { success: false, message: `❌ ${err.message}` }
+      }));
+    } finally {
+      setTesting(false);
+    }
+  };
+  const handleSave = () => {
+    const currentApiKey = apiKeys[selectedProvider];
+    if (!currentApiKey.trim()) {
       setError("Please enter a valid API key");
       return;
     }
-    localStorage.setItem("openai_api_key", apiKey);
-    onSave(apiKey);
+    if (!aiService.validateApiKey(selectedProvider, currentApiKey)) {
+      setError(`Invalid ${selectedProvider === "openai" ? "OpenAI" : "Perplexity"} API key format`);
+      return;
+    }
+    aiService.setApiKey(selectedProvider, currentApiKey);
+    aiService.setCurrentProvider(selectedProvider);
+    const otherProvider = selectedProvider === "openai" ? "perplexity" : "openai";
+    if (apiKeys[otherProvider].trim()) {
+      aiService.setApiKey(otherProvider, apiKeys[otherProvider]);
+    }
+    onSave(currentApiKey);
     onClose();
   };
+  const handleClearKey = (provider) => {
+    aiService.removeApiKey(provider);
+    setApiKeys((prev) => ({
+      ...prev,
+      [provider]: ""
+    }));
+    setTestResults((prev) => ({
+      ...prev,
+      [provider]: null
+    }));
+  };
   if (!isOpen) return null;
+  const providers = aiService.providers;
+  const currentProviderConfig = providers[selectedProvider];
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "modal modal-open", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "modal-box", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-bold text-lg mb-4", children: "OpenAI API Key" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "form-control", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "label", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "label-text", children: "Enter your OpenAI API key" }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "input",
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "modal-box max-w-2xl", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-bold text-lg mb-4", children: "AI API Configuration" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "form-control mb-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "label", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "label-text font-semibold", children: "Select AI Provider" }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "tabs tabs-boxed", children: Object.entries(providers).map(([key, config2]) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
           {
-            type: "password",
-            placeholder: "sk-...",
-            className: "input input-bordered w-full",
-            value: apiKey,
-            onChange: (e2) => setApiKey(e2.target.value)
-          }
-        ),
-        error && /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "label", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "label-text-alt text-error", children: error }) })
+            className: `tab ${selectedProvider === key ? "tab-active" : ""}`,
+            onClick: () => handleProviderChange(key),
+            children: config2.name
+          },
+          key
+        )) })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-sm text-base-content/70 mt-2", children: "Your API key is stored locally in your browser and never sent to our servers." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "form-control mb-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "label", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "label-text", children: [
+            currentProviderConfig.name,
+            " API Key"
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "label-text-alt", children: apiKeys[selectedProvider] ? "✅ Saved" : "❌ Not set" })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "join w-full", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "input",
+            {
+              type: "password",
+              placeholder: `${currentProviderConfig.keyPrefix}...`,
+              className: "input input-bordered join-item flex-1",
+              value: apiKeys[selectedProvider],
+              onChange: (e2) => handleApiKeyChange(selectedProvider, e2.target.value)
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              className: "btn btn-outline join-item",
+              onClick: () => handleTestConnection(selectedProvider),
+              disabled: testing || !apiKeys[selectedProvider].trim(),
+              children: testing ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "loading loading-spinner loading-sm" }) : "Test"
+            }
+          ),
+          apiKeys[selectedProvider] && /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              className: "btn btn-ghost join-item",
+              onClick: () => handleClearKey(selectedProvider),
+              children: "Clear"
+            }
+          )
+        ] }),
+        testResults[selectedProvider] && /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "label", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `label-text-alt ${testResults[selectedProvider].success ? "text-success" : "text-error"}`, children: testResults[selectedProvider].message }) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "form-control mb-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "label", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "label-text", children: [
+            selectedProvider === "openai" ? "Perplexity" : "OpenAI",
+            " API Key (Optional)"
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "label-text-alt", children: apiKeys[selectedProvider === "openai" ? "perplexity" : "openai"] ? "✅ Saved" : "❌ Not set" })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "join w-full", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "input",
+            {
+              type: "password",
+              placeholder: `${providers[selectedProvider === "openai" ? "perplexity" : "openai"].keyPrefix}...`,
+              className: "input input-bordered join-item flex-1",
+              value: apiKeys[selectedProvider === "openai" ? "perplexity" : "openai"],
+              onChange: (e2) => handleApiKeyChange(selectedProvider === "openai" ? "perplexity" : "openai", e2.target.value)
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              className: "btn btn-outline join-item",
+              onClick: () => handleTestConnection(selectedProvider === "openai" ? "perplexity" : "openai"),
+              disabled: testing || !apiKeys[selectedProvider === "openai" ? "perplexity" : "openai"].trim(),
+              children: testing ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "loading loading-spinner loading-sm" }) : "Test"
+            }
+          ),
+          apiKeys[selectedProvider === "openai" ? "perplexity" : "openai"] && /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              className: "btn btn-ghost join-item",
+              onClick: () => handleClearKey(selectedProvider === "openai" ? "perplexity" : "openai"),
+              children: "Clear"
+            }
+          )
+        ] }),
+        testResults[selectedProvider === "openai" ? "perplexity" : "openai"] && /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "label", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `label-text-alt ${testResults[selectedProvider === "openai" ? "perplexity" : "openai"].success ? "text-success" : "text-error"}`, children: testResults[selectedProvider === "openai" ? "perplexity" : "openai"].message }) })
+      ] }),
+      error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "alert alert-error mb-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: error }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-base-200 p-4 rounded-lg mb-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("h4", { className: "font-semibold mb-2", children: [
+          "About ",
+          currentProviderConfig.name
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-sm space-y-1", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Model:" }),
+            " ",
+            currentProviderConfig.model
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Key Format:" }),
+            ' Starts with "',
+            currentProviderConfig.keyPrefix,
+            '"'
+          ] }),
+          selectedProvider === "openai" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Get API Key:" }),
+            " ",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://platform.openai.com/api-keys", target: "_blank", rel: "noopener noreferrer", className: "link link-primary", children: "OpenAI Platform" })
+          ] }),
+          selectedProvider === "perplexity" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Get API Key:" }),
+            " ",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://www.perplexity.ai/settings/api", target: "_blank", rel: "noopener noreferrer", className: "link link-primary", children: "Perplexity Settings" })
+          ] })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-sm text-base-content/70 mb-4", children: "🔒 Your API keys are stored locally in your browser and never sent to our servers. Having both keys allows automatic fallback if one provider is unavailable." }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "modal-action", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "btn btn-ghost", onClick: onClose, children: "Cancel" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "btn btn-primary", onClick: handleSave, children: "Save" })
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "button",
+          {
+            className: "btn btn-primary",
+            onClick: handleSave,
+            disabled: !apiKeys[selectedProvider].trim(),
+            children: [
+              "Save & Use ",
+              currentProviderConfig.name
+            ]
+          }
+        )
       ] })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "modal-backdrop", onClick: onClose })
